@@ -4,7 +4,7 @@
 		<view class="search-classify">
 			<view class="classify-top">
 				<view class="item" @tap="doSearch(0)" v-bind:class='searchData.orderType==0 ? "red" : "gray"'>
-					综合
+					综合11
 				</view>
 				<view class="item" @tap="doSearch(1)" v-bind:class='searchData.orderType==1 ? "red" : "gray"'>
 					最新
