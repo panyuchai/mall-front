@@ -1,74 +1,88 @@
 <template>
 	<view>
 		<view class="blank"></view>
-		<!-- 商品列表 -->
-		<view class="goods-list">
-			<view class="tis" v-if="goodsList.length==0">购物车是空的哦~</view>
-		    <view class="row" v-for="(row,index) in goodsList" :key="index" >
-				<!-- 删除按钮 -->
-				<view class="menu" @tap.stop="deleteGoods(row.id)">
-					<view class="icon iconfont icon-shanchu"></view>
-				</view>
-				<!-- 商品 -->
-				<view class="carrier" :class="[theIndex==index?'open':oldIndex==index?'close':'']" @touchstart="touchStart(index,$event)" @touchmove="touchMove(index,$event)" @touchend="touchEnd(index,$event)">
-					<!-- checkbox -->
-					<view class="checkbox-box" @tap="selected(index)">
-						<view class="checkbox" :class="[row.selected?'on':'']">
-							<view :class="[row.selected?'on':'']"></view>
+		<block>
+			<view v-if='hasLogin'>
+				<!-- 商品列表 -->
+				<view class="goods-list">
+					<view class="tis" v-if="goodsList.length==0">购物车是空的哦~</view>
+					<view class="row" v-for="(row,index) in goodsList" :key="index" >
+						<!-- 删除按钮 -->
+						<view class="menu" @tap.stop="deleteGoods(row.id)">
+							<view class="icon iconfont icon-shanchu"></view>
 						</view>
-					</view>
-					<!-- 商品信息 -->
-					<view class="goods-info" @tap="linkToDetail(row)">
-						<view class="img">
-							<image :src="row.img"></image>
-						</view>
-						<view class="info">
-							<view class="title">{{row.name}}</view>
-							<view class="spec">{{row.spec}}</view>
-							<view class="price-number">
-								<view class="price">
-									<view class="sale-price">
-										￥<text class="num">{{row.price}}</text>
-									</view>
-									<view class="factory-price">
-										￥{{row.price}}
-									</view>
+						<!-- 商品 -->
+						<view class="carrier" :class="[theIndex==index?'open':oldIndex==index?'close':'']" @touchstart="touchStart(index,$event)" @touchmove="touchMove(index,$event)" @touchend="touchEnd(index,$event)">
+							<!-- checkbox -->
+							<view class="checkbox-box" @tap="selected(index)">
+								<view class="checkbox" :class="[row.selected?'on':'']">
+									<view :class="[row.selected?'on':'']"></view>
 								</view>
-								<view class="number">
-									<view class="sub" @tap.stop="sub(index)">
-										<view class="icon iconfont icon-jian"></view>
-									</view>
-									<view class="input" @tap.stop="discard">
-										<input type="number" v-model="row.number" @input="sum($event,index)" />
-									</view>
-									<view class="add"  @tap.stop="add(index)">
-										<view class="icon iconfont icon-jia"></view>
+							</view>
+							<!-- 商品信息 -->
+							<view class="goods-info" @tap="linkToDetail(row)">
+								<view class="img">
+									<image :src="row.img"></image>
+								</view>
+								<view class="info">
+									<view class="title">{{row.name}}</view>
+									<view class="spec">{{row.spec}}</view>
+									<view class="price-number">
+										<view class="price">
+											<view class="sale-price">
+												￥<text class="num">{{row.price}}</text>
+											</view>
+											<view class="factory-price">
+												￥{{row.price}}
+											</view>
+										</view>
+										<view class="number">
+											<view class="sub" @tap.stop="sub(index)">
+												<view class="icon iconfont icon-jian"></view>
+											</view>
+											<view class="input" @tap.stop="discard">
+												<input type="number" v-model="row.number" @input="sum($event,index)" />
+											</view>
+											<view class="add"  @tap.stop="add(index)">
+												<view class="icon iconfont icon-jia"></view>
+											</view>
+										</view>
 									</view>
 								</view>
 							</view>
 						</view>
 					</view>
 				</view>
-			</view>
-		</view>
-		<!-- 脚部菜单 -->
-		<view class="footer" :style="{bottom:footerbottom}">
-			<view class="checkbox-box" @tap="allSelect">
-				<view class="checkbox" :class="[isAllselected?'on':'']">
-					<view :class="[isAllselected?'on':'']"></view>
+				<!-- 脚部菜单 -->
+				<view class="footer" :style="{bottom:footerbottom}">
+					<view class="checkbox-box" @tap="allSelect">
+						<view class="checkbox" :class="[isAllselected?'on':'']">
+							<view :class="[isAllselected?'on':'']"></view>
+						</view>
+						<view class="text">全选</view>
+					</view>
+					<view class="delBtn" @tap="deleteList" v-if="selectedList.length>0">删除</view>
+					<view class="settlement">
+						<view class="sum">价格:<view class="money">{{sumPrice}}元</view></view>
+						<view class="btn" @tap="linkToPayment">去结算</view>
+					</view>
 				</view>
-				<view class="text">全选</view>
 			</view>
-			<view class="delBtn" @tap="deleteList" v-if="selectedList.length>0">删除</view>
-			<view class="settlement">
-				<view class="sum">价格:<view class="money">{{sumPrice}}元</view></view>
-				<view class="btn" @tap="linkToPayment">去结算</view>
+			<view class="product-empty" v-else>
+				<view class="err-tips">
+					您还未登陆，请先去<text class="login-btn" @tap="linkToLogin">登陆</text>吧~
+				</view>
 			</view>
-		</view>
+		</block>
+			
 	</view>
 </template>
 
 <script>
+	import {
+	    mapState,
+	    mapMutations
+	} from 'vuex'
 	export default {
 		data() {
 			return {
@@ -117,6 +131,9 @@
 			this.showHeader = false;
 			this.statusHeight = plus.navigator.getStatusbarHeight();
 			// #endif
+		},
+		computed: {
+			...mapState("common", ['hasLogin']),
 		},
 		methods: {
 			//加入商品 参数 goods:商品数据
@@ -323,6 +340,18 @@
 
 <style lang="scss">
 	// page{position: relative;background-color: #fff;}
+	.product-empty{
+		margin-top: 94px;
+		.err-tips{
+			display: flex;
+			justify-content: center;
+			font-size: 28upx;
+			padding: 8vh 20upx 0;
+			.login-btn{
+				color: #E93548
+			}
+		}
+	}
 	.blank{
 		position: fixed;
 		left: 0;

@@ -3,24 +3,24 @@
 		<search class="search-bar"></search>
 		<view class="search-classify">
 			<view class="classify-top">
-				<view class="item" @tap="doSearch(0)" v-bind:class='searchData.orderType==0 ? "red" : "gray"'>
+				<view class="item" @tap="doSearch(0)" v-bind:class='searchData.orderType==0 ? "red" : ""'>
 					综合
 				</view>
-				<view class="item" @tap="doSearch(1)" v-bind:class='searchData.orderType==1 ? "red" : "gray"'>
+				<view class="item" @tap="doSearch(1)" v-bind:class='searchData.orderType==1 ? "red" : ""'>
 					最新
 				</view>
 				<view class="item" @tap="doSearch(2)">
 					价格
 					<text class="item-icon">
-						<text class="iconfont icon-icon_sanjiaoxing icon-top" v-bind:class='[searchData.orderType==2 && searchData.isDesc ? "red" : "gray"]'></text>
-						<text class="iconfont icon-icon_sanjiaoxing icon-bottom" v-bind:class='[searchData.orderType==2 && !searchData.isDesc ? "red" : "gray"]'></text>
+						<text class="iconfont icon-icon_sanjiaoxing icon-top" v-bind:class='[searchData.orderType==2 && searchData.isDesc ? "red" : ""]'></text>
+						<text class="iconfont icon-icon_sanjiaoxing icon-bottom" v-bind:class='[searchData.orderType==2 && !searchData.isDesc ? "red" : ""]'></text>
 					</text>
 				</view>
-				<view class="item" @tap="doSearch(3)" v-bind:class='searchData.orderType==3 ? "red" : "gray"'>
+				<view class="item" @tap="doSearch(3)">
 					销量
 					<text class="item-icon">
-						<text class="iconfont icon-icon_sanjiaoxing icon-top"></text>
-						<text class="iconfont icon-icon_sanjiaoxing icon-bottom"></text>
+						<text class="iconfont icon-icon_sanjiaoxing icon-top" v-bind:class='[searchData.orderType==3 && searchData.isDesc ? "red" : ""]'></text>
+						<text class="iconfont icon-icon_sanjiaoxing icon-bottom" v-bind:class='[searchData.orderType==3 && !searchData.isDesc ? "red" : ""]'></text>
 					</text>
 				</view>
 				<!-- <view class="item">
@@ -54,62 +54,52 @@
 				</text>
 			</view> -->
 		</view>
-		<view v-if='notFound'>
+		<view v-if='notFound' class="product-empty">
 			<view class="not-tips">
 				没有找到相关搜索结果
 			</view>
 		</view>
-		<view>
-			<view v-if='hasLogin'>
-				<view class="product-list">
-					<!--商品列表-->
-					<!-- <view class="pro-item" @tap="linkToDetail(item.id)" v-for="(item,index) in productData" :key="index">
-						<image :src="item.goodsMainimagepath" class="pro-img" mode="widthFix" />
-						<view class="pro-content">
-							<view class="pro-tit">{{item.goodsProductname}}</view>
-							<view>
-								<view class="pro-subtit">
-									{{item.goodsTitle}}
-								</view>
-								<view class="pro-price">
-									<text class="sale-price"><text class="unit">￥</text>{{item.salePrice}}</text>
-								</view>
-							</view>
+		<view class="product-list">
+			<!--商品列表-->
+			<view class="pro-item" @tap="linkToDetail(item.id)" v-for="(item,index) in productData" :key="index">
+				<image :src="item.goodsMainimagepath" class="pro-img" mode="widthFix" />
+				<view class="pro-content">
+					<view class="pro-tit">{{item.goodsProductname}}</view>
+					<view>
+						<view class="pro-subtit">
+							{{item.goodsTitle}}
 						</view>
-						<view v-if="item.tag" class="tag">
-							{{item.label}}
-						</view>
-					</view> -->
-					<view class="pro-item" @tap="linkToDetail" v-for="(item,index) in productList" :key="index">
-						<image :src="item.img" class="pro-img" mode="widthFix" />
-						<view class="pro-content">
-							<view class="pro-tit">{{item.name}}</view>
-							<view>
-								<view class="pro-subtit">
-									{{item.subname}}
-								</view>
-								<view class="pro-price">
-									<text class="sale-price"><text class="unit">￥</text>{{item.sale}}</text>
-								</view>
-							</view>
-						</view>
-						<view v-if="item.tag" class="tag">
-							{{item.tag}}
+						<view class="pro-price">
+							<text class="sale-price"><text class="unit">￥</text>{{item.salePrice}}</text>
 						</view>
 					</view>
-					<!--商品列表-->
 				</view>
-				<!--加载loadding-->
-				<tui-loadmore :visible="loadding" :index="3" type="primary"></tui-loadmore>
-				<tui-nomore :visible="!pullUpOn"></tui-nomore>
-				
-			</view>
-			<view class="product-empty" v-else>
-				<view class="err-tips">
-					您还未登陆，请先去<text class="login-btn" @tap="linkToLogin">登陆</text>吧~
+				<view v-if="item.tag" class="tag">
+					{{item.label}}
 				</view>
 			</view>
+			<!-- <view class="pro-item" @tap="linkToDetail" v-for="(item,index) in productList" :key="index">
+				<image :src="item.img" class="pro-img" mode="widthFix" />
+				<view class="pro-content">
+					<view class="pro-tit">{{item.name}}</view>
+					<view>
+						<view class="pro-subtit">
+							{{item.subname}}
+						</view>
+						<view class="pro-price">
+							<text class="sale-price"><text class="unit">￥</text>{{item.sale}}</text>
+						</view>
+					</view>
+				</view>
+				<view v-if="item.tag" class="tag">
+					{{item.tag}}
+				</view>
+			</view> -->
+			<!--商品列表-->
 		</view>
+		<!--加载loadding-->
+		<tui-loadmore :visible="loadding" :index="3" type="primary"></tui-loadmore>
+		<tui-nomore :visible="!pullUpOn"></tui-nomore>
 		
 	</view>
 </template>
@@ -374,8 +364,15 @@
 			},
 			doSearch(orderType){
 				this.searchData.orderType=orderType || this.searchData.orderType;
-				if(orderType == 2){
-					this.searchData.isDesc=!this.searchData.isDesc;
+				switch (orderType){
+					case 2:
+						this.searchData.isDesc=!this.searchData.isDesc;
+						break;
+					case 3:
+						this.searchData.isDesc=!this.searchData.isDesc;
+						break;
+					default:
+						this.searchData.isDesc=false;
 				}
 				this.$http.post('/mall/app/goods/list', {
 					...this.baseInfo,
@@ -384,6 +381,9 @@
 				.then( res => {
 					console.log(res)
 					if(res.code == 0){
+						if(!res.result.mallGoodsList.length){
+							this.notFound=true;
+						}
 						this.productData=res.result.mallGoodsList;
 						this.searchData.totalPage=res.totalPage;
 					}else{
@@ -414,11 +414,11 @@
 			}
 		},
 		computed: {
-			...mapState("common", ['baseInfo', 'hasLogin']),
+			...mapState("common", ['baseInfo']),
 		},
 		onLoad: function(options){
 			// console.log(options);
-			this.initProductData(0);
+			this.initProductData();
 		},
 		/**
 		 * 页面相关事件处理函数--监听用户下拉动作
@@ -569,7 +569,7 @@
 	}
 	.product-empty{
 		margin-top: 94px;
-		.err-tips{
+		.not-tips{
 			display: flex;
 			justify-content: center;
 			font-size: 28upx;
@@ -678,8 +678,8 @@
 		color: #ea1500!important;
 	}
 	
-	.gray{
-		color: #080808!important;
-	}
+	// .gray{
+	// 	color: #080808!important;
+	// }
 	
 </style>

@@ -1,9 +1,9 @@
 (global["webpackJsonp"] = global["webpackJsonp"] || []).push([["common/vendor"],{
 
 /***/ 0:
-/*!******************************************!*\
-  !*** D:/0/HBuilderProjects/zssc/main.js ***!
-  \******************************************/
+/*!**********************************************************!*\
+  !*** D:/0/HBuilderProjects/exclusive-mall-front/main.js ***!
+  \**********************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -1620,9 +1620,9 @@ uni$1;exports.default = _default;
 /***/ }),
 
 /***/ 10:
-/*!*****************************************************************!*\
-  !*** D:/0/HBuilderProjects/zssc/utils/lunch-request/request.js ***!
-  \*****************************************************************/
+/*!*********************************************************************************!*\
+  !*** D:/0/HBuilderProjects/exclusive-mall-front/utils/lunch-request/request.js ***!
+  \*********************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -1733,9 +1733,9 @@ Request = /*#__PURE__*/function () {function Request() {var _this = this;_classC
 /***/ }),
 
 /***/ 102:
-/*!*****************************************************************************!*\
-  !*** D:/0/HBuilderProjects/zssc/main.js?{"page":"pages%2Fcoupon%2Fcoupon"} ***!
-  \*****************************************************************************/
+/*!*********************************************************************************************!*\
+  !*** D:/0/HBuilderProjects/exclusive-mall-front/main.js?{"page":"pages%2Fcoupon%2Fcoupon"} ***!
+  \*********************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -1750,9 +1750,9 @@ createPage(_coupon.default);
 /***/ }),
 
 /***/ 108:
-/*!*******************************************************************************!*\
-  !*** D:/0/HBuilderProjects/zssc/main.js?{"page":"pages%2Faddress%2Faddress"} ***!
-  \*******************************************************************************/
+/*!***********************************************************************************************!*\
+  !*** D:/0/HBuilderProjects/exclusive-mall-front/main.js?{"page":"pages%2Faddress%2Faddress"} ***!
+  \***********************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -1767,9 +1767,9 @@ createPage(_address.default);
 /***/ }),
 
 /***/ 11:
-/*!*************************************************!*\
-  !*** D:/0/HBuilderProjects/zssc/utils/store.js ***!
-  \*************************************************/
+/*!*****************************************************************!*\
+  !*** D:/0/HBuilderProjects/exclusive-mall-front/utils/store.js ***!
+  \*****************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -1882,9 +1882,9 @@ exports.removeStore = removeStore;
 /***/ }),
 
 /***/ 116:
-/*!*******************************************************************************************!*\
-  !*** D:/0/HBuilderProjects/zssc/main.js?{"page":"pages%2FaddressManage%2FaddressManage"} ***!
-  \*******************************************************************************************/
+/*!***********************************************************************************************************!*\
+  !*** D:/0/HBuilderProjects/exclusive-mall-front/main.js?{"page":"pages%2FaddressManage%2FaddressManage"} ***!
+  \***********************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -1899,9 +1899,9 @@ createPage(_addressManage.default);
 /***/ }),
 
 /***/ 12:
-/*!****************************************************!*\
-  !*** D:/0/HBuilderProjects/zssc/utils/validate.js ***!
-  \****************************************************/
+/*!********************************************************************!*\
+  !*** D:/0/HBuilderProjects/exclusive-mall-front/utils/validate.js ***!
+  \********************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -2131,9 +2131,9 @@ function validatenull(val) {
 /***/ }),
 
 /***/ 124:
-/*!*******************************************************************************************!*\
-  !*** D:/0/HBuilderProjects/zssc/main.js?{"page":"pages%2FaccountManage%2FaccountManage"} ***!
-  \*******************************************************************************************/
+/*!***********************************************************************************************************!*\
+  !*** D:/0/HBuilderProjects/exclusive-mall-front/main.js?{"page":"pages%2FaccountManage%2FaccountManage"} ***!
+  \***********************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -2148,9 +2148,9 @@ createPage(_accountManage.default);
 /***/ }),
 
 /***/ 13:
-/*!*************************************************!*\
-  !*** D:/0/HBuilderProjects/zssc/store/index.js ***!
-  \*************************************************/
+/*!*****************************************************************!*\
+  !*** D:/0/HBuilderProjects/exclusive-mall-front/store/index.js ***!
+  \*****************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -2177,9 +2177,9 @@ store;exports.default = _default;
 /***/ }),
 
 /***/ 132:
-/*!***************************************************************************!*\
-  !*** D:/0/HBuilderProjects/zssc/main.js?{"page":"pages%2Forder%2Forder"} ***!
-  \***************************************************************************/
+/*!*******************************************************************************************!*\
+  !*** D:/0/HBuilderProjects/exclusive-mall-front/main.js?{"page":"pages%2Forder%2Forder"} ***!
+  \*******************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -2194,9 +2194,9 @@ createPage(_order.default);
 /***/ }),
 
 /***/ 14:
-/*!**********************************************************!*\
-  !*** D:/0/HBuilderProjects/zssc/store/modules/common.js ***!
-  \**********************************************************/
+/*!**************************************************************************!*\
+  !*** D:/0/HBuilderProjects/exclusive-mall-front/store/modules/common.js ***!
+  \**************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -2307,9 +2307,9 @@ var getters = {};var _default =
 /***/ }),
 
 /***/ 140:
-/*!***************************************************************************************!*\
-  !*** D:/0/HBuilderProjects/zssc/main.js?{"page":"pages%2ForderDetail%2ForderDetail"} ***!
-  \***************************************************************************************/
+/*!*******************************************************************************************************!*\
+  !*** D:/0/HBuilderProjects/exclusive-mall-front/main.js?{"page":"pages%2ForderDetail%2ForderDetail"} ***!
+  \*******************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -2324,9 +2324,9 @@ createPage(_orderDetail.default);
 /***/ }),
 
 /***/ 148:
-/*!*********************************************************************************!*\
-  !*** D:/0/HBuilderProjects/zssc/main.js?{"page":"pages%2Fdelivery%2Fdelivery"} ***!
-  \*********************************************************************************/
+/*!*************************************************************************************************!*\
+  !*** D:/0/HBuilderProjects/exclusive-mall-front/main.js?{"page":"pages%2Fdelivery%2Fdelivery"} ***!
+  \*************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -2341,9 +2341,9 @@ createPage(_delivery.default);
 /***/ }),
 
 /***/ 15:
-/*!***************************************************!*\
-  !*** D:/0/HBuilderProjects/zssc/store/getters.js ***!
-  \***************************************************/
+/*!*******************************************************************!*\
+  !*** D:/0/HBuilderProjects/exclusive-mall-front/store/getters.js ***!
+  \*******************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -2465,9 +2465,9 @@ function normalizeComponent (
 /***/ }),
 
 /***/ 19:
-/*!***************************************************************************!*\
-  !*** D:/0/HBuilderProjects/zssc/main.js?{"page":"pages%2Findex%2Findex"} ***!
-  \***************************************************************************/
+/*!*******************************************************************************************!*\
+  !*** D:/0/HBuilderProjects/exclusive-mall-front/main.js?{"page":"pages%2Findex%2Findex"} ***!
+  \*******************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -8431,9 +8431,9 @@ internalMixin(Vue);
 /***/ }),
 
 /***/ 25:
-/*!*************************************************************************!*\
-  !*** D:/0/HBuilderProjects/zssc/main.js?{"page":"pages%2Fmain%2Fmain"} ***!
-  \*************************************************************************/
+/*!*****************************************************************************************!*\
+  !*** D:/0/HBuilderProjects/exclusive-mall-front/main.js?{"page":"pages%2Fmain%2Fmain"} ***!
+  \*****************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -8448,9 +8448,9 @@ createPage(_main.default);
 /***/ }),
 
 /***/ 280:
-/*!****************************************************************************!*\
-  !*** D:/0/HBuilderProjects/zssc/components/w-picker/city-data/province.js ***!
-  \****************************************************************************/
+/*!********************************************************************************************!*\
+  !*** D:/0/HBuilderProjects/exclusive-mall-front/components/w-picker/city-data/province.js ***!
+  \********************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -8598,9 +8598,9 @@ provinceData;exports.default = _default;
 /***/ }),
 
 /***/ 281:
-/*!************************************************************************!*\
-  !*** D:/0/HBuilderProjects/zssc/components/w-picker/city-data/city.js ***!
-  \************************************************************************/
+/*!****************************************************************************************!*\
+  !*** D:/0/HBuilderProjects/exclusive-mall-front/components/w-picker/city-data/city.js ***!
+  \****************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -10112,9 +10112,9 @@ cityData;exports.default = _default;
 /***/ }),
 
 /***/ 282:
-/*!************************************************************************!*\
-  !*** D:/0/HBuilderProjects/zssc/components/w-picker/city-data/area.js ***!
-  \************************************************************************/
+/*!****************************************************************************************!*\
+  !*** D:/0/HBuilderProjects/exclusive-mall-front/components/w-picker/city-data/area.js ***!
+  \****************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -22665,9 +22665,9 @@ areaData;exports.default = _default;
 /***/ }),
 
 /***/ 283:
-/*!******************************************************************!*\
-  !*** D:/0/HBuilderProjects/zssc/components/w-picker/w-picker.js ***!
-  \******************************************************************/
+/*!**********************************************************************************!*\
+  !*** D:/0/HBuilderProjects/exclusive-mall-front/components/w-picker/w-picker.js ***!
+  \**********************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -22961,9 +22961,9 @@ module.exports = g;
 /***/ }),
 
 /***/ 33:
-/*!***************************************************************************!*\
-  !*** D:/0/HBuilderProjects/zssc/main.js?{"page":"pages%2Flogin%2Flogin"} ***!
-  \***************************************************************************/
+/*!*******************************************************************************************!*\
+  !*** D:/0/HBuilderProjects/exclusive-mall-front/main.js?{"page":"pages%2Flogin%2Flogin"} ***!
+  \*******************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -22978,9 +22978,9 @@ createPage(_login.default);
 /***/ }),
 
 /***/ 4:
-/*!*********************************************!*\
-  !*** D:/0/HBuilderProjects/zssc/pages.json ***!
-  \*********************************************/
+/*!*************************************************************!*\
+  !*** D:/0/HBuilderProjects/exclusive-mall-front/pages.json ***!
+  \*************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -22990,9 +22990,9 @@ createPage(_login.default);
 /***/ }),
 
 /***/ 41:
-/*!***********************************************************************!*\
-  !*** D:/0/HBuilderProjects/zssc/main.js?{"page":"pages%2Freg%2Freg"} ***!
-  \***********************************************************************/
+/*!***************************************************************************************!*\
+  !*** D:/0/HBuilderProjects/exclusive-mall-front/main.js?{"page":"pages%2Freg%2Freg"} ***!
+  \***************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -23007,9 +23007,9 @@ createPage(_reg.default);
 /***/ }),
 
 /***/ 47:
-/*!*********************************************!*\
-  !*** D:/0/HBuilderProjects/zssc/service.js ***!
-  \*********************************************/
+/*!*************************************************************!*\
+  !*** D:/0/HBuilderProjects/exclusive-mall-front/service.js ***!
+  \*************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -23044,9 +23044,9 @@ var addUser = function addUser(userInfo) {
 /***/ }),
 
 /***/ 48:
-/*!***********************************************************************!*\
-  !*** D:/0/HBuilderProjects/zssc/main.js?{"page":"pages%2Fpwd%2Fpwd"} ***!
-  \***********************************************************************/
+/*!***************************************************************************************!*\
+  !*** D:/0/HBuilderProjects/exclusive-mall-front/main.js?{"page":"pages%2Fpwd%2Fpwd"} ***!
+  \***************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -23061,9 +23061,9 @@ createPage(_pwd.default);
 /***/ }),
 
 /***/ 54:
-/*!*******************************************************************************!*\
-  !*** D:/0/HBuilderProjects/zssc/main.js?{"page":"pages%2Fproduct%2Fproduct"} ***!
-  \*******************************************************************************/
+/*!***********************************************************************************************!*\
+  !*** D:/0/HBuilderProjects/exclusive-mall-front/main.js?{"page":"pages%2Fproduct%2Fproduct"} ***!
+  \***********************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -23078,9 +23078,9 @@ createPage(_product.default);
 /***/ }),
 
 /***/ 62:
-/*!***********************************************************************!*\
-  !*** D:/0/HBuilderProjects/zssc/main.js?{"page":"pages%2Fcar%2Fcar"} ***!
-  \***********************************************************************/
+/*!***************************************************************************************!*\
+  !*** D:/0/HBuilderProjects/exclusive-mall-front/main.js?{"page":"pages%2Fcar%2Fcar"} ***!
+  \***************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -23095,9 +23095,9 @@ createPage(_car.default);
 /***/ }),
 
 /***/ 70:
-/*!*************************************************************************!*\
-  !*** D:/0/HBuilderProjects/zssc/main.js?{"page":"pages%2Fuser%2Fuser"} ***!
-  \*************************************************************************/
+/*!*****************************************************************************************!*\
+  !*** D:/0/HBuilderProjects/exclusive-mall-front/main.js?{"page":"pages%2Fuser%2Fuser"} ***!
+  \*****************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -23112,9 +23112,9 @@ createPage(_user.default);
 /***/ }),
 
 /***/ 78:
-/*!*************************************************************************************!*\
-  !*** D:/0/HBuilderProjects/zssc/main.js?{"page":"pages%2FsearchPage%2FsearchPage"} ***!
-  \*************************************************************************************/
+/*!*****************************************************************************************************!*\
+  !*** D:/0/HBuilderProjects/exclusive-mall-front/main.js?{"page":"pages%2FsearchPage%2FsearchPage"} ***!
+  \*****************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -24080,9 +24080,9 @@ var index_esm = {
 /***/ }),
 
 /***/ 86:
-/*!*******************************************************************************************!*\
-  !*** D:/0/HBuilderProjects/zssc/main.js?{"page":"pages%2FproductDetail%2FproductDetail"} ***!
-  \*******************************************************************************************/
+/*!***********************************************************************************************************!*\
+  !*** D:/0/HBuilderProjects/exclusive-mall-front/main.js?{"page":"pages%2FproductDetail%2FproductDetail"} ***!
+  \***********************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -24097,9 +24097,9 @@ createPage(_productDetail.default);
 /***/ }),
 
 /***/ 9:
-/*!*********************************************!*\
-  !*** D:/0/HBuilderProjects/zssc/api/api.js ***!
-  \*********************************************/
+/*!*************************************************************!*\
+  !*** D:/0/HBuilderProjects/exclusive-mall-front/api/api.js ***!
+  \*************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -24109,8 +24109,8 @@ var _store = __webpack_require__(/*! ../utils/store.js */ 11);
 var _index = _interopRequireDefault(__webpack_require__(/*! ../store/index.js */ 13));function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}function _objectSpread(target) {for (var i = 1; i < arguments.length; i++) {var source = arguments[i] != null ? arguments[i] : {};var ownKeys = Object.keys(source);if (typeof Object.getOwnPropertySymbols === 'function') {ownKeys = ownKeys.concat(Object.getOwnPropertySymbols(source).filter(function (sym) {return Object.getOwnPropertyDescriptor(source, sym).enumerable;}));}ownKeys.forEach(function (key) {_defineProperty(target, key, source[key]);});}return target;}function _defineProperty(obj, key, value) {if (key in obj) {Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true });} else {obj[key] = value;}return obj;}
 var test = new _request.default();exports.test = test;
 test.setConfig(function (config) {/* 设置全局配置 */
-  // config.baseUrl = 'http://192.168.1.104:8087';192.168.1.110
-  config.baseUrl = 'http://192.168.1.110:8086';
+  config.baseUrl = 'http://192.168.1.104:8087';
+  // config.baseUrl = 'http://192.168.1.110:8086';
   config.header = {
     a: 4,
     b: 4 };
@@ -24153,8 +24153,8 @@ test.interceptor.response(function (response) {/* 请求之后拦截器 */
 // }
 var http = new _request.default();exports.http = http;
 http.setConfig(function (config) {/* 设置全局配置 */
-  // config.baseUrl = "http://192.168.1.104:8087"; /* 根域名不同 */
-  config.baseUrl = 'http://192.168.1.110:8086';
+  config.baseUrl = "http://192.168.1.104:8087"; /* 根域名不同 */
+  // config.baseUrl = 'http://192.168.1.110:8086';
   config.header = {
     // 'cookie': uni.getStorageSync('sessionid') || '123',
     a: 5 };
@@ -24184,9 +24184,9 @@ http.interceptor.response(function (response) {/* 请求之后拦截器 */
 /***/ }),
 
 /***/ 94:
-/*!*******************************************************************************!*\
-  !*** D:/0/HBuilderProjects/zssc/main.js?{"page":"pages%2Fpayment%2Fpayment"} ***!
-  \*******************************************************************************/
+/*!***********************************************************************************************!*\
+  !*** D:/0/HBuilderProjects/exclusive-mall-front/main.js?{"page":"pages%2Fpayment%2Fpayment"} ***!
+  \***********************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 

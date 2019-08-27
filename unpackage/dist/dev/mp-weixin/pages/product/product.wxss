@@ -87,7 +87,7 @@
 .product-empty {
   margin-top: 94px;
 }
-.product-empty .err-tips {
+.product-empty .not-tips {
     display: -webkit-box;
     display: -webkit-flex;
     display: -ms-flexbox;
@@ -99,7 +99,7 @@
     font-size: 28rpx;
     padding: 8vh 20rpx 0;
 }
-.product-empty .err-tips .login-btn {
+.product-empty .not-tips .login-btn {
       color: #E93548;
 }
 .product-list {
@@ -220,8 +220,5 @@
 }
 .red {
   color: #ea1500 !important;
-}
-.gray {
-  color: #080808 !important;
 }
 

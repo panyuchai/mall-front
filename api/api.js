@@ -3,11 +3,11 @@ import { setStore, getStore, removeStore } from '../utils/store.js'
 import store from '../store/index.js';
 const test = new Request();
 test.setConfig((config) => { /* 设置全局配置 */
-	// config.baseUrl = 'http://192.168.1.104:8087';192.168.1.110
-	config.baseUrl = 'http://192.168.1.110:8086';
+	config.baseUrl = 'http://192.168.1.104:8087';
+	// config.baseUrl = 'http://192.168.1.110:8086';
 	config.header = {
 		a: 4,
-		b: 4
+		b: 4,
 	}
 	return config;
 })
@@ -47,11 +47,11 @@ test.interceptor.response((response) => { /* 请求之后拦截器 */
 // }
 const http = new Request();
 http.setConfig((config) => { /* 设置全局配置 */
-	// config.baseUrl = "http://192.168.1.104:8087"; /* 根域名不同 */
-	config.baseUrl = 'http://192.168.1.110:8086';
+	config.baseUrl = "http://192.168.1.104:8087"; /* 根域名不同 */
+	// config.baseUrl = 'http://192.168.1.110:8086';
 	config.header = {
 		// 'cookie': uni.getStorageSync('sessionid') || '123',
-		a: 5
+		a: 5,
 	};
 	return config;
 })
