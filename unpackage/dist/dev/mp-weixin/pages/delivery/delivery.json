@@ -1,6 +1,0 @@
-{
-  "navigationBarTitleText": "物流详情",
-  "usingComponents": {
-    "step": "/components/step/step"
-  }
-}
