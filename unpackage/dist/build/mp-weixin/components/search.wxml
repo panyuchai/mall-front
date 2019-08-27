@@ -1,0 +1,1 @@
+<view class="searchBar"><view data-event-opts="{{[['tap',[['linkToSearch',['$event']]]]]}}" class="search" bindtap="__e"><text class="iconfont icon-sousuo search-icon"></text><text class="search-info">输入商品名称</text></view></view>

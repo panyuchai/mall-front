@@ -1,0 +1,6 @@
+{
+  "navigationBarTitleText": "账号管理",
+  "usingComponents": {
+    "w-picker": "/components/w-picker/w-picker"
+  }
+}

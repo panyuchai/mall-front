@@ -1,0 +1,168 @@
+.content {
+  background-color: #FFFFFF;
+  margin: 24rpx;
+  padding: 0 24rpx;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-flex: 1;
+  -webkit-flex: 1;
+      -ms-flex: 1;
+          flex: 1;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+  -webkit-flex-direction: column;
+      -ms-flex-direction: column;
+          flex-direction: column;
+}
+.delivery-number {
+  font-size: 28rpx;
+  color: #000000;
+  padding: 10rpx 0 54rpx 0;
+}
+.state-cont {
+  border-left: 1px #D8D8D8 solid;
+}
+.list-item {
+  position: relative;
+  padding-left: 40rpx;
+}
+.list-item .icon {
+    position: absolute;
+    left: -20rpx;
+    width: 36rpx;
+    height: 36rpx;
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-align: center;
+    -webkit-align-items: center;
+        -ms-flex-align: center;
+            align-items: center;
+    -webkit-box-pack: center;
+    -webkit-justify-content: center;
+        -ms-flex-pack: center;
+            justify-content: center;
+    border-radius: 50%;
+    background: #D8D8D8;
+}
+.list-item .icon .icon-font {
+      font-size: 20rpx;
+      color: #fff;
+}
+.list-item .info {
+    color: #979797;
+}
+.list-item .info .tit {
+      font-size: 28rpx;
+}
+.list-item .info .con {
+      font-size: 24rpx;
+      padding: 20rpx 0;
+      position: relative;
+}
+.list-item .info .con .dot {
+        width: 10rpx;
+        height: 10rpx;
+        border-radius: 50%;
+        background: #D8D8D8;
+        position: absolute;
+        top: 50%;
+        left: -46rpx;
+        z-index: 2;
+        -webkit-transform: translateY(-50%);
+            -ms-transform: translateY(-50%);
+                transform: translateY(-50%);
+}
+.list-item .info .con .time {
+        margin-top: 10rpx;
+}
+.list-item.list-active .icon {
+    background: #E93B3D;
+}
+.list-item.list-active .info {
+    color: #000000;
+}
+.list-item .icon {
+  left: -18rpx;
+}
+.list-item .info .con .dot {
+  left: -45rpx;
+}
+
+/* .isOk{
+	background-color: #F0AD4E !important;
+}
+.ali_top_iconss{
+	width: 12upx;
+	height: 12upx;
+	display: block;
+	background-color: #999;
+	padding-right: 2upx;
+	border-radius: 50%;
+}
+.noline{
+	background-color: #fff !important;
+}
+.State_Four{
+	display: flex;
+}
+.FourBox{
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	padding-right: 24upx;
+}
+.line{
+	width: 2upx;
+	display: flex;
+	flex-direction: column;
+	flex: 1;
+	background-color: #999;
+}
+.remark{
+	display: flex;
+	flex-direction: column;
+	width: 90%;
+	padding: 24upx 0;
+}
+.borders{
+	border-bottom: 1upx solid #F2F2F2;
+	padding: 24upx 0;
+}
+.ali_top_icons{
+	width: 46upx;
+	height: 46upx;
+	display: block;
+	background-color: #FFF;
+	border-radius: 50%;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+	align-content: center;
+}
+.ali_top_icon{
+	width: 46upx;
+	height: 46upx;
+	display: block;
+	background-color: #83AECF;
+	color: #fff;
+	font-size: 28upx;
+	border-radius: 50%;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	margin-right: 20upx;
+}
+.a14{
+	font-size: 28upx;
+	color: #000000;
+}
+.a12{
+	font-size: 24upx;
+	color: #999;
+} */
+

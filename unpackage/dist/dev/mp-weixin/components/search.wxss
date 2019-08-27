@@ -1,0 +1,23 @@
+.searchBar {
+  background-color: #E22018;
+  padding: 10px 8px;
+}
+.searchBar .search {
+    height: 30px;
+    line-height: 30px;
+    overflow: hidden;
+    background-color: #fff;
+    border-radius: 15px;
+}
+.searchBar .search .search-icon {
+      color: #979797;
+      font-size: 20px;
+      padding: 0 4px 0 10px;
+      float: left;
+}
+.searchBar .search .search-info {
+      font-size: 14px;
+      color: #6F6F6F;
+      float: left;
+}
+
