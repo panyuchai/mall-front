@@ -1,0 +1,1 @@
+<view class="content"><step vue-id="1" state="{{stepData3.state}}" datas="{{stepData3.data}}" ways="{{stepData3.information}}" bind:__l="__l"></step></view>

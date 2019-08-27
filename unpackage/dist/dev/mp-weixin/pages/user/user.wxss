@@ -1,0 +1,194 @@
+page {
+  background: #F8F8F8;
+  padding-bottom: 80rpx;
+}
+.order-section .order-item {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+  -webkit-flex-direction: column;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-pack: center;
+  -webkit-justify-content: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+  -webkit-align-items: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+.order-section {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-justify-content: space-around;
+      -ms-flex-pack: distribute;
+          justify-content: space-around;
+  -webkit-align-content: center;
+      -ms-flex-line-pack: center;
+          align-content: center;
+  background: #fff;
+}
+.user-section {
+  position: relative;
+}
+.user-info-box {
+  position: relative;
+  height: 176rpx;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+  -webkit-align-items: center;
+      -ms-flex-align: center;
+          align-items: center;
+  position: relative;
+}
+.user-info-box .bg {
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 1;
+}
+.user-info-box .portrait-box {
+    width: 114rpx;
+    height: 114rpx;
+    border-radius: 50%;
+    overflow: hidden;
+    margin-left: 40rpx;
+    position: relative;
+    z-index: 2;
+}
+.user-info-box .portrait-box .portrait {
+      border-radius: 50%;
+      width: 114rpx;
+      height: 114rpx;
+}
+.user-info-box .info-box {
+    position: relative;
+    z-index: 2;
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+    -webkit-flex-direction: column;
+        -ms-flex-direction: column;
+            flex-direction: column;
+    margin-left: 25rpx;
+    font-size: 28rpx;
+    color: #fff;
+    line-height: 40rpx;
+}
+.user-info-box .info-box .username {
+      font-size: 30rpx;
+}
+.user-info-setting {
+  position: absolute;
+  z-index: 9;
+  top: 20rpx;
+  right: 25rpx;
+  padding: 15rpx;
+  font-size: 24rpx;
+  color: #861E17;
+  vertical-align: middle;
+}
+.user-info-setting .icon-setting {
+    padding-right: 8rpx;
+}
+.order-section {
+  margin-top: 25rpx;
+}
+.order-section .order-item {
+    width: 120rpx;
+    height: 120rpx;
+}
+.order-section .order-item .icon {
+      width: 100rpx;
+      height: 60rpx;
+      overflow: hidden;
+      display: -webkit-box;
+      display: -webkit-flex;
+      display: -ms-flexbox;
+      display: flex;
+      -webkit-box-align: center;
+      -webkit-align-items: center;
+          -ms-flex-align: center;
+              align-items: center;
+      -webkit-justify-content: space-around;
+          -ms-flex-pack: distribute;
+              justify-content: space-around;
+      position: relative;
+}
+.order-section .order-item .icon .iconfont {
+        font-size: 48rpx;
+        color: #DCA754;
+}
+.order-section .order-item .icon .iconfont.iconfont-all {
+          font-size: 42rpx;
+}
+.order-section .order-item .icon .iconfont.iconfont-transport {
+          font-size: 50rpx;
+}
+.order-section .order-item .icon .iconfont.iconfont-transport .badge {
+            position: absolute;
+            top: 0;
+            left: 8rpx;
+}
+.order-section .order-item .icon .iconfont.iconfont-finished {
+          font-size: 54rpx;
+}
+.order-section .order-item .icon .iconfont.iconfont-service {
+          font-size: 45rpx;
+}
+.order-section .order-item .name {
+      font-size: 24rpx;
+      color: #828282;
+      max-width: 100%;
+      overflow: hidden;
+      white-space: nowrap;
+      -o-text-overflow: ellipsis;
+         text-overflow: ellipsis;
+}
+.list-section {
+  padding-top: 30rpx;
+}
+.list-section .list-cell {
+    margin-top: 30rpx;
+    background-color: #fff;
+    position: relative;
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-align: center;
+    -webkit-align-items: center;
+        -ms-flex-align: center;
+            align-items: center;
+    padding: 26rpx 30rpx 26rpx 40rpx;
+}
+.list-section .list-cell .cell-tit {
+      font-size: 24rpx;
+      color: #828282;
+      line-height: 28rpx;
+}
+.list-section .list-cell .icon-arrow {
+      position: absolute;
+      top: 50%;
+      right: 20rpx;
+      color: #C6C6C6;
+      font-weight: bold;
+      -webkit-transform: translateY(-50%);
+          -ms-transform: translateY(-50%);
+              transform: translateY(-50%);
+}
+

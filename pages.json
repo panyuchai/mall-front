@@ -1,0 +1,142 @@
+{
+    "pages": [ //pages数组中第一项表示应用启动页,
+		
+        {
+            "path": "pages/index/index",
+            "style": {
+                "navigationBarTitleText": "专属商城"
+            }
+        }, {
+            "path": "pages/main/main",
+            "style": {
+                "navigationBarTitleText": "登录模板"
+            }
+        }, {
+			"path": "pages/login/login",
+			"style": {
+				"navigationBarTitleText": "登录"
+			}
+		}, {
+            "path": "pages/reg/reg",
+            "style": {
+                "navigationBarTitleText": "注册"
+            }
+        }, {
+            "path": "pages/pwd/pwd",
+            "style": {
+                "navigationBarTitleText": "找回密码"
+            }
+        }
+        ,{
+            "path" : "pages/product/product",
+            "style" : {
+				"navigationBarTitleText": "商品"
+			}
+        }
+        ,{
+            "path" : "pages/car/car",
+            "style" : {
+				"navigationBarTitleText": "购物车"
+			}
+        }
+		,{
+		    "path": "pages/user/user",
+		    "style": {
+		        "navigationBarTitleText": "个人中心"
+		    }
+		}
+        ,{
+            "path" : "pages/searchPage/searchPage",
+            "style" : {
+				"navigationBarTitleText": "搜索"
+			}
+        }
+        ,{
+            "path" : "pages/productDetail/productDetail",
+            "style" : {
+				"navigationStyle":"custom"
+			}
+        }
+        ,{
+            "path" : "pages/payment/payment",
+            "style" : {
+            	"navigationBarTitleText": "提交订单"
+            }
+        }
+        ,{
+            "path" : "pages/coupon/coupon",
+            "style" : {
+            	"navigationBarTitleText": "优惠券"
+            }
+        }
+        ,{
+            "path" : "pages/address/address",
+            "style" : {
+				"navigationBarTitleText": "收货地址"
+			}
+        }
+        ,{
+            "path" : "pages/addressManage/addressManage",
+            "style" : {
+				"navigationBarTitleText": "收货地址"
+			}
+        }
+        ,{
+            "path" : "pages/accountManage/accountManage",
+            "style" : {
+				"navigationBarTitleText": "账号管理"
+			}
+        }
+        ,{
+            "path" : "pages/order/order",
+            "style" : {
+				"navigationBarTitleText": "我的订单"
+			}
+        }
+        ,{
+            "path" : "pages/orderDetail/orderDetail",
+            "style" : {
+				"navigationBarTitleText": "订单详情"
+			}
+        }
+        ,{
+            "path" : "pages/delivery/delivery",
+            "style" : {
+				"navigationBarTitleText": "物流详情"
+			}
+        }
+    ],
+    "tabBar": {
+        "color": "#7F8389",
+        "selectedColor": "#EF2F0C",
+        "backgroundColor": "#ffffff",
+        "list": [{
+            "pagePath": "pages/index/index",
+            "text": "首页",
+            "iconPath": "static/img/home.png",
+            "selectedIconPath": "static/img/homeHL.png"
+        }, {
+            "pagePath": "pages/product/product",
+            "text": "商品",
+            "iconPath": "static/img/product.png",
+            "selectedIconPath": "static/img/productHL.png"
+        }, {
+            "pagePath": "pages/car/car",
+            "text": "购物车",
+            "iconPath": "static/img/car.png",
+            "selectedIconPath": "static/img/carHL.png"
+        }, {
+            "pagePath": "pages/user/user",
+            "text": "我的",
+            "iconPath": "static/img/user.png",
+            "selectedIconPath": "static/img/userHL.png"
+        }]
+    },
+    "globalStyle": {
+		"navigationBarTextStyle": "black",
+		"navigationBarTitleText": "专属商城",
+		"navigationBarBackgroundColor": "#ffffff",
+		"backgroundColor": "#F8F8F8"
+		
+    }
+}
