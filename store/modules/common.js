@@ -3,7 +3,7 @@ const state = {
   /**
    * 是否需要强制登录
    */
-  mallDomain: 'testyjl',
+  mallDomain: 'yyy',
   mallType: '',
   mallId: '',
   // mallId: '',
@@ -20,30 +20,22 @@ const state = {
 	  mallId: '',
 	  p: '',
 	  scm: '',
-	  accountId:''
+	  // accountId:''
   },
 }
 const mutations = {
-	// login(state, userName) {
-	// 	state.userName = userName || '新用户';
+	// login(state, data) {
 	// 	state.hasLogin = true;
+	// 	state.userInfo = data;
+	// 	setStore({ name: 'userInfo', content: state.userInfo, type: 'sync' });
+	// 	setStore({ name: 'hasLogin', content: state.hasLogin, type: 'sync' });
 	// },
 	// logout(state) {
-	// 	state.userName = "";
 	// 	state.hasLogin = false;
+	// 	state.userInfo = {};
+	// 	removeStore({ name: 'userInfo' });
+	// 	removeStore({ name: 'hasLogin' });
 	// },
-	login(state, data) {
-		state.hasLogin = true;
-		state.userInfo = data;
-		setStore({ name: 'userInfo', content: state.userInfo, type: 'sync' });
-		setStore({ name: 'hasLogin', content: state.hasLogin, type: 'sync' });
-	},
-	logout(state) {
-		state.hasLogin = false;
-		state.userInfo = {};
-		removeStore({ name: 'userInfo' });
-		removeStore({ name: 'hasLogin' });
-	},
 	SET_HASLOGIN: (state, hasLogin) => {
 		state.hasLogin = hasLogin;
 		setStore({ name: 'hasLogin', content: state.hasLogin, type: 'sync' });
@@ -79,9 +71,11 @@ const mutations = {
 	},
 	SET_BASEINFO: (state, baseInfo) => {
 		state.baseInfo = baseInfo;
+		setStore({ name: 'baseInfo', content: state.baseInfo, type: 'sync' });
 	},
 	SET_USERIFNO: (state, userInfo) => {
 	  state.userInfo = userInfo;
+	  setStore({ name: 'userInfo', content: state.userInfo, type: 'sync' });
 	},
 	// SET_MALLTYPE: (state, mallType) => {
 	// 	state.mallType = mallType;

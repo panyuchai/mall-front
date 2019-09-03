@@ -6,7 +6,7 @@
 			...mapState("common", ['uniCode', 'mallDomain', 'baseInfo', 'hasLogin'])
 		},
 		methods: {
-			...mapMutations("common", ['SET_BASEINFO', 'SET_UNICODE', 'SET_MALLDOMAIN', 'SET_MALLTYPE', 'SET_MALLID']),
+			...mapMutations("common", ['SET_BASEINFO', 'SET_USERIFNO', 'SET_UNICODE', 'SET_MALLDOMAIN', 'SET_MALLTYPE', 'SET_MALLID']),
 			checkMallType(){
 				this.$http.post('/mall/app/login/mall/shopmall/type', {
 					mallDomain: this.mallDomain
@@ -22,34 +22,6 @@
 						});
 						this.SET_MALLTYPE(res.result.type);
 						this.SET_MALLID(res.result.mallId);
-						// switch (res.result.type){
-						// 	case 1:
-						// 		this.SET_BASEINFO({
-						// 			...this.baseInfo,
-						// 			mallType: 1
-						// 		});
-						// 		this.SET_MALLTYPE(1);
-						// 		break;
-						// 	case 2:
-						// 		this.SET_BASEINFO({
-						// 			...this.baseInfo,
-						// 			mallType: 2
-						// 		});
-						// 		this.SET_MALLTYPE(2);
-						// 		break;
-						// 	case 3:
-						// 		this.SET_BASEINFO({
-						// 			...this.baseInfo,
-						// 			mallType: 3
-						// 		});
-						// 		this.SET_MALLTYPE(3);
-						// 		break;
-						// 	case 4:
-						// 		console.log("第三方用户商城");
-						// 		break;
-						// 	default:
-						// 		console.log("login--mallTaye 未标记商城类型");
-						// }
 					}else{
 						console.log('login--mallTaye 接口调用失败');
 					}
@@ -74,7 +46,7 @@
 			
 			// console.log(navigator.userAgent.toLowerCase())
 			
-			
+			let othis = this;
 			function browserRedirect() {
 				var sUserAgent = navigator.userAgent.toLowerCase();
 				var bIsIpad = sUserAgent.match(/ipad/i) == "ipad";
@@ -87,9 +59,17 @@
 				var bIsWM = sUserAgent.match(/windows mobile/i) == "windows mobile";
 				var bIsWeChat = sUserAgent.match(/MicroMessenger/i) == "micromessenger";//微信端
 				if (bIsIpad || bIsIphoneOs || bIsMidp || bIsUc7 || bIsUc || bIsAndroid || bIsCE || bIsWM) {
-					console.log('h5端')
+					console.log('h5端');
+					othis.SET_BASEINFO({
+						...othis.baseInfo,
+						scm: 'pc'
+					});
 				} else if(bIsWeChat) {
-					if(!this.hasLogin){
+					othis.SET_BASEINFO({
+						...othis.baseInfo,
+						scm: 'h5'
+					});
+					if(!othis.hasLogin){
 						defaultwxWebLogin();
 					}
 				}else {
@@ -101,20 +81,25 @@
 				browserRedirect();
 			}else{
 				// 小程序环境
+				// console.log(this)
+				this.SET_BASEINFO({
+					...this.baseInfo,
+					scm: 'wechat'
+				});
 				if(!this.hasLogin){
 					defaultWxLogin();
 				}
 			};
-			let othis = this;
+			// let othis = this;
 			function defaultwxWebLogin(){
 				othis.$http.post('/app/login/mall/wxweb', {
 					mallDomain: othis.mallDomain,
 				})
 				.then( res => {
-					
+					console.log(res);
 				})
 				.catch( err => {
-					
+					console.log('App.vue-- wxweb接口调用出错');
 				})
 			};
 			function defaultWxLogin(){
@@ -155,7 +140,6 @@
 							if(res.data.code == 0){
 								if(res.data.result.isSuccess){
 									console.log('App.vue--wxapp 登陆成功');
-									
 								}else{
 									console.log("App.vue--wxapp 登陆失败");
 								}
@@ -167,9 +151,9 @@
 						}
 					})
 					.catch( err => {
-						console.log('App.vue--wxapp 接口调用出错');
+						console.log('App.vue--wxapp 接口调用出错' + err);
 					})
-				}
+				};
 				
 			}
 			

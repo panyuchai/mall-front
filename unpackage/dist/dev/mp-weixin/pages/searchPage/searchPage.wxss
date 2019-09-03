@@ -90,4 +90,8 @@ page {
 	margin-right: 20rpx;
 	font-size: 26rpx !important;
 }
+.default-tag{
+	min-width: 68rpx;
+	text-align: center;
+}
 

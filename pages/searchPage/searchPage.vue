@@ -3,31 +3,31 @@
 		<view class="tui-searchbox">
 			<view class="tui-search-input">
 				<!-- #ifdef APP-PLUS || MP -->
-				<icon type="search" :size='13' color='#333'></icon>
+				<icon type="search" :size='13' color='#333' @tap="handleSearch"></icon>
 				<!-- #endif -->
 				<!-- #ifdef H5 -->
-				<view><tui-icon name="search" :size='16' color='#333'></tui-icon></view>
+				<view><tui-icon name="search" :size='16' color='#333' @tap="handleSearch"></tui-icon></view>
 				<!-- #endif -->
 				<input confirm-type="search" placeholder="大家都在搜：2019退役球星" :focus="true" auto-focus placeholder-class="tui-input-plholder"
-				 class="tui-input" v-model.trim="key" />
+				 class="tui-input" v-model.trim="keyword" />
 				<!-- #ifdef APP-PLUS || MP -->
-				<icon type="clear" :size='13' color='#bcbcbc' @tap="cleanKey" v-show="key"></icon>
+				<icon type="clear" :size='13' color='#bcbcbc' @tap="cleanKey" v-show="keyword"></icon>
 				<!-- #endif -->
 				<!-- #ifdef H5 -->
-				<view @tap="cleanKey" v-show="key"><tui-icon name="close-fill" :size='16' color='#bcbcbc'></tui-icon></view>
+				<view @tap="cleanKey" v-show="keyword"><tui-icon name="close-fill" :size='16' color='#bcbcbc'></tui-icon></view>
 				<!-- #endif -->
 			</view>
 			<view class="tui-cancle" @tap="back">取消</view>
 		</view>
 
-		<view class="tui-search-history" v-if="history.length>0">
+		<view class="tui-search-history" v-if="historyShow">
 			<view class="tui-history-header">
 				<view class="tui-search-title">搜索历史</view>
 				<tui-icon name="delete" :size='14' color='#333' @tap="openActionSheet" class="tui-icon-delete"></tui-icon>
 			</view>
 			<view class="tui-history-content">
-				<block v-for="(item,index) in history" :key="index">
-					<tui-tag type="gray" @tap="chooseKeywords(item)" shape="circle">{{item}}</tui-tag>
+				<block v-for="(item,index) in historyData" :key="index">
+					<tui-tag class="default-tag" type="gray" @tap="chooseKeywords(item.keyword)" shape="circle">{{item.keyword}}</tui-tag>
 				</block>
 			</view>
 		</view>
@@ -38,6 +38,10 @@
 </template>
 
 <script>
+	import {
+		mapState,
+		mapMutations
+	} from 'vuex'
 	import tuiIcon from "@/components/icon/icon"
 	import tuiTag from "@/components/tag/tag"
 	import tuiActionsheet from "@/components/actionsheet/actionsheet"
@@ -49,20 +53,9 @@
 		},
 		data() {
 			return {
-				history: [
-					"美洲杯",
-					"D站观点",
-					"C罗",
-					"早安D站",
-					"2019退役球星",
-					"女神大会",
-					"德利赫特",
-					"托雷斯",
-					"自热火锅",
-					"华为手机",
-					"有机酸奶"
-				],
-				key: "",
+				historyData: [],
+				historyShow: true,
+				keyword: "",
 				showActionSheet: false,
 				tips: "确认清空搜索历史吗？"
 			}
@@ -72,7 +65,7 @@
 				uni.navigateBack();
 			},
 			cleanKey: function() {
-				this.key = ''
+				this.keyword = ''
 			},
 			closeActionSheet: function() {
 				this.showActionSheet = false
@@ -80,16 +73,74 @@
 			openActionSheet: function() {
 				this.showActionSheet = true
 			},
-			itemClick: function(e) {
-				let index = e.index;
-				if (index == 0) {
-					this.showActionSheet = false;
-					this.history = []
+			chooseKeywords: function(e){
+				this.keyword = e;
+			},
+			handleSearch(){
+				if(this.keyword.trim() == ''){
+					uni.showToast({
+						icon: 'none',
+						title: '搜索条件不能为空',
+					});
+				}else{
+					uni.setStorageSync('searchKeyword', this.keyword);
+					// uni.$emit('handleSearchKeywor', this.keyword);
+					uni.switchTab({
+						url: '/pages/product/product'
+					});
 				}
 			},
-			chooseKeywords: function(e){
-				this.key = e;
+			itemClick: function(e) {
+				// let index = e.index;
+				// if (index == 0) {
+				// 	this.showActionSheet = false;
+				// 	this.history = []
+				// }
+				let index = e.index;
+				if(index == 0){
+					this.showActionSheet = false;
+					this.$http.post('/mall/app/search/history/clear', {
+						...this.baseInfo,
+						accountId: this.userInfo.accountId
+					})
+					.then( res => {
+						if(res.code == 0){
+							this.getHistoryData();
+						}else{
+							console.log('searchPage.vue-- clear接口清空数据失败');
+						}
+					})
+					.catch( err => {
+						console.log('searchPage.vue-- clear接口清空数据错误');
+					})
+				}
+			},
+			getHistoryData(){
+				this.$http.post('/mall/app/search/history/query', {
+					...this.baseInfo,
+					accountId: this.userInfo.accountId
+				})
+				.then( res => {
+					if(res.code == 0){
+						if(res.result.list){
+							this.historyData=res.result.list;
+						}else{
+							this.historyShow=false;
+						}
+					}else{
+						console.log('searchPage.vue-- query接口获取数据失败');
+					}
+				})
+				.catch( err => {
+					console.log('searchPage.vue-- query接口获取数据错误');
+				})
 			}
+		},
+		computed: {
+			...mapState("common", ['baseInfo', 'userInfo'])
+		},
+		onLoad: function(){
+			this.getHistoryData();
 		}
 	}
 </script>
@@ -164,5 +215,10 @@
 		margin-bottom: 20upx;
 		margin-right: 20upx;
 		font-size: 26upx !important;
+	}
+	
+	.default-tag{
+		min-width: 68upx;
+		text-align: center;
 	}
 </style>

@@ -1,22 +1,22 @@
 <template>
 	<view>
-		<search class="search-bar"></search>
+		<search class="search-bar" :keyword='searchData.keyword'></search>
 		<view class="search-classify">
 			<view class="classify-top">
-				<view class="item" @tap="doSearch(0)" v-bind:class='searchData.orderType==0 ? "red" : ""'>
+				<view class="item" @tap="doQuery(0)" v-bind:class='searchData.orderType==0 ? "red" : ""'>
 					综合
 				</view>
-				<view class="item" @tap="doSearch(1)" v-bind:class='searchData.orderType==1 ? "red" : ""'>
+				<view class="item" @tap="doQuery(1)" v-bind:class='searchData.orderType==1 ? "red" : ""'>
 					最新
 				</view>
-				<view class="item" @tap="doSearch(2)">
+				<view class="item" @tap="doQuery(2)">
 					价格
 					<text class="item-icon">
 						<text class="iconfont icon-icon_sanjiaoxing icon-top" v-bind:class='[searchData.orderType==2 && searchData.isDesc ? "red" : ""]'></text>
 						<text class="iconfont icon-icon_sanjiaoxing icon-bottom" v-bind:class='[searchData.orderType==2 && !searchData.isDesc ? "red" : ""]'></text>
 					</text>
 				</view>
-				<view class="item" @tap="doSearch(3)">
+				<view class="item" @tap="doQuery(3)">
 					销量
 					<text class="item-icon">
 						<text class="iconfont icon-icon_sanjiaoxing icon-top" v-bind:class='[searchData.orderType==3 && searchData.isDesc ? "red" : ""]'></text>
@@ -59,7 +59,7 @@
 				没有找到相关搜索结果
 			</view>
 		</view>
-		<view class="product-list">
+		<view class="product-list" @scroll="scroll" :scroll-top="scrollTop">
 			<!--商品列表-->
 			<view class="pro-item" @tap="linkToDetail(item.id)" v-for="(item,index) in productData" :key="index">
 				<image :src="item.goodsMainimagepath" class="pro-img" mode="widthFix" />
@@ -78,23 +78,6 @@
 					{{item.label}}
 				</view>
 			</view>
-			<!-- <view class="pro-item" @tap="linkToDetail" v-for="(item,index) in productList" :key="index">
-				<image :src="item.img" class="pro-img" mode="widthFix" />
-				<view class="pro-content">
-					<view class="pro-tit">{{item.name}}</view>
-					<view>
-						<view class="pro-subtit">
-							{{item.subname}}
-						</view>
-						<view class="pro-price">
-							<text class="sale-price"><text class="unit">￥</text>{{item.sale}}</text>
-						</view>
-					</view>
-				</view>
-				<view v-if="item.tag" class="tag">
-					{{item.tag}}
-				</view>
-			</view> -->
 			<!--商品列表-->
 		</view>
 		<!--加载loadding-->
@@ -115,255 +98,55 @@
 	export default {
 		data() {
 			return {
+				toggle: true,
 				pageNum: 1,
 				productData: [],
-				productList: [{
-						img: "http://localhost:8081/static/images/product/1.jpg",
-						name: "1利物浦官方 独家出品纪念版沙发",
-						subname: "好油特别好的油副标题好油特别好的油副标题好油特别好的油副标题",
-						sale: 599,
-						tag: "大特惠"
-					},
-					{
-						img: "http://localhost:8081/static/images/product/2.jpg",
-						name: "2好看好养活的绿色养眼小盆栽，超级实惠",
-						subname: "好油特别好的油副标题好油特别好的油副标题好油特别好的油副标题",
-						sale: 29,
-						tag: "新品特惠"
-					},
-					{
-						img: "http://localhost:8081/static/images/product/3.jpg",
-						name: "3利物浦官方 独家出品大红床上用品三件套",
-						subname: "好油特别好的油副标题好油特别好的油副标题好油特别好的油副标题",
-						sale: 299,
-						tag: "新品"
-					},
-					{
-						img: "http://localhost:8081/static/images/product/4.jpg",
-						name: "4利物浦官方 独家出品花花碎花床上用品三件套",
-						subname: "好油特别好的油副标题好油特别好的油副标题好油特别好的油副标题",
-						sale: 1599,
-						tag: ""
-					},
-					{
-						img: "http://localhost:8081/static/images/product/5.jpg",
-						name: "5利物浦官方 独家出品纪念版书柜，便宜又省空间，超级划算",
-						subname: "好油特别好的油副标题好油特别好的油副标题好油特别好的油副标题",
-						sale: 599
-					}, {
-						img: "http://localhost:8081/static/images/product/1.jpg",
-						name: "6独家出品纪念版沙发",
-						subname: "好油特别好的油副标题好油特别好的油副标题好油特别好的油副标题",
-						sale: 599
-					},
-					{
-						img: "http://localhost:8081/static/images/product/2.jpg",
-						name: "7好看好养活的绿色养眼小盆栽，超级实惠",
-						subname: "好油特别好的油副标题好油特别好的油副标题好油特别好的油副标题",
-						sale: 29
-					},
-					{
-						img: "http://localhost:8081/static/images/product/3.jpg",
-						name: "8利物浦官方 独家出品大红床上用品三件套",
-						subname: "好油特别好的油副标题好油特别好的油副标题好油特别好的油副标题",
-						sale: 299
-					},
-					{
-						img: "http://localhost:8081/static/images/product/4.jpg",
-						name: "9利物浦官方 独家出品花花碎花床上用品三件套",
-						subname: "好油特别好的油副标题好油特别好的油副标题好油特别好的油副标题",
-						sale: 1599
-					},
-					{
-						img: "http://localhost:8081/static/images/product/5.jpg",
-						name: "10利物浦官方 独家出品纪念版书柜，便宜又省空间，超级划算",
-						subname: "好油特别好的油副标题好油特别好的油副标题好油特别好的油副标题",
-						sale: 599
-					}
-				],
-				loadData: [{
-						img: "http://localhost:8081/static/images/product/1.jpg",
-						name: "11利物浦官方 独家出品纪念版沙发",
-						subname: "好油特别好的油副标题好油特别好的油副标题好油特别好的油副标题",
-						sale: 599
-					},
-					{
-						img: "http://localhost:8081/static/images/product/2.jpg",
-						name: "12好看好养活的绿色养眼小盆栽，超级实惠",
-						subname: "好油特别好的油副标题好油特别好的油副标题好油特别好的油副标题",
-						sale: 29
-					},
-					{
-						img: "http://localhost:8081/static/images/product/3.jpg",
-						name: "13利物浦官方 独家出品大红床上用品三件套",
-						subname: "好油特别好的油副标题好油特别好的油副标题好油特别好的油副标题",
-						sale: 299
-					},
-					{
-						img: "http://localhost:8081/static/images/product/4.jpg",
-						name: "14利物浦官方 独家出品花花碎花床上用品三件套",
-						subname: "好油特别好的油副标题好油特别好的油副标题好油特别好的油副标题",
-						sale: 1599
-					},
-					{
-						img: "http://localhost:8081/static/images/product/5.jpg",
-						name: "15利物浦官方 独家出品纪念版书柜，便宜又省空间，超级划算",
-						subname: "好油特别好的油副标题好油特别好的油副标题好油特别好的油副标题",
-						sale: 599
-					}, {
-						img: "http://localhost:8081/static/images/product/1.jpg",
-						name: "16独家出品纪念版沙发",
-						subname: "好油特别好的油副标题好油特别好的油副标题好油特别好的油副标题",
-						sale: 599
-					},
-					{
-						img: "http://localhost:8081/static/images/product/2.jpg",
-						name: "17好看好养活的绿色养眼小盆栽，超级实惠",
-						subname: "好油特别好的油副标题好油特别好的油副标题好油特别好的油副标题",
-						sale: 29
-					},
-					{
-						img: "http://localhost:8081/static/images/product/3.jpg",
-						name: "18利物浦官方 独家出品大红床上用品三件套",
-						subname: "好油特别好的油副标题好油特别好的油副标题好油特别好的油副标题",
-						sale: 299
-					},
-					{
-						img: "http://localhost:8081/static/images/product/4.jpg",
-						name: "19利物浦官方 独家出品花花碎花床上用品三件套",
-						subname: "好油特别好的油副标题好油特别好的油副标题好油特别好的油副标题",
-						sale: 1599
-					},
-					{
-						img: "http://localhost:8081/static/images/product/5.jpg",
-						name: "20利物浦官方 独家出品纪念版书柜，便宜又省空间，超级划算",
-						subname: "好油特别好的油副标题好油特别好的油副标题好油特别好的油副标题",
-						sale: 599
-					},
-					{
-						img: "http://localhost:8081/static/images/product/1.jpg",
-						name: "21利物浦官方 独家出品纪念版沙发",
-						subname: "好油特别好的油副标题好油特别好的油副标题好油特别好的油副标题",
-						sale: 599
-					},
-					{
-						img: "http://localhost:8081/static/images/product/2.jpg",
-						name: "22好看好养活的绿色养眼小盆栽，超级实惠",
-						subname: "好油特别好的油副标题好油特别好的油副标题好油特别好的油副标题",
-						sale: 29
-					},
-					{
-						img: "http://localhost:8081/static/images/product/3.jpg",
-						name: "23利物浦官方 独家出品大红床上用品三件套",
-						subname: "好油特别好的油副标题好油特别好的油副标题好油特别好的油副标题",
-						sale: 299
-					},
-					{
-						img: "http://localhost:8081/static/images/product/4.jpg",
-						name: "24利物浦官方 独家出品花花碎花床上用品三件套",
-						subname: "好油特别好的油副标题好油特别好的油副标题好油特别好的油副标题",
-						sale: 1599
-					},
-					{
-						img: "http://localhost:8081/static/images/product/5.jpg",
-						name: "25利物浦官方 独家出品纪念版书柜，便宜又省空间，超级划算",
-						subname: "好油特别好的油副标题好油特别好的油副标题好油特别好的油副标题",
-						sale: 599
-					}, {
-						img: "http://localhost:8081/static/images/product/1.jpg",
-						name: "26独家出品纪念版沙发",
-						subname: "好油特别好的油副标题好油特别好的油副标题好油特别好的油副标题",
-						sale: 599
-					},
-					{
-						img: "http://localhost:8081/static/images/product/2.jpg",
-						name: "27好看好养活的绿色养眼小盆栽，超级实惠",
-						subname: "好油特别好的油副标题好油特别好的油副标题好油特别好的油副标题",
-						sale: 29
-					},
-					{
-						img: "http://localhost:8081/static/images/product/3.jpg",
-						name: "28利物浦官方 独家出品大红床上用品三件套",
-						subname: "好油特别好的油副标题好油特别好的油副标题好油特别好的油副标题",
-						sale: 299
-					},
-					{
-						img: "http://localhost:8081/static/images/product/4.jpg",
-						name: "29利物浦官方 独家出品花花碎花床上用品三件套",
-						subname: "好油特别好的油副标题好油特别好的油副标题好油特别好的油副标题",
-						sale: 1599
-					},
-					{
-						img: "http://localhost:8081/static/images/product/5.jpg",
-						name: "30利物浦官方 独家出品纪念版书柜，便宜又省空间，超级划算",
-						subname: "好油特别好的油副标题好油特别好的油副标题好油特别好的油副标题",
-						sale: 599
-					},
-					{
-						img: "http://localhost:8081/static/images/product/5.jpg",
-						name: "31利物浦官方 独家出品纪念版书柜，便宜又省空间，超级划算",
-						subname: "好油特别好的油副标题好油特别好的油副标题好油特别好的油副标题",
-						sale: 599
-					}, {
-						img: "http://localhost:8081/static/images/product/1.jpg",
-						name: "32独家出品纪念版沙发",
-						subname: "好油特别好的油副标题好油特别好的油副标题好油特别好的油副标题",
-						sale: 599
-					},
-					{
-						img: "http://localhost:8081/static/images/product/2.jpg",
-						name: "33好看好养活的绿色养眼小盆栽，超级实惠",
-						subname: "好油特别好的油副标题好油特别好的油副标题好油特别好的油副标题",
-						sale: 29
-					},
-					{
-						img: "http://localhost:8081/static/images/product/3.jpg",
-						name: "34利物浦官方 独家出品大红床上用品三件套",
-						subname: "好油特别好的油副标题好油特别好的油副标题好油特别好的油副标题",
-						sale: 299
-					},
-					{
-						img: "http://localhost:8081/static/images/product/4.jpg",
-						name: "利物浦官方 独家出品花花碎花床上用品三件套",
-						subname: "好油特别好的油副标题好油特别好的油副标题好油特别好的油副标题",
-						sale: 1599
-					},
-					{
-						img: "http://localhost:8081/static/images/product/5.jpg",
-						name: "35利物浦官方 独家出品纪念版书柜，便宜又省空间，超级划算",
-						subname: "好油特别好的油副标题好油特别好的油副标题好油特别好的油副标题",
-						sale: 599
-					}
-				],
 				loadding: false,
 				pullUpOn: true,
 				notFound: false,
+				canReachBottom: true,
 				searchData: {
 					pageNum: 1,
 					pageSize: 10,
 					totalPage: null,
-					keyword: '',
-					orderType: 0,
+					keyword: uni.getStorageSync('searchKeyword') || '',
+					orderType: null,
 					isDesc: false
+				},
+				scrollTop: 0,
+				old: {
+					scrollTop: 0
 				}
 			}
 		},
 		methods: {
-			linkToLogin(){
-				uni.navigateTo({
-				    url: '/pages/login/login'
+			scroll: function(e) {
+				this.old.scrollTop = e.detail.scrollTop
+			},
+			goTop: function(e) {
+				this.scrollTop = this.old.scrollTop
+				this.$nextTick(function() {
+					this.scrollTop = 0
 				});
 			},
 			linkToDetail(e){
 				uni.navigateTo({
-					url: '/pages/productDetail/productDetail'
+					url: '/pages/productDetail/productDetail?id=' + e
 				});
 			},
-			doQuery(){
-				
-			},
-			doSearch(orderType){
-				this.searchData.orderType=orderType || this.searchData.orderType;
+			// goTop: function() {
+			// 	// this.toggle = false;
+			// 	uni.pageScrollTo({
+			// 		scrollTop: 0,
+			// 		// duration: 5
+			// 	})
+			// 	// setTimeout(() => {
+			// 	// 	this.toggle = true
+			// 	// }, 10)
+			// },
+			doQuery(orderType){
+				this.goTop();
+				this.searchData.pageNum=1;
 				switch (orderType){
 					case 2:
 						this.searchData.isDesc=!this.searchData.isDesc;
@@ -374,18 +157,41 @@
 					default:
 						this.searchData.isDesc=false;
 				}
+				this.doSearch(orderType);
+				uni.setStorageSync('product_searchType_storage', orderType);
+			},
+			doSearch(orderType){
+				this.loadding = true;
+				this.pullUpOn = true;
+				this.searchData.orderType=orderType || 0;
+				
 				this.$http.post('/mall/app/goods/list', {
+					accountId: this.userInfo.accountId || '',
 					...this.baseInfo,
 					...this.searchData
 				})
 				.then( res => {
-					console.log(res)
+					// console.log(res)
 					if(res.code == 0){
-						if(!res.result.mallGoodsList.length){
-							this.notFound=true;
+						if(res.result){
+							this.searchData.totalPage=res.result.totalPage;
+							if(res.result.mallGoodsList.length == 0){
+								// this.notFound=true;
+								
+								this.loadding = false;
+								this.pullUpOn = false;
+							}else{
+								this.loadding = false;
+							}
+							if(this.searchData.pageNum == 1){
+								if(res.result.mallGoodsList){
+									this.productData=res.result.mallGoodsList;
+								}
+							}else{
+								this.productData=this.productData.concat(res.result.mallGoodsList);
+							}
 						}
-						this.productData=res.result.mallGoodsList;
-						this.searchData.totalPage=res.totalPage;
+						
 					}else{
 						console.log("product.vue-- list获取数据列表失败");
 					}
@@ -394,32 +200,61 @@
 					console.log("product.vue-- list获取数据列表错误");
 				})
 			},
-			initProductData(){
-				this.doSearch();
-				// this.$http.post('/mall/app/goods/list', {
-				// 	...this.baseInfo,
-				// 	pageNum: this.pageNum
-				// })
-				// .then( res => {
-				// 	if(res.code == 0){
-				// 		this.productData=res.result.mallGoodsList
-				// 	}else{
-				// 		console.log("product.vue-- list获取数据列表失败");
-				// 	}
-				// 	console.log(res)
-				// })
-				// .catch( err => {
-				// 	console.log("product.vue-- list获取数据列表错误");
-				// })
+			initSearch(){
+				// let keyword = uni.getStorageSync('searchKeyword') || '';
+				// this.searchData.keyword=keyword;
+				this.searchData.pageNum=1;
+				// this.notFound=false;
+				// this.canReachBottom=true;
+				// this.pullUpOn=true;
+				this.productData=[];
 			}
+			// initProductData(){
+			// 	this.doSearch();
+			// 	// this.$http.post('/mall/app/goods/list', {
+			// 	// 	...this.baseInfo,
+			// 	// 	pageNum: this.pageNum
+			// 	// })
+			// 	// .then( res => {
+			// 	// 	if(res.code == 0){
+			// 	// 		this.productData=res.result.mallGoodsList
+			// 	// 	}else{
+			// 	// 		console.log("product.vue-- list获取数据列表失败");
+			// 	// 	}
+			// 	// 	console.log(res)
+			// 	// })
+			// 	// .catch( err => {
+			// 	// 	console.log("product.vue-- list获取数据列表错误");
+			// 	// })
+			// }
 		},
 		computed: {
-			...mapState("common", ['baseInfo']),
+			...mapState("common", ['baseInfo', 'userInfo']),
 		},
-		onLoad: function(options){
-			// console.log(options);
-			this.initProductData();
+		onLoad: function(){
+			
 		},
+		onShow(){
+			let keyword = uni.getStorageSync('searchKeyword') || '';
+			this.searchData.keyword=keyword;
+			this.initSearch();
+			this.doSearch(0);
+		},
+		onHide(){
+			uni.removeStorageSync('searchKeyword');
+			uni.removeStorageSync('product_searchType_storage');
+		},
+		// onShow(){  
+		//     // 监听事件  
+		//     uni.$on('handleSearchKeywor',(keyword)=>{  
+		//         this.searchData.keyword = keyword;  
+		// 		console.log(this.searchData.keyword)
+		//     })  
+		// },  
+		// onHide() {  
+		//     // 移除监听事件  
+		// 	uni.$off('handleSearchKeywor');  
+		// }, 
 		/**
 		 * 页面相关事件处理函数--监听用户下拉动作
 		 */
@@ -440,14 +275,17 @@
 		onReachBottom: function() {
 			if (!this.pullUpOn) return;
 			this.loadding = true;
-			if (this.pageNum == 3) {
+			this.searchData.pageNum++;
+			// if(this.canReachBottom){
+			if (this.searchData.pageNum == this.searchData.totalPage) {
 				this.loadding = false;
-				this.pullUpOn = false
-			} else {
-				this.productList = this.productList.concat(this.loadData);
-				this.pageNum = this.pageNum + 1;
-				this.loadding = false
+				this.pullUpOn = false;
 			}
+			// }else{
+			// 	this.loadding = false;
+			// }
+			
+			this.doSearch(uni.getStorageSync('product_searchType_storage'));
 		},
 		components: {
 			Search,

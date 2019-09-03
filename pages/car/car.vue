@@ -5,43 +5,47 @@
 			<view v-if='hasLogin'>
 				<!-- 商品列表 -->
 				<view class="goods-list">
-					<view class="tis" v-if="goodsList.length==0">购物车是空的哦~</view>
+					<view v-if="carEmpty" class="product-empty">
+						<view class="not-tips">
+							购物车是空的哦~
+						</view>
+					</view>
 					<view class="row" v-for="(row,index) in goodsList" :key="index" >
 						<!-- 删除按钮 -->
-						<view class="menu" @tap.stop="deleteGoods(row.id)">
+						<view class="menu" @tap.stop="deleteGoods(row.shopcarId)">
 							<view class="icon iconfont icon-shanchu"></view>
 						</view>
 						<!-- 商品 -->
 						<view class="carrier" :class="[theIndex==index?'open':oldIndex==index?'close':'']" @touchstart="touchStart(index,$event)" @touchmove="touchMove(index,$event)" @touchend="touchEnd(index,$event)">
 							<!-- checkbox -->
 							<view class="checkbox-box" @tap="selected(index)">
-								<view class="checkbox" :class="[row.selected?'on':'']">
-									<view :class="[row.selected?'on':'']"></view>
+								<view class="checkbox" :class="[row.checked?'on':'']">
+									<view :class="[row.checked?'on':'']"></view>
 								</view>
 							</view>
 							<!-- 商品信息 -->
-							<view class="goods-info" @tap="linkToDetail(row)">
+							<view class="goods-info" @tap="linkToDetail(row.mallGoodsId)">
 								<view class="img">
-									<image :src="row.img"></image>
+									<image :src="row.goodsMainimagepath"></image>
 								</view>
 								<view class="info">
-									<view class="title">{{row.name}}</view>
-									<view class="spec">{{row.spec}}</view>
+									<view class="title">{{row.goodsProductname}}</view>
+									<view class="spec">{{row.goodsTitle}}</view>
 									<view class="price-number">
 										<view class="price">
 											<view class="sale-price">
-												￥<text class="num">{{row.price}}</text>
+												￥<text class="num">{{row.salePrice}}</text>
 											</view>
-											<view class="factory-price">
+											<!-- <view class="factory-price">
 												￥{{row.price}}
-											</view>
+											</view> -->
 										</view>
 										<view class="number">
 											<view class="sub" @tap.stop="sub(index)">
 												<view class="icon iconfont icon-jian"></view>
 											</view>
 											<view class="input" @tap.stop="discard">
-												<input type="number" v-model="row.number" @input="sum($event,index)" />
+												<input type="number" v-model="row.goodsCount" @input="sum($event,index)" @blur="change(index)"/>
 											</view>
 											<view class="add"  @tap.stop="add(index)">
 												<view class="icon iconfont icon-jia"></view>
@@ -93,21 +97,12 @@
 				showHeader:true,
 				selectedList:[],
 				isAllselected:false,
-				goodsList:[
-					{id:1,img:'http://localhost:8082/static/img/goods/p1.jpg',name:'商品标题商品标题商品标题商品标题商品标题商品标题商品标题商品标题商品标题商品标题',spec:'香辣味香辣味香辣味香辣味香辣味香辣味',price:127.5,number:1,selected:false},
-					{id:2,img:'/static/img/goods/p2.jpg',name:'商品标题商品标题商品标题商品标题商品标题商品标题商品标题商品标题商品标题商品标题',price:127.5,spec:'',number:1,selected:false},
-					{id:3,img:'/static/img/goods/p3.jpg',name:'商品标题商品标题商品标题商品标题商品标题商品标题商品标题商品标题商品标题商品标题',price:127.5,spec:'',number:1,selected:false},
-					{id:4,img:'/static/img/goods/p4.jpg',name:'商品标题商品标题商品标题商品标题商品标题商品标题商品标题商品标题商品标题商品标题',price:127.5,spec:'',number:1,selected:false},
-					{id:5,img:'/static/img/goods/p5.jpg',name:'商品标题商品标题商品标题商品标题商品标题商品标题商品标题商品标题商品标题商品标题',price:127.5,spec:'',number:1,selected:false},
-					{id:6,img:'/static/img/goods/p5.jpg',name:'商品标题商品标题商品标题商品标题商品标题商品标题商品标题商品标题商品标题商品标题',price:127.5,spec:'',number:1,selected:false},
-					{id:7,img:'/static/img/goods/p5.jpg',name:'商品标题商品标题商品标题商品标题商品标题商品标题商品标题商品标题商品标题商品标题',price:127.5,spec:'',number:1,selected:false},
-					{id:8,img:'/static/img/goods/p5.jpg',name:'商品标题商品标题商品标题商品标题商品标题商品标题商品标题商品标题商品标题商品标题',price:127.5,spec:'',number:1,selected:false},
-					{id:9,img:'/static/img/goods/p5.jpg',name:'商品标题商品标题商品标题商品标题商品标题商品标题商品标题商品标题商品标题商品标题',price:127.5,spec:'',number:1,selected:false},
-				],
+				goodsList:[],
 				//控制滑动效果
 				theIndex:null,
 				oldIndex:null,
-				isStop:false
+				isStop:false,
+				carEmpty:false
 			}
 		},
 		onPageScroll(e){
@@ -117,25 +112,22 @@
 			this.statusTop = e.scrollTop>=0?null:-this.statusHeight+'px';
 		},
 		//下拉刷新，需要自己在page.json文件中配置开启页面下拉刷新 "enablePullDownRefresh": true
-		onPullDownRefresh() {
-		    setTimeout(function () {
-		        uni.stopPullDownRefresh();
-		    }, 1000);
-		},
-		onLoad() {
-			//兼容H5下结算条位置
-			// #ifdef H5
-				this.footerbottom = document.getElementsByTagName('uni-tabbar')[0].offsetHeight+'px';
-			// #endif
-			// #ifdef APP-PLUS
-			this.showHeader = false;
-			this.statusHeight = plus.navigator.getStatusbarHeight();
-			// #endif
-		},
+		// onPullDownRefresh() {
+		//     setTimeout(function () {
+		//         uni.stopPullDownRefresh();
+		//     }, 1000);
+		// },
+		
 		computed: {
-			...mapState("common", ['hasLogin']),
+			...mapState("common", ['hasLogin', 'baseInfo', 'userInfo']),
 		},
 		methods: {
+			// ...mapMutations('order', ['SET_ORDER_GOODSLIST']),
+			linkToLogin(){
+				uni.navigateTo({
+				    url: '/pages/login/login'
+				});
+			},
 			//加入商品 参数 goods:商品数据
 			// joinGoods(goods){
 			// 	/*
@@ -213,9 +205,8 @@
 			
 			//商品跳转
 			linkToDetail(e){
-				uni.showToast({title: '商品'+e.id,icon:"none"});
 				uni.navigateTo({
-					url: '/pages/productDetail/productDetail'
+					url: '/pages/productDetail/productDetail?id=' + e
 				});
 			},
 			//跳转确认订单页面
@@ -223,7 +214,7 @@
 				let tmpList=[];
 				let len = this.goodsList.length;
 				for(let i=0;i<len;i++){
-					if(this.goodsList[i].selected) {
+					if(this.goodsList[i].checked) {
 						tmpList.push(this.goodsList[i]);
 					}
 				}
@@ -235,7 +226,7 @@
 					return ;
 				}
 				uni.setStorage({
-					key:'buylist',
+					key:'buyList',
 					data:tmpList,
 					success: () => {
 						uni.navigateTo({
@@ -243,49 +234,82 @@
 						})
 					}
 				})
+				// this.SET_ORDER_GOODSLIST(tmpList);
+				// uni.navigateTo({
+				// 	url:'/pages/payment/payment'
+				// })
 			},
 			//删除商品
-			deleteGoods(id){
+			deleteGoods(shopcarId){
 				uni.showModal({
 				    title: '提示',
 				    content: '确定要删除选中商品吗？',
 					confirmColor: '#E93548',
-				    success: function (res) {
+				    success: res => {
 				        if (res.confirm) {
-				            console.log('用户点击确定');
+				            this.$http.post('/mall/app/car/delete', {
+								...this.baseInfo,
+								accountId: this.userInfo.accountId,
+								shopcarIds: shopcarId
+							})
+							.then( res => {
+								if(res.code == 0){
+									this.getGoodsList();
+									uni.showToast({
+										icon: 'none',
+										title: '商品删除成功',
+									});
+									this.sum();
+									this.oldIndex = null;
+									this.theIndex = null;
+								}
+							})
+							.catch( err => {
+								console.log('car.vue-- delete接口删除数据错误');
+							})
 				        } else if (res.cancel) {
 				            console.log('用户点击取消');
 				        }
 				    }
 				});
-				let len = this.goodsList.length;
-				for(let i=0;i<len;i++){
-					if(id==this.goodsList[i].id){
-						this.goodsList.splice(i, 1);
-						break;
-					}
-				}
-				this.selectedList.splice(this.selectedList.indexOf(id), 1);
-				this.sum();
-				this.oldIndex = null;
-				this.theIndex = null;
+				// let len = this.goodsList.length;
+				// for(let i=0;i<len;i++){
+				// 	if(id==this.goodsList[i].id){
+				// 		this.goodsList.splice(i, 1);
+				// 		break;
+				// 	}
+				// }
+				// this.selectedList.splice(this.selectedList.indexOf(id), 1);
+				// this.sum();
+				// this.oldIndex = null;
+				// this.theIndex = null;
 			},
 			// 删除商品s
 			deleteList(){
-				let len = this.selectedList.length;
-				while (this.selectedList.length>0)
-				{
-					this.deleteGoods(this.selectedList[0]);
-				}
+				// let len = this.selectedList.length;
+				// while (this.selectedList.length>0)
+				// {
+					// console.log(this.selectedList[0]);
+					// this.deleteGoods(this.selectedList[0]);
+				// }
+				// this.selectedList = [];
+				// this.isAllselected = this.selectedList.length == this.goodsList.length && this.goodsList.length>0;
+				// this.sum();
+				
+				let shopcarIds = ''
+				this.selectedList.map(item => {
+					shopcarIds += `${item},`;
+				})
+				this.deleteGoods(shopcarIds);
 				this.selectedList = [];
 				this.isAllselected = this.selectedList.length == this.goodsList.length && this.goodsList.length>0;
 				this.sum();
 			},
 			// 选中商品
 			selected(index){
-				this.goodsList[index].selected = this.goodsList[index].selected?false:true;
-				let i = this.selectedList.indexOf(this.goodsList[index].id);
-				i>-1?this.selectedList.splice(i, 1):this.selectedList.push(this.goodsList[index].id);
+				this.goodsList[index].checked = this.goodsList[index].checked?false:true;
+				let i = this.selectedList.indexOf(this.goodsList[index].shopcarId);
+				i>-1?this.selectedList.splice(i, 1):this.selectedList.push(this.goodsList[index].shopcarId);
 				this.isAllselected = this.selectedList.length == this.goodsList.length;
 				this.sum();
 			},
@@ -294,8 +318,8 @@
 				let len = this.goodsList.length;
 				let arr = [];
 				for(let i=0;i<len;i++){
-					this.goodsList[i].selected = this.isAllselected? false : true;
-					arr.push(this.goodsList[i].id);
+					this.goodsList[i].checked = this.isAllselected? false : true;
+					arr.push(this.goodsList[i].shopcarId);
 				}
 				this.selectedList = this.isAllselected?[]:arr;
 				this.isAllselected = this.isAllselected||this.goodsList.length==0?false : true;
@@ -303,27 +327,53 @@
 			},
 			// 减少数量
 			sub(index){
-				if(this.goodsList[index].number<=1){
+				if(this.goodsList[index].goodsCount<=1){
 					return;
 				}
-				this.goodsList[index].number--;
+				this.goodsList[index].goodsCount--;
+				this.editCount(index);
 				this.sum();
 			},
 			// 增加数量
 			add(index){
-				this.goodsList[index].number++;
+				this.goodsList[index].goodsCount++;
+				this.editCount(index);
 				this.sum();
+			},
+			change(index){
+				this.editCount(index);
+			},
+			editCount(index){
+				let productParams = [this.goodsList[index]];
+				this.$http.post('/mall/app/car/edit', {
+					...this.baseInfo,
+					accountId: this.userInfo.accountId,
+					list: productParams
+				})
+				.then( res => {
+					if(res.message == 'success'){
+						console.log('编辑成功');
+					}else{
+						uni.showToast({
+							icon: 'none',
+							title: res.message,
+						});
+					}
+				})
+				.catch( err => {
+					console.log('car.vue-- edit接口编辑数据错误');
+				})
 			},
 			// 合计
 			sum(e,index){
 				this.sumPrice=0;
 				let len = this.goodsList.length;
 				for(let i=0;i<len;i++){
-					if(this.goodsList[i].selected) {
+					if(this.goodsList[i].checked) {
 						if(e && i==index){
-							this.sumPrice = this.sumPrice + (e.detail.value*this.goodsList[i].price);
+							this.sumPrice = this.sumPrice + (e.detail.value*this.goodsList[i].salePrice);
 						}else{
-							this.sumPrice = this.sumPrice + (this.goodsList[i].number*this.goodsList[i].price);
+							this.sumPrice = this.sumPrice + (this.goodsList[i].goodsCount*this.goodsList[i].salePrice);
 						}
 					}
 				}
@@ -331,10 +381,42 @@
 			},
 			discard() {
 				//丢弃
+			},
+			getGoodsList(){
+				this.$http.post('/mall/app/car/query', {
+					...this.baseInfo,
+					accountId: this.userInfo.accountId
+				})
+				.then( res => {
+					if(res.code == 0){
+						console.log(res)
+						this.goodsList=res.result.list;
+						if(!res.result.list){
+							this.carEmpty=true;
+						};
+						// console.log(res.result.list)
+					}else{
+						console.log('car.vue-- query接口获取数据失败');
+					}
+				})
+				.catch( err => {
+					console.log('car.vue-- query接口获取数据错误');
+				})
 			}
-			
-			
-		}
+		},
+		onShow() {
+			this.getGoodsList();
+		},
+		onLoad() {
+			//兼容H5下结算条位置
+			// #ifdef H5
+				this.footerbottom = document.getElementsByTagName('uni-tabbar')[0].offsetHeight+'px';
+			// #endif
+			// #ifdef APP-PLUS
+			this.showHeader = false;
+			this.statusHeight = plus.navigator.getStatusbarHeight();
+			// #endif
+		},
 	}
 </script>
 
@@ -480,13 +562,17 @@
 	.goods-list{
 		width: 100%;
 		padding: 20upx 0 120upx 0;
-		.tis{
-			width: 100%;
-			height: 60upx;
-			display: flex;
-			justify-content: center;
-			align-items: center;
-			font-size: 32upx;
+		.product-empty{
+			margin-top: 0;
+			.not-tips{
+				display: flex;
+				justify-content: center;
+				font-size: 28upx;
+				padding: 8vh 20upx 0;
+				.login-btn{
+					color: #E93548
+				}
+			}
 		}
 		.row{
 			height: calc(22vw + 40upx); 

@@ -68,6 +68,7 @@
 				},
 				isMiniprogram: false,
 				isWx: false,
+				isWebWx: false,
 				isPhoneLogin: false,
 				isPasswordLogin: false,
 				wxLoginData: {},
@@ -76,16 +77,18 @@
             }
         },
         computed: {
-			...mapState("common", ['mallDomain', 'mallType']),
+			...mapState("common", ['mallDomain', 'mallType', 'userInfo', 'baseInfo']),
 			showOauthBtn() {
 				return this.isMiniprogram
 			}
 		},
         methods: {
-            ...mapMutations('common', ['SET_TOKEN', 'SET_HASLOGIN', 'login']),
+            ...mapMutations('common', ['SET_TOKEN', 'SET_HASLOGIN', 'login', 'SET_USERIFNO', 'SET_BASEINFO']),
 			handlePhoneLogin(){
 				if(this.isWx){
 					this.bindPhoneLogin();
+				}else if(this.isWebWx){
+					this.wxPhoneLogin();
 				}else{
 					this.phoneLogin();
 				}
@@ -93,6 +96,8 @@
 			handlePasswordLogin(){
 				if(this.isWx){
 					this.bindPasswordLogin();
+				}else if(this.isWebWx){
+					this.wxPasswordLogin();
 				}else{
 					this.passwordLogin();
 				}
@@ -253,6 +258,7 @@
 						...this.phoneData
 					})
 					.then( res => {
+						// console.log(res)
 						if(res.result.isSuccess){
 							this.SET_HASLOGIN(true);
 							this.SET_TOKEN(res.result.token);
@@ -260,6 +266,7 @@
 								config.header['Authorization'] = 'Bearer ' + getStore({ name: 'token' });
 								return config;
 							});
+							this.setUserInfo();
 							uni.showToast({
 								icon: 'none',
 								title: '登陆成功',
@@ -270,7 +277,7 @@
 								});
 							}, 1000);
 						}else{
-							console.log("login-- userinfo登录失败");
+							console.log("login-- h5登录失败");
 							if(res.result.code == '0011'){
 								uni.showToast({
 									icon: 'none',
@@ -281,7 +288,7 @@
 						}
 					})
 					.catch( err => {
-						console.log("login-- userinfo登录错误");
+						console.log("login-- h5登录错误");
 					})
 				}else{
 					uni.showToast({
@@ -304,6 +311,7 @@
 								config.header['Authorization'] = 'Bearer ' + getStore({ name: 'token' });
 								return config;
 							});
+							this.setUserInfo();
 							uni.showToast({
 								icon: 'none',
 								title: '登陆成功',
@@ -314,7 +322,7 @@
 								});
 							}, 1000);
 						}else{
-							console.log("login-- userinfo登录失败");
+							console.log("login-- h5登录失败");
 							if(res.result.code == '0010'){
 								uni.showToast({
 									icon: 'none',
@@ -325,7 +333,7 @@
 						}
 					})
 					.catch( err => {
-						console.log("login-- userinfo登录错误");
+						console.log("login-- h5登录错误");
 					})
 				}else{
 					uni.showToast({
@@ -349,6 +357,7 @@
 								config.header['Authorization'] = 'Bearer ' + getStore({ name: 'token' });
 								return config;
 							});
+							this.setUserInfo();
 							uni.showToast({
 								icon: 'none',
 								title: '登陆成功',
@@ -393,9 +402,16 @@
 								config.header['Authorization'] = 'Bearer ' + getStore({ name: 'token' });
 								return config;
 							});
-							uni.navigateBack({
-							    delta: 1
+							this.setUserInfo();
+							uni.showToast({
+								icon: 'none',
+								title: '登陆成功',
 							});
+							setTimeout(function() {
+								uni.navigateBack({
+								    delta: 1
+								});
+							}, 1000);
 						}else{
 							console.log("login-- userinfo登录失败");
 							if(res.result.code == '0011'){
@@ -431,6 +447,96 @@
             //         uni.navigateBack();
             //     }
             // },
+			wxPhoneLogin(){
+				if(!validatenull(this.phoneData.code) && !isvalidatemobile(this.phoneData.phone)[0]){
+					this.$http.post('/mall/app/login/mall/wxweb/userinfo', {
+						mallDomain: this.mallDomain,
+						...this.phoneData
+					})
+					.then( res => {
+						if(res.result.isSuccess){
+							this.SET_HASLOGIN(true);
+							this.SET_TOKEN(res.result.token);
+							this.$http.setConfig((config) => {
+								config.header['Authorization'] = 'Bearer ' + getStore({ name: 'token' });
+								return config;
+							});
+							this.setUserInfo();
+							uni.showToast({
+								icon: 'none',
+								title: '登陆成功',
+							});
+							setTimeout(function() {
+								uni.navigateBack({
+								    delta: 1
+								});
+							}, 1000);
+						}else{
+							console.log("login-- wxweb/userinfo登录失败");
+							if(res.result.code == '0011'){
+								uni.showToast({
+									icon: 'none',
+									title: '验证码不正确',
+								});
+								this.phoneData.code='';
+							}
+						}
+					})
+					.catch( err => {
+						console.log("login-- wxweb/userinfo登录错误");
+					})
+				}else{
+					uni.showToast({
+						icon: 'none',
+						title: '信息填写有误',
+					});
+				}
+			},
+			wxPasswordLogin(){
+				if(!validatenull(this.phoneData.loginName) && !validatenull(this.passwordData.password)){
+					this.$http.post('/mall/app/login/mall/wxweb/userinfo', {
+						mallDomain: this.mallDomain,
+						...this.passwordData
+					})
+					.then( res => {
+						if(res.result.isSuccess){
+							this.SET_HASLOGIN(true);
+							this.SET_TOKEN(res.result.token);
+							this.$http.setConfig((config) => {
+								config.header['Authorization'] = 'Bearer ' + getStore({ name: 'token' });
+								return config;
+							});
+							this.setUserInfo();
+							uni.showToast({
+								icon: 'none',
+								title: '登陆成功',
+							});
+							setTimeout(function() {
+								uni.navigateBack({
+								    delta: 1
+								});
+							}, 1000);
+						}else{
+							console.log("login-- wxweb/userinfo登录失败");
+							if(res.result.code == '0011'){
+								uni.showToast({
+									icon: 'none',
+									title: '账户密码错误',
+								});
+								this.passwordData.password='';
+							}
+						}
+					})
+					.catch( err => {
+						console.log("login-- wxweb/userinfo登录错误");
+					})
+				}else{
+					uni.showToast({
+						icon: 'none',
+						title: '信息填写有误',
+					});
+				}
+			},
 			wxLogin(){
 				var othis = this;
 				uni.getSetting({
@@ -512,17 +618,19 @@
 				})
 				.then(res => {
 					if(res.result.isSuccess){
-						// uni.getUserInfo({
-						// 	success: (res) => {
-						// 		this.login(res.userInfo);
-						// 	}
-						// })
+						uni.getUserInfo({
+							success: (res) => {
+								// this.SET_USERIFNO(res.userInfo);
+								this.setUserInfo();
+							}
+						})
 						this.SET_HASLOGIN(true);
 						this.SET_TOKEN(res.result.token);
 						this.$http.setConfig((config) => {
 							config.header['Authorization'] = 'Bearer ' + getStore({ name: 'token' });
 							return config;
 						});
+						
 						uni.navigateBack({
 						    delta: 1
 						});
@@ -544,16 +652,14 @@
 			defaultLogin(){
 				if(this.isMiniprogram){
 					this.wxLogin();
-				}else{
-					
 				}
 			},
 			checkEnvironment(){
 				if(navigator && navigator.userAgent){
-					// 非小程序环境
+					// 非小程序
 					this.browserRedirect();
 				}else{
-					// 小程序环境
+					// 小程序
 					this.isMiniprogram=true;
 					this.isWx=true;
 				};
@@ -581,12 +687,36 @@
 							console.log("login.vue--未标记商城类型");
 					}
 				} else if(bIsWeChat) {
-					console.log("2");
-					console.log(sUserAgent);
-					// defaultwxWebLogin();
+					this.isWebWx=true;
+					switch(this.mallType){
+						case 1:
+							this.isPhoneLogin=true;
+							break;
+						case 3:
+							this.isPasswordLogin=true;
+							break;
+						default:
+							console.log("login.vue--未标记商城类型");
+					}
 				}else {
 					console.log("login.vue--非h5环境");
 				}
+			},
+			setUserInfo(){
+				this.$http.post('/mall/app/account/info')
+				.then( res => {
+					if(res.code == 0){
+						if(res.result){
+							let {accountId, customerName, customerSex, customerImage, customerId} = res.result.customer;
+							this.SET_USERIFNO({accountId, customerName, customerSex, customerImage, customerId});
+						}
+					}else{
+						console.log('login.vue-- info接口调用失败');
+					}
+				})
+				.catch( err => {
+					console.log('login.vue-- info接口调用错误');
+				})
 			}
 			
         },

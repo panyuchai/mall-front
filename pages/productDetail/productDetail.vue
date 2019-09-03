@@ -11,7 +11,7 @@
 				 @tap="back"></view>
 				<view class="tui-icon icon-more-fill iconfont icon-gengduo  tui-icon-ml" :style="{color:opcity>=1?'#000':'#fff',background:'rgba(0, 0, 0,'+iconOpcity+')',fontSize:'20px'}"
 				 @tap.stop="openMenu"></view>
-				<tui-badge type="red" size="small">3</tui-badge>
+				<tui-badge type="red" size="small" v-if="goodsInfo.carCount">{{goodsInfo.carCount}}</tui-badge>
 			</view>
 		</view>
 		<!--header-->
@@ -21,7 +21,7 @@
 			<swiper :autoplay="true" :interval="5000" :duration="150" :circular="true" :style="{height:scrollH + 'px'}" @change="bannerChange">
 				<block v-for="(item,index) in banner" :key="index">
 					<swiper-item :data-index="index" @tap.stop="previewImage">
-						<image :src="item" class="tui-slide-image" :style="{height:scrollH+'px'}" />
+						<image :src="item.url" class="tui-slide-image" :style="{height:scrollH+'px'}" />
 					</swiper-item>
 				</block>
 			</swiper>
@@ -52,11 +52,11 @@
 				<view class="pro-pricebox tui-padding">
 					<view class="pro-price">
 						<view class="sale-price">
-							￥<text class="num">49</text>.00
+							￥<text class="num">{{goodsInfo.salePrice}}</text>
 						</view>
-						<view class="original-price">
+						<!-- <view class="original-price">
 							<text class="line-through">￥199.00</text>
-						</view>
+						</view> -->
 					</view>
 					<view class="pro-action">
 						<button  open-type="share" class="we-share">
@@ -70,7 +70,7 @@
 					<text class="tui-line-through">￥199.00</text>
 				</view> -->
 				<view class="pro-titbox">
-					<view class="pro-title">三只松鼠猪肉铺 猪肉干肉脯 靖江特产休闲三只松鼠猪肉铺 猪肉干肉脯 靖江特产休闲</view>
+					<view class="pro-title">{{goodsInfo.goodsProductname}}</view>
 					<!-- <button open-type="share" class="tui-share-btn tui-share-position">
 						<tui-tag type="gray" tui-tag-class="tui-tag-share tui-size" shape="circleLeft" size="small">
 							<view class="tui-icon tui-icon-partake" style="color:#999;font-size:15px"></view>
@@ -79,11 +79,11 @@
 					</button> -->
 					<view class="pro-subtitle">
 						<view class="sub-title">
-							好油特别好的油副标题
+							{{goodsInfo.goodsTitle}}
 						</view>
 						<view class="sale-info">
-							<view class="info">库存：999</view>
-							<view class="info">销量：9999</view>
+							<view class="info">库存：{{goodsInfo.stock}}</view>
+							<view class="info">销量：{{goodsInfo.sales}}</view>
 						</view>
 					</view>
 				</view>
@@ -201,21 +201,31 @@
 			</view> -->
 			<view class="info-detail tui-mtop">
 				<view class="title-name">
-					<view class="title-item title-item-active">
+					<view class="title-item" @tap="handleChangeCont(0)" :class="showCont ? 'title-item-active' : ''">
 						<text class="name">商品详情</text>
 					</view>
-					<view class="title-item">
+					<view class="title-item" @tap="handleChangeCont(1)" :class="!showCont ? 'title-item-active' : ''">
 						<text class="name">规格参数</text>
 					</view>
 				</view>
 				<view class="content-info">
-					<view class="content-item content-item-active">
+					<view class="content-item content-item-active" v-if="showCont">
 						<view class="tui-product-img">
-							<image class="img" :src="'https://www.thorui.cn/img/detail/'+(index+1)+'.jpg'" v-for="(img,index) in 20" :key="index" mode="widthFix"></image>
+							<!-- <image class="img" :src="img.url" v-for="(img,index) in goodsInfo.details" :key="index" mode="widthFix"></image> -->
+							{{goodsInfo.details}}
 						</view>
 					</view>
-					<view class="content-item">
-						123
+					<view class="content-item" v-if="!showCont">
+						<view class="product-specs">
+							<view class="specs-info">
+								<view class="table-list">
+									<view class="list-cell" v-for="item in goodsInfo.specs" :key="item.sort">
+										<text class="cell skey">{{item.skey}}</text>
+										<text class="cell svalue">{{item.svalue}}</text>
+									</view>
+								</view>
+							</view>
+						</view>
 					</view>
 				</view>
 			</view>
@@ -235,15 +245,15 @@
 					<view class="tui-operation-text tui-scale-small">店铺</view>
 				</view> -->
 				<!-- <view class="tui-operation-item" hover-class="opcity" :hover-stay-time="150"> -->
-				<view class="tui-operation-item" @tap="linkToCar()">
+				<view class="tui-operation-item" @tap="linkToCart">
 					<tui-icon name="cart" :size="22" color='#333'></tui-icon>
 					<view class="tui-operation-text tui-scale-small">购物车</view>
-					<tui-badge type="danger" size="small">9</tui-badge>
+					<tui-badge type="danger" size="small" v-if=goodsInfo.carCount>{{goodsInfo.carCount}}</tui-badge>
 				</view>
 			</view>
 			<view class="tui-operation-right tui-right-flex tui-col-10">
 				<view class="tui-flex-1">
-					<view class="style-yellow operation-button" @click="showPopup">加入购物车</view>
+					<view class="style-yellow operation-button" @click="handleAddCart(goodsInfo.id)">加入购物车</view>
 				</view>
 				<view class="tui-flex-1">
 					<view class="style-red operation-button" @click="showPopup">立即购买</view>
@@ -262,7 +272,7 @@
 					功能直达
 				</view>
 				<view class="tui-menu-itembox">
-					<block v-for="(item,index) in topMenu" :key="index">
+					<!-- <block v-for="(item,index) in topMenu" :key="index">
 						<view class="tui-menu-item" hover-class="tui-opcity" :hover-stay-time="150" @tap="common">
 							<view class="tui-badge-box">
 								<tui-icon :name="item.icon" color="#fff" :size="item.size"></tui-icon>
@@ -270,7 +280,26 @@
 							</view>
 							<view class="tui-menu-text">{{item.text}}</view>
 						</view>
-					</block>
+					</block> -->
+					<view class="tui-menu-item" hover-class="tui-opcity" :hover-stay-time="150" @tap="linkToIndex">
+						<view class="tui-badge-box">
+							<tui-icon name="home" color="#fff" :size="23"></tui-icon>
+						</view>
+						<view class="tui-menu-text">首页</view>
+					</view>
+					<view class="tui-menu-item" hover-class="tui-opcity" :hover-stay-time="150" @tap="linkToUser">
+						<view class="tui-badge-box">
+							<tui-icon name="people" color="#fff" :size="26"></tui-icon>
+						</view>
+						<view class="tui-menu-text">我的</view>
+					</view>
+					<view class="tui-menu-item" hover-class="tui-opcity" :hover-stay-time="150" @tap="linkToCart">
+						<view class="tui-badge-box">
+							<tui-icon name="cart" color="#fff" :size="23"></tui-icon>
+							<tui-badge type="red" tui-badge-class="tui-menu-badge" size="small" v-if="goodsInfo.carCount">{{goodsInfo.carCount}}</tui-badge>
+						</view>
+						<view class="tui-menu-text">购物车</view>
+					</view>
 				</view>
 				<view class="tui-icon icon-up iconfont icon-shouqi" style="color: #fff; font-size: 20px;" @tap.stop="closeMenu"></view>
 				<!-- <tui-icon name="up" color="#fff" size="26" class="tui-icon-up" @tap.stop="closeMenu"></tui-icon> -->
@@ -283,10 +312,10 @@
 		<tui-bottom-popup :show="popupShow" @close="hidePopup">
 			<view class="tui-popup-box">
 				<view class="tui-product-box tui-padding">
-					<image src="https://www.thorui.cn/img/product/11.jpg" class="tui-popup-img"></image>
+					<image :src="goodsInfo.goodsMainimagepath" class="tui-popup-img"></image>
 					<view class="tui-popup-price">
-						<view class="tui-amount tui-bold">￥<text class="num">49</text>.00</view>
-						<view class="tui-number">货号：11243444</view>
+						<view class="tui-amount tui-bold">￥<text class="num">{{goodsInfo.salePrice}}</text></view>
+						<view class="tui-number">货号：{{goodsInfo.goodsGoodsnum}}</view>
 					</view>
 				</view>
 				<scroll-view scroll-y class="tui-popup-scroll">
@@ -336,7 +365,7 @@
 					</view>
 				</scroll-view>
 				<view class="tui-operation tui-right-flex popup-btn">
-					<view class="operation-btn style-yellow" @click="hidePopup">加入购物车</view>
+					<view class="operation-btn style-yellow" @click="handleAddCart(goodsInfo.id)">加入购物车</view>
 					<view class="operation-btn style-red" @click="hidePopup">立即购买</view>
 				</view>
 				<!-- <view class="tui-icon tui-icon-close-fill tui-icon-close" style="color: #999;font-size:20px" @tap="hidePopup"></view> -->
@@ -349,6 +378,9 @@
 </template>
 
 <script>
+	import {
+		mapState
+	} from 'vuex'
 	import tuiIcon from "@/components/icon/icon"
 	import tuiTag from "@/components/tag/tag"
 	import tuiBadge from "@/components/badge/badge"
@@ -370,21 +402,14 @@
 		},
 		data() {
 			return {
+				goodsInfo: {},
+				showCont: true,
 				height: 64, //header高度
 				top: 0, //标题图标距离顶部距离
 				scrollH: 0, //滚动总高度
 				opcity: 0,
 				iconOpcity: 0.5,
-				banner: [
-					"https://www.thorui.cn/img/product/11.jpg",
-					"https://www.thorui.cn/img/product/2.png",
-					"https://www.thorui.cn/img/product/33.jpg",
-					"https://www.thorui.cn/img/product/4.png",
-					"https://www.thorui.cn/img/product/55.jpg",
-					"https://www.thorui.cn/img/product/6.png",
-					"https://www.thorui.cn/img/product/7.jpg",
-					"https://www.thorui.cn/img/product/8.jpg"
-				],
+				banner: [],
 				bannerIndex: 0,
 				topMenu: [{
 					icon: "home",
@@ -392,12 +417,6 @@
 					size: 23,
 					badge: 0
 				}, 
-				// {
-				// 	icon: "message",
-				// 	text: "消息",
-				// 	size: 26,
-				// 	badge: 3
-				// },
 				{
 					icon: "people",
 					text: "我的",
@@ -411,6 +430,12 @@
 					badge: 2
 				}, 
 				// {
+				// 	icon: "share",
+				// 	text: "分享",
+				// 	size: 26,
+				// 	badge: 0
+				// }
+				// {
 				// 	icon: "kefu",
 				// 	text: "客服小蜜",
 				// 	size: 26,
@@ -422,55 +447,39 @@
 				// 	size: 23,
 				// 	badge: 0
 				// }, 
-				{
-					icon: "share",
-					text: "分享",
-					size: 26,
-					badge: 0
-				}],
+				],
 				menuShow: false,
 				popupShow: false,
 				value: 1,
 				collected: false
 			}
 		},
-		onLoad: function(options) {
-			let obj = {};
-			// #ifdef MP-WEIXIN
-			obj = wx.getMenuButtonBoundingClientRect();
-			// #endif
-			// #ifdef MP-BAIDU
-			obj = swan.getMenuButtonBoundingClientRect();
-			// #endif
-			// #ifdef MP-ALIPAY
-			my.hideAddToDesktopMenu();
-			// #endif
-
-			uni.getSystemInfo({
-				success: (res) => {
-					this.width = obj.left || res.windowWidth;
-					this.height = obj.top ? (obj.top + obj.height + 8) : (res.statusBarHeight + 44);
-					this.top = obj.top ? (obj.top + (obj.height - 32) / 2) : (res.statusBarHeight + 6);
-					this.scrollH = res.windowWidth
-				}
-			})
-		},
-		onPullDownRefresh() {
-			console.log('refresh');
-			setTimeout(function () {
-				uni.stopPullDownRefresh();
-			}, 1000);
-		},
 		methods: {
 			bannerChange: function(e) {
 				this.bannerIndex = e.detail.current
 			},
 			previewImage: function(e) {
+				let picArray = [];
+				this.banner.map(item => {
+					picArray.push(item.url);
+				});
 				let index = e.currentTarget.dataset.index;
 				uni.previewImage({
-					current: this.banner[index],
-					urls: this.banner
+					current: this.banner[index].url,
+					urls: picArray
 				})
+			},
+			handleChangeCont(num){
+				switch (num) {
+					case 0:
+						this.showCont=true;
+						break;
+					case 1:
+						this.showCont=false;
+						break;
+					default:
+						this.showCont=true;
+				}
 			},
 			back: function() {
 				uni.navigateBack()
@@ -490,18 +499,100 @@
 			change: function(e) {
 				this.value = e.value
 			},
+			handleAddCart(mallGoodsId){
+				this.hidePopup();
+				this.$http.post('/mall/app/car/add', {
+					...this.baseInfo,
+					accountId: this.userInfo.accountId,
+					goodsCount: this.value,
+					mallGoodsId: mallGoodsId
+				})
+				.then( res => {
+					if(res.code == 0){
+						this.getGoodsDetail();
+						uni.showToast({
+							icon: 'none',
+							title: '商品添加成功',
+						});
+					}else{
+						console.log('productDetail.vue-- add接口添加购物车失败');
+					}
+				})
+				.catch( err => {
+					console.log('productDetail.vue-- add接口添加购物车错误');
+				})
+			},
 			// collecting: function() {
 			// 	this.collected = !this.collected
 			// },
-			common: function() {
-				this.tui.toast("功能开发中~")
+			// common: function() {
+			// 	this.tui.toast("功能开发中~")
+			// },
+			linkToIndex(){
+				uni.reLaunch({
+					url: '/pages/index/index'
+				})
 			},
-			linkToCar(){
+			linkToUser(){
+				uni.reLaunch({
+					url: '/pages/user/user'
+				})
+			},
+			linkToCart(){
 				uni.reLaunch({
 					url: '/pages/car/car'
 				})
+			},
+			getGoodsDetail(){
+				let goodsId=uni.getStorageSync('goodsId');
+				this.$http.post('/mall/app/goods/detail', goodsId)
+				.then( res => {
+					// console.log(res);
+					if(res.code == 0){
+						this.goodsInfo=res.result;
+						this.banner=res.result.pics;
+					}else{
+						console.log('productDetail.vue-- detail接口获取数据失败');
+					}
+				})
+				.catch( err => {
+					console.log('productDetail.vue-- detail接口获取数据错误');
+				})
 			}
 		},
+		computed: {
+			...mapState('common', ['baseInfo', 'userInfo'])
+		},
+		onLoad: function(options) {
+			uni.setStorageSync('goodsId', options);
+			this.getGoodsDetail();
+			
+			let obj = {};
+			// #ifdef MP-WEIXIN
+			obj = wx.getMenuButtonBoundingClientRect();
+			// #endif
+			// #ifdef MP-BAIDU
+			obj = swan.getMenuButtonBoundingClientRect();
+			// #endif
+			// #ifdef MP-ALIPAY
+			my.hideAddToDesktopMenu();
+			// #endif
+		
+			uni.getSystemInfo({
+				success: (res) => {
+					this.width = obj.left || res.windowWidth;
+					this.height = obj.top ? (obj.top + obj.height + 8) : (res.statusBarHeight + 44);
+					this.top = obj.top ? (obj.top + (obj.height - 32) / 2) : (res.statusBarHeight + 6);
+					this.scrollH = res.windowWidth
+				}
+			})
+		},
+		// onPullDownRefresh() {
+		// 	console.log('refresh');
+		// 	setTimeout(function () {
+		// 		uni.stopPullDownRefresh();
+		// 	}, 1000);
+		// },
 		onPageScroll(e) {
 			let scroll = e.scrollTop <= 0 ? 0 : e.scrollTop;
 			let opcity = scroll / this.scrollH;
@@ -889,13 +980,40 @@
 		}
 		.content-info{
 			.content-item{
-				display: none;
+				// display: none;
+				background: #fff;
 				&.content-item-active{
-					display: block;
+					// display: block;
 				}
 				.tui-product-img{
 					.img{
 						vertical-align: top!important;
+					}
+				}
+				.product-specs{
+					.specs-info{
+						padding: 30upx 20upx;
+						.table-list{
+							border-top: 1px solid #ccc;
+							border-left: 1px solid #ccc;
+							.list-cell{
+								display: flex;
+								align-items: center;
+								.cell{
+									border-bottom: 1px solid #ccc;
+									border-right: 1px solid #ccc;
+									padding: 10upx 20upx;
+									font-size: 24upx;
+									color: #747474;
+									&.skey{
+										min-width: 80upx;
+									}
+									&.svalue{
+										flex: 1;
+									}
+								}
+							}
+						}
 					}
 				}
 			}

@@ -1,22 +1,12 @@
+import { setStore, getStore, removeStore } from '../../utils/store.js'
 const state = {
-  order_status:"",
-  order_No:"",
-  order_goods:[{goodsid:"",count:"",overbalanceid:""}],
-  order_from:"",
+  order_goodsList: []
 }
 const mutations = {
-  order_type_change (state, data) {
-    state.order_status = data;
-  },
-  order_No_link (state, data) {
-    state.order_No = data;
-  },
-  SETORDERGOODS(state,data){
-    state.order_goods = data;
-  },
-  SETORDERFROM(state,data){
-    state.order_from = data;
-  }
+	SET_ORDER_GOODSLIST (state, data){
+		state.order_goodsList = data;
+		setStore({ name: 'order_goodsList', content: state.data, type: 'sync' });
+	}
 }
 const actions = {
 

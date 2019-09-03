@@ -6,10 +6,10 @@
 			<view class="order-content">
 				<view class="cen">
 					<view class="top">
-						<text class="name">{{addressData.name}}</text>
-						<text class="mobile">{{addressData.mobile}}</text>
+						<text class="name">{{payData.address && payData.address.addressRecipients}}</text>
+						<text class="mobile">{{payData.address && payData.address.addressPhone}}</text>
 					</view>
-					<view class="address">{{addressData.address}}{{addressData.area}}</view>
+					<view class="address">{{payData.address && payData.address.addressDetail}}</view>
 				</view>
 				<text class="iconfont icon-arrowRight icon-you"></text>
 			</view>
@@ -19,18 +19,18 @@
 
 		<view class="goods-section mt-20">
 			<!-- 商品列表 -->
-			<view class="g-item border-bottom">
-				<image src="https://ss2.bdstatic.com/70cFvnSh_Q1YnxGkpoWK1HF6hhy/it/u=756705744,3505936868&fm=11&gp=0.jpg"></image>
+			<view class="g-item border-bottom" v-for="(row, index) in payData.goodsListDetailList">
+				<image :src="row.goodsMainimagepath"></image>
 				<view class="right">
-					<view class="title clamp">古黛妃 短袖t恤女夏装2019新款</view>
-					<view class="spec">春装款 L</view>
+					<view class="title clamp">{{row.goodsProductname}}</view>
+					<view class="spec">{{row.goodsTitle}}</view>
 					<view class="price-box">
-						<text class="price">￥<text class="num">17</text>.8</text>
-						<text class="number">x 1</text>
+						<text class="price">￥<text class="num">{{row.salePrice}}</text></text>
+						<text class="number">x {{row.goodsCount}}</text>
 					</view>
 				</view>
 			</view>
-			<view class="g-item border-bottom">
+			<!-- <view class="g-item border-bottom">
 				<image src="https://ss0.bdstatic.com/70cFvHSh_Q1YnxGkpoWK1HF6hhy/it/u=1620020012,789258862&fm=26&gp=0.jpg"></image>
 				<view class="right">
 					<view class="title clamp">韩版于是洞洞拖鞋韩版于是洞洞拖鞋 夏季浴室防滑简约居家【新人专享，限选意见】</view>
@@ -40,7 +40,7 @@
 						<text class="number">x 1</text>
 					</view>
 				</view>
-			</view>
+			</view> -->
 		</view>
 
 		<!-- 优惠明细 -->
@@ -59,27 +59,28 @@
 				<view class="cell-tit">
 					快递方式
 				</view>
-				<view class="cell-tip">快递：10</view>
+				<view class="cell-tip">{{payData.express && payData.express.name}}</view>
 			</view>
 			<view class="yt-list-cell">
 				<view class="cell-tit">
 					备注
 				</view>
 				<view class="cell-tip cell-remark-tip">
-					<input class="action-input" type="text" value="" placeholder="请填写备注信息" />
+					<input class="action-input" type="text" v-model="remark" placeholder="请填写备注信息" />
 				</view>
 			</view>
 		</view>
 		<view class="yt-list mt-20">
-			<view class="yt-list-cell border-bottom">
+			<view class="yt-list-cell border-bottom" v-if="payData.balance">
 				<view class="cell-tit">
 					账户余额
 				</view>
 				<view class="cell-tip cell-account-tip">
-					<view class="num red">0.00</view>
+					<view class="num red">{{payData.balance}}</view>
 					<view class="action-right">
-						<view><text class="action-name">使用</text>￥</view>
-						<input class="action-input" type="number" value="" />
+						<!-- <view><text class="action-name">使用</text>￥</view>
+						<input class="action-input" type="number" value="" /> -->
+						<switch class="switchBtn" @change="switchChange" style="transform:scale(0.7)" color="#E93548"/>
 					</view>
 				</view>
 			</view>
@@ -91,7 +92,7 @@
 					</text>
 				</view>
 				<view class="cell-tip cell-coupon-tip">
-					<view class="red">-¥<text class="num">0.00</text></view>
+					<view class="red">-¥<text class="num">0</text></view>
 					<view class="icon-arrow iconfont icon-arrowRight"></view>
 				</view>
 			</view>
@@ -99,18 +100,26 @@
 		<view class="yt-list mt-20">
 			<view class="yt-list-cell">
 				<view class="cell-tit">
-					应付总金额
+					商品金额
 				</view>
 				<view class="cell-tip">
-					<text class="red">¥<text class="num">23.00</text></text>
+					<text class="red">¥<text class="num">{{payData.totalPrice}}</text></text>
 				</view>
 			</view>
 			<view class="yt-list-cell">
 				<view class="cell-tit">
+					快递费
+				</view>
+				<view class="cell-tip">
+					<text class="red">¥<text class="num">{{payData.express && payData.express.fee}}</text></text>
+				</view>
+			</view>
+			<view class="yt-list-cell" v-if='balanceType'>
+				<view class="cell-tit">
 					余额支付
 				</view>
 				<view class="cell-tip">
-					<text class="red">¥<text class="num">0.00</text></text>
+					<text class="red">¥<text class="num">{{balancePay}}</text></text>
 				</view>
 			</view>
 			<view class="yt-list-cell">
@@ -118,7 +127,7 @@
 					优惠支付
 				</view>
 				<view class="cell-tip">
-					<text class="red">¥<text class="num">0.00</text></text>
+					<text class="red">¥<text class="num">0</text></text>
 				</view>
 			</view>
 			<view class="yt-list-cell border-top">
@@ -126,7 +135,7 @@
 					
 				</view>
 				<view class="cell-tip cell-amount-tip">
-					实付金额<text class="price red">¥<text class="num">0.00</text></text>
+					实付金额<text class="price red">¥<text class="num">{{payPrice}}</text></text>
 				</view>
 			</view>
 		</view>
@@ -157,7 +166,7 @@
 				<text class="price-tip">￥</text>
 				<text class="price">475</text>
 			</view> -->
-			<view class="submit" @click="submit">微信支付</view>
+			<view class="submit" @click="handleSubmit">立即下单</view>
 		</view>
 		
 		<!-- 优惠券面板 -->
@@ -187,48 +196,227 @@
 </template>
 
 <script>
+	import {
+		mapState
+	} from 'vuex'
 	export default {
 		data() {
 			return {
-				maskState: 0, //优惠券面板显示状态
-				desc: '', //备注
-				payType: 1, //1微信 2支付宝
-				couponList: [
-					{
-						title: '新用户专享优惠券',
-						price: 5,
-					},
-					{
-						title: '庆五一发一波优惠券',
-						price: 10,
-					},
-					{
-						title: '优惠券优惠券优惠券优惠券',
-						price: 15,
-					}
-				],
-				addressData: {
-					name: '许小星',
-					mobile: '13853988752',
-					address: '湖北省武汉市江汉区淮海路泛海国际soho',
-					area: '123',
-					default: false,
-				}
+				// maskState: 0, //优惠券面板显示状态
+				// desc: '', //备注
+				// payType: 1, //1微信 2支付宝
+				// couponList: [
+				// 	{
+				// 		title: '新用户专享优惠券',
+				// 		price: 5,
+				// 	},
+				// 	{
+				// 		title: '庆五一发一波优惠券',
+				// 		price: 10,
+				// 	},
+				// 	{
+				// 		title: '优惠券优惠券优惠券优惠券',
+				// 		price: 15,
+				// 	}
+				// ],
+				// addressData: {
+				// 	name: '许小星',
+				// 	mobile: '13853988752',
+				// 	address: '湖北省武汉市江汉区淮海路泛海国际soho',
+				// 	area: '123',
+				// 	default: false,
+				// },
+				isWx: false,
+				isWebWx: false,
+				isPc: false,
+				remark: '',
+				payData:{},
+				balanceType: 0,
+				fee: 0
 			}
-		},
-		onLoad(option){
-			//商品数据
-			//let data = JSON.parse(option.data);
-			//console.log(data);
 		},
 		methods: {
 			linkToCoupon(){
 				uni.redirectTo({
 					url: '/pages/coupon/coupon'
 				})
+			},
+			switchChange(e){
+				this.balanceType=Number(e.detail.value);
+			},
+			handleWxPay(){
+				this.$http.post('/mall/app/order/submit', {
+					...this.baseInfo,
+					accountId: this.userInfo.accountId,
+					balance: this.balancePay,
+					isBalance: this.balanceType,
+					credits: 0,
+					expressFee: this.payData.express.fee,
+					goodsList: this.payData.goodsListDetailList,
+					payChannels: '8',
+					payPrice: this.payPrice,
+					remark: this.remark,
+					totalPrice: this.payData.totalPrice,
+				})
+				.then( res => {
+					cnsole.log(res);
+				})
+				.catch( err => {
+					console.log(err);
+				})
+			},
+			handleWxWebPay(){
+				
+			},
+			handlePcPay(){
+				// this.$http.post('/mall/app/order/submit', {
+				// 	...this.baseInfo,
+				// 	accountId: this.userInfo.accountId,
+				// 	addressId: this.payData.address.addressId,
+				// 	balance: this.balancePay,
+				// 	isBalance: this.balanceType,
+				// 	credits: 0,
+				// 	expressFee: this.payData.express.fee,
+				// 	goodsList: this.payData.goodsListDetailList,
+				// 	payChannels: '8',
+				// 	payPrice: this.payPrice,
+				// 	remark: this.remark,
+				// 	totalPrice: this.payData.totalPrice,
+				// })
+				// .then( res => {
+				// 	console.log(res);
+				// })
+				// .catch( err => {
+				// 	console.log(err);
+				// })
+			},
+			handleSubmit(){
+				uni.getProvider({
+				    service: 'payment',
+				    success: function (res) {
+				        console.log(res.provider)
+				        // if (~res.provider.indexOf('qq')) {
+				        //     uni.login({
+				        //         provider: 'qq',
+				        //         success: function (loginRes) {
+				        //             console.log(JSON.stringify(loginRes));
+				        //         }
+				        //     });
+				        // }
+				    }
+				});
+				
+				if(this.isWx){
+					this.handleWxPay();
+				}else if(this.isWebWx){
+					this.handleWxWebPay();
+				}else if(this.isPc){
+					this.handlePcPay();
+				}
+				
+				// let payChannels = '',
+				// 	arrStr = [];
+				// 	// this.balancePay, this.payPrice
+				// if(this.balanceType){
+				// 	if(this.balancePay>0){
+				// 		arrStr.push(0)
+				// 	}
+				// 	if(this.payPrice>0){
+				// 		arrStr.push(0)
+				// 	}
+				// }else{
+				// 	
+				// }
+				// console.log(arrStr)
+				
+				// this.$http.post('/mall/app/order/submit', {
+				// 	...this.baseInfo,
+				// 	accountId: this.userInfo.accountId,
+				// 	// balance: this.balancePay,
+				// 	isBalance: this.balanceType,
+				// 	credits: 0,
+				// 	expressFee: this.payData.express.fee,
+				// 	goodsList: this.payData.goodsListDetailList,
+				// 	payChannels: '',
+				// 	payPrice: this.payPrice,
+				// 	remark: this.remark,
+				// 	totalPrice: this.payData.totalPrice,
+				// })
+				// .then( res => {
+				// 	cnsole.log(res);
+				// })
+				// .catch( err => {
+				// 	console.log(err);
+				// })
+			},
+			checkEnvironment(){
+				if(navigator && navigator.userAgent){
+					// 非小程序
+					this.browserRedirect();
+				}else{
+					// 小程序
+					this.isWx=true;
+				};
+			},
+			browserRedirect() {
+				var sUserAgent = navigator.userAgent.toLowerCase();
+				var bIsIpad = sUserAgent.match(/ipad/i) == "ipad";
+				var bIsIphoneOs = sUserAgent.match(/iphone os/i) == "iphone os";
+				var bIsMidp = sUserAgent.match(/midp/i) == "midp";
+				var bIsUc7 = sUserAgent.match(/rv:1.2.3.4/i) == "rv:1.2.3.4";
+				var bIsUc = sUserAgent.match(/ucweb/i) == "ucweb";
+				var bIsAndroid = sUserAgent.match(/android/i) == "android";
+				var bIsCE = sUserAgent.match(/windows ce/i) == "windows ce";
+				var bIsWM = sUserAgent.match(/windows mobile/i) == "windows mobile";
+				var bIsWeChat = sUserAgent.match(/MicroMessenger/i) == "micromessenger";//微信端
+				if (bIsIpad || bIsIphoneOs || bIsMidp || bIsUc7 || bIsUc || bIsAndroid || bIsCE || bIsWM) {
+					this.isPc=true;
+				} else if(bIsWeChat) {
+					this.isWebWx=true;
+				}else {
+					console.log("login.vue--非h5环境");
+				}
+			},
+			getOrderData(){
+				this.$http.post('/mall/app/order/confirm', {
+					...this.baseInfo,
+					accountId: this.userInfo.accountId,
+					goodsList: uni.getStorageSync('buyList')
+					// goodsList: this.order_goodsList
+				})
+				.then( res => {
+					console.log(res)
+					if(res.code == 0){
+						this.payData=res.result;
+						this.fee=res.result.express.fee
+					}else{
+						console.log('payment.vue-- confirm接口获取数据失败');
+					}
+				})
+				.catch( err => {
+					console.log('payment.vue-- confirm接口获取数据错误');
+				})
 			}
-			
-		}
+		},
+		computed: {
+			...mapState('common', ['baseInfo', 'userInfo']),
+			// ...mapState('order', ['order_goodsList'])
+			balancePay(){
+				return this.payData.totalPrice+this.fee>this.payData.balance ? this.payData.balance : this.payData.totalPrice+this.fee
+			},
+			payPrice(){
+				return this.balanceType ? this.payData.totalPrice+this.fee - this.balancePay : this.payData.totalPrice+this.fee
+			}
+		},
+		onShow(){
+			this.getOrderData();
+		},
+		onLoad(option){
+			this.checkEnvironment();
+			//商品数据
+			//let data = JSON.parse(option.data);
+			//console.log(data);
+		},
 	}
 </script>
 
@@ -439,24 +627,27 @@
 				}
 				.action-right{
 					display: flex;
-					justify-content: flex-end;
+					justify-content: center;
 					align-items: center;
-					flex-wrap:nowrap;
-					flex-direction:row;
-					color: #333333;
-					.action-name{
-						color: #A2A2A2;
+					.switchBtn{
+						margin-top: -10upx;
 					}
-					.action-input{
-						border: 1px #F3F3F3 solid;
-						width: 84upx;
-						padding: 0 10upx;
-						height: 55upx;
-						line-height: 55upx;
-						font-size: 24upx;
-						text-align: center;
-						color: #A2A2A2;
-					}
+					// flex-wrap:nowrap;
+					// flex-direction:row;
+					// color: #333333;
+					// .action-name{
+					// 	color: #A2A2A2;
+					// }
+					// .action-input{
+					// 	border: 1px #F3F3F3 solid;
+					// 	width: 84upx;
+					// 	padding: 0 10upx;
+					// 	height: 55upx;
+					// 	line-height: 55upx;
+					// 	font-size: 24upx;
+					// 	text-align: center;
+					// 	color: #A2A2A2;
+					// }
 				}
 			}
 			&.cell-coupon-tip{

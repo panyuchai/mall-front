@@ -349,13 +349,43 @@ page {
         background-color: #FD2502;
 }
 .info-detail .content-info .content-item {
-  display: none;
-}
-.info-detail .content-info .content-item.content-item-active {
-    display: block;
+  background: #fff;
 }
 .info-detail .content-info .content-item .tui-product-img .img {
     vertical-align: top !important;
+}
+.info-detail .content-info .content-item .product-specs .specs-info {
+    padding: 30rpx 20rpx;
+}
+.info-detail .content-info .content-item .product-specs .specs-info .table-list {
+      border-top: 1px solid #ccc;
+      border-left: 1px solid #ccc;
+}
+.info-detail .content-info .content-item .product-specs .specs-info .table-list .list-cell {
+        display: -webkit-box;
+        display: -webkit-flex;
+        display: -ms-flexbox;
+        display: flex;
+        -webkit-box-align: center;
+        -webkit-align-items: center;
+            -ms-flex-align: center;
+                align-items: center;
+}
+.info-detail .content-info .content-item .product-specs .specs-info .table-list .list-cell .cell {
+          border-bottom: 1px solid #ccc;
+          border-right: 1px solid #ccc;
+          padding: 10rpx 20rpx;
+          font-size: 24rpx;
+          color: #747474;
+}
+.info-detail .content-info .content-item .product-specs .specs-info .table-list .list-cell .cell.skey {
+            min-width: 80rpx;
+}
+.info-detail .content-info .content-item .product-specs .specs-info .table-list .list-cell .cell.svalue {
+            -webkit-box-flex: 1;
+            -webkit-flex: 1;
+                -ms-flex: 1;
+                    flex: 1;
 }
 .base-info .list-cell {
   background-color: #fff;

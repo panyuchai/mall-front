@@ -100,6 +100,11 @@
 		components: {
 			tuiBadge,
 		},
+		data() {
+			return {
+				userData: {}
+			}
+		},
         computed: {
             ...mapState("common", ['hasLogin', 'forcedLogin', 'userInfo'])
         },
@@ -129,7 +134,20 @@
 					url
 				})  
 			},
-        }
+			// userInitData(){
+			// 	this.$http.post('/mall/app/account/info')
+			// 	.then( res => {
+			// 		console.log(res);
+			// 	})
+			// 	.catch( err => {
+			// 		console.log('user.vue-- info接口调用错误');
+			// 	})
+			// 	
+			// },
+        },
+		onLoad: function(){
+			// this.userInitData();
+		}
     }
 </script>
 
