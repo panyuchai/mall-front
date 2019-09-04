@@ -121,17 +121,10 @@
 			};
 			// let othis = this;
 			function defaultwxWebLogin(){
-				// othis.$http.post('/app/login/mall/wxweb', {
-				// 	mallDomain: othis.mallDomain,
-				// })
-				// .then( res => {
-				// 	console.log(res);
-				// })
-				// .catch( err => {
-				// 	console.log('App.vue-- wxweb接口调用出错');
-				// })
-				
-				window.location.href='http://192.168.1.135:8086/mall/app/login/mall/wxweb?mallDomain=yyy'
+				if (document.referrer) {
+				    uni.setStorageSync('referUrl', document.referrer);
+				}
+				window.location.href='http://192.168.1.135:8086/mall/app/login/mall/wxweb?mallDomain=' + othis.baseInfo.mallDomain
 			};
 			function defaultWxLogin(){
 				uni.checkSession({

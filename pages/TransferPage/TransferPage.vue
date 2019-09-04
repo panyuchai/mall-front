@@ -5,6 +5,11 @@
 </template>
 
 <script>
+	import {
+	    mapState,
+	    mapMutations
+	} from 'vuex'
+	import { setStore, getStore, removeStore} from '../../utils/store.js'
 	export default {
 		data() {
 			return {
@@ -12,11 +17,30 @@
 			}
 		},
 		methods: {
-			
+			...mapMutations('common', ['SET_HASLOGIN', 'SET_TOKEN']),
+			handleTransfer(options){
+				if(options.success == 'true'){
+					this.SET_HASLOGIN(true);
+					this.SET_TOKEN(res.result.token);
+					this.$http.setConfig((config) => {
+						config.header['Authorization'] = 'Bearer ' + getStore({ name: 'token' });
+						return config;
+					});
+					if(uni.getStorageSync('referUrl')){
+						window.location.href=uni.getStorageSync('referUrl');
+						uni.removeStorageSync('referUrl');
+					}
+				}else{
+					alert(options.code);
+					uni.switchTab({
+					    url: '/pages/index/index'
+					});
+				}
+				
+			}
 		},
 		onLoad(options){
-			console.log(options);
-			this.initData=options
+			this.handleTransfer(options);
 		}
 	}
 </script>

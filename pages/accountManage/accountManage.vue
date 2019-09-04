@@ -14,7 +14,7 @@
 					用户名
 				</view>
 				<view class="cell-info">
-					<input class="input" type="text" v-model="userInfo.userName" />
+					<input class="input" type="text" v-model="userInfo.customerName" />
 				</view>
 				<view class="iconfont icon-arrowRight icon-arrow"></view>
 			</view>
@@ -23,7 +23,7 @@
 					昵称
 				</view>
 				<view class="cell-info">
-					<input class="input" type="text"  v-model="userInfo.nickName" />
+					<input class="input" type="text"  v-model="userInfo.wechatName" />
 				</view>
 				<view class="iconfont icon-arrowRight icon-arrow"></view>
 			</view>
@@ -32,7 +32,7 @@
 					性别
 				</view>
 				<view class="cell-info">
-					<input class="input" disabled @tap.stop="toggleTab('selector')" type="text" v-model="userInfo.sex" value="0"/>
+					<input class="input" disabled @tap.stop="toggleTab('selector')" type="text" v-model="userInfo.customerSex" value="0"/>
 					<!-- <view class="input">
 						管理收货地址
 					</view> -->
@@ -44,7 +44,7 @@
 					生日
 				</view>
 				<view class="cell-info">
-					<input class="input" disabled @tap.stop="toggleTab('date')" type="text" v-model="userInfo.birthday" />
+					<input class="input" disabled @tap.stop="toggleTab('date')" type="text" v-model="userInfo.customerBirthday" />
 				</view>
 				<view class="iconfont icon-arrowRight icon-arrow"></view>
 			</view>
