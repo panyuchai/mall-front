@@ -46,7 +46,7 @@
 				</view>
 				<view class="order-item" @tap="navTo('/pages/order/order?state=1')"  hover-class="common-hover" :hover-stay-time="50">
 					<view class="icon">
-						<text class="iconfont icon-tianchongxing-"></text>
+						<text class="iconfont icon-tianchongxing-"><tui-badge v-if="toPayNum" class="badge" type="danger" size="small">{{toPayNum}}</tui-badge></text>
 					</view>
 					<view class="name">待付款</view>
 				</view>
@@ -103,11 +103,12 @@
 		},
 		data() {
 			return {
-				toReceivedNum: null
+				toPayNum: 0,
+				toReceivedNum: 0
 			}
 		},
         computed: {
-            ...mapState("common", ['hasLogin', 'forcedLogin', 'userInfo', 'baseInfo'])
+            ...mapState("common", ['hasLogin', 'userInfo', 'baseInfo'])
         },
         methods: {
             // ...mapMutations(['logout']),
@@ -145,14 +146,31 @@
 			// 	})
 			// 	
 			// },
+			initPayNum(){
+				this.$http.post('/mall/app/order/count', {
+					...this.baseInfo,
+					accountId: this.userInfo.accountId,
+					orderState: 0
+				})
+				.then( res => {
+					if(res.code == 0){
+						this.toPayNum=res.result;
+					}
+				})
+				.catch( err => {
+					console.log(err);
+				})
+			},
 			initToReceivedNum(){
 				this.$http.post('/mall/app/order/count', {
 					...this.baseInfo,
 					accountId: this.userInfo.accountId,
-					orderState: ''
+					orderState: 2
 				})
 				.then( res => {
-					console.log(res)
+					if(res.code == 0){
+						this.toReceivedNum=res.result;
+					}
 				})
 				.catch( err => {
 					console.log(err);
@@ -161,6 +179,7 @@
         },
 		onLoad: function(){
 			// this.userInitData();
+			this.initPayNum();
 			this.initToReceivedNum();
 		}
     }
@@ -262,17 +281,18 @@
 				.iconfont{
 					font-size: 48upx;
 					color: #DCA754;
+					.badge{
+						position: absolute;
+						top: 0;
+						left: 8upx;
+					}
 					&.iconfont-all{
 						font-size: 42upx;
 					}
 					&.iconfont-transport{
 						font-size: 50upx;
 						
-						.badge{
-							position: absolute;
-							top: 0;
-							left: 8upx;
-						}
+						
 					}
 					&.iconfont-finished{
 						font-size: 54upx;

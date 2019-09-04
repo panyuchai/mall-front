@@ -6,7 +6,7 @@
 					头像
 				</view>
 				<view class="cell-info cell-info-avatar" @tap="uploadAvatar">
-					<image class="portrait" :src="userInfo.portrait || '/static/img/missing-face.png'"></image>
+					<image class="portrait" :src="userInfo.customerImage || '/static/img/missing-face.png'"></image>
 				</view>
 			</view>
 			<view class="list-cell">
@@ -128,7 +128,7 @@
 			};
 		},
 		computed: {
-		    ...mapState("common", ['userInfo'])
+		    ...mapState("common", ['baseInfo', 'userInfo'])
 		},
 		methods: {
 			uploadAvatar(){
@@ -164,6 +164,9 @@
 				    url: "/pages/address/address"
 				});
 			}
+		},
+		onLoad(){
+			console.log(this.userInfo);
 		}
 	}
 </script>

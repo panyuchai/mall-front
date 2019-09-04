@@ -8,7 +8,7 @@
 		methods: {
 			...mapMutations("common", ['SET_BASEINFO', 'SET_USERIFNO', 'SET_UNICODE', 'SET_MALLDOMAIN', 'SET_MALLTYPE', 'SET_MALLID']),
 			checkMallType(){
-				alert('checkMallType接口');
+				// alert('checkMallType接口');
 				this.$http.post('/mall/app/login/mall/shopmall/type', {
 					mallDomain: this.mallDomain
 				})
@@ -31,22 +31,22 @@
 					console.log('login--mallTaye 接口调用出错');
 				})
 			},
-			defaultwxWebLogin(){
-				alert("wxweb接口调用");
-				this.$http.post('/mall/app/login/mall/wxweb', {
-					mallDomain: this.mallDomain,
-				})
-				.then( res => {
-					console.log(res);
-				})
-				.catch( err => {
-					console.log('App.vue-- wxweb接口调用出错');
-				})
-			}
+			// defaultwxWebLogin(){
+			// 	alert("wxweb接口调用");
+			// 	this.$http.post('/mall/app/login/mall/wxweb', {
+			// 		mallDomain: this.mallDomain,
+			// 	})
+			// 	.then( res => {
+			// 		console.log(res);
+			// 	})
+			// 	.catch( err => {
+			// 		console.log('App.vue-- wxweb接口调用出错');
+			// 	})
+			// }
 		},
 		onLaunch: function(options) {
 			this.checkMallType();
-			this.defaultwxWebLogin();
+			// this.defaultwxWebLogin();
 			console.log('App Launch');
 			// console.log(options)
 			
@@ -79,7 +79,6 @@
 						scm: 'pc'
 					});
 				} else if(bIsWeChat) {
-					alert('wxWeb端');
 					othis.SET_BASEINFO({
 						...othis.baseInfo,
 						scm: 'h5'
@@ -107,7 +106,6 @@
 			};
 			// let othis = this;
 			function defaultwxWebLogin(){
-				alert("defaultwxWebLogin");
 				othis.$http.post('/app/login/mall/wxweb', {
 					mallDomain: othis.mallDomain,
 				})

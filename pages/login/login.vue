@@ -706,15 +706,15 @@
 				this.$http.post('/mall/app/account/info')
 				.then( res => {
 					if(res.code == 0){
+						console.log(res);
 						if(res.result){
 							let mobilephone = res.result.mobilephone;
-							let {accountId, customerName, customerSex, customerImage, customerId} = res.result.customer;
-							this.SET_USERIFNO({accountId, customerName, customerSex, customerImage, customerId});
+							let {accountId, customerName, wechatName, customerSex, customer_birthday, customerImage, customerId} = res.result.customer;
+							this.SET_USERIFNO({accountId, customerName, wechatName, customerSex, customer_birthday, customerImage, customerId});
 							this.SET_USERIFNO({
 								...this.userInfo,
 								mobilephone: mobilephone
 							})
-							console.log(this.userInfo)
 						}
 					}else{
 						console.log('login.vue-- info接口调用失败');
