@@ -79,7 +79,6 @@
 						scm: 'pc'
 					});
 				} else if(bIsWeChat) {
-					alert('bIsWeChat')
 					othis.SET_BASEINFO({
 						...othis.baseInfo,
 						scm: 'h5'
@@ -117,8 +116,7 @@
 				// 	console.log('App.vue-- wxweb接口调用出错');
 				// })
 				
-				alert('1212')
-				window.location.href='http://192.168.1.135:8086/mall/app/login/mall/wxweb?mallDomain=yyy'
+				window.location.href='http://192.168.1.135:8086/mall/app/login/mall/wxweb?mallDomain='+othis.baseInfo.mallDomain
 			};
 			function defaultWxLogin(){
 				uni.checkSession({

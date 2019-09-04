@@ -46,7 +46,7 @@
         mapState,
         mapMutations
     } from 'vuex'
-	import { setStore, getStore, removeStore} from '../../utils/store.js'
+	// import { setStore, getStore, removeStore} from '../../utils/store.js'
 	import { isvalidatemobile, validatenull } from '../../utils/validate.js'
     import mInput from '../../components/m-input.vue'
 
@@ -263,7 +263,7 @@
 							this.SET_HASLOGIN(true);
 							this.SET_TOKEN(res.result.token);
 							this.$http.setConfig((config) => {
-								config.header['Authorization'] = 'Bearer ' + getStore({ name: 'token' });
+								config.header['Authorization'] = 'Bearer ' + uni.getStorageSync('token');
 								return config;
 							});
 							this.setUserInfo();
@@ -308,7 +308,7 @@
 							this.SET_HASLOGIN(true);
 							this.SET_TOKEN(res.result.token);
 							this.$http.setConfig((config) => {
-								config.header['Authorization'] = 'Bearer ' + getStore({ name: 'token' });
+								config.header['Authorization'] = 'Bearer ' + uni.getStorageSync('token');
 								return config;
 							});
 							this.setUserInfo();
@@ -354,7 +354,7 @@
 							this.SET_HASLOGIN(true);
 							this.SET_TOKEN(res.result.token);
 							this.$http.setConfig((config) => {
-								config.header['Authorization'] = 'Bearer ' + getStore({ name: 'token' });
+								config.header['Authorization'] = 'Bearer ' + uni.getStorageSync('token');
 								return config;
 							});
 							this.setUserInfo();
@@ -399,7 +399,7 @@
 							this.SET_HASLOGIN(true);
 							this.SET_TOKEN(res.result.token);
 							this.$http.setConfig((config) => {
-								config.header['Authorization'] = 'Bearer ' + getStore({ name: 'token' });
+								config.header['Authorization'] = 'Bearer ' + uni.getStorageSync('token');
 								return config;
 							});
 							this.setUserInfo();
@@ -458,7 +458,7 @@
 							this.SET_HASLOGIN(true);
 							this.SET_TOKEN(res.result.token);
 							this.$http.setConfig((config) => {
-								config.header['Authorization'] = 'Bearer ' + getStore({ name: 'token' });
+								config.header['Authorization'] = 'Bearer ' + uni.getStorageSync('token');
 								return config;
 							});
 							this.setUserInfo();
@@ -503,7 +503,7 @@
 							this.SET_HASLOGIN(true);
 							this.SET_TOKEN(res.result.token);
 							this.$http.setConfig((config) => {
-								config.header['Authorization'] = 'Bearer ' + getStore({ name: 'token' });
+								config.header['Authorization'] = 'Bearer ' + uni.getStorageSync('token');
 								return config;
 							});
 							this.setUserInfo();
@@ -627,7 +627,7 @@
 						this.SET_HASLOGIN(true);
 						this.SET_TOKEN(res.result.token);
 						this.$http.setConfig((config) => {
-							config.header['Authorization'] = 'Bearer ' + getStore({ name: 'token' });
+							config.header['Authorization'] = 'Bearer ' + uni.getStorageSync('token');
 							return config;
 						});
 						
