@@ -1,4 +1,5 @@
 <script>
+	import { setStore, getStore, removeStore } from './utils/store.js'
 	import { mapState, mapMutations } from 'vuex';
 	import { test } from './api/api.js'
 	export default {
@@ -6,7 +7,7 @@
 			...mapState("common", ['uniCode', 'mallDomain', 'baseInfo', 'hasLogin'])
 		},
 		methods: {
-			...mapMutations("common", ['SET_BASEINFO', 'SET_USERIFNO', 'SET_UNICODE', 'SET_MALLDOMAIN', 'SET_MALLTYPE', 'SET_MALLID']),
+			...mapMutations("common", ['SET_BASEINFO', 'SET_USERIFNO', 'SET_UNICODE', 'SET_HASLOGIN', 'SET_TOKEN', 'SET_MALLTYPE', 'SET_MALLID']),
 			checkMallType(){
 				this.$http.post('/mall/app/login/mall/shopmall/type', {
 					mallDomain: this.mallDomain
@@ -41,11 +42,26 @@
 			// 	.catch( err => {
 			// 		console.log('App.vue-- wxweb接口调用出错');
 			// 	})
-			// }
+			// },
+			initData(){
+				if(getStore({ name: 'hasLogin' })){
+					this.SET_HASLOGIN(getStore({ name: 'hasLogin' }));
+				}
+				if(getStore({ name: 'token' })){
+					this.SET_TOKEN(getStore({ name: 'token' }));
+				}
+				if(getStore({ name: 'uniCode' })){
+					this.SET_UNICODE(getStore({ name: 'uniCode' }));
+				}
+				if(getStore({ name: 'userInfo' })){
+					this.SET_USERIFNO(getStore({ name: 'userInfo' }));
+				}
+			}
 		},
 		onLaunch: function(options) {
 			this.checkMallType();
 			// this.defaultwxWebLogin();
+			this.initData();
 			console.log('App Launch');
 			// console.log(options)
 			

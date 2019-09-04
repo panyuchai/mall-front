@@ -18,7 +18,7 @@ test.interceptor.request((config, cancel) => { /* 请求之前拦截器 */
 	if (store.getters.token) {
 		config.header = {
 			...config.header,
-			Authorization: 'Bearer ' + getStore({ name: 'token' }).token
+			Authorization: 'Bearer ' + getStore({ name: 'token' })
 		}
     }
 	/*
@@ -63,7 +63,7 @@ http.interceptor.request((config, cancel) => { /* 请求之前拦截器 */
 	if (store.getters.token) {
 		config.header = {
 			...config.header,
-			Authorization: 'Bearer ' + getStore({ name: 'token' }).token
+			Authorization: 'Bearer ' + getStore({ name: 'token' })
 			// config.header['Authorization'] = 'Bearer ' + getStore({ name: 'token' });
 		}
     }
