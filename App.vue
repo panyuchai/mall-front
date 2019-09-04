@@ -29,10 +29,23 @@
 				.catch( err => {
 					console.log('login--mallTaye 接口调用出错');
 				})
+			},
+			defaultwxWebLogin(){
+				alert("123");
+				othis.$http.post('/app/login/mall/wxweb', {
+					mallDomain: othis.mallDomain,
+				})
+				.then( res => {
+					console.log(res);
+				})
+				.catch( err => {
+					console.log('App.vue-- wxweb接口调用出错');
+				})
 			}
 		},
 		onLaunch: function(options) {
 			this.checkMallType();
+			this.defaultwxWebLogin();
 			console.log('App Launch');
 			// console.log(options)
 			
@@ -72,6 +85,7 @@
 					if(!othis.hasLogin){
 						defaultwxWebLogin();
 					}
+					// defaultwxWebLogin();
 				}else {
 					console.log("App.vue--非h5环境");
 				}
@@ -92,6 +106,7 @@
 			};
 			// let othis = this;
 			function defaultwxWebLogin(){
+				alert("123");
 				othis.$http.post('/app/login/mall/wxweb', {
 					mallDomain: othis.mallDomain,
 				})
