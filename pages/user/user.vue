@@ -8,11 +8,11 @@
 			<view class="user-info-box">
 				<image class="bg" src="/static/img/user-bg.png" mode="scaleToFill"></image>
 				<view class="portrait-box">
-					<image class="portrait" :src="userInfo.portrait||'/static/img/missing-face.png'" mode="aspectFill"></image>
+					<image class="portrait" :src="userInfo.customerImage||'/static/img/missing-face.png'" mode="aspectFill"></image>
 				</view>
 				<view class="info-box" @tap="navTo('#')">
-					<text class="username">{{userInfo.nickname || '游客'}}</text>
-					<text class="userphone">{{userInfo.phone || ''}}</text>
+					<text class="username">{{userInfo.customerName || '游客'}}</text>
+					<text class="userphone">{{userInfo.mobilephone || ''}}</text>
 				</view>
 			</view>
 			<view class="user-info-setting" @tap="navTo('/pages/accountManage/accountManage')">
@@ -90,6 +90,7 @@
 </template>
 
 <script>
+	import { setStore, getStore, removeStore} from '../../utils/store.js'
 	import tuiBadge from "@/components/badge/badge"
     import {
         mapState,
@@ -102,7 +103,7 @@
 		},
 		data() {
 			return {
-				userData: {}
+				userData: {},
 			}
 		},
         computed: {

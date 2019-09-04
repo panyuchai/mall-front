@@ -707,8 +707,14 @@
 				.then( res => {
 					if(res.code == 0){
 						if(res.result){
+							let mobilephone = res.result.mobilephone;
 							let {accountId, customerName, customerSex, customerImage, customerId} = res.result.customer;
 							this.SET_USERIFNO({accountId, customerName, customerSex, customerImage, customerId});
+							this.SET_USERIFNO({
+								...this.userInfo,
+								mobilephone: mobilephone
+							})
+							console.log(this.userInfo)
 						}
 					}else{
 						console.log('login.vue-- info接口调用失败');

@@ -17,7 +17,8 @@
     "pages/accountManage/accountManage",
     "pages/order/order",
     "pages/orderDetail/orderDetail",
-    "pages/delivery/delivery"
+    "pages/delivery/delivery",
+    "pages/TransferPage/TransferPage"
   ],
   "subPackages": [],
   "window": {

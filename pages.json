@@ -105,6 +105,10 @@
 				"navigationBarTitleText": "物流详情"
 			}
         }
+        ,{
+            "path" : "pages/TransferPage/TransferPage",
+            "style" : {}
+        }
     ],
     "tabBar": {
         "color": "#7F8389",

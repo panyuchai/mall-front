@@ -29,5 +29,8 @@
 }
 .m-input-icon {
 	width: 20px;
+	padding-left: 10rpx;
+	height: 18px;
+	line-height: 18px;
 }
 

@@ -1,8 +1,9 @@
 .category-list {
   position: relative;
+  padding-top: 10rpx;
 }
 .category-list .swiper {
-    height: 320rpx;
+    height: 340rpx;
 }
 .category-list .swiper .swiper-item {
       height: 100%;
