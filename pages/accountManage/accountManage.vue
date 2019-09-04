@@ -112,12 +112,6 @@
 				formData: {
 					
 				},
-				accountData: {
-					userName: '韩莹',
-					nickName: '韩莹123',
-					sex: '请选择',
-					birthday: '请选择'
-				},
 				selectList:[{
 					label:"男",
 					value:0

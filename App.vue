@@ -8,7 +8,7 @@
 		methods: {
 			...mapMutations("common", ['SET_BASEINFO', 'SET_USERIFNO', 'SET_UNICODE', 'SET_MALLDOMAIN', 'SET_MALLTYPE', 'SET_MALLID']),
 			checkMallType(){
-				// alert('checkMallType接口');
+				alert('checkMallType接口');
 				this.$http.post('/mall/app/login/mall/shopmall/type', {
 					mallDomain: this.mallDomain
 				})
@@ -79,6 +79,7 @@
 						scm: 'pc'
 					});
 				} else if(bIsWeChat) {
+					alert('bIsWeChat')
 					othis.SET_BASEINFO({
 						...othis.baseInfo,
 						scm: 'h5'
@@ -106,15 +107,18 @@
 			};
 			// let othis = this;
 			function defaultwxWebLogin(){
-				othis.$http.post('/app/login/mall/wxweb', {
-					mallDomain: othis.mallDomain,
-				})
-				.then( res => {
-					console.log(res);
-				})
-				.catch( err => {
-					console.log('App.vue-- wxweb接口调用出错');
-				})
+				// othis.$http.post('/app/login/mall/wxweb', {
+				// 	mallDomain: othis.mallDomain,
+				// })
+				// .then( res => {
+				// 	console.log(res);
+				// })
+				// .catch( err => {
+				// 	console.log('App.vue-- wxweb接口调用出错');
+				// })
+				
+				alert('1212')
+				window.location.href='http://192.168.1.135:8086/mall/app/login/mall/wxweb?mallDomain='+this.baseInfo.mallDomain
 			};
 			function defaultWxLogin(){
 				uni.checkSession({
