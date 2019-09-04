@@ -118,7 +118,7 @@
 				// })
 				
 				alert('1212')
-				window.location.href='http://192.168.1.135:8086/mall/app/login/mall/wxweb?mallDomain='+this.baseInfo.mallDomain
+				window.location.href='http://192.168.1.135:8086/mall/app/login/mall/wxweb?mallDomain=yyy'
 			};
 			function defaultWxLogin(){
 				uni.checkSession({
