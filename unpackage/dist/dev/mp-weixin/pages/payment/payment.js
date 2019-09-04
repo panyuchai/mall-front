@@ -236,11 +236,14 @@ var _vuex = __webpack_require__(/*! vuex */ 8);function _objectSpread(target) {f
       // 	area: '123',
       // 	default: false,
       // },
+      hasAddress: true,
       isWx: false,
       isWebWx: false,
-      isPc: false,
+      isWeb: false,
       remark: '',
       payData: {},
+      address: {},
+      goodsList: [],
       balanceType: 0,
       fee: 0 };
 
@@ -254,74 +257,148 @@ var _vuex = __webpack_require__(/*! vuex */ 8);function _objectSpread(target) {f
     switchChange: function switchChange(e) {
       this.balanceType = Number(e.detail.value);
     },
-    handleWxPay: function handleWxPay() {
+    handleWxPay: function handleWxPay(data) {var _this = this;
       this.$http.post('/mall/app/order/submit', _objectSpread({},
-      this.baseInfo, {
-        accountId: this.userInfo.accountId,
-        balance: this.balancePay,
-        isBalance: this.balanceType,
-        credits: 0,
-        expressFee: this.payData.express.fee,
-        goodsList: this.payData.goodsListDetailList,
-        payChannels: '8',
-        payPrice: this.payPrice,
-        remark: this.remark,
-        totalPrice: this.payData.totalPrice })).
+      data, {
+        payChannels: '8' })).
 
       then(function (res) {
-        cnsole.log(res);
+        if (res.result.orderState == 1) {
+          uni.showToast({
+            icon: 'none',
+            title: '订单提交成功' });
+
+          setTimeout(function () {
+            uni.redirectTo({
+              url: '/pages/orderDetail/orderDetail' });
+
+          }, 1000);
+        } else {
+          _this.$http.post('/mall/app/order/submit', _objectSpread({},
+          data, {
+            payChannels: '8',
+            callBackNo: res.result.orderNo })).
+
+          then(function (res) {
+            wx.requestPayment({
+              'timeStamp': res.result.payResponse.wxPayResponse.timeStamp,
+              'nonceStr': res.result.payResponse.wxPayResponse.nonceStr,
+              'package': res.result.payResponse.wxPayResponse.packageStr,
+              'signType': res.result.payResponse.wxPayResponse.signType,
+              'paySign': res.result.payResponse.wxPayResponse.paySign,
+              'success': function success(sc) {
+                console.log(sc);
+                // wx.redirectTo({
+                // 	url: '/pages/translateOrder/translateOrder'
+                // })
+              },
+              'fail': function fail(er) {
+                console.log(er);
+              },
+              'complete': function complete(msg) {
+                console.log(msg);
+              } });
+
+          }).
+          catch(function (err) {
+            console.log(err);
+          });
+        }
       }).
       catch(function (err) {
         console.log(err);
       });
     },
     handleWxWebPay: function handleWxWebPay() {
-
+      // function onBridgeReady(){
+      //    WeixinJSBridge.invoke(
+      //       'getBrandWCPayRequest', {
+      //          "appId":"wx2421b1c4370ec43b",     //公众号名称，由商户传入     
+      //          "timeStamp":"1395712654",         //时间戳，自1970年以来的秒数     
+      //          "nonceStr":"e61463f8efa94090b1f366cccfbbb444", //随机串     
+      //          "package":"prepay_id=u802345jgfjsdfgsdg888",     
+      //          "signType":"MD5",         //微信签名方式：     
+      //          "paySign":"70EA570631E4BB79628FBCA90534C63FF7FADD89" //微信签名 
+      //       },
+      //       function(res){
+      //       if(res.err_msg == "get_brand_wcpay_request:ok" ){
+      //       // 使用以上方式判断前端返回,微信团队郑重提示：
+      //             //res.err_msg将在用户支付成功后返回ok，但并不保证它绝对可靠。
+      //       } 
+      //    }); 
+      // }
+      // if (typeof WeixinJSBridge == "undefined"){
+      //    if( document.addEventListener ){
+      //        document.addEventListener('WeixinJSBridgeReady', onBridgeReady, false);
+      //    }else if (document.attachEvent){
+      //        document.attachEvent('WeixinJSBridgeReady', onBridgeReady); 
+      //        document.attachEvent('onWeixinJSBridgeReady', onBridgeReady);
+      //    }
+      // }else{
+      //    onBridgeReady();
+      // }
     },
-    handlePcPay: function handlePcPay() {
-      // this.$http.post('/mall/app/order/submit', {
-      // 	...this.baseInfo,
-      // 	accountId: this.userInfo.accountId,
-      // 	addressId: this.payData.address.addressId,
-      // 	balance: this.balancePay,
-      // 	isBalance: this.balanceType,
-      // 	credits: 0,
-      // 	expressFee: this.payData.express.fee,
-      // 	goodsList: this.payData.goodsListDetailList,
-      // 	payChannels: '8',
-      // 	payPrice: this.payPrice,
-      // 	remark: this.remark,
-      // 	totalPrice: this.payData.totalPrice,
-      // })
-      // .then( res => {
-      // 	console.log(res);
-      // })
-      // .catch( err => {
-      // 	console.log(err);
-      // })
+    handleWebPay: function handleWebPay(data) {var _this2 = this;
+      this.$http.post('/mall/app/order/submit', _objectSpread({},
+      data, {
+        payChannels: '2' })).
+
+      then(function (res) {
+        if (res.result.orderState == 1) {
+          uni.showToast({
+            icon: 'none',
+            title: '订单提交成功' });
+
+          setTimeout(function () {
+            uni.redirectTo({
+              url: '/pages/orderDetail/orderDetail' });
+
+          }, 1000);
+        } else {
+          _this2.$http.post('/mall/app/order/submit', _objectSpread({},
+          data, {
+            payChannels: '2',
+            callBackNo: res.result.orderNo })).
+
+          then(function (res) {
+            console.log(res);
+          }).
+          catch(function (err) {
+            console.log(err);
+          });
+        }
+
+      }).
+      catch(function (err) {
+        console.log(err);
+      });
     },
     handleSubmit: function handleSubmit() {
-      uni.getProvider({
-        service: 'payment',
-        success: function success(res) {
-          console.log(res.provider);
-          // if (~res.provider.indexOf('qq')) {
-          //     uni.login({
-          //         provider: 'qq',
-          //         success: function (loginRes) {
-          //             console.log(JSON.stringify(loginRes));
-          //         }
-          //     });
-          // }
-        } });
+      if (!this.hasAddress) {
+        uni.showToast({
+          icon: 'none',
+          title: '请先去创建地址' });
 
+      }
+      var data = _objectSpread({},
+      this.baseInfo, {
+        accountId: this.userInfo.accountId,
+        addressId: this.address.addressId,
+        balance: this.balancePay,
+        isBalance: this.balanceType,
+        credits: 0,
+        expressFee: this.payData.express.fee,
+        goodsList: this.goodsList,
+        payPrice: this.payPrice,
+        remark: this.remark,
+        totalPrice: this.payData.totalPrice });
 
       if (this.isWx) {
-        this.handleWxPay();
+        this.handleWxPay(data);
       } else if (this.isWebWx) {
-        this.handleWxWebPay();
-      } else if (this.isPc) {
-        this.handlePcPay();
+        this.handleWxWebPay(data);
+      } else if (this.isWeb) {
+        this.handleWebPay(data);
       }
 
       // let payChannels = '',
@@ -380,14 +457,14 @@ var _vuex = __webpack_require__(/*! vuex */ 8);function _objectSpread(target) {f
       var bIsWM = sUserAgent.match(/windows mobile/i) == "windows mobile";
       var bIsWeChat = sUserAgent.match(/MicroMessenger/i) == "micromessenger"; //微信端
       if (bIsIpad || bIsIphoneOs || bIsMidp || bIsUc7 || bIsUc || bIsAndroid || bIsCE || bIsWM) {
-        this.isPc = true;
+        this.isWeb = true;
       } else if (bIsWeChat) {
         this.isWebWx = true;
       } else {
         console.log("login.vue--非h5环境");
       }
     },
-    getOrderData: function getOrderData() {var _this = this;
+    getOrderData: function getOrderData() {var _this3 = this;
       this.$http.post('/mall/app/order/confirm', _objectSpread({},
       this.baseInfo, {
         accountId: this.userInfo.accountId,
@@ -397,14 +474,23 @@ var _vuex = __webpack_require__(/*! vuex */ 8);function _objectSpread(target) {f
       then(function (res) {
         console.log(res);
         if (res.code == 0) {
-          _this.payData = res.result;
-          _this.fee = res.result.express.fee;
+          if (!res.result.address) {
+            _this3.hasAddress = false;
+          }
+          _this3.payData = res.result;
+          _this3.address = res.result.address || {};
+          _this3.address.addressRecipients = res.result.address && res.result.address.addressRecipients || '请先去创建地址';
+          res.result.goodsListDetailList.map(function (item) {
+            item.mallGoodsId = item.id;
+            _this3.goodsList.push(item);
+          });
+          _this3.fee = res.result.express.fee;
         } else {
           console.log('payment.vue-- confirm接口获取数据失败');
         }
       }).
       catch(function (err) {
-        console.log('payment.vue-- confirm接口获取数据错误');
+        console.log('payment.vue-- confirm接口获取数据错误' + err);
       });
     } },
 

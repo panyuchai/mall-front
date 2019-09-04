@@ -6,10 +6,10 @@
 			<view class="order-content">
 				<view class="cen">
 					<view class="top">
-						<text class="name">{{payData.address && payData.address.addressRecipients}}</text>
-						<text class="mobile">{{payData.address && payData.address.addressPhone}}</text>
+						<text class="name">{{address.addressRecipients}}</text>
+						<text class="mobile">{{address.addressPhone}}</text>
 					</view>
-					<view class="address">{{payData.address && payData.address.addressDetail}}</view>
+					<view class="address">{{address.addressDetail}}</view>
 				</view>
 				<text class="iconfont icon-arrowRight icon-you"></text>
 			</view>
@@ -226,11 +226,14 @@
 				// 	area: '123',
 				// 	default: false,
 				// },
+				hasAddress: true,
 				isWx: false,
 				isWebWx: false,
-				isPc: false,
+				isWeb: false,
 				remark: '',
-				payData:{},
+				payData: {},
+				address: {},
+				goodsList: [],
 				balanceType: 0,
 				fee: 0
 			}
@@ -244,74 +247,148 @@
 			switchChange(e){
 				this.balanceType=Number(e.detail.value);
 			},
-			handleWxPay(){
+			handleWxPay(data){
 				this.$http.post('/mall/app/order/submit', {
-					...this.baseInfo,
-					accountId: this.userInfo.accountId,
-					balance: this.balancePay,
-					isBalance: this.balanceType,
-					credits: 0,
-					expressFee: this.payData.express.fee,
-					goodsList: this.payData.goodsListDetailList,
+					...data,
 					payChannels: '8',
-					payPrice: this.payPrice,
-					remark: this.remark,
-					totalPrice: this.payData.totalPrice,
 				})
 				.then( res => {
-					cnsole.log(res);
+					if(res.result.orderState == 1){
+						uni.showToast({
+							icon: 'none',
+							title: '订单提交成功'
+						})
+						setTimeout(function(){
+							uni.redirectTo({
+							    url: '/pages/orderDetail/orderDetail'
+							});
+						}, 1000)
+					}else{
+						this.$http.post('/mall/app/order/submit', {
+							...data,
+							payChannels: '8',
+							callBackNo: res.result.orderNo
+						})
+						.then( res => {
+							wx.requestPayment({
+								'timeStamp': res.result.payResponse.wxPayResponse.timeStamp,
+								'nonceStr': res.result.payResponse.wxPayResponse.nonceStr,
+								'package': res.result.payResponse.wxPayResponse.packageStr,
+								'signType': res.result.payResponse.wxPayResponse.signType,
+								'paySign': res.result.payResponse.wxPayResponse.paySign,
+								'success': function (sc) {
+									console.log(sc);
+									// wx.redirectTo({
+									// 	url: '/pages/translateOrder/translateOrder'
+									// })
+								},
+								'fail': function (er) {
+									console.log(er);
+								},
+								'complete': function(msg){
+									console.log(msg)
+								}
+							})
+						})
+						.catch( err => {
+							console.log(err)
+						})
+					}
 				})
 				.catch( err => {
 					console.log(err);
 				})
 			},
 			handleWxWebPay(){
-				
+				// function onBridgeReady(){
+				//    WeixinJSBridge.invoke(
+				//       'getBrandWCPayRequest', {
+				//          "appId":"wx2421b1c4370ec43b",     //公众号名称，由商户传入     
+				//          "timeStamp":"1395712654",         //时间戳，自1970年以来的秒数     
+				//          "nonceStr":"e61463f8efa94090b1f366cccfbbb444", //随机串     
+				//          "package":"prepay_id=u802345jgfjsdfgsdg888",     
+				//          "signType":"MD5",         //微信签名方式：     
+				//          "paySign":"70EA570631E4BB79628FBCA90534C63FF7FADD89" //微信签名 
+				//       },
+				//       function(res){
+				//       if(res.err_msg == "get_brand_wcpay_request:ok" ){
+				//       // 使用以上方式判断前端返回,微信团队郑重提示：
+				//             //res.err_msg将在用户支付成功后返回ok，但并不保证它绝对可靠。
+				//       } 
+				//    }); 
+				// }
+				// if (typeof WeixinJSBridge == "undefined"){
+				//    if( document.addEventListener ){
+				//        document.addEventListener('WeixinJSBridgeReady', onBridgeReady, false);
+				//    }else if (document.attachEvent){
+				//        document.attachEvent('WeixinJSBridgeReady', onBridgeReady); 
+				//        document.attachEvent('onWeixinJSBridgeReady', onBridgeReady);
+				//    }
+				// }else{
+				//    onBridgeReady();
+				// }
 			},
-			handlePcPay(){
-				// this.$http.post('/mall/app/order/submit', {
-				// 	...this.baseInfo,
-				// 	accountId: this.userInfo.accountId,
-				// 	addressId: this.payData.address.addressId,
-				// 	balance: this.balancePay,
-				// 	isBalance: this.balanceType,
-				// 	credits: 0,
-				// 	expressFee: this.payData.express.fee,
-				// 	goodsList: this.payData.goodsListDetailList,
-				// 	payChannels: '8',
-				// 	payPrice: this.payPrice,
-				// 	remark: this.remark,
-				// 	totalPrice: this.payData.totalPrice,
-				// })
-				// .then( res => {
-				// 	console.log(res);
-				// })
-				// .catch( err => {
-				// 	console.log(err);
-				// })
+			handleWebPay(data){
+				this.$http.post('/mall/app/order/submit', {
+					...data,
+					payChannels: '2',
+				})
+				.then( res => {
+					if(res.result.orderState == 1){
+						uni.showToast({
+							icon: 'none',
+							title: '订单提交成功'
+						})
+						setTimeout(function(){
+							uni.redirectTo({
+							    url: '/pages/orderDetail/orderDetail'
+							});
+						}, 1000)
+					}else{
+						this.$http.post('/mall/app/order/submit', {
+							...data,
+							payChannels: '2',
+							callBackNo: res.result.orderNo
+						})
+						.then( res => {
+							console.log(res)
+						})
+						.catch( err => {
+							console.log(err);
+						})
+					}
+					
+				})
+				.catch( err => {
+					console.log(err);
+				})
 			},
 			handleSubmit(){
-				uni.getProvider({
-				    service: 'payment',
-				    success: function (res) {
-				        console.log(res.provider)
-				        // if (~res.provider.indexOf('qq')) {
-				        //     uni.login({
-				        //         provider: 'qq',
-				        //         success: function (loginRes) {
-				        //             console.log(JSON.stringify(loginRes));
-				        //         }
-				        //     });
-				        // }
-				    }
-				});
-				
+				if(!this.hasAddress){
+					uni.showToast({
+						icon: 'none',
+						title: '请先去创建地址'
+					})
+				}
+				let data = {
+					...this.baseInfo,
+					accountId: this.userInfo.accountId,
+					addressId: this.address.addressId,
+					balance: this.balancePay,
+					isBalance: this.balanceType,
+					credits: 0,
+					expressFee: this.payData.express.fee,
+					goodsList: this.goodsList,
+					payPrice: this.payPrice,
+					remark: this.remark,
+					totalPrice: this.payData.totalPrice,
+				};
 				if(this.isWx){
-					this.handleWxPay();
+					this.handleWxPay(data);
 				}else if(this.isWebWx){
-					this.handleWxWebPay();
-				}else if(this.isPc){
-					this.handlePcPay();
+					this.handleWxWebPay(data);
+				}else if(this.isWeb){
+					this.handleWebPay(data);
 				}
 				
 				// let payChannels = '',
@@ -370,7 +447,7 @@
 				var bIsWM = sUserAgent.match(/windows mobile/i) == "windows mobile";
 				var bIsWeChat = sUserAgent.match(/MicroMessenger/i) == "micromessenger";//微信端
 				if (bIsIpad || bIsIphoneOs || bIsMidp || bIsUc7 || bIsUc || bIsAndroid || bIsCE || bIsWM) {
-					this.isPc=true;
+					this.isWeb=true;
 				} else if(bIsWeChat) {
 					this.isWebWx=true;
 				}else {
@@ -387,14 +464,23 @@
 				.then( res => {
 					console.log(res)
 					if(res.code == 0){
+						if(!res.result.address){
+							this.hasAddress=false;
+						}
 						this.payData=res.result;
-						this.fee=res.result.express.fee
+						this.address=res.result.address || {};
+						this.address.addressRecipients=res.result.address && res.result.address.addressRecipients || '请先去创建地址';
+						res.result.goodsListDetailList.map(item => {
+							item.mallGoodsId=item.id;
+							this.goodsList.push(item);
+						});
+						this.fee=res.result.express.fee;
 					}else{
 						console.log('payment.vue-- confirm接口获取数据失败');
 					}
 				})
 				.catch( err => {
-					console.log('payment.vue-- confirm接口获取数据错误');
+					console.log('payment.vue-- confirm接口获取数据错误' + err);
 				})
 			}
 		},

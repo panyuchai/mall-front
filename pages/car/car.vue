@@ -303,7 +303,7 @@
 				this.deleteGoods(shopcarIds);
 				this.selectedList = [];
 				this.isAllselected = this.selectedList.length == this.goodsList.length && this.goodsList.length>0;
-				this.sum();
+				// this.sum();
 			},
 			// 选中商品
 			selected(index){
@@ -391,6 +391,7 @@
 					if(res.code == 0){
 						console.log(res)
 						this.goodsList=res.result.list;
+						// this.sum();
 						if(!res.result.list){
 							this.carEmpty=true;
 						};
@@ -400,7 +401,7 @@
 					}
 				})
 				.catch( err => {
-					console.log('car.vue-- query接口获取数据错误');
+					console.log('car.vue-- query接口获取数据错误' + err);
 				})
 			}
 		},
