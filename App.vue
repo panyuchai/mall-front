@@ -8,7 +8,7 @@
 		methods: {
 			...mapMutations("common", ['SET_BASEINFO', 'SET_USERIFNO', 'SET_UNICODE', 'SET_MALLDOMAIN', 'SET_MALLTYPE', 'SET_MALLID']),
 			checkMallType(){
-				alert('checkMallType接口');
+				// alert('checkMallType接口');
 				this.$http.post('/mall/app/login/mall/shopmall/type', {
 					mallDomain: this.mallDomain
 				})
@@ -33,7 +33,7 @@
 			},
 			defaultwxWebLogin(){
 				alert("wxweb接口调用");
-				this.$http.post('/app/login/mall/wxweb', {
+				this.$http.post('/mall/app/login/mall/wxweb', {
 					mallDomain: this.mallDomain,
 				})
 				.then( res => {
@@ -84,6 +84,7 @@
 						scm: 'h5'
 					});
 					if(!othis.hasLogin){
+						alert('55555');
 						defaultwxWebLogin();
 					}
 				}else {

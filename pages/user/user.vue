@@ -52,7 +52,7 @@
 				</view>
 				<view class="order-item" @tap="navTo('/pages/order/order?state=2')" hover-class="common-hover"  :hover-stay-time="50">
 					<view class="icon">
-						<view class="iconfont icon-che-tianchong iconfont-transport"><tui-badge class="badge" type="danger" size="small">9</tui-badge></view>
+						<view class="iconfont icon-che-tianchong iconfont-transport"><tui-badge v-if="toReceivedNum" class="badge" type="danger" size="small">{{toReceivedNum}}</tui-badge></view>
 					</view>
 					<view class="name">待收货</view>
 				</view>
@@ -103,11 +103,11 @@
 		},
 		data() {
 			return {
-				userData: {},
+				toReceivedNum: null
 			}
 		},
         computed: {
-            ...mapState("common", ['hasLogin', 'forcedLogin', 'userInfo'])
+            ...mapState("common", ['hasLogin', 'forcedLogin', 'userInfo', 'baseInfo'])
         },
         methods: {
             // ...mapMutations(['logout']),
@@ -145,9 +145,23 @@
 			// 	})
 			// 	
 			// },
+			initToReceivedNum(){
+				this.$http.post('/mall/app/order/count', {
+					...this.baseInfo,
+					accountId: this.userInfo.accountId,
+					orderState: ''
+				})
+				.then( res => {
+					console.log(res)
+				})
+				.catch( err => {
+					console.log(err);
+				})
+			}
         },
 		onLoad: function(){
 			// this.userInitData();
+			this.initToReceivedNum();
 		}
     }
 </script>
