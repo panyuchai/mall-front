@@ -14,7 +14,7 @@
 					用户名
 				</view>
 				<view class="cell-info">
-					<input class="input" type="text" v-model="accountData.userName" />
+					<input class="input" type="text" v-model="userInfo.userName" />
 				</view>
 				<view class="iconfont icon-arrowRight icon-arrow"></view>
 			</view>
@@ -23,7 +23,7 @@
 					昵称
 				</view>
 				<view class="cell-info">
-					<input class="input" type="text"  v-model="accountData.nickName" />
+					<input class="input" type="text"  v-model="userInfo.nickName" />
 				</view>
 				<view class="iconfont icon-arrowRight icon-arrow"></view>
 			</view>
@@ -32,7 +32,7 @@
 					性别
 				</view>
 				<view class="cell-info">
-					<input class="input" disabled @tap.stop="toggleTab('selector')" type="text" v-model="accountData.sex" value="0"/>
+					<input class="input" disabled @tap.stop="toggleTab('selector')" type="text" v-model="userInfo.sex" value="0"/>
 					<!-- <view class="input">
 						管理收货地址
 					</view> -->
@@ -44,7 +44,7 @@
 					生日
 				</view>
 				<view class="cell-info">
-					<input class="input" disabled @tap.stop="toggleTab('date')" type="text" v-model="accountData.birthday" />
+					<input class="input" disabled @tap.stop="toggleTab('date')" type="text" v-model="userInfo.birthday" />
 				</view>
 				<view class="iconfont icon-arrowRight icon-arrow"></view>
 			</view>
@@ -148,10 +148,10 @@
 			},
 			onConfirmSex(val){
 				// console.log(val)
-				this.accountData.sex = val.result;
+				this.userInfo.sex = val.result;
 			},
 			onConfirmBirthday(val){
-				this.accountData.birthday = val.result;
+				this.userInfo.birthday = val.result;
 			},
 			linkToAddress(){
 				uni.navigateTo({

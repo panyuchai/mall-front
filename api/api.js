@@ -18,8 +18,7 @@ test.interceptor.request((config, cancel) => { /* 请求之前拦截器 */
 	if (store.getters.token) {
 		config.header = {
 			...config.header,
-			// Authorization: 'Bearer ' + getStore({ name: 'token' })
-			Authorization: 'Bearer ' + uni.getStorageSync('token')
+			Authorization: 'Bearer ' + getStore({ name: 'token' }).token
 		}
     }
 	/*
@@ -64,8 +63,8 @@ http.interceptor.request((config, cancel) => { /* 请求之前拦截器 */
 	if (store.getters.token) {
 		config.header = {
 			...config.header,
-			// Authorization: 'Bearer ' + getStore({ name: 'token' })
-			Authorization: 'Bearer ' + uni.getStorageSync('token')
+			Authorization: 'Bearer ' + getStore({ name: 'token' }).token
+			// config.header['Authorization'] = 'Bearer ' + getStore({ name: 'token' });
 		}
     }
 	/*

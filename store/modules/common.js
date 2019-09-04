@@ -11,9 +11,9 @@ const state = {
   // scm: '',
   // accountId:'',
   forcedLogin: false,
-  hasLogin: uni.getStorageSync('hasLogin') || false,
-  token: uni.getStorageSync('token') || '',
-  uniCode: uni.getStorageSync('uniCode') || '',
+  hasLogin: getStore({ name: 'hasLogin' }) && getStore({ name: 'hasLogin' }).hasLogin || false,
+  token: getStore({ name: 'token' }) && getStore({ name: 'token' }).token || '',
+  uniCode: getStore({ name: 'uniCode' }) && getStore({ name: 'uniCode' }).uniCode || '',
   userInfo: getStore({ name: 'userInfo' }) || {},
   baseInfo: {
 	  mallDomain: '',
@@ -38,13 +38,13 @@ const mutations = {
 	// },
 	SET_HASLOGIN: (state, hasLogin) => {
 		state.hasLogin = hasLogin;
-		// setStore({ name: 'hasLogin', content: state.hasLogin, type: 'sync' });
-		uni.setStorageSync('hasLogin', JSON.stringify(hasLogin));
+		setStore({ name: 'hasLogin', content: {hasLogin: state.hasLogin}, type: 'sync' });
+		// uni.setStorageSync('hasLogin', JSON.stringify(hasLogin));
 	},
 	SET_TOKEN: (state, token) => {
 		state.token = token;
-		// setStore({ name: 'token', content: state.token, type: 'sync' });
-		uni.setStorageSync('token', JSON.stringify(token));
+		setStore({ name: 'token', content: {token: state.token}, type: 'sync' });
+		// uni.setStorageSync('token', JSON.stringify(token));
 	},
 	SET_MALLDOMAIN: (state, mallDomain) => {
 		state.mallDomain = mallDomain;
@@ -69,8 +69,8 @@ const mutations = {
 	// },
 	SET_UNICODE: (state, uniCode) => {
 		state.uniCode = uniCode;
-		// setStore({ name: 'uniCode', content: state.uniCode, type: 'sync' });
-		uni.setStorageSync('uniCode', JSON.stringify(uniCode));
+		setStore({ name: 'uniCode', content: {uniCode: state.uniCode}, type: 'sync' });
+		// uni.setStorageSync('uniCode', JSON.stringify(uniCode));
 	},
 	SET_BASEINFO: (state, baseInfo) => {
 		state.baseInfo = baseInfo;

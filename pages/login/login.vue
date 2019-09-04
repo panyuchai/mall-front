@@ -46,7 +46,7 @@
         mapState,
         mapMutations
     } from 'vuex'
-	// import { setStore, getStore, removeStore} from '../../utils/store.js'
+	import { setStore, getStore, removeStore} from '../../utils/store.js'
 	import { isvalidatemobile, validatenull } from '../../utils/validate.js'
     import mInput from '../../components/m-input.vue'
 
@@ -263,7 +263,7 @@
 							this.SET_HASLOGIN(true);
 							this.SET_TOKEN(res.result.token);
 							this.$http.setConfig((config) => {
-								config.header['Authorization'] = 'Bearer ' + uni.getStorageSync('token');
+								config.header['Authorization'] = 'Bearer ' + getStore({ name: 'token' }).token;
 								return config;
 							});
 							this.setUserInfo();
@@ -308,7 +308,7 @@
 							this.SET_HASLOGIN(true);
 							this.SET_TOKEN(res.result.token);
 							this.$http.setConfig((config) => {
-								config.header['Authorization'] = 'Bearer ' + uni.getStorageSync('token');
+								config.header['Authorization'] = 'Bearer ' + getStore({ name: 'token' }).token;
 								return config;
 							});
 							this.setUserInfo();
@@ -354,7 +354,7 @@
 							this.SET_HASLOGIN(true);
 							this.SET_TOKEN(res.result.token);
 							this.$http.setConfig((config) => {
-								config.header['Authorization'] = 'Bearer ' + uni.getStorageSync('token');
+								config.header['Authorization'] = 'Bearer ' + getStore({ name: 'token' }).token;
 								return config;
 							});
 							this.setUserInfo();
@@ -399,7 +399,7 @@
 							this.SET_HASLOGIN(true);
 							this.SET_TOKEN(res.result.token);
 							this.$http.setConfig((config) => {
-								config.header['Authorization'] = 'Bearer ' + uni.getStorageSync('token');
+								config.header['Authorization'] = 'Bearer ' + getStore({ name: 'token' }).token;
 								return config;
 							});
 							this.setUserInfo();
@@ -414,7 +414,7 @@
 							}, 1000);
 						}else{
 							console.log("login-- userinfo登录失败");
-							if(res.result.code == '0011'){
+							if(res.result.code == '0010'){
 								uni.showToast({
 									icon: 'none',
 									title: '账户密码错误',
@@ -458,7 +458,7 @@
 							this.SET_HASLOGIN(true);
 							this.SET_TOKEN(res.result.token);
 							this.$http.setConfig((config) => {
-								config.header['Authorization'] = 'Bearer ' + uni.getStorageSync('token');
+								config.header['Authorization'] = 'Bearer ' + getStore({ name: 'token' }).token;
 								return config;
 							});
 							this.setUserInfo();
@@ -503,7 +503,7 @@
 							this.SET_HASLOGIN(true);
 							this.SET_TOKEN(res.result.token);
 							this.$http.setConfig((config) => {
-								config.header['Authorization'] = 'Bearer ' + uni.getStorageSync('token');
+								config.header['Authorization'] = 'Bearer ' + getStore({ name: 'token' }).token;
 								return config;
 							});
 							this.setUserInfo();
@@ -518,7 +518,7 @@
 							}, 1000);
 						}else{
 							console.log("login-- wxweb/userinfo登录失败");
-							if(res.result.code == '0011'){
+							if(res.result.code == '0010'){
 								uni.showToast({
 									icon: 'none',
 									title: '账户密码错误',
@@ -627,7 +627,7 @@
 						this.SET_HASLOGIN(true);
 						this.SET_TOKEN(res.result.token);
 						this.$http.setConfig((config) => {
-							config.header['Authorization'] = 'Bearer ' + uni.getStorageSync('token');
+							config.header['Authorization'] = 'Bearer ' + getStore({ name: 'token' }).token;
 							return config;
 						});
 						
@@ -710,7 +710,7 @@
 						if(res.result){
 							let mobilephone = res.result.mobilephone;
 							let {accountId, customerName, wechatName, customerSex, customer_birthday, customerImage, customerId} = res.result.customer;
-							this.SET_USERIFNO({accountId, customerName, wechatName, customerSex, customer_birthday, customerImage, customerId});
+							this.SET_USERIFNO({accountId, customerName, wechatName, customerSex, customer_birthday,  customerImage, customerId});
 							this.SET_USERIFNO({
 								...this.userInfo,
 								mobilephone: mobilephone

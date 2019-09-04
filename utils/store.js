@@ -29,7 +29,7 @@ export const getStore = (params) => {
     type
   } = params;
   let obj = {},
-    content;
+      content;
   obj = uni.getStorageSync(name);
   if (validatenull(obj)) obj = uni.getStorage(name);
   if (validatenull(obj)) return;

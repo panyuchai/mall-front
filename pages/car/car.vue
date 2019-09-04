@@ -102,7 +102,7 @@
 				theIndex:null,
 				oldIndex:null,
 				isStop:false,
-				carEmpty:false
+				carEmpty:false,
 			}
 		},
 		onPageScroll(e){
@@ -417,6 +417,7 @@
 			this.showHeader = false;
 			this.statusHeight = plus.navigator.getStatusbarHeight();
 			// #endif
+			
 		},
 	}
 </script>

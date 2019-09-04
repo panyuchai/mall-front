@@ -8,7 +8,6 @@
 		methods: {
 			...mapMutations("common", ['SET_BASEINFO', 'SET_USERIFNO', 'SET_UNICODE', 'SET_MALLDOMAIN', 'SET_MALLTYPE', 'SET_MALLID']),
 			checkMallType(){
-				alert('checkMallType接口');
 				this.$http.post('/mall/app/login/mall/shopmall/type', {
 					mallDomain: this.mallDomain
 				})
