@@ -27,9 +27,14 @@
 						return config;
 					});
 					if(uni.getStorageSync('referUrl')){
-						window.location.href=uni.getStorageSync('referUrl');
-						uni.removeStorageSync('referUrl');
+						// window.location.href=uni.getStorageSync('referUrl');
+						// uni.removeStorageSync('referUrl');
+					}else{
+						// uni.switchTab({
+						//     url: '/pages/index/index'
+						// });
 					}
+					alert('登陆成功')
 				}else{
 					alert(options.code);
 					uni.switchTab({

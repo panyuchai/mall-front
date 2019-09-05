@@ -124,7 +124,9 @@
 				if (document.referrer) {
 				    uni.setStorageSync('referUrl', document.referrer);
 				}
-				window.location.href='http://192.168.1.135:8086/mall/app/login/mall/wxweb?mallDomain=' + othis.baseInfo.mallDomain
+				alert(othis.baseInfo.mallDomain);
+				window.location.href='http://192.168.1.135:8086/mall/app/login/mall/wxweb?mallDomain=yyy';
+				
 			};
 			function defaultWxLogin(){
 				uni.checkSession({
