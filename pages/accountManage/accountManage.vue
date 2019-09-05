@@ -6,7 +6,7 @@
 					头像
 				</view>
 				<view class="cell-info cell-info-avatar" @tap="uploadAvatar">
-					<image class="portrait" :src="userInfo.customerImage || '/static/img/missing-face.png'"></image>
+					<image class="portrait" :src="formData.customerImage || '/static/img/missing-face.png'"></image>
 				</view>
 			</view>
 			<view class="list-cell">
@@ -14,7 +14,7 @@
 					用户名
 				</view>
 				<view class="cell-info">
-					<input class="input" type="text" v-model="userInfo.customerName" />
+					<input class="input" type="text" v-model="formData.customerName" />
 				</view>
 				<view class="iconfont icon-arrowRight icon-arrow"></view>
 			</view>
@@ -23,7 +23,7 @@
 					昵称
 				</view>
 				<view class="cell-info">
-					<input class="input" type="text"  v-model="userInfo.wechatName" />
+					<input class="input" type="text"  v-model="formData.wechatName" />
 				</view>
 				<view class="iconfont icon-arrowRight icon-arrow"></view>
 			</view>
@@ -32,7 +32,7 @@
 					性别
 				</view>
 				<view class="cell-info">
-					<input class="input" disabled @tap.stop="toggleTab('selector')" type="text" v-model="userInfo.customerSex" value="0"/>
+					<input class="input" disabled @tap.stop="toggleTab('selector')" type="text" v-model="formData.transCustomerSex"/>
 					<!-- <view class="input">
 						管理收货地址
 					</view> -->
@@ -44,7 +44,7 @@
 					生日
 				</view>
 				<view class="cell-info">
-					<input class="input" disabled @tap.stop="toggleTab('date')" type="text" v-model="userInfo.customerBirthday" />
+					<input class="input" disabled @tap.stop="toggleTab('date')" type="text" v-model="formData.transCustomerBirthday" value='0'/>
 				</view>
 				<view class="iconfont icon-arrowRight icon-arrow"></view>
 			</view>
@@ -60,15 +60,15 @@
 				</view>
 				<view class="iconfont icon-arrowRight icon-arrow"></view>
 			</view>
-			<view class="list-cell">
+			<!-- <view class="list-cell">
 				<view class="cell-tit">
 					修改密码
 				</view>
 				<view class="iconfont icon-arrowRight icon-arrow"></view>
-			</view>
+			</view> -->
 		</view>
 		<view class="action-section">
-			<view class="saving-btn">
+			<view class="saving-btn" @tap="saveAccount">
 				保存修改
 			</view>
 		</view>
@@ -102,6 +102,7 @@
 	    mapState,
 	    mapMutations
 	} from 'vuex'
+	import { setStore, getStore, removeStore } from '../../utils/store.js'
 	
 	export default {
 		components:{
@@ -110,7 +111,12 @@
 		data() {
 			return {
 				formData: {
-					
+					customerImage: '',
+					customerName: '',
+					wechatName: '',
+					customerSex: 0,
+					transCustomerBirthday: '',
+					transCustomerSex: ''
 				},
 				selectList:[{
 					label:"男",
@@ -125,20 +131,34 @@
 		    ...mapState("common", ['baseInfo', 'userInfo'])
 		},
 		methods: {
+			...mapMutations('common', ['SET_USERIFNO']),
 			uploadAvatar(){
 				uni.chooseImage({
 				    success: (chooseImageRes) => {
 				        const tempFilePaths = chooseImageRes.tempFilePaths;
-				        uni.uploadFile({
-				            url: 'https://www.example.com/upload', //仅为示例，非真实的接口地址
+				        uni.uploadFile({  // http://192.168.1.104/saas/app/backsite/sysFile/upload
+				            url: '/saas/app/backsite/sysFile/upload',
+							header:{
+								Authorization: 'Bearer ' + getStore({ name: 'token' })
+							},
 				            filePath: tempFilePaths[0],
 				            name: 'file',
 				            formData: {
 				                'user': 'test'
 				            },
 				            success: (uploadFileRes) => {
-				                console.log(uploadFileRes.data);
-				            }
+				                // if(uploadFileRes.data && uploadFileRes.data.code == 0){
+									
+									this.formData={
+										...this.formData,
+										customerImage: JSON.parse(uploadFileRes.data).result.url
+									}
+									// this.formData.customerImage=JSON.parse(uploadFileRes.data).result.url;
+								// }
+				            },
+							fail: (err) => {
+								console.log(err);
+							}
 				        });
 				    }
 				});
@@ -147,20 +167,111 @@
 				this.$refs[val].show();
 			},
 			onConfirmSex(val){
-				// console.log(val)
-				this.userInfo.sex = val.result;
+				// this.formData.transCustomerSex = val.result;
+				this.formData={
+					...this.formData,
+					transCustomerSex: val.result
+				}
 			},
 			onConfirmBirthday(val){
-				this.userInfo.birthday = val.result;
+				// this.formData.transCustomerBirthday = val.result;
+				this.formData={
+					...this.formData,
+					transCustomerBirthday: val.result
+				}
+				// console.log(this.formData.transCustomerBirthday);
 			},
 			linkToAddress(){
 				uni.navigateTo({
 				    url: "/pages/address/address"
 				});
+			},
+			saveAccount(){
+				
+				let transSexNum = this.transformSexNum(this.formData.transCustomerSex);
+				this.$http.post('/mall/app/account/update', {
+					...this.baseInfo,
+					...this.formData,
+					customerBirthday: this.formData.transCustomerBirthday,
+					customerSex: transSexNum
+				})
+				.then( res => {
+					uni.showToast({
+						icon: 'none',
+						title: '修改成功'
+					});
+					this.setUserInfo();
+					// this.initData();
+				})
+				.catch( err => {
+					console.log(err);
+				})
+			},
+			transformSexNum(str){
+				switch(str){
+					case '男':
+						return 1;
+						break;
+					case '女':
+						return 0
+						break;
+				}
+			},
+			transformSex(num){
+				switch(num){
+					case 0:
+						return '女';
+						break;
+					case 1:
+						return '男'
+						break;
+				}
+			},
+			// initData(){
+			// 	this.formData=this.userInfo || {};
+			// 	this.formData.transCustomerBirthday=this.userInfo.customerBirthday.split('T')[0];
+			// 	this.formData.transCustomerSex=this.transformSex(this.userInfo.customerSex);
+			// },
+			setUserInfo(){
+				this.$http.post('/mall/app/account/info')
+				.then( res => {
+					if(res.code == 0){
+						if(res.result){
+							let mobilephone = res.result.mobilephone;
+							let {accountId, customerName, wechatName, customerSex, customerBirthday, customerImage, customerId} = res.result.customer;
+							this.SET_USERIFNO({accountId, customerName, wechatName, customerSex, customerBirthday,  customerImage, customerId});
+							this.SET_USERIFNO({
+								...this.userInfo,
+								mobilephone: mobilephone
+							})
+							this.formData=this.userInfo;
+							let moment = require('moment');
+							let day = moment(this.userInfo.customerBirthday, moment.ISO_8601);
+							this.formData.transCustomerBirthday=day.format("YYYY-MM-DD");
+							this.formData.transCustomerSex=this.transformSex(this.userInfo.customerSex);
+						}
+					}else{
+						console.log('login.vue-- info接口调用失败');
+					}
+				})
+				.catch( err => {
+					console.log('login.vue-- info接口调用错误');
+				})
+			}
+		},
+		watch: {
+			formData: {
+				handler(val, oldval){
+					this.formData.transCustomerBirthday=val.transCustomerBirthday;
+					this.formData.transCustomerSex=val.transCustomerSex;
+					this.formData.customerImage=val.customerImage;
+				},
+				deep: true
 			}
 		},
 		onLoad(){
-			console.log(this.userInfo);
+			this.setUserInfo();
+			
 		}
 	}
 </script>

@@ -1,21 +1,21 @@
 <template>
 	<view class="content">
 		<view class="list border-bottom" v-for="(item, index) in addressList" :key="index" @click="checkAddress(item,index)">
-			<view class="checkbox-box">
-				<view class="checkbox" :class="[item.default?'on':'']">
-					<view :class="[item.default?'on':'']"></view>
+			<view class="checkbox-box" @tap.stop="changeDefaultAddress(item.addressId)">
+				<view class="checkbox" :class="[item.addressSelected?'on':'']">
+					<view :class="[item.addressSelected?'on':'']"></view>
 				</view>
 			</view>
 			<view class="wrapper">
 				<view class="u-box">
-					<text class="name">{{item.name}}</text>
-					<text class="mobile">{{item.mobile}}</text>
+					<text class="name">{{item.addressRecipients}}</text>
+					<text class="mobile">{{item.addressPhone}}</text>
 				</view>
 				<view class="address-box">
-					<text class="address">{{item.address}}{{item.area}}</text>
+					<text class="address">{{item.addressSheng}}{{item.addressShi}}{{item.addressQu}}{{item.addressAddress}}</text>
 				</view>
 			</view>
-			<text class="action" @click.stop="addAddress('edit', item)">编辑</text>
+			<text class="action" @click.stop="addAddress('edit', item.addressId)">编辑</text>
 		</view>
 		
 		<button class="add-btn" @click="addAddress('add')">新增地址</button>
@@ -23,32 +23,35 @@
 </template>
 
 <script>
+	import {
+	    mapState,
+	    mapMutations
+	} from 'vuex'
 	export default {
 		data() {
 			return {
 				source: 0,
-				addressList: [
-					{
-						name: '刘晓晓',
-						mobile: '18666666666',
-						address: '北京市东城区',
-						area: '泛海国际soho城8栋1904',
-						default: true
-					},{
-						name: '刘大大',
-						mobile: '18667766666',
-						address: '山东省济南市历城区山东省济南市历城区山东省济南市历城区山东省济南市历城区山东省济南市历城区山东省济南市历城区',
-						area: '泛海国际soho城8栋1904',
-						default: false,
-					}
-				]
+				addressList: []
 			}
 		},
-		onLoad(option){
-			// console.log(option.source);
-			this.source = option.source;
-		},
 		methods: {
+			changeDefaultAddress(addressId){
+				this.$http.post('/mall/app/address/default', {
+					...this.baseInfo,
+					accountId: this.userInfo.accountId,
+					addressId: addressId,
+					addressSelected: 1
+				})
+				.then( res => {
+					console.log(res)
+					if(res.code == 0){
+						this.initAddressData();
+					}
+				})
+				.catch( err => {
+					console.log(err);
+				})
+			},
 			//选择地址
 			checkAddress(item, index){
 				const prePage = ()=>{
@@ -60,26 +63,52 @@
 					return prePage.$vm;
 				}
 				if(this.source == 1){
-					prePage().addressData = item;
-					this.addressList.map((v, i) => {
-						v.default=false;
-					})
-					this.addressList[index].default = true
-					uni.navigateBack();
+					prePage().address = item;
+					console.log(prePage().address)
+					// this.addressList.map((v, i) => {
+					// 	v.default=false;
+					// })
+					// this.addressList[index].default = true;
+					// uni.navigateBack();
 				}
 			},
 			addAddress(type, item){
 				uni.navigateTo({
-					url: `/pages/addressManage/addressManage?type=${type}&data=${JSON.stringify(item)}`
+					url: `/pages/addressManage/addressManage?type=${type}&data=${item}`
 				})
 			},
 			//添加或修改成功之后回调
-			refreshList(data, type){
-				//添加或修改后事件，这里直接在最前面添加了一条数据，实际应用中直接刷新地址列表即可
-				this.addressList.unshift(data);
-				
-				console.log(data, type);
+			// refreshList(data, type){
+			// 	//添加或修改后事件，这里直接在最前面添加了一条数据，实际应用中直接刷新地址列表即可
+			// 	this.addressList.unshift(data);
+			// 	
+			// 	console.log(data, type);
+			// },
+			initAddressData(){
+				this.$http.post('/mall/app/address/list', {
+					...this.baseInfo,
+					accountId: this.userInfo.accountId
+				})
+				.then( res => {
+					if(res.code == 0){
+						this.addressList=res.result;
+					}
+				})
+				.catch( err => {
+					console.log(err);
+				})
 			}
+		},
+		computed: {
+			...mapState('common', ['baseInfo', 'userInfo'])
+		},
+		onLoad(option){
+			// console.log(option.source);
+			this.source = option.source;
+			
+		},
+		onShow(){
+			this.initAddressData();
 		}
 	}
 </script>
