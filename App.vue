@@ -125,7 +125,7 @@
 				if (document.referrer) {
 				    uni.setStorageSync('referUrl', document.referrer);
 				}
-				alert(JSON.parse(othis));
+				alert(othis);
 				alert(2222)
 				alert(JSON.parse(othis.baseInfo));
 				alert(3333)
