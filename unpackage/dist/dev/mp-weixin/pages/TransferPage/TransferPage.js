@@ -118,7 +118,7 @@ var _store = __webpack_require__(/*! ../../utils/store.js */ 8);function _object
 {
   data: function data() {
     return {
-      initData: '' };
+      initData: '888888888' };
 
   },
   methods: _objectSpread({},
@@ -154,7 +154,6 @@ var _store = __webpack_require__(/*! ../../utils/store.js */ 8);function _object
         console.log(err);
       });
       this.SET_FIRSTLOAD(false);
-
     } }),
 
   computed: _objectSpread({},

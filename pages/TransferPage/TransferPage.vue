@@ -13,7 +13,7 @@
 	export default {
 		data() {
 			return {
-				initData: ''
+				initData: '888888888'
 			}
 		},
 		methods: {
@@ -49,7 +49,6 @@
 					console.log(err);
 				});
 				this.SET_FIRSTLOAD(false);
-				
 			}
 		},
 		computed: {
