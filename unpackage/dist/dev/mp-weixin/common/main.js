@@ -225,7 +225,9 @@ var _api = __webpack_require__(/*! ./api/api.js */ 11);function _objectSpread(ta
       // window.location.href='http://192.168.1.135:8086/mall/app/login/mall/wxweb?mallDomain=yyy';
       // alert(4444)
       // alert(JSON.parse(othis))
-      if (!urlPage.test('/pages/TransferPage/TransferPage')) {
+      var reg = RegExp(/\/pages\/TransferPage\/TransferPage/ig);
+      if (!reg.test(options)) {
+        alert(333333 + othis.hasLogin);
         window.location.href = 'http://192.168.1.135:8086/mall/app/login/mall/wxweb?mallDomain=yyy';
       }
       // if(!othis.hasLogin){
