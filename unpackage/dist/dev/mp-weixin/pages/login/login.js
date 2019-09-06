@@ -149,12 +149,12 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
-var _vuex = __webpack_require__(/*! vuex */ 8);
+var _vuex = __webpack_require__(/*! vuex */ 10);
 
 
 
-var _store = __webpack_require__(/*! ../../utils/store.js */ 11);
-var _validate = __webpack_require__(/*! ../../utils/validate.js */ 12);function _objectSpread(target) {for (var i = 1; i < arguments.length; i++) {var source = arguments[i] != null ? arguments[i] : {};var ownKeys = Object.keys(source);if (typeof Object.getOwnPropertySymbols === 'function') {ownKeys = ownKeys.concat(Object.getOwnPropertySymbols(source).filter(function (sym) {return Object.getOwnPropertyDescriptor(source, sym).enumerable;}));}ownKeys.forEach(function (key) {_defineProperty(target, key, source[key]);});}return target;}function _defineProperty(obj, key, value) {if (key in obj) {Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true });} else {obj[key] = value;}return obj;}var mInput = function mInput() {return __webpack_require__.e(/*! import() | components/m-input */ "components/m-input").then(__webpack_require__.bind(null, /*! ../../components/m-input.vue */ 199));};var _default =
+var _store = __webpack_require__(/*! ../../utils/store.js */ 8);
+var _validate = __webpack_require__(/*! ../../utils/validate.js */ 9);function _objectSpread(target) {for (var i = 1; i < arguments.length; i++) {var source = arguments[i] != null ? arguments[i] : {};var ownKeys = Object.keys(source);if (typeof Object.getOwnPropertySymbols === 'function') {ownKeys = ownKeys.concat(Object.getOwnPropertySymbols(source).filter(function (sym) {return Object.getOwnPropertyDescriptor(source, sym).enumerable;}));}ownKeys.forEach(function (key) {_defineProperty(target, key, source[key]);});}return target;}function _defineProperty(obj, key, value) {if (key in obj) {Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true });} else {obj[key] = value;}return obj;}var mInput = function mInput() {return __webpack_require__.e(/*! import() | components/m-input */ "components/m-input").then(__webpack_require__.bind(null, /*! ../../components/m-input.vue */ 335));};var _default =
 
 
 {
@@ -521,7 +521,7 @@ var _validate = __webpack_require__(/*! ../../utils/validate.js */ 12);function 
             }, 1000);
           } else {
             console.log("login-- userinfo登录失败");
-            if (res.result.code == '0011') {
+            if (res.result.code == '0010') {
               uni.showToast({
                 icon: 'none',
                 title: '账户密码错误' });
@@ -625,7 +625,7 @@ var _validate = __webpack_require__(/*! ../../utils/validate.js */ 12);function 
             }, 1000);
           } else {
             console.log("login-- wxweb/userinfo登录失败");
-            if (res.result.code == '0011') {
+            if (res.result.code == '0010') {
               uni.showToast({
                 icon: 'none',
                 title: '账户密码错误' });
@@ -734,7 +734,7 @@ var _validate = __webpack_require__(/*! ../../utils/validate.js */ 12);function 
           _this8.SET_HASLOGIN(true);
           _this8.SET_TOKEN(res.result.token);
           _this8.$http.setConfig(function (config) {
-            config.header['Authorization'] = 'Bearer ' + (0, _store.getStore)({ name: 'token' });
+            config.header['Authorization'] = 'Bearer ' + (0, _store.getStore)({ name: 'token' }).token;
             return config;
           });
 
@@ -813,9 +813,14 @@ var _validate = __webpack_require__(/*! ../../utils/validate.js */ 12);function 
       this.$http.post('/mall/app/account/info').
       then(function (res) {
         if (res.code == 0) {
-          if (res.result) {var _res$result$customer =
-            res.result.customer,accountId = _res$result$customer.accountId,customerName = _res$result$customer.customerName,customerSex = _res$result$customer.customerSex,customerImage = _res$result$customer.customerImage,customerId = _res$result$customer.customerId;
-            _this9.SET_USERIFNO({ accountId: accountId, customerName: customerName, customerSex: customerSex, customerImage: customerImage, customerId: customerId });
+          if (res.result) {
+            var mobilephone = res.result.mobilephone;var _res$result$customer =
+            res.result.customer,accountId = _res$result$customer.accountId,customerName = _res$result$customer.customerName,wechatName = _res$result$customer.wechatName,customerSex = _res$result$customer.customerSex,customerBirthday = _res$result$customer.customerBirthday,customerImage = _res$result$customer.customerImage,customerId = _res$result$customer.customerId;
+            _this9.SET_USERIFNO({ accountId: accountId, customerName: customerName, wechatName: wechatName, customerSex: customerSex, customerBirthday: customerBirthday, customerImage: customerImage, customerId: customerId });
+            _this9.SET_USERIFNO(_objectSpread({},
+            _this9.userInfo, {
+              mobilephone: mobilephone }));
+
           }
         } else {
           console.log('login.vue-- info接口调用失败');

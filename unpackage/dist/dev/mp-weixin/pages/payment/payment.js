@@ -206,7 +206,7 @@
 
 
 
-var _vuex = __webpack_require__(/*! vuex */ 8);function _objectSpread(target) {for (var i = 1; i < arguments.length; i++) {var source = arguments[i] != null ? arguments[i] : {};var ownKeys = Object.keys(source);if (typeof Object.getOwnPropertySymbols === 'function') {ownKeys = ownKeys.concat(Object.getOwnPropertySymbols(source).filter(function (sym) {return Object.getOwnPropertyDescriptor(source, sym).enumerable;}));}ownKeys.forEach(function (key) {_defineProperty(target, key, source[key]);});}return target;}function _defineProperty(obj, key, value) {if (key in obj) {Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true });} else {obj[key] = value;}return obj;}var _default =
+var _vuex = __webpack_require__(/*! vuex */ 10);function _objectSpread(target) {for (var i = 1; i < arguments.length; i++) {var source = arguments[i] != null ? arguments[i] : {};var ownKeys = Object.keys(source);if (typeof Object.getOwnPropertySymbols === 'function') {ownKeys = ownKeys.concat(Object.getOwnPropertySymbols(source).filter(function (sym) {return Object.getOwnPropertyDescriptor(source, sym).enumerable;}));}ownKeys.forEach(function (key) {_defineProperty(target, key, source[key]);});}return target;}function _defineProperty(obj, key, value) {if (key in obj) {Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true });} else {obj[key] = value;}return obj;}var _default =
 
 
 {
@@ -485,6 +485,9 @@ var _vuex = __webpack_require__(/*! vuex */ 8);function _objectSpread(target) {f
             _this3.goodsList.push(item);
           });
           _this3.fee = res.result.express.fee;
+          if (uni.getStorageSync('chooseAddress')) {
+            _this3.address = uni.getStorageSync('chooseAddress');
+          }
         } else {
           console.log('payment.vue-- confirm接口获取数据失败');
         }
@@ -506,6 +509,10 @@ var _vuex = __webpack_require__(/*! vuex */ 8);function _objectSpread(target) {f
 
   onShow: function onShow() {
     this.getOrderData();
+  },
+  onBackPress: function onBackPress() {
+    uni.removeStorageSync('chooseAddress');
+    // 支付结束后重删一次
   },
   onLoad: function onLoad(option) {
     this.checkEnvironment();

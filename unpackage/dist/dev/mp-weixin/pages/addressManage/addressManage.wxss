@@ -18,6 +18,7 @@ page {
   padding: 0rpx 30rpx;
   height: 110rpx;
   background: #fff;
+  position: relative;
 }
 .row:after {
     content: "";
@@ -29,7 +30,7 @@ page {
     background: #E8E8E8;
 }
 .row .tit {
-    width: 120rpx;
+    width: 180rpx;
     font-size: 28rpx;
     color: #8C8C8C;
     display: inline-block;
@@ -58,6 +59,13 @@ page {
     padding: 0 !important;
     margin: 0 !important;
 }
+.row .switchBtn {
+    float: right;
+    position: absolute;
+    right: 30rpx;
+    top: 0;
+    line-height: 110rpx;
+}
 .add-btn {
   display: -webkit-box;
   display: -webkit-flex;
@@ -73,12 +81,32 @@ page {
           justify-content: center;
   width: 710rpx;
   height: 106rpx;
-  margin: 60rpx auto;
+  margin: 60rpx auto 0;
   font-size: 32rpx;
   color: #fff;
   background: #E84342;
   border-radius: 10rpx;
   -webkit-box-shadow: 1px 2px 5px rgba(219, 63, 96, 0.4);
           box-shadow: 1px 2px 5px rgba(219, 63, 96, 0.4);
+}
+.delete-btn {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+  -webkit-align-items: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: center;
+  -webkit-justify-content: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  width: 710rpx;
+  height: 106rpx;
+  margin: 40rpx auto 0;
+  font-size: 32rpx;
+  color: #000;
+  border-radius: 10rpx;
 }
 

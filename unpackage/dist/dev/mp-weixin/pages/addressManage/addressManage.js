@@ -105,59 +105,60 @@ __webpack_require__.r(__webpack_exports__);
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-/* WEBPACK VAR INJECTION */(function(uni) {Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0; //
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-var _default =
+/* WEBPACK VAR INJECTION */(function(uni) {Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+var _vuex = __webpack_require__(/*! vuex */ 10);function _objectSpread(target) {for (var i = 1; i < arguments.length; i++) {var source = arguments[i] != null ? arguments[i] : {};var ownKeys = Object.keys(source);if (typeof Object.getOwnPropertySymbols === 'function') {ownKeys = ownKeys.concat(Object.getOwnPropertySymbols(source).filter(function (sym) {return Object.getOwnPropertyDescriptor(source, sym).enumerable;}));}ownKeys.forEach(function (key) {_defineProperty(target, key, source[key]);});}return target;}function _defineProperty(obj, key, value) {if (key in obj) {Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true });} else {obj[key] = value;}return obj;}var _default =
+
+
+
 {
   data: function data() {
     return {
+      // addressId: uni.getStorageSync('addressId') || '',
+      addressId: '',
       addressData: {
-        name: '',
-        mobile: '',
-        address: '在地图选择',
-        area: '',
-        default: false } };
+        addressRecipients: '',
+        addressPhone: '',
+        addressSheng: '',
+        addressShi: '',
+        addressQu: '',
+        addressAddress: '',
+        addressSelected: 0 } };
 
-
-  },
-  onLoad: function onLoad(option) {
-    var title = '新增地址';
-    if (option.type === 'edit') {
-      title = '编辑地址';
-
-      this.addressData = JSON.parse(option.data);
-    }
-    this.manageType = option.type;
-    uni.setNavigationBarTitle({
-      title: title });
 
   },
   methods: {
@@ -169,47 +170,154 @@ var _default =
     chooseLocation: function chooseLocation() {var _this = this;
       uni.chooseLocation({
         success: function success(data) {
-          console.log(data);
-          _this.addressData.address = data.name;
+          var Sheng = data.address.indexOf('省'),
+          Shi = data.address.indexOf('市'),
+          Qu = data.address.indexOf('区');
+          _this.addressData.addressSheng = data.address.slice(0, Sheng + 1);
+          _this.addressData.addressShi = data.address.slice(Sheng + 1, Shi + 1);
+          _this.addressData.addressQu = data.address.slice(Shi + 1, Qu + 1);
+          _this.addressData.addressAddress = data.address.slice(Qu + 1);
         } });
 
     },
-
+    switchChange: function switchChange(val) {
+      this.addressData.addressSelected = Number(val.detail.value);
+    },
     //提交
-    confirm: function confirm() {
+    confirm: function confirm() {var _this2 = this;
       var data = this.addressData;
-      if (!data.name) {
+      if (!data.addressRecipients) {
         this.tui.toast("请填写收货人姓名");
         return;
       }
-      if (!/(^1[3|4|5|7|8][0-9]{9}$)/.test(data.mobile)) {
+      if (!/(^1[3|4|5|7|8][0-9]{9}$)/.test(data.addressPhone)) {
         this.tui.toast("请输入正确的手机号码");
         return;
       }
-      if (!data.address) {
+      if (!data.addressQu) {
         this.tui.toast("请在地图选择所在位置");
         return;
       }
-      if (!data.area) {
+      if (!data.addressAddress) {
         this.tui.toast("请填写详细门牌号信息");
         return;
       }
 
-      var prePage = function prePage() {
-        var pages = getCurrentPages();
-        var prePage = pages[pages.length - 2];
+      // const prePage = ()=>{
+      // 	let pages = getCurrentPages();
+      // 	let prePage = pages[pages.length - 2];
+      //
 
 
+      // 	return prePage.$vm;
+      // }
+      // //this.$api.prePage()获取上一页实例，可直接调用上页所有数据和方法，在App.vue定义
+      // prePage().refreshList(data, this.manageType);
 
-        return prePage.$vm;
-      };
-      //this.$api.prePage()获取上一页实例，可直接调用上页所有数据和方法，在App.vue定义
-      prePage().refreshList(data, this.manageType);
-      this.tui.toast("\u5730\u5740".concat(this.manageType == 'edit' ? '修改' : '添加', "\u6210\u529F"));
-      setTimeout(function () {
-        uni.navigateBack();
-      }, 800);
-    } } };exports.default = _default;
+      if (this.manageType == 'edit') {
+        this.$http.post('/mall/app/address/update', _objectSpread({},
+        this.baseInfo, {
+          accountId: this.userInfo.accountId,
+          // addressId: uni.getStorageSync('addressId'),
+          addressId: this.addressId,
+          receiverName: this.addressData.addressRecipients,
+          receiverPhone: this.addressData.addressPhone,
+          province: this.addressData.addressSheng,
+          city: this.addressData.addressShi,
+          district: this.addressData.addressQu,
+          address: this.addressData.addressAddress,
+          addressSelected: this.addressData.addressSelected })).
+
+        then(function (res) {
+          if (res.code == 0) {
+            _this2.tui.toast("\u5730\u5740".concat(_this2.manageType == 'edit' ? '修改' : '添加', "\u6210\u529F"));
+            // this.initAddress();
+            setTimeout(function () {
+              uni.navigateBack();
+            }, 800);
+          }
+        }).
+        catch(function (err) {
+          console.log(err);
+        });
+      } else {
+        this.$http.post('/mall/app/address/add', _objectSpread({},
+        this.baseInfo, {
+          accountId: this.userInfo.accountId,
+          receiverName: this.addressData.addressRecipients,
+          receiverPhone: this.addressData.addressPhone,
+          province: this.addressData.addressSheng,
+          city: this.addressData.addressShi,
+          district: this.addressData.addressQu,
+          address: this.addressData.addressAddress,
+          addressSelected: this.addressData.addressSelected })).
+
+        then(function (res) {
+          if (res.code == 0) {
+            _this2.tui.toast("\u5730\u5740".concat(_this2.manageType == 'edit' ? '修改' : '添加', "\u6210\u529F"));
+            setTimeout(function () {
+              uni.navigateBack();
+            }, 800);
+          }
+        }).
+        catch(function (err) {
+          console.log(err);
+        });
+      }
+    },
+    deleteAddress: function deleteAddress() {var _this3 = this;
+      if (this.addressId) {
+        this.$http.post('/mall/app/address/delete', _objectSpread({},
+        this.baseInfo, {
+          accountId: this.userInfo.accountId,
+          addressId: this.addressId })).
+
+        then(function (res) {
+          if (res.code == 0) {
+            _this3.tui.toast("\u5220\u9664\u6210\u529F");
+            setTimeout(function () {
+              uni.navigateBack();
+            }, 800);
+          }
+        }).
+        catch(function (err) {
+          console.log(err);
+        });
+      }
+    },
+    initAddress: function initAddress() {var _this4 = this;
+      this.$http.post('/mall/app/address/one', _objectSpread({},
+      this.baseInfo, {
+        accountId: this.userInfo.accountId,
+        addressId: this.addressId })).
+
+      then(function (res) {
+        console.log(res);
+        if (res.code == 0) {
+          _this4.addressData = res.result;
+        }
+      }).
+      catch(function (err) {
+        console.log(err);
+      });
+    } },
+
+  computed: _objectSpread({},
+  (0, _vuex.mapState)('common', ['baseInfo', 'userInfo'])),
+
+  onLoad: function onLoad(option) {
+    var title = '新增地址';
+    if (option.type === 'edit') {
+      title = '编辑地址';
+      this.addressId = option.data;
+      // uni.setStorageSync('addressId', option.data);
+      this.initAddress();
+    }
+    this.manageType = option.type;
+    uni.setNavigationBarTitle({
+      title: title });
+
+  } };exports.default = _default;
 /* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./node_modules/@dcloudio/uni-mp-weixin/dist/index.js */ 1)["default"]))
 
 /***/ }),

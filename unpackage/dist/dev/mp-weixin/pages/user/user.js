@@ -197,8 +197,9 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
+var _store = __webpack_require__(/*! ../../utils/store.js */ 8);
 
-var _vuex = __webpack_require__(/*! vuex */ 8);function _objectSpread(target) {for (var i = 1; i < arguments.length; i++) {var source = arguments[i] != null ? arguments[i] : {};var ownKeys = Object.keys(source);if (typeof Object.getOwnPropertySymbols === 'function') {ownKeys = ownKeys.concat(Object.getOwnPropertySymbols(source).filter(function (sym) {return Object.getOwnPropertyDescriptor(source, sym).enumerable;}));}ownKeys.forEach(function (key) {_defineProperty(target, key, source[key]);});}return target;}function _defineProperty(obj, key, value) {if (key in obj) {Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true });} else {obj[key] = value;}return obj;}var tuiBadge = function tuiBadge() {return __webpack_require__.e(/*! import() | components/badge/badge */ "components/badge/badge").then(__webpack_require__.bind(null, /*! @/components/badge/badge */ 220));};var _default =
+var _vuex = __webpack_require__(/*! vuex */ 10);function _objectSpread(target) {for (var i = 1; i < arguments.length; i++) {var source = arguments[i] != null ? arguments[i] : {};var ownKeys = Object.keys(source);if (typeof Object.getOwnPropertySymbols === 'function') {ownKeys = ownKeys.concat(Object.getOwnPropertySymbols(source).filter(function (sym) {return Object.getOwnPropertyDescriptor(source, sym).enumerable;}));}ownKeys.forEach(function (key) {_defineProperty(target, key, source[key]);});}return target;}function _defineProperty(obj, key, value) {if (key in obj) {Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true });} else {obj[key] = value;}return obj;}var tuiBadge = function tuiBadge() {return __webpack_require__.e(/*! import() | components/badge/badge */ "components/badge/badge").then(__webpack_require__.bind(null, /*! @/components/badge/badge */ 356));};var _default =
 
 
 
@@ -209,11 +210,12 @@ var _vuex = __webpack_require__(/*! vuex */ 8);function _objectSpread(target) {f
 
   data: function data() {
     return {
-      userData: {} };
+      toPayNum: 0,
+      toReceivedNum: 0 };
 
   },
   computed: _objectSpread({},
-  (0, _vuex.mapState)("common", ['hasLogin', 'forcedLogin', 'userInfo'])),
+  (0, _vuex.mapState)("common", ['hasLogin', 'userInfo', 'baseInfo'])),
 
   methods: {
     // ...mapMutations(['logout']),
@@ -240,20 +242,52 @@ var _vuex = __webpack_require__(/*! vuex */ 8);function _objectSpread(target) {f
       uni.navigateTo({
         url: url });
 
+    },
+    // userInitData(){
+    // 	this.$http.post('/mall/app/account/info')
+    // 	.then( res => {
+    // 		console.log(res);
+    // 	})
+    // 	.catch( err => {
+    // 		console.log('user.vue-- info接口调用错误');
+    // 	})
+    // 	
+    // },
+    initPayNum: function initPayNum() {var _this = this;
+      this.$http.post('/mall/app/order/count', _objectSpread({},
+      this.baseInfo, {
+        accountId: this.userInfo.accountId,
+        orderState: 0 })).
+
+      then(function (res) {
+        if (res.code == 0) {
+          _this.toPayNum = res.result;
+        }
+      }).
+      catch(function (err) {
+        console.log(err);
+      });
+    },
+    initToReceivedNum: function initToReceivedNum() {var _this2 = this;
+      this.$http.post('/mall/app/order/count', _objectSpread({},
+      this.baseInfo, {
+        accountId: this.userInfo.accountId,
+        orderState: 2 })).
+
+      then(function (res) {
+        if (res.code == 0) {
+          _this2.toReceivedNum = res.result;
+        }
+      }).
+      catch(function (err) {
+        console.log(err);
+      });
     } },
-
-
-
-
-
-
-
-
-
-
 
   onLoad: function onLoad() {
     // this.userInitData();
+    this.initPayNum();
+    this.initToReceivedNum();
   } };exports.default = _default;
 /* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./node_modules/@dcloudio/uni-mp-weixin/dist/index.js */ 1)["default"]))
 

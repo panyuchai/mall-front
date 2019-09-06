@@ -105,88 +105,119 @@ __webpack_require__.r(__webpack_exports__);
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-/* WEBPACK VAR INJECTION */(function(uni) {Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0; //
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-var _default =
+/* WEBPACK VAR INJECTION */(function(uni) {Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+var _vuex = __webpack_require__(/*! vuex */ 10);function _objectSpread(target) {for (var i = 1; i < arguments.length; i++) {var source = arguments[i] != null ? arguments[i] : {};var ownKeys = Object.keys(source);if (typeof Object.getOwnPropertySymbols === 'function') {ownKeys = ownKeys.concat(Object.getOwnPropertySymbols(source).filter(function (sym) {return Object.getOwnPropertyDescriptor(source, sym).enumerable;}));}ownKeys.forEach(function (key) {_defineProperty(target, key, source[key]);});}return target;}function _defineProperty(obj, key, value) {if (key in obj) {Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true });} else {obj[key] = value;}return obj;}var _default =
+
+
+
 {
   data: function data() {
     return {
       source: 0,
-      addressList: [
-      {
-        name: '刘晓晓',
-        mobile: '18666666666',
-        address: '北京市东城区',
-        area: '泛海国际soho城8栋1904',
-        default: true },
-      {
-        name: '刘大大',
-        mobile: '18667766666',
-        address: '山东省济南市历城区山东省济南市历城区山东省济南市历城区山东省济南市历城区山东省济南市历城区山东省济南市历城区',
-        area: '泛海国际soho城8栋1904',
-        default: false }] };
+      addressList: [] };
 
-
-
-  },
-  onLoad: function onLoad(option) {
-    // console.log(option.source);
-    this.source = option.source;
   },
   methods: {
+    changeDefaultAddress: function changeDefaultAddress(addressId) {var _this = this;
+      this.$http.post('/mall/app/address/default', _objectSpread({},
+      this.baseInfo, {
+        accountId: this.userInfo.accountId,
+        addressId: addressId,
+        addressSelected: 1 })).
+
+      then(function (res) {
+        console.log(res);
+        if (res.code == 0) {
+          _this.initAddressData();
+        }
+      }).
+      catch(function (err) {
+        console.log(err);
+      });
+    },
     //选择地址
     checkAddress: function checkAddress(item, index) {
-      var prePage = function prePage() {
-        var pages = getCurrentPages();
-        var prePage = pages[pages.length - 2];
+      // const prePage = ()=>{
+      // 	let pages = getCurrentPages();
+      // 	let prePage = pages[pages.length - 2];
+      //
 
 
-
-        return prePage.$vm;
-      };
+      // 	return prePage.$vm;
+      // }
       if (this.source == 1) {
-        prePage().addressData = item;
-        this.addressList.map(function (v, i) {
-          v.default = false;
-        });
-        this.addressList[index].default = true;
+        // prePage().address = item;
+        // console.log(prePage().address)
+        uni.setStorageSync('chooseAddress', item);
+        // this.addressList.map((v, i) => {
+        // 	v.default=false;
+        // })
+        // this.addressList[index].default = true;
         uni.navigateBack();
       }
     },
     addAddress: function addAddress(type, item) {
       uni.navigateTo({
-        url: "/pages/addressManage/addressManage?type=".concat(type, "&data=").concat(JSON.stringify(item)) });
+        url: "/pages/addressManage/addressManage?type=".concat(type, "&data=").concat(item) });
 
     },
     //添加或修改成功之后回调
-    refreshList: function refreshList(data, type) {
-      //添加或修改后事件，这里直接在最前面添加了一条数据，实际应用中直接刷新地址列表即可
-      this.addressList.unshift(data);
+    // refreshList(data, type){
+    // 	//添加或修改后事件，这里直接在最前面添加了一条数据，实际应用中直接刷新地址列表即可
+    // 	this.addressList.unshift(data);
+    // 	
+    // 	console.log(data, type);
+    // },
+    initAddressData: function initAddressData() {var _this2 = this;
+      this.$http.post('/mall/app/address/list', _objectSpread({},
+      this.baseInfo, {
+        accountId: this.userInfo.accountId })).
 
-      console.log(data, type);
-    } } };exports.default = _default;
+      then(function (res) {
+        if (res.code == 0) {
+          _this2.addressList = res.result;
+        }
+      }).
+      catch(function (err) {
+        console.log(err);
+      });
+    } },
+
+  computed: _objectSpread({},
+  (0, _vuex.mapState)('common', ['baseInfo', 'userInfo'])),
+
+  onLoad: function onLoad(option) {
+    // console.log(option.source);
+    this.source = option.source;
+
+  },
+  onShow: function onShow() {
+    this.initAddressData();
+  } };exports.default = _default;
 /* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./node_modules/@dcloudio/uni-mp-weixin/dist/index.js */ 1)["default"]))
 
 /***/ }),

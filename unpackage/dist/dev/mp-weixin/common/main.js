@@ -91,14 +91,15 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 /* WEBPACK VAR INJECTION */(function(uni) {Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0;
-var _vuex = __webpack_require__(/*! vuex */ 8);
-var _api = __webpack_require__(/*! ./api/api.js */ 9);function _objectSpread(target) {for (var i = 1; i < arguments.length; i++) {var source = arguments[i] != null ? arguments[i] : {};var ownKeys = Object.keys(source);if (typeof Object.getOwnPropertySymbols === 'function') {ownKeys = ownKeys.concat(Object.getOwnPropertySymbols(source).filter(function (sym) {return Object.getOwnPropertyDescriptor(source, sym).enumerable;}));}ownKeys.forEach(function (key) {_defineProperty(target, key, source[key]);});}return target;}function _defineProperty(obj, key, value) {if (key in obj) {Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true });} else {obj[key] = value;}return obj;}var _default =
+var _store = __webpack_require__(/*! ./utils/store.js */ 8);
+var _vuex = __webpack_require__(/*! vuex */ 10);
+var _api = __webpack_require__(/*! ./api/api.js */ 11);function _objectSpread(target) {for (var i = 1; i < arguments.length; i++) {var source = arguments[i] != null ? arguments[i] : {};var ownKeys = Object.keys(source);if (typeof Object.getOwnPropertySymbols === 'function') {ownKeys = ownKeys.concat(Object.getOwnPropertySymbols(source).filter(function (sym) {return Object.getOwnPropertyDescriptor(source, sym).enumerable;}));}ownKeys.forEach(function (key) {_defineProperty(target, key, source[key]);});}return target;}function _defineProperty(obj, key, value) {if (key in obj) {Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true });} else {obj[key] = value;}return obj;}var _default =
 {
   computed: _objectSpread({},
-  (0, _vuex.mapState)("common", ['uniCode', 'mallDomain', 'baseInfo', 'hasLogin'])),
+  (0, _vuex.mapState)("common", ['uniCode', 'mallDomain', 'baseInfo', 'hasLogin', 'firstLoad'])),
 
   methods: _objectSpread({},
-  (0, _vuex.mapMutations)("common", ['SET_BASEINFO', 'SET_USERIFNO', 'SET_UNICODE', 'SET_MALLDOMAIN', 'SET_MALLTYPE', 'SET_MALLID']), {
+  (0, _vuex.mapMutations)("common", ['SET_BASEINFO', 'SET_USERIFNO', 'SET_UNICODE', 'SET_HASLOGIN', 'SET_TOKEN', 'SET_MALLTYPE', 'SET_MALLID']), {
     checkMallType: function checkMallType() {var _this = this;
       this.$http.post('/mall/app/login/mall/shopmall/type', {
         mallDomain: this.mallDomain }).
@@ -121,10 +122,38 @@ var _api = __webpack_require__(/*! ./api/api.js */ 9);function _objectSpread(tar
       catch(function (err) {
         console.log('login--mallTaye 接口调用出错');
       });
+    },
+    // defaultwxWebLogin(){
+    // 	alert("wxweb接口调用");
+    // 	this.$http.post('/mall/app/login/mall/wxweb', {
+    // 		mallDomain: this.mallDomain,
+    // 	})
+    // 	.then( res => {
+    // 		console.log(res);
+    // 	})
+    // 	.catch( err => {
+    // 		console.log('App.vue-- wxweb接口调用出错');
+    // 	})
+    // },
+    initData: function initData() {
+      if ((0, _store.getStore)({ name: 'hasLogin' })) {
+        this.SET_HASLOGIN((0, _store.getStore)({ name: 'hasLogin' }));
+      }
+      if ((0, _store.getStore)({ name: 'token' })) {
+        this.SET_TOKEN((0, _store.getStore)({ name: 'token' }));
+      }
+      if ((0, _store.getStore)({ name: 'uniCode' })) {
+        this.SET_UNICODE((0, _store.getStore)({ name: 'uniCode' }));
+      }
+      if ((0, _store.getStore)({ name: 'userInfo' })) {
+        this.SET_USERIFNO((0, _store.getStore)({ name: 'userInfo' }));
+      }
     } }),
 
   onLaunch: function onLaunch(options) {
     this.checkMallType();
+    // this.defaultwxWebLogin();
+    this.initData();
     console.log('App Launch');
     // console.log(options)
 
@@ -157,6 +186,7 @@ var _api = __webpack_require__(/*! ./api/api.js */ 9);function _objectSpread(tar
           scm: 'pc' }));
 
       } else if (bIsWeChat) {
+        console.log('wx h5端');
         othis.SET_BASEINFO(_objectSpread({},
         othis.baseInfo, {
           scm: 'h5' }));
@@ -184,15 +214,22 @@ var _api = __webpack_require__(/*! ./api/api.js */ 9);function _objectSpread(tar
     };
     // let othis = this;
     function defaultwxWebLogin() {
-      othis.$http.post('/app/login/mall/wxweb', {
-        mallDomain: othis.mallDomain }).
+      alert(111111);
+      if (document.referrer) {
+        uni.setStorageSync('referUrl', document.referrer);
+      }
+      alert(othis);
+      alert(2222);
+      var ddd = JSON.parse(othis.baseInfo);
+      alert(99999);
+      alert(ddd);
+      alert(3333);
+      window.location.href = 'http://192.168.1.135:8086/mall/app/login/mall/wxweb?mallDomain=yyy';
+      alert(4444);
+      // if(this.firstLoad){
+      // 	window.location.href='http://192.168.1.135:8086/mall/app/login/mall/wxweb?mallDomain=yyy';
+      // }
 
-      then(function (res) {
-        console.log(res);
-      }).
-      catch(function (err) {
-        console.log('App.vue-- wxweb接口调用出错');
-      });
     };
     function defaultWxLogin() {
       uni.checkSession({

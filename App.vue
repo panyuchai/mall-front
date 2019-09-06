@@ -94,6 +94,7 @@
 						scm: 'pc'
 					});
 				} else if(bIsWeChat) {
+					console.log('wx h5端');
 					othis.SET_BASEINFO({
 						...othis.baseInfo,
 						scm: 'h5'
@@ -127,7 +128,9 @@
 				}
 				alert(othis);
 				alert(2222)
-				alert(JSON.parse(othis.baseInfo));
+				let ddd = JSON.parse(othis.baseInfo)
+				alert(99999)
+				alert(ddd);
 				alert(3333)
 				window.location.href='http://192.168.1.135:8086/mall/app/login/mall/wxweb?mallDomain=yyy';
 				alert(4444)
