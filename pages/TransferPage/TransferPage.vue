@@ -37,7 +37,7 @@
 					}
 					alert('登陆成功')
 				}else{
-					alert(options.code);
+					alert(options.code + '55555555555555555555555');
 					uni.switchTab({
 					    url: '/pages/index/index'
 					});
