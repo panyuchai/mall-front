@@ -19,7 +19,7 @@
 		methods: {
 			...mapMutations('common', ['SET_HASLOGIN', 'SET_TOKEN', 'SET_FIRSTLOAD']),
 			handleTransfer(options){
-				this.SET_FIRSTLOAD(false);
+				// this.SET_FIRSTLOAD(false);
 				if(options.success == 'true'){
 					this.SET_HASLOGIN(true);
 					this.SET_TOKEN(res.result.token);
