@@ -9,7 +9,7 @@
 						<text class="name">{{address.addressRecipients}}</text>
 						<text class="mobile">{{address.addressPhone}}</text>
 					</view>
-					<view class="address">{{address.addressDetail}}</view>
+					<view class="address">{{address.addressSheng}}{{address.addressShi}}{{address.addressQu}}{{address.addressAddress}}</view>
 				</view>
 				<text class="iconfont icon-arrowRight icon-you"></text>
 			</view>
@@ -475,6 +475,9 @@
 							this.goodsList.push(item);
 						});
 						this.fee=res.result.express.fee;
+						if(uni.getStorageSync('chooseAddress')){
+							this.address=uni.getStorageSync('chooseAddress');
+						}
 					}else{
 						console.log('payment.vue-- confirm接口获取数据失败');
 					}
@@ -496,6 +499,9 @@
 		},
 		onShow(){
 			this.getOrderData();
+		},
+		onBackPress(){
+			uni.removeStorageSync('chooseAddress');
 		},
 		onLoad(option){
 			this.checkEnvironment();

@@ -25,7 +25,7 @@
 					</swiper-item>
 				</block>
 			</swiper>
-			<tui-tag type="translucent" shape="circleLeft" size="small">{{bannerIndex+1}}/{{banner.length}}</tui-tag>
+			<tui-tag type="translucent" shape="circleLeft" size="small">{{bannerIndex+1}}/{{banner && banner.length}}</tui-tag>
 		</view>
 
 		<!--banner-->
@@ -210,7 +210,7 @@
 				</view>
 				<view class="content-info">
 					<view class="content-item content-item-active" v-if="showCont">
-						<view class="tui-product-img">
+						<view class="tui-product-img" v-html="goodsInfo.details">
 							<!-- <image class="img" :src="img.url" v-for="(img,index) in goodsInfo.details" :key="index" mode="widthFix"></image> -->
 							{{goodsInfo.details}}
 						</view>
@@ -986,8 +986,9 @@
 					// display: block;
 				}
 				.tui-product-img{
-					.img{
+					/deep/ img{
 						vertical-align: top!important;
+						width: 100%!important;
 					}
 				}
 				.product-specs{

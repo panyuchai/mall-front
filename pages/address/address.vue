@@ -54,22 +54,23 @@
 			},
 			//选择地址
 			checkAddress(item, index){
-				const prePage = ()=>{
-					let pages = getCurrentPages();
-					let prePage = pages[pages.length - 2];
-					// #ifdef H5
-					return prePage;
-					// #endif
-					return prePage.$vm;
-				}
+				// const prePage = ()=>{
+				// 	let pages = getCurrentPages();
+				// 	let prePage = pages[pages.length - 2];
+				// 	// #ifdef H5
+				// 	return prePage;
+				// 	// #endif
+				// 	return prePage.$vm;
+				// }
 				if(this.source == 1){
-					prePage().address = item;
-					console.log(prePage().address)
+					// prePage().address = item;
+					// console.log(prePage().address)
+					uni.setStorageSync('chooseAddress', item);
 					// this.addressList.map((v, i) => {
 					// 	v.default=false;
 					// })
 					// this.addressList[index].default = true;
-					// uni.navigateBack();
+					uni.navigateBack();
 				}
 			},
 			addAddress(type, item){
