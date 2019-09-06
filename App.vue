@@ -122,7 +122,7 @@
 			};
 			// let othis = this;
 			function defaultwxWebLogin(){
-				alert(2222222)
+				alert('微信h5环境');
 				if (document.referrer) {
 				    uni.setStorageSync('referUrl', document.referrer);
 				}
@@ -134,8 +134,9 @@
 				// alert(4444)
 				// alert(JSON.parse(othis))
 				let reg = RegExp(/\/pages\/TransferPage\/TransferPage/ig);
+				alert('路径判断---------------'+reg);
 				if(!reg.test(options)){
-					alert(333333+othis.hasLogin)
+					alert('静默登陆开始跳转')
 					window.location.href='http://192.168.1.135:8086/mall/app/login/mall/wxweb?mallDomain=yyy';
 				}
 				// if(!othis.hasLogin){

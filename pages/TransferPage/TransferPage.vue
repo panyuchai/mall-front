@@ -19,9 +19,9 @@
 		methods: {
 			...mapMutations('common', ['SET_HASLOGIN', 'SET_TOKEN', 'SET_FIRSTLOAD']),
 			handleTransfer(options){
-				alert(555555555)
+				alert('TransferPage------方法开始调用')
 				if(options.success == 'true'){
-					alert(666666)
+					alert('静默登陆成功')
 					this.SET_HASLOGIN(true);
 					this.SET_TOKEN(options.token);
 					this.$http.setConfig((config) => {
@@ -37,7 +37,7 @@
 						// });
 					}
 				}else{
-					alert(7777777)
+					alert('静默登陆失败')
 					// uni.switchTab({
 					// 	url: '/pages/index/index'
 					// });
