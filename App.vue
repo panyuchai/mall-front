@@ -99,7 +99,6 @@
 						scm: 'h5'
 					});
 					if(!othis.hasLogin){
-						alert('11111')
 						defaultwxWebLogin();
 					}
 				}else {
@@ -122,9 +121,11 @@
 			};
 			// let othis = this;
 			function defaultwxWebLogin(){
+				alert(111111)
 				if (document.referrer) {
 				    uni.setStorageSync('referUrl', document.referrer);
 				}
+				alert(JSON.parse(othis));
 				alert(JSON.parse(othis.baseInfo));
 				window.location.href='http://192.168.1.135:8086/mall/app/login/mall/wxweb?mallDomain=yyy';
 				// if(this.firstLoad){
