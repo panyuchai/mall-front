@@ -72,64 +72,7 @@
 							<view class="action-btn action-red" v-if="item.state == 2"  @tap.stop="confirmOrder()">
 								确认收货
 							</view>
-							<!-- <view class="action" v-if="item.state == 1"> -->
-								<!-- <button type="primary" class="action-btn " v-if="item.state == 1">取消订单</button>
-								<button type="primary" class="action-btn action-red" v-if="item.state == 1">去付款</button>
-								<button type="primary" class="action-btn " v-if="item.state==2 || item.state==3 || item.state==4">查看物流详情</button>
-								<button type="primary" class="action-btn action-red" v-if="item.state == 2">确认收货</button> -->
-							<!-- </view> -->
-							<!-- <view class="action" v-if="item.state == 2">
-								<button class="action-btn ">查看物流详情</button>
-								<button class="action-btn action-red">确认收货</button>
-							</view>
-							<view class="action" v-if="item.state == 3">
-								<button class="action-btn ">查看物流详情</button>
-							</view>
-							<view class="action" v-if="item.state == 4">
-								<button class="action-btn ">查看物流详情</button>
-							</view> -->
 						</view>
-						<!-- <view class="i-top b-b">
-							<text class="time">{{item.time}}</text>
-							<text class="state" :style="{color: item.stateTipColor}">{{item.stateTip}}</text>
-							<text 
-								v-if="item.state===9" 
-								class="del-btn yticon icon-iconfontshanchu1"
-								@click="deleteOrder(index)"
-							></text>
-						</view> -->
-						
-						<!-- <scroll-view v-if="item.goodsList.length > 1" class="goods-box" scroll-x>
-							<view
-								v-for="(goodsItem, goodsIndex) in item.goodsList" :key="goodsIndex"
-								class="goods-item"
-							>
-								<image class="goods-img" :src="goodsItem.image" mode="aspectFill"></image>
-							</view>
-						</scroll-view> -->
-						<!-- <view 
-							v-if="item.goodsList.length === 1" 
-							class="goods-box-single"
-							v-for="(goodsItem, goodsIndex) in item.goodsList" :key="goodsIndex"
-						>
-							<image class="goods-img" :src="goodsItem.image" mode="aspectFill"></image>
-							<view class="right">
-								<text class="title clamp">{{goodsItem.title}}</text>
-								<text class="attr-box">{{goodsItem.attr}}  x {{goodsItem.number}}</text>
-								<text class="price">{{goodsItem.price}}</text>
-							</view>
-						</view> -->
-						
-						<!-- <view class="price-box">
-							共
-							<text class="num">7</text>
-							件商品 实付款
-							<text class="price">143.7</text>
-						</view> -->
-						<!-- <view class="action-box b-t" v-if="item.state != 9">
-							<button class="action-btn" @click="cancelOrder(item)">取消订单</button>
-							<button class="action-btn recom">立即支付</button>
-						</view> -->
 					</view>
 					 
 					<uni-load-more :status="tabItem.loadingType"></uni-load-more>
@@ -301,6 +244,7 @@
 		},
 		
 		onLoad(options){
+			console.log(options)
 			/**
 			 * 修复app端点击除全部订单外的按钮进入时不加载数据的问题
 			 * 替换onLoad下代码即可

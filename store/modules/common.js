@@ -11,6 +11,7 @@ const state = {
   // scm: '',
   // accountId:'',
   forcedLogin: false,
+  firstLoad: true,
   // hasLogin: getStore({ name: 'hasLogin' }) && getStore({ name: 'hasLogin' }).hasLogin || false,
   // token: getStore({ name: 'token' }) && getStore({ name: 'token' }).token || '',
   // uniCode: getStore({ name: 'uniCode' }) && getStore({ name: 'uniCode' }).uniCode || '',
@@ -40,6 +41,9 @@ const mutations = {
 	// 	removeStore({ name: 'userInfo' });
 	// 	removeStore({ name: 'hasLogin' });
 	// },
+	SET_FIRSTLOAD: (state, firstLoad) => {
+		state.firstLoad = firstLoad;
+	},
 	SET_HASLOGIN: (state, hasLogin) => {
 		state.hasLogin = hasLogin;
 		setStore({ name: 'hasLogin', content: state.hasLogin, type: 'sync' });

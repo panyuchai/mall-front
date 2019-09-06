@@ -4,7 +4,7 @@
 	import { test } from './api/api.js'
 	export default {
 		computed: {
-			...mapState("common", ['uniCode', 'mallDomain', 'baseInfo', 'hasLogin'])
+			...mapState("common", ['uniCode', 'mallDomain', 'baseInfo', 'hasLogin', 'firstLoad'])
 		},
 		methods: {
 			...mapMutations("common", ['SET_BASEINFO', 'SET_USERIFNO', 'SET_UNICODE', 'SET_HASLOGIN', 'SET_TOKEN', 'SET_MALLTYPE', 'SET_MALLID']),
@@ -124,8 +124,11 @@
 				if (document.referrer) {
 				    uni.setStorageSync('referUrl', document.referrer);
 				}
-				alert(othis.baseInfo.mallDomain);
-				window.location.href='http://192.168.1.135:8086/mall/app/login/mall/wxweb?mallDomain=yyy';
+				alert(othis);
+				alert(othis.baseInfo);
+				if(this.firstLoad){
+					window.location.href='http://192.168.1.135:8086/mall/app/login/mall/wxweb?mallDomain=yyy';
+				}
 				
 			};
 			function defaultWxLogin(){

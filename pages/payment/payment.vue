@@ -502,6 +502,7 @@
 		},
 		onBackPress(){
 			uni.removeStorageSync('chooseAddress');
+			// 支付结束后重删一次
 		},
 		onLoad(option){
 			this.checkEnvironment();
