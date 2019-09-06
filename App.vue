@@ -99,6 +99,7 @@
 						scm: 'h5'
 					});
 					if(!othis.hasLogin){
+						alert('11111')
 						defaultwxWebLogin();
 					}
 				}else {
