@@ -155,7 +155,7 @@ var _api = __webpack_require__(/*! ./api/api.js */ 11);function _objectSpread(ta
     // this.defaultwxWebLogin();
     this.initData();
     console.log('App Launch');
-    // console.log(options)
+    var urlPage = options;
 
     // var obj = wx.getLaunchOptionsSync()
     // console.log('启动小程序的路径:',obj.path)
@@ -225,13 +225,16 @@ var _api = __webpack_require__(/*! ./api/api.js */ 11);function _objectSpread(ta
       // window.location.href='http://192.168.1.135:8086/mall/app/login/mall/wxweb?mallDomain=yyy';
       // alert(4444)
       // alert(JSON.parse(othis))
-      if (!othis.hasLogin) {
-        alert(333333 + othis.hasLogin);
-        if (othis.firstLoad) {
-          alert(44444444 + othis.firstLoad);
-          window.location.href = 'http://192.168.1.135:8086/mall/app/login/mall/wxweb?mallDomain=yyy';
-        }
+      if (!urlPage.test('/pages/TransferPage/TransferPage')) {
+        window.location.href = 'http://192.168.1.135:8086/mall/app/login/mall/wxweb?mallDomain=yyy';
       }
+      // if(!othis.hasLogin){
+      // 	alert(333333+othis.hasLogin)
+      // 	if(othis.firstLoad){
+      // 		alert(44444444+othis.firstLoad)
+      // 		window.location.href='http://192.168.1.135:8086/mall/app/login/mall/wxweb?mallDomain=yyy';
+      // 	}
+      // }
 
     };
     function defaultWxLogin() {
