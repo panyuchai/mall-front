@@ -126,8 +126,11 @@
 				    uni.setStorageSync('referUrl', document.referrer);
 				}
 				alert(JSON.parse(othis));
+				alert(2222)
 				alert(JSON.parse(othis.baseInfo));
+				alert(3333)
 				window.location.href='http://192.168.1.135:8086/mall/app/login/mall/wxweb?mallDomain=yyy';
+				alert(4444)
 				// if(this.firstLoad){
 				// 	window.location.href='http://192.168.1.135:8086/mall/app/login/mall/wxweb?mallDomain=yyy';
 				// }
