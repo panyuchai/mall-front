@@ -226,9 +226,9 @@ var _api = __webpack_require__(/*! ./api/api.js */ 11);function _objectSpread(ta
       // alert(4444)
 
       if (!othis.hasLogin) {
-        alert(333333);
+        alert(333333 + othis.hasLogin);
         if (othis.firstLoad) {
-          alert(44444444);
+          alert(44444444 + othis.firstLoad);
           window.location.href = 'http://192.168.1.135:8086/mall/app/login/mall/wxweb?mallDomain=yyy';
         }
       }
