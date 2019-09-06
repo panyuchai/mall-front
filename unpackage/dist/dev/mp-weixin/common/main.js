@@ -213,7 +213,7 @@ var _api = __webpack_require__(/*! ./api/api.js */ 11);function _objectSpread(ta
       }
     };
     // let othis = this;
-    alert('环境------------' + options);
+    alert('环境------------' + options.path);
     function defaultwxWebLogin() {
       alert('微信h5环境');
       if (document.referrer) {
@@ -226,10 +226,10 @@ var _api = __webpack_require__(/*! ./api/api.js */ 11);function _objectSpread(ta
       // window.location.href='http://192.168.1.135:8086/mall/app/login/mall/wxweb?mallDomain=yyy';
       // alert(4444)
       // alert(JSON.parse(othis))
-      alert('微信h5环境------------' + options);
+      alert('微信h5环境------------' + options.path);
       var reg = RegExp(/\/pages\/TransferPage\/TransferPage/ig);
-      alert('路径判断---------------' + reg.test(options));
-      if (!reg.test(options)) {
+      alert('路径判断---------------' + reg.test(options.path));
+      if (!reg.test(options.path)) {
         alert('静默登陆开始跳转');
         window.location.href = 'http://192.168.1.135:8086/mall/app/login/mall/wxweb?mallDomain=yyy';
       }
@@ -298,8 +298,9 @@ var _api = __webpack_require__(/*! ./api/api.js */ 11);function _objectSpread(ta
     }
 
   },
-  onShow: function onShow() {
+  onShow: function onShow(options) {
     console.log('App Show');
+    alert(options);
   },
   onHide: function onHide() {
     console.log('App Hide');
