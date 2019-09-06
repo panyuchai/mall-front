@@ -97,7 +97,7 @@
 				if(!this.hasLogin){
 					if(urlPath){
 						alert('静默登陆开始跳转')
-						window.location.href='http://192.168.1.135:8086/mall/app/login/mall/wxweb?mallDomain='+ this.baseInfo.mallDomain;
+						window.location.href='http://192.168.1.135:8086/mall/app/login/mall/wxweb?mallDomain=yyyy';
 					}
 				}
 				

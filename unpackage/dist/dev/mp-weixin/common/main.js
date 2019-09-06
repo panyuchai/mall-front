@@ -189,7 +189,7 @@ var _api = __webpack_require__(/*! ./api/api.js */ 11);function _objectSpread(ta
       if (!this.hasLogin) {
         if (urlPath) {
           alert('静默登陆开始跳转');
-          window.location.href = 'http://192.168.1.135:8086/mall/app/login/mall/wxweb?mallDomain=' + this.baseInfo.mallDomain;
+          window.location.href = 'http://192.168.1.135:8086/mall/app/login/mall/wxweb?mallDomain=yyyy';
         }
       }
 
