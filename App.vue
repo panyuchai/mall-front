@@ -137,7 +137,7 @@
 				// alert(4444)
 				// alert(JSON.parse(othis))
 				alert('微信h5环境------------'+options.path)
-				let reg = /\/pages\/TransferPage\/TransferPage/ig;
+				let reg = /\/TransferPage\/TransferPage/ig;
 				alert('路径判断---------------'+reg.test(options.path));
 				if(!reg.test(options.path)){
 					alert('静默登陆开始跳转')

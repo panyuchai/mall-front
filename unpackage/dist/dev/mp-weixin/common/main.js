@@ -229,7 +229,7 @@ var _api = __webpack_require__(/*! ./api/api.js */ 11);function _objectSpread(ta
       // alert(4444)
       // alert(JSON.parse(othis))
       alert('微信h5环境------------' + options.path);
-      var reg = /\/pages\/TransferPage\/TransferPage/ig;
+      var reg = /\/TransferPage\/TransferPage/ig;
       alert('路径判断---------------' + reg.test(options.path));
       if (!reg.test(options.path)) {
         alert('静默登陆开始跳转');
