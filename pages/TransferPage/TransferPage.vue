@@ -18,35 +18,42 @@
 		},
 		methods: {
 			...mapMutations('common', ['SET_HASLOGIN', 'SET_TOKEN', 'SET_FIRSTLOAD']),
-			handleTransfer(options){
-				// this.SET_FIRSTLOAD(false);
-				if(options.success == 'true'){
-					this.SET_HASLOGIN(true);
-					this.SET_TOKEN(res.result.token);
-					this.$http.setConfig((config) => {
-						config.header['Authorization'] = 'Bearer ' + getStore({ name: 'token' });
-						return config;
-					});
-					if(uni.getStorageSync('referUrl')){
-						// window.location.href=uni.getStorageSync('referUrl');
-						// uni.removeStorageSync('referUrl');
+			handleTransfer(){
+				this.$http.post('/mall/app/login/mall/wxweb', this.baseInfo)
+				.then( res => {
+					if(res.success == 'true'){
+						this.SET_HASLOGIN(true);
+						this.SET_TOKEN(res.result.token);
+						this.$http.setConfig((config) => {
+							config.header['Authorization'] = 'Bearer ' + getStore({ name: 'token' });
+							return config;
+						});
+						if(uni.getStorageSync('referUrl')){
+							window.location.href=uni.getStorageSync('referUrl');
+							uni.removeStorageSync('referUrl');
+						}else{
+							uni.switchTab({
+								url: '/pages/index/index'
+							});
+						}
 					}else{
-						// uni.switchTab({
-						//     url: '/pages/index/index'
-						// });
+						uni.switchTab({
+							url: '/pages/index/index'
+						});
 					}
-					alert('登陆成功')
-				}else{
-					alert(options.code + '55555555555555555555555');
-					uni.switchTab({
-					    url: '/pages/index/index'
-					});
-				}
+				})
+				.catch( err => {
+					console.log(err);
+				});
+				this.SET_FIRSTLOAD(false);
 				
 			}
 		},
-		onLoad(options){
-			this.handleTransfer(options);
+		computed: {
+			...mapState('common', 'baseInfo')
+		},
+		onLoad(){
+			this.handleTransfer();
 		}
 	}
 </script>
