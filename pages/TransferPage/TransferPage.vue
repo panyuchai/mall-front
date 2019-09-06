@@ -18,42 +18,35 @@
 		},
 		methods: {
 			...mapMutations('common', ['SET_HASLOGIN', 'SET_TOKEN', 'SET_FIRSTLOAD']),
-			handleTransfer(){
-				alert('wxweb');
-				this.$http.post('/mall/app/login/mall/wxweb', this.baseInfo)
-				.then( res => {
-					if(res.success == 'true'){
-						this.SET_HASLOGIN(true);
-						this.SET_TOKEN(res.result.token);
-						this.$http.setConfig((config) => {
-							config.header['Authorization'] = 'Bearer ' + getStore({ name: 'token' });
-							return config;
-						});
-						if(uni.getStorageSync('referUrl')){
-							window.location.href=uni.getStorageSync('referUrl');
-							uni.removeStorageSync('referUrl');
-						}else{
-							uni.switchTab({
-								url: '/pages/index/index'
-							});
-						}
+			handleTransfer(options){
+				if(options.success == 'true'){
+					this.SET_HASLOGIN(true);
+					this.SET_TOKEN(options.token);
+					this.$http.setConfig((config) => {
+						config.header['Authorization'] = 'Bearer ' + getStore({ name: 'token' });
+						return config;
+					});
+					if(uni.getStorageSync('referUrl')){
+						window.location.href=uni.getStorageSync('referUrl');
+						uni.removeStorageSync('referUrl');
 					}else{
 						uni.switchTab({
 							url: '/pages/index/index'
 						});
 					}
-				})
-				.catch( err => {
-					console.log(err);
-				});
+				}else{
+					uni.switchTab({
+						url: '/pages/index/index'
+					});
+				}
 				this.SET_FIRSTLOAD(false);
 			}
 		},
 		computed: {
 			...mapState('common', 'baseInfo')
 		},
-		onLoad(){
-			this.handleTransfer();
+		onLoad(options){
+			this.handleTransfer(options);
 		}
 	}
 </script>

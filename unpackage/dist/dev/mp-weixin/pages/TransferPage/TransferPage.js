@@ -123,42 +123,35 @@ var _store = __webpack_require__(/*! ../../utils/store.js */ 8);function _object
   },
   methods: _objectSpread({},
   (0, _vuex.mapMutations)('common', ['SET_HASLOGIN', 'SET_TOKEN', 'SET_FIRSTLOAD']), {
-    handleTransfer: function handleTransfer() {var _this = this;
-      alert('wxweb');
-      this.$http.post('/mall/app/login/mall/wxweb', this.baseInfo).
-      then(function (res) {
-        if (res.success == 'true') {
-          _this.SET_HASLOGIN(true);
-          _this.SET_TOKEN(res.result.token);
-          _this.$http.setConfig(function (config) {
-            config.header['Authorization'] = 'Bearer ' + (0, _store.getStore)({ name: 'token' });
-            return config;
-          });
-          if (uni.getStorageSync('referUrl')) {
-            window.location.href = uni.getStorageSync('referUrl');
-            uni.removeStorageSync('referUrl');
-          } else {
-            uni.switchTab({
-              url: '/pages/index/index' });
-
-          }
+    handleTransfer: function handleTransfer(options) {
+      if (options.success == 'true') {
+        this.SET_HASLOGIN(true);
+        this.SET_TOKEN(options.token);
+        this.$http.setConfig(function (config) {
+          config.header['Authorization'] = 'Bearer ' + (0, _store.getStore)({ name: 'token' });
+          return config;
+        });
+        if (uni.getStorageSync('referUrl')) {
+          window.location.href = uni.getStorageSync('referUrl');
+          uni.removeStorageSync('referUrl');
         } else {
           uni.switchTab({
             url: '/pages/index/index' });
 
         }
-      }).
-      catch(function (err) {
-        console.log(err);
-      });
+      } else {
+        uni.switchTab({
+          url: '/pages/index/index' });
+
+      }
       this.SET_FIRSTLOAD(false);
     } }),
 
   computed: _objectSpread({},
   (0, _vuex.mapState)('common', 'baseInfo')),
 
-  onLoad: function onLoad() {
-    this.handleTransfer();
+  onLoad: function onLoad(options) {
+    this.handleTransfer(options);
   } };exports.default = _default;
 /* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./node_modules/@dcloudio/uni-mp-weixin/dist/index.js */ 1)["default"]))
 
