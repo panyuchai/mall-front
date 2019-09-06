@@ -92,28 +92,14 @@
 				if (document.referrer) {
 				    uni.setStorageSync('referUrl', document.referrer);
 				}
-				// alert(othis);
-				// alert(2222)
-				// alert(JSON.stringify(othis.baseInfo));
-				// alert(3333)
-				// window.location.href='http://192.168.1.135:8086/mall/app/login/mall/wxweb?mallDomain=yyy';
-				// alert(4444)
-				// alert(JSON.parse(othis))
-				alert('微信h5环境------------'+options.path)
 				let reg = /\/TransferPage\/TransferPage/ig;
-				let aaa = !(reg.test(options.path));
-				alert('路径判断---------------'+aaa);
-				if(aaa){
-					alert('静默登陆开始跳转')
-					window.location.href='http://192.168.1.135:8086/mall/app/login/mall/wxweb?mallDomain=yyy';
+				let urlPath = !(reg.test(options.path));
+				if(!this.hasLogin){
+					if(urlPath){
+						alert('静默登陆开始跳转')
+						window.location.href='http://192.168.1.135:8086/mall/app/login/mall/wxweb?mallDomain='+ this.baseInfo.mallDomain;
+					}
 				}
-				// if(!othis.hasLogin){
-				// 	alert(333333+othis.hasLogin)
-				// 	if(othis.firstLoad){
-				// 		alert(44444444+othis.firstLoad)
-				// 		window.location.href='http://192.168.1.135:8086/mall/app/login/mall/wxweb?mallDomain=yyy';
-				// 	}
-				// }
 				
 			},
 			defaultWxLogin(){
@@ -189,8 +175,6 @@
 			
 			// console.log(navigator.userAgent.toLowerCase())
 			
-			let othis = this;
-
 			if(navigator && navigator.userAgent){
 				alert('navigator');
 				// 非小程序环境
@@ -206,9 +190,10 @@
 					this.defaultWxLogin();
 				}
 			};
-			// let othis = this;
+			
 			alert('环境------------'+options.path);
 			
+			// let othis = this;
 			// function browserRedirect() {
 			// 	var sUserAgent = navigator.userAgent.toLowerCase();
 			// 	var bIsIpad = sUserAgent.match(/ipad/i) == "ipad";

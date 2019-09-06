@@ -32,15 +32,15 @@
 						window.location.href=uni.getStorageSync('referUrl');
 						uni.removeStorageSync('referUrl');
 					}else{
-						// uni.switchTab({
-						// 	url: '/pages/index/index?'
-						// });
+						uni.switchTab({
+							url: '/pages/index/index?'
+						});
 					}
 				}else{
 					alert('静默登陆失败')
-					// uni.switchTab({
-					// 	url: '/pages/index/index'
-					// });
+					uni.switchTab({
+						url: '/pages/index/index'
+					});
 				}
 				this.SET_FIRSTLOAD(false);
 			}

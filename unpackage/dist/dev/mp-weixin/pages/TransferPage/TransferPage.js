@@ -137,15 +137,15 @@ var _store = __webpack_require__(/*! ../../utils/store.js */ 8);function _object
           window.location.href = uni.getStorageSync('referUrl');
           uni.removeStorageSync('referUrl');
         } else {
-          // uni.switchTab({
-          // 	url: '/pages/index/index?'
-          // });
+          uni.switchTab({
+            url: '/pages/index/index?' });
+
         }
       } else {
         alert('静默登陆失败');
-        // uni.switchTab({
-        // 	url: '/pages/index/index'
-        // });
+        uni.switchTab({
+          url: '/pages/index/index' });
+
       }
       this.SET_FIRSTLOAD(false);
     } }),
