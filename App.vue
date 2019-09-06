@@ -76,6 +76,24 @@
 			// console.log(navigator.userAgent.toLowerCase())
 			
 			let othis = this;
+
+			if(navigator && navigator.userAgent){
+				// 非小程序环境
+				browserRedirect();
+			}else{
+				// 小程序环境
+				// console.log(this)
+				this.SET_BASEINFO({
+					...this.baseInfo,
+					scm: 'wechat'
+				});
+				if(!this.hasLogin){
+					defaultWxLogin();
+				}
+			};
+			// let othis = this;
+			alert('环境------------'+options.path);
+			
 			function browserRedirect() {
 				var sUserAgent = navigator.userAgent.toLowerCase();
 				var bIsIpad = sUserAgent.match(/ipad/i) == "ipad";
@@ -106,22 +124,6 @@
 					console.log("App.vue--非h5环境");
 				}
 			}
-			if(navigator && navigator.userAgent){
-				// 非小程序环境
-				browserRedirect();
-			}else{
-				// 小程序环境
-				// console.log(this)
-				this.SET_BASEINFO({
-					...this.baseInfo,
-					scm: 'wechat'
-				});
-				if(!this.hasLogin){
-					defaultWxLogin();
-				}
-			};
-			// let othis = this;
-			alert('环境------------'+options.path);
 			function defaultwxWebLogin(){
 				alert('微信h5环境');
 				if (document.referrer) {
@@ -135,7 +137,7 @@
 				// alert(4444)
 				// alert(JSON.parse(othis))
 				alert('微信h5环境------------'+options.path)
-				let reg = RegExp(/\/pages\/TransferPage\/TransferPage/ig);
+				let reg = /\/pages\/TransferPage\/TransferPage/ig;
 				alert('路径判断---------------'+reg.test(options.path));
 				if(!reg.test(options.path)){
 					alert('静默登陆开始跳转')
@@ -208,7 +210,7 @@
 		},
 		onShow: function(options) {
 			console.log('App Show');
-			alert(options)
+			// alert(options)
 		},
 		onHide: function() {
 			console.log('App Hide');
