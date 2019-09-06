@@ -63,7 +63,7 @@
 			// this.defaultwxWebLogin();
 			this.initData();
 			console.log('App Launch');
-			let urlPage = options
+			// let urlPage = options
 			
 			// var obj = wx.getLaunchOptionsSync()
 			// console.log('启动小程序的路径:',obj.path)
@@ -121,6 +121,7 @@
 				}
 			};
 			// let othis = this;
+			alert('环境------------'+options)
 			function defaultwxWebLogin(){
 				alert('微信h5环境');
 				if (document.referrer) {
@@ -133,6 +134,7 @@
 				// window.location.href='http://192.168.1.135:8086/mall/app/login/mall/wxweb?mallDomain=yyy';
 				// alert(4444)
 				// alert(JSON.parse(othis))
+				alert('微信h5环境------------'+options)
 				let reg = RegExp(/\/pages\/TransferPage\/TransferPage/ig);
 				alert('路径判断---------------'+reg.test(options));
 				if(!reg.test(options)){
