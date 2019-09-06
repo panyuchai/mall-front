@@ -19,9 +19,11 @@
 		methods: {
 			...mapMutations('common', ['SET_HASLOGIN', 'SET_TOKEN', 'SET_FIRSTLOAD']),
 			handleTransfer(){
+				alert('wxweb');
 				this.$http.post('/mall/app/login/mall/wxweb', this.baseInfo)
 				.then( res => {
 					if(res.success == 'true'){
+						alert('wxweb 成功');
 						this.SET_HASLOGIN(true);
 						this.SET_TOKEN(res.result.token);
 						this.$http.setConfig((config) => {
@@ -37,6 +39,7 @@
 							});
 						}
 					}else{
+						alert('wxweb 失败');
 						uni.switchTab({
 							url: '/pages/index/index'
 						});

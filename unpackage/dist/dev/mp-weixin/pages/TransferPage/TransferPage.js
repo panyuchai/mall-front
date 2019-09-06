@@ -124,9 +124,11 @@ var _store = __webpack_require__(/*! ../../utils/store.js */ 8);function _object
   methods: _objectSpread({},
   (0, _vuex.mapMutations)('common', ['SET_HASLOGIN', 'SET_TOKEN', 'SET_FIRSTLOAD']), {
     handleTransfer: function handleTransfer() {var _this = this;
+      alert('wxweb');
       this.$http.post('/mall/app/login/mall/wxweb', this.baseInfo).
       then(function (res) {
         if (res.success == 'true') {
+          alert('wxweb 成功');
           _this.SET_HASLOGIN(true);
           _this.SET_TOKEN(res.result.token);
           _this.$http.setConfig(function (config) {
@@ -142,6 +144,7 @@ var _store = __webpack_require__(/*! ../../utils/store.js */ 8);function _object
 
           }
         } else {
+          alert('wxweb 失败');
           uni.switchTab({
             url: '/pages/index/index' });
 
