@@ -132,8 +132,7 @@
 				// alert(3333)
 				// window.location.href='http://192.168.1.135:8086/mall/app/login/mall/wxweb?mallDomain=yyy';
 				// alert(4444)
-				alert(this)
-				alert(othis)
+				alert(JSON.parse(othis))
 				if(!othis.hasLogin){
 					alert(333333+othis.hasLogin)
 					if(othis.firstLoad){

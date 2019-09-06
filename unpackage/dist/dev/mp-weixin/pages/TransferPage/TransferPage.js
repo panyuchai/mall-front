@@ -126,6 +126,7 @@ var _store = __webpack_require__(/*! ../../utils/store.js */ 8);function _object
     handleTransfer: function handleTransfer(options) {
       alert(555555555);
       if (options.success == 'true') {
+        alert(666666);
         this.SET_HASLOGIN(true);
         this.SET_TOKEN(options.token);
         this.$http.setConfig(function (config) {
@@ -136,14 +137,15 @@ var _store = __webpack_require__(/*! ../../utils/store.js */ 8);function _object
           window.location.href = uni.getStorageSync('referUrl');
           uni.removeStorageSync('referUrl');
         } else {
-          uni.switchTab({
-            url: '/pages/index/index' });
-
+          // uni.switchTab({
+          // 	url: '/pages/index/index?'
+          // });
         }
       } else {
-        uni.switchTab({
-          url: '/pages/index/index' });
-
+        alert(7777777);
+        // uni.switchTab({
+        // 	url: '/pages/index/index'
+        // });
       }
       this.SET_FIRSTLOAD(false);
     } }),

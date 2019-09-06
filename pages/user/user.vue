@@ -38,7 +38,7 @@
 			
 			<!-- 订单 -->
 			<view class="order-section">
-				<view class="order-item" @tap="navTo('/pages/order/order?state=0')" hover-class="common-hover"  :hover-stay-time="50">
+				<view class="order-item" @tap="navTo('/pages/order/order?state=')" hover-class="common-hover"  :hover-stay-time="50">
 					<view class="icon">
 						<text class="iconfont icon-icon iconfont-all"></text>
 					</view>

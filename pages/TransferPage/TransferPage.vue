@@ -21,6 +21,7 @@
 			handleTransfer(options){
 				alert(555555555)
 				if(options.success == 'true'){
+					alert(666666)
 					this.SET_HASLOGIN(true);
 					this.SET_TOKEN(options.token);
 					this.$http.setConfig((config) => {
@@ -31,14 +32,15 @@
 						window.location.href=uni.getStorageSync('referUrl');
 						uni.removeStorageSync('referUrl');
 					}else{
-						uni.switchTab({
-							url: '/pages/index/index'
-						});
+						// uni.switchTab({
+						// 	url: '/pages/index/index?'
+						// });
 					}
 				}else{
-					uni.switchTab({
-						url: '/pages/index/index'
-					});
+					alert(7777777)
+					// uni.switchTab({
+					// 	url: '/pages/index/index'
+					// });
 				}
 				this.SET_FIRSTLOAD(false);
 			}
