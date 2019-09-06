@@ -122,7 +122,7 @@
 			};
 			// let othis = this;
 			function defaultwxWebLogin(){
-				alert(111111)
+				alert(2222222)
 				if (document.referrer) {
 				    uni.setStorageSync('referUrl', document.referrer);
 				}
@@ -130,11 +130,11 @@
 				// alert(2222)
 				// alert(JSON.stringify(othis.baseInfo));
 				// alert(3333)
-				window.location.href='http://192.168.1.135:8086/mall/app/login/mall/wxweb?mallDomain=yyy';
+				// window.location.href='http://192.168.1.135:8086/mall/app/login/mall/wxweb?mallDomain=yyy';
 				// alert(4444)
-				// if(this.firstLoad){
-				// 	window.location.href='http://192.168.1.135:8086/mall/app/login/mall/wxweb?mallDomain=yyy';
-				// }
+				if(this.firstLoad){
+					window.location.href='http://192.168.1.135:8086/mall/app/login/mall/wxweb?mallDomain=yyy';
+				}
 				
 			};
 			function defaultWxLogin(){
