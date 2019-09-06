@@ -56,46 +56,8 @@
 				if(getStore({ name: 'userInfo' })){
 					this.SET_USERIFNO(getStore({ name: 'userInfo' }));
 				}
-			}
-		},
-		onLaunch: function(options) {
-			this.checkMallType();
-			// this.defaultwxWebLogin();
-			this.initData();
-			console.log('App Launch');
-			// let urlPage = options
-			
-			// var obj = wx.getLaunchOptionsSync()
-			// console.log('启动小程序的路径:',obj.path)
-			// console.log('启动小程序的场景值:', obj.scene)
-			// console.log('启动小程序的 query 参数:', obj.query)
-			// console.log('来源信息:', obj.shareTicket)
-			// console.log('来源信息参数appId:', obj.referrerInfo.appId)
-			// console.log('来源信息传过来的数据:', obj.referrerInfo.extraData)
-			
-			// console.log(navigator.userAgent.toLowerCase())
-			
-			let othis = this;
-
-			if(navigator && navigator.userAgent){
-				alert('navigator')
-				// 非小程序环境
-				browserRedirect();
-			}else{
-				// 小程序环境
-				// console.log(this)
-				this.SET_BASEINFO({
-					...this.baseInfo,
-					scm: 'wechat'
-				});
-				if(!this.hasLogin){
-					defaultWxLogin();
-				}
-			};
-			// let othis = this;
-			alert('环境------------'+options.path);
-			
-			function browserRedirect() {
+			},
+			browserRedirect(options) {
 				var sUserAgent = navigator.userAgent.toLowerCase();
 				var bIsIpad = sUserAgent.match(/ipad/i) == "ipad";
 				var bIsIphoneOs = sUserAgent.match(/iphone os/i) == "iphone os";
@@ -108,24 +70,24 @@
 				var bIsWeChat = sUserAgent.match(/MicroMessenger/i) == "micromessenger";//微信端
 				if (bIsIpad || bIsIphoneOs || bIsMidp || bIsUc7 || bIsUc || bIsAndroid || bIsCE || bIsWM) {
 					console.log('h5端');
-					othis.SET_BASEINFO({
+					this.SET_BASEINFO({
 						...othis.baseInfo,
 						scm: 'pc'
 					});
 				} else if(bIsWeChat) {
 					console.log('wx h5端');
-					othis.SET_BASEINFO({
-						...othis.baseInfo,
+					this.SET_BASEINFO({
+						...this.baseInfo,
 						scm: 'h5'
 					});
-					if(!othis.hasLogin){
-						defaultwxWebLogin();
+					if(!this.hasLogin){
+						this.defaultwxWebLogin(options);
 					}
 				}else {
 					console.log("App.vue--非h5环境");
 				}
-			}
-			function defaultwxWebLogin(){
+			},
+			defaultwxWebLogin(options){
 				alert('微信h5环境');
 				if (document.referrer) {
 				    uni.setStorageSync('referUrl', document.referrer);
@@ -152,12 +114,12 @@
 				// 	}
 				// }
 				
-			};
-			function defaultWxLogin(){
+			},
+			defaultWxLogin(){
 				uni.checkSession({
 					success: (res) => {
 					  console.log('App.vue--uni.login登陆状态');
-					  wxLogin(othis.uniCode);
+					  this.wxLogin(this.uniCode);
 					},
 					fail: (err) => {
 						console.log('App.vue--uni.login登陆已失效');
@@ -165,9 +127,9 @@
 						  provider: 'weixin',
 						  success: (res) => {
 							  // console.log(res);
-							  othis.SET_UNICODE(res.code);
+							  this.SET_UNICODE(res.code);
 						    if(res.code){
-								wxLogin(res.code);
+								this.wxLogin(res.code);
 							}else{
 								console.log("App.vue--获取code失败")
 							}
@@ -175,38 +137,189 @@
 						});
 					}
 				});
-				function wxLogin(code){
-					test.post('/mall/app/login/mall/wxapp', {
-						mallDomain: othis.mallDomain,
-						jsCode: code
-					})
-					.then( res => {
-						if(res.statusCode == 200){
-							uni.removeStorageSync('sessionid');
-							uni.setStorageSync('sessionid', res.header['Set-Cookie']);
-							othis.$http.setConfig((config) => {
-								config.header['cookie'] = uni.getStorageSync('sessionid') || '';
-								return config;
-							});
-							if(res.data.code == 0){
-								if(res.data.result.isSuccess){
-									console.log('App.vue--wxapp 登陆成功');
-								}else{
-									console.log("App.vue--wxapp 登陆失败");
-								}
+				
+				
+			},
+			wxLogin(code){
+				test.post('/mall/app/login/mall/wxapp', {
+					mallDomain: this.mallDomain,
+					jsCode: code
+				})
+				.then( res => {
+					if(res.statusCode == 200){
+						uni.removeStorageSync('sessionid');
+						uni.setStorageSync('sessionid', res.header['Set-Cookie']);
+						this.$http.setConfig((config) => {
+							config.header['cookie'] = uni.getStorageSync('sessionid') || '';
+							return config;
+						});
+						if(res.data.code == 0){
+							if(res.data.result.isSuccess){
+								console.log('App.vue--wxapp 登陆成功');
 							}else{
-								console.log('App.vue--wxapp 接口返回data出错');
+								console.log("App.vue--wxapp 登陆失败");
 							}
 						}else{
-							console.log('App.vue--wxapp 接口调用失败');
+							console.log('App.vue--wxapp 接口返回data出错');
 						}
-					})
-					.catch( err => {
-						console.log('App.vue--wxapp 接口调用出错' + err);
-					})
-				};
-				
+					}else{
+						console.log('App.vue--wxapp 接口调用失败');
+					}
+				})
+				.catch( err => {
+					console.log('App.vue--wxapp 接口调用出错' + err);
+				})
 			}
+		},
+		onLaunch: function(options) {
+			this.checkMallType();
+			// this.defaultwxWebLogin();
+			this.initData();
+			console.log('App Launch');
+			// let urlPage = options
+			
+			// var obj = wx.getLaunchOptionsSync()
+			// console.log('启动小程序的路径:',obj.path)
+			// console.log('启动小程序的场景值:', obj.scene)
+			// console.log('启动小程序的 query 参数:', obj.query)
+			// console.log('来源信息:', obj.shareTicket)
+			// console.log('来源信息参数appId:', obj.referrerInfo.appId)
+			// console.log('来源信息传过来的数据:', obj.referrerInfo.extraData)
+			
+			// console.log(navigator.userAgent.toLowerCase())
+			
+			let othis = this;
+
+			if(navigator && navigator.userAgent){
+				alert('navigator');
+				// 非小程序环境
+				this.browserRedirect(options);
+			}else{
+				// 小程序环境
+				// console.log(this)
+				this.SET_BASEINFO({
+					...this.baseInfo,
+					scm: 'wechat'
+				});
+				if(!this.hasLogin){
+					this.defaultWxLogin();
+				}
+			};
+			// let othis = this;
+			alert('环境------------'+options.path);
+			
+			// function browserRedirect() {
+			// 	var sUserAgent = navigator.userAgent.toLowerCase();
+			// 	var bIsIpad = sUserAgent.match(/ipad/i) == "ipad";
+			// 	var bIsIphoneOs = sUserAgent.match(/iphone os/i) == "iphone os";
+			// 	var bIsMidp = sUserAgent.match(/midp/i) == "midp";
+			// 	var bIsUc7 = sUserAgent.match(/rv:1.2.3.4/i) == "rv:1.2.3.4";
+			// 	var bIsUc = sUserAgent.match(/ucweb/i) == "ucweb";
+			// 	var bIsAndroid = sUserAgent.match(/android/i) == "android";
+			// 	var bIsCE = sUserAgent.match(/windows ce/i) == "windows ce";
+			// 	var bIsWM = sUserAgent.match(/windows mobile/i) == "windows mobile";
+			// 	var bIsWeChat = sUserAgent.match(/MicroMessenger/i) == "micromessenger";//微信端
+			// 	if (bIsIpad || bIsIphoneOs || bIsMidp || bIsUc7 || bIsUc || bIsAndroid || bIsCE || bIsWM) {
+			// 		console.log('h5端');
+			// 		othis.SET_BASEINFO({
+			// 			...othis.baseInfo,
+			// 			scm: 'pc'
+			// 		});
+			// 	} else if(bIsWeChat) {
+			// 		console.log('wx h5端');
+			// 		othis.SET_BASEINFO({
+			// 			...othis.baseInfo,
+			// 			scm: 'h5'
+			// 		});
+			// 		if(!othis.hasLogin){
+			// 			defaultwxWebLogin();
+			// 		}
+			// 	}else {
+			// 		console.log("App.vue--非h5环境");
+			// 	}
+			// }
+			// function defaultwxWebLogin(){
+			// 	alert('微信h5环境');
+			// 	if (document.referrer) {
+			// 	    uni.setStorageSync('referUrl', document.referrer);
+			// 	}
+			// 	// alert(othis);
+			// 	// alert(2222)
+			// 	// alert(JSON.stringify(othis.baseInfo));
+			// 	// alert(3333)
+			// 	// window.location.href='http://192.168.1.135:8086/mall/app/login/mall/wxweb?mallDomain=yyy';
+			// 	// alert(4444)
+			// 	// alert(JSON.parse(othis))
+			// 	alert('微信h5环境------------'+options.path)
+			// 	let reg = /\/TransferPage\/TransferPage/ig;
+			// 	alert('路径判断---------------'+reg.test(options.path));
+			// 	if(!reg.test(options.path)){
+			// 		alert('静默登陆开始跳转')
+			// 		window.location.href='http://192.168.1.135:8086/mall/app/login/mall/wxweb?mallDomain=yyy';
+			// 	}
+			// 	// if(!othis.hasLogin){
+			// 	// 	alert(333333+othis.hasLogin)
+			// 	// 	if(othis.firstLoad){
+			// 	// 		alert(44444444+othis.firstLoad)
+			// 	// 		window.location.href='http://192.168.1.135:8086/mall/app/login/mall/wxweb?mallDomain=yyy';
+			// 	// 	}
+			// 	// }
+			// 	
+			// };
+			// function defaultWxLogin(){
+			// 	uni.checkSession({
+			// 		success: (res) => {
+			// 		  console.log('App.vue--uni.login登陆状态');
+			// 		  wxLogin(othis.uniCode);
+			// 		},
+			// 		fail: (err) => {
+			// 			console.log('App.vue--uni.login登陆已失效');
+			// 			uni.login({
+			// 			  provider: 'weixin',
+			// 			  success: (res) => {
+			// 				  // console.log(res);
+			// 				  othis.SET_UNICODE(res.code);
+			// 			    if(res.code){
+			// 					wxLogin(res.code);
+			// 				}else{
+			// 					console.log("App.vue--获取code失败")
+			// 				}
+			// 			  }
+			// 			});
+			// 		}
+			// 	});
+			// 	function wxLogin(code){
+			// 		test.post('/mall/app/login/mall/wxapp', {
+			// 			mallDomain: othis.mallDomain,
+			// 			jsCode: code
+			// 		})
+			// 		.then( res => {
+			// 			if(res.statusCode == 200){
+			// 				uni.removeStorageSync('sessionid');
+			// 				uni.setStorageSync('sessionid', res.header['Set-Cookie']);
+			// 				othis.$http.setConfig((config) => {
+			// 					config.header['cookie'] = uni.getStorageSync('sessionid') || '';
+			// 					return config;
+			// 				});
+			// 				if(res.data.code == 0){
+			// 					if(res.data.result.isSuccess){
+			// 						console.log('App.vue--wxapp 登陆成功');
+			// 					}else{
+			// 						console.log("App.vue--wxapp 登陆失败");
+			// 					}
+			// 				}else{
+			// 					console.log('App.vue--wxapp 接口返回data出错');
+			// 				}
+			// 			}else{
+			// 				console.log('App.vue--wxapp 接口调用失败');
+			// 			}
+			// 		})
+			// 		.catch( err => {
+			// 			console.log('App.vue--wxapp 接口调用出错' + err);
+			// 		})
+			// 	};
+			// 	
+			// }
 			
 		},
 		onShow: function(options) {
