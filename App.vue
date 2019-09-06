@@ -132,11 +132,10 @@
 				// alert(3333)
 				// window.location.href='http://192.168.1.135:8086/mall/app/login/mall/wxweb?mallDomain=yyy';
 				// alert(4444)
-				window.location.href='http://192.168.1.135:8086/mall/app/login/mall/wxweb?mallDomain=yyy';
-				// if(this.firstLoad){
-				// 	alert('9999999')
-				// 	window.location.href='http://192.168.1.135:8086/mall/app/login/mall/wxweb?mallDomain=yyy';
-				// }
+				
+				if(this.firstLoad){
+					window.location.href='http://192.168.1.135:8086/mall/app/login/mall/wxweb?mallDomain=yyy';
+				}
 				
 			};
 			function defaultWxLogin(){
