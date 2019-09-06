@@ -78,6 +78,7 @@
 			let othis = this;
 
 			if(navigator && navigator.userAgent){
+				alert('navigator')
 				// 非小程序环境
 				browserRedirect();
 			}else{

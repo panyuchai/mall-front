@@ -170,6 +170,7 @@ var _api = __webpack_require__(/*! ./api/api.js */ 11);function _objectSpread(ta
     var othis = this;
 
     if (navigator && navigator.userAgent) {
+      alert('navigator');
       // 非小程序环境
       browserRedirect();
     } else {
