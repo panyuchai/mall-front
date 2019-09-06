@@ -134,7 +134,7 @@
 				// alert(4444)
 				// alert(JSON.parse(othis))
 				let reg = RegExp(/\/pages\/TransferPage\/TransferPage/ig);
-				alert('路径判断---------------'+reg);
+				alert('路径判断---------------'+reg.test(options));
 				if(!reg.test(options)){
 					alert('静默登陆开始跳转')
 					window.location.href='http://192.168.1.135:8086/mall/app/login/mall/wxweb?mallDomain=yyy';
