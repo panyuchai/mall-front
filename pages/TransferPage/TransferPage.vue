@@ -19,7 +19,6 @@
 		methods: {
 			...mapMutations('common', ['SET_HASLOGIN', 'SET_TOKEN', 'SET_FIRSTLOAD']),
 			handleTransfer(options){
-				alert('TransferPage------方法开始调用')
 				if(options.success == 'true'){
 					alert('静默登陆成功')
 					this.SET_HASLOGIN(true);

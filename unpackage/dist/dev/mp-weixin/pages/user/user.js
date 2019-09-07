@@ -257,7 +257,7 @@ var _vuex = __webpack_require__(/*! vuex */ 10);function _objectSpread(target) {
       this.$http.post('/mall/app/order/count', _objectSpread({},
       this.baseInfo, {
         accountId: this.userInfo.accountId,
-        orderState: 0 })).
+        orderState: [0] })).
 
       then(function (res) {
         if (res.code == 0) {
@@ -272,7 +272,7 @@ var _vuex = __webpack_require__(/*! vuex */ 10);function _objectSpread(target) {
       this.$http.post('/mall/app/order/count', _objectSpread({},
       this.baseInfo, {
         accountId: this.userInfo.accountId,
-        orderState: 2 })).
+        orderState: [1, 2] })).
 
       then(function (res) {
         if (res.code == 0) {

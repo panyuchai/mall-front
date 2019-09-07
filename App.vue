@@ -71,7 +71,7 @@
 				if (bIsIpad || bIsIphoneOs || bIsMidp || bIsUc7 || bIsUc || bIsAndroid || bIsCE || bIsWM) {
 					console.log('h5端');
 					this.SET_BASEINFO({
-						...othis.baseInfo,
+						...this.baseInfo,
 						scm: 'pc'
 					});
 				} else if(bIsWeChat) {
@@ -94,10 +94,10 @@
 				}
 				let reg = /\/TransferPage\/TransferPage/ig;
 				let urlPath = !(reg.test(options.path));
+				alert(this.hasLogin);
 				if(!this.hasLogin){
 					if(urlPath){
-						alert('静默登陆开始跳转')
-						window.location.href='http://192.168.1.135:8086/mall/app/login/mall/wxweb?mallDomain=yyyy';
+						window.location.href='http://192.168.1.135:8086/mall/app/login/mall/wxweb?mallDomain=yyy';
 					}
 				}
 				
@@ -176,7 +176,6 @@
 			// console.log(navigator.userAgent.toLowerCase())
 			
 			if(navigator && navigator.userAgent){
-				alert('navigator');
 				// 非小程序环境
 				this.browserRedirect(options);
 			}else{
@@ -190,8 +189,6 @@
 					this.defaultWxLogin();
 				}
 			};
-			
-			alert('环境------------'+options.path);
 			
 			// let othis = this;
 			// function browserRedirect() {

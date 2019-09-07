@@ -124,7 +124,6 @@ var _store = __webpack_require__(/*! ../../utils/store.js */ 8);function _object
   methods: _objectSpread({},
   (0, _vuex.mapMutations)('common', ['SET_HASLOGIN', 'SET_TOKEN', 'SET_FIRSTLOAD']), {
     handleTransfer: function handleTransfer(options) {
-      alert('TransferPage------方法开始调用');
       if (options.success == 'true') {
         alert('静默登陆成功');
         this.SET_HASLOGIN(true);

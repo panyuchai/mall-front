@@ -150,7 +150,7 @@
 				this.$http.post('/mall/app/order/count', {
 					...this.baseInfo,
 					accountId: this.userInfo.accountId,
-					orderState: 0
+					orderState: [0]
 				})
 				.then( res => {
 					if(res.code == 0){
@@ -165,7 +165,7 @@
 				this.$http.post('/mall/app/order/count', {
 					...this.baseInfo,
 					accountId: this.userInfo.accountId,
-					orderState: 2
+					orderState: [1, 2]
 				})
 				.then( res => {
 					if(res.code == 0){

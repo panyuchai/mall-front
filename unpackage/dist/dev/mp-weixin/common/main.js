@@ -163,7 +163,7 @@ var _api = __webpack_require__(/*! ./api/api.js */ 11);function _objectSpread(ta
       if (bIsIpad || bIsIphoneOs || bIsMidp || bIsUc7 || bIsUc || bIsAndroid || bIsCE || bIsWM) {
         console.log('h5端');
         this.SET_BASEINFO(_objectSpread({},
-        othis.baseInfo, {
+        this.baseInfo, {
           scm: 'pc' }));
 
       } else if (bIsWeChat) {
@@ -186,10 +186,10 @@ var _api = __webpack_require__(/*! ./api/api.js */ 11);function _objectSpread(ta
       }
       var reg = /\/TransferPage\/TransferPage/ig;
       var urlPath = !reg.test(options.path);
+      alert(this.hasLogin);
       if (!this.hasLogin) {
         if (urlPath) {
-          alert('静默登陆开始跳转');
-          window.location.href = 'http://192.168.1.135:8086/mall/app/login/mall/wxweb?mallDomain=yyyy';
+          window.location.href = 'http://192.168.1.135:8086/mall/app/login/mall/wxweb?mallDomain=yyy';
         }
       }
 
@@ -268,7 +268,6 @@ var _api = __webpack_require__(/*! ./api/api.js */ 11);function _objectSpread(ta
     // console.log(navigator.userAgent.toLowerCase())
 
     if (navigator && navigator.userAgent) {
-      alert('navigator');
       // 非小程序环境
       this.browserRedirect(options);
     } else {
@@ -282,8 +281,6 @@ var _api = __webpack_require__(/*! ./api/api.js */ 11);function _objectSpread(ta
         this.defaultWxLogin();
       }
     };
-
-    alert('环境------------' + options.path);
 
     // let othis = this;
     // function browserRedirect() {
