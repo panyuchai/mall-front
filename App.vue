@@ -45,6 +45,7 @@
 			// },
 			initData(){
 				alert('initData------------begin')
+				alert(getStore({ name: 'hasLogin' }));
 				// if(getStore({ name: 'hasLogin' })){
 				// 	this.SET_HASLOGIN(getStore({ name: 'hasLogin' }));
 				// }
