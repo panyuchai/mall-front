@@ -62,14 +62,17 @@
 					this.SET_HASLOGIN(uni.getStorageSync('hasLogin'));
 				}
 				if(uni.getStorageSync('token')){
-					this.SET_HASLOGIN(uni.getStorageSync('token'));
+					this.SET_TOKEN(uni.getStorageSync('token'));
 				}
 				if(uni.getStorageSync('uniCode')){
-					this.SET_HASLOGIN(uni.getStorageSync('uniCode'));
+					this.SET_UNICODE(uni.getStorageSync('uniCode'));
 				}
 				alert('getStore userInfo-------------开始');
-				if(uni.getStorageSync('userInfo')){
-					this.SET_USERIFNO(uni.getStorageSync('userInfo'));
+				// if(uni.getStorageSync('userInfo')){
+				// 	this.SET_USERIFNO(uni.getStorageSync('userInfo'));
+				// }
+				if(getStore({ name: 'userInfo' })){
+					this.SET_USERIFNO(getStore({ name: 'userInfo' }));
 				}
 				alert('getStore userInfo-------------结束');
 			},

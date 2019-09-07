@@ -86,8 +86,8 @@ const mutations = {
 	},
 	SET_USERIFNO: (state, userInfo) => {
 	  state.userInfo = userInfo;
-	  // setStore({ name: 'userInfo', content: state.userInfo, type: 'sync' });
-	  uni.setStorageSync('userInfo', JSON.stringify(userInfo));
+	  setStore({ name: 'userInfo', content: state.userInfo, type: 'sync' });
+	  // uni.setStorageSync('userInfo', JSON.stringify(userInfo));
 	},
 	// SET_MALLTYPE: (state, mallType) => {
 	// 	state.mallType = mallType;

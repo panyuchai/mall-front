@@ -104,7 +104,7 @@
 		data() {
 			return {
 				toPayNum: 0,
-				toReceivedNum: 0
+				toReceivedNum: 0,
 			}
 		},
         computed: {
