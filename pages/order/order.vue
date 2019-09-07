@@ -41,20 +41,20 @@
 								<text>{{item.orderStateName}}</text>
 							</view>
 						</view>
-						<view class="bd" v-for="(good, i) in item.goodsList">
+						<view class="bd" v-for="(good, i) in item.details">
 							<view class="pic">
-								<image class="img" :src="good.imgSrc" mode="aspectFill"></image>
+								<image class="img" :src="good.imageUrl" mode="aspectFill"></image>
 							</view>
 							<view class="info">
 								<view class="tit">
-									{{good.tit}}
+									{{good.goodsProductname}}
 								</view>
 								<view class="con">
 									<view class="_left">
-										共{{good.num}}件商品
+										共{{good.goodsCount}}件商品
 									</view>
 									<view class="_right">
-										实付金额：<text class="price">¥{{good.price}}</text>
+										实付金额：<text class="price">¥{{good.goodsRelprice}}</text>
 									</view>
 								</view>
 							</view>
@@ -304,7 +304,9 @@
 				console.log(source)
 				this.$http.post('/mall/app/order/list', {
 					...this.baseInfo,
-					accountId: this.userInfo.accountId
+					accountId: this.userInfo.accountId,
+					// pageNum: 10,
+					query: 'W1712015071'
 				})
 				.then( res => {
 					console.log(res)
