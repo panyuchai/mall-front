@@ -9,7 +9,6 @@
 		methods: {
 			...mapMutations("common", ['SET_BASEINFO', 'SET_USERIFNO', 'SET_UNICODE', 'SET_HASLOGIN', 'SET_TOKEN', 'SET_MALLTYPE', 'SET_MALLID']),
 			checkMallType(){
-				alert('checkMallType');
 				this.$http.post('/mall/app/login/mall/shopmall/type', {
 					mallDomain: this.mallDomain
 				})
@@ -58,6 +57,7 @@
 				}
 			},
 			browserRedirect(options) {
+				alert('browserRedirect')
 				var sUserAgent = navigator.userAgent.toLowerCase();
 				// var bIsIpad = sUserAgent.match(/ipad/i) == "ipad";
 				// var bIsIphoneOs = sUserAgent.match(/iphone os/i) == "iphone os";
@@ -163,7 +163,7 @@
 			this.initData();
 			console.log('App Launch');
 			// let urlPage = options
-			
+			alert('Launch')
 			// var obj = wx.getLaunchOptionsSync()
 			// console.log('启动小程序的路径:',obj.path)
 			// console.log('启动小程序的场景值:', obj.scene)
@@ -176,6 +176,7 @@
 			
 			if(navigator && navigator.userAgent){
 				// 非小程序环境
+				alert('非小程序环境')
 				this.browserRedirect(options);
 			}else{
 				// 小程序环境
