@@ -90,6 +90,7 @@
 			defaultwxWebLogin(options){
 				alert('微信h5环境');
 				if (document.referrer) {
+					alert(document.referrer);
 				    uni.setStorageSync('referUrl', document.referrer);
 				}
 				let reg = /\/TransferPage\/TransferPage/ig;

@@ -37,6 +37,7 @@
 					}
 				}else{
 					alert('静默登陆失败')
+					uni.setStorageSync('openid',options.openid)
 					uni.switchTab({
 						url: '/pages/index/index'
 					});

@@ -450,6 +450,7 @@
 			wxPhoneLogin(){
 				if(!validatenull(this.phoneData.code) && !isvalidatemobile(this.phoneData.phone)[0]){
 					this.$http.post('/mall/app/login/mall/wxweb/userinfo', {
+						openid: uni.getStorageSync('openid'),
 						mallDomain: this.mallDomain,
 						...this.phoneData
 					})
@@ -495,6 +496,7 @@
 			wxPasswordLogin(){
 				if(!validatenull(this.phoneData.loginName) && !validatenull(this.passwordData.password)){
 					this.$http.post('/mall/app/login/mall/wxweb/userinfo', {
+						openid: uni.getStorageSync('openid'),
 						mallDomain: this.mallDomain,
 						...this.passwordData
 					})

@@ -249,6 +249,25 @@
 			 * 修复app端点击除全部订单外的按钮进入时不加载数据的问题
 			 * 替换onLoad下代码即可
 			 */
+			switch(options.state){
+				case '':
+					return 0;
+					break;
+				case 0:
+					return 1;
+					break;
+				case 2:
+					return 2;
+					break;
+				case 3:
+					return 3;
+					break;
+				case 7:
+					return 4;
+					break;
+				default:
+					return 0;
+			}
 			this.tabCurrentIndex = +options.state;
 			
 			// #ifndef MP
