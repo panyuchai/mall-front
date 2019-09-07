@@ -111,7 +111,7 @@
             ...mapState("common", ['hasLogin', 'userInfo', 'baseInfo'])
         },
         methods: {
-            // ...mapMutations(['logout']),
+            // ...mapMutations('common', ['SET_USERIFNO']),
             bindLogin() {
                 uni.navigateTo({
                     url: '../login/login',
@@ -136,6 +136,7 @@
 					url
 				})  
 			},
+			
 			// userInitData(){
 			// 	this.$http.post('/mall/app/account/info')
 			// 	.then( res => {

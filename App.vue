@@ -68,8 +68,6 @@
 				// var bIsCE = sUserAgent.match(/windows ce/i) == "windows ce";
 				// var bIsWM = sUserAgent.match(/windows mobile/i) == "windows mobile";
 				var bIsWeChat = sUserAgent.match(/MicroMessenger/i) == "micromessenger";//微信端
-				alert(sUserAgent)
-				alert(bIsWeChat)
 				if(bIsWeChat) {
 					alert('wx h5端');
 					this.SET_BASEINFO({

@@ -678,7 +678,7 @@
 				// var bIsCE = sUserAgent.match(/windows ce/i) == "windows ce";
 				// var bIsWM = sUserAgent.match(/windows mobile/i) == "windows mobile";
 				var bIsWeChat = sUserAgent.match(/MicroMessenger/i) == "micromessenger";//微信端
-				if(bIsWeChat) {
+				if (bIsWeChat) {
 					this.isWebWx=true;
 					switch(this.mallType){
 						case 1:
