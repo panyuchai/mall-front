@@ -9,11 +9,11 @@
 		methods: {
 			...mapMutations("common", ['SET_BASEINFO', 'SET_USERIFNO', 'SET_UNICODE', 'SET_HASLOGIN', 'SET_TOKEN', 'SET_MALLTYPE', 'SET_MALLID']),
 			checkMallType(){
+				alert('checkMallType');
 				this.$http.post('/mall/app/login/mall/shopmall/type', {
 					mallDomain: this.mallDomain
 				})
 				.then( res => {
-					// console.log(res);
 					if(res.code == 0){
 						this.SET_BASEINFO({
 							...this.baseInfo,
