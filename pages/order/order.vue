@@ -192,7 +192,7 @@
 					...this.baseInfo,
 					accountId: this.userInfo.accountId,
 					// pageNum: 10,
-					query: 'W1712015071'
+					// query: 'W1712015071'
 				})
 				.then( res => {
 					console.log(res)
@@ -201,7 +201,6 @@
 						this.listData.map(item => {
 							this.$set(item, 'orderStateName', this.transOrderState(item.orderlistState));
 						})
-						// this.$set(this.listData, 'orderStateName', this.transOrderState(res.result.records.orderlistState))
 					}
 				})
 				.catch( err => {
@@ -212,37 +211,37 @@
 				let navItem = this.navList[index];
 				let state = navItem.state;
 				
-				if(source === 'tabChange' && navItem.loaded === true){
-					//tab切换只有第一次需要加载数据
-					return;
-				}
-				if(navItem.loadingType === 'loading'){
-					//防止重复加载
-					return;
-				}
-				
-				navItem.loadingType = 'loading';
-				
-				setTimeout(()=>{
-					let orderList = this.listData.filter(item=>{
-						//添加不同状态下订单的表现形式
-						item = Object.assign(item, this.orderStateExp(item.state));
-						//演示数据所以自己进行状态筛选
-						if(state === 0){
-							//0为全部订单
-							return item;
-						}
-						return item.state === state
-					});
-					orderList.forEach(item=>{
-						navItem.orderList.push(item);
-					})
-					// loaded新字段用于表示数据加载完毕，如果为空可以显示空白页
-					this.$set(navItem, 'loaded', true);
-					
-					//判断是否还有数据， 有改为 more， 没有改为noMore 
-					navItem.loadingType = 'more';
-				}, 600);	
+				// if(source === 'tabChange' && navItem.loaded === true){
+				// 	//tab切换只有第一次需要加载数据
+				// 	return;
+				// }
+				// if(navItem.loadingType === 'loading'){
+				// 	//防止重复加载
+				// 	return;
+				// }
+				// 
+				// navItem.loadingType = 'loading';
+				// 
+				// setTimeout(()=>{
+				// 	let orderList = this.listData.filter(item=>{
+				// 		//添加不同状态下订单的表现形式
+				// 		item = Object.assign(item, this.orderStateExp(item.state));
+				// 		//演示数据所以自己进行状态筛选
+				// 		if(state === 0){
+				// 			//0为全部订单
+				// 			return item;
+				// 		}
+				// 		return item.state === state
+				// 	});
+				// 	orderList.forEach(item=>{
+				// 		navItem.orderList.push(item);
+				// 	})
+				// 	// loaded新字段用于表示数据加载完毕，如果为空可以显示空白页
+				// 	this.$set(navItem, 'loaded', true);
+				// 	
+				// 	//判断是否还有数据， 有改为 more， 没有改为noMore 
+				// 	navItem.loadingType = 'more';
+				// }, 600);
 			}, 
 
 			//swiper 切换
