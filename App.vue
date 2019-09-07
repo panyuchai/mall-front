@@ -9,6 +9,7 @@
 		methods: {
 			...mapMutations("common", ['SET_BASEINFO', 'SET_USERIFNO', 'SET_UNICODE', 'SET_HASLOGIN', 'SET_TOKEN', 'SET_MALLTYPE', 'SET_MALLID']),
 			checkMallType(){
+				alert('checkMallType');
 				this.$http.post('/mall/app/login/mall/shopmall/type', {
 					mallDomain: this.mallDomain
 				})
@@ -163,7 +164,6 @@
 			this.initData();
 			console.log('App Launch');
 			// let urlPage = options
-			alert('Launch')
 			// var obj = wx.getLaunchOptionsSync()
 			// console.log('启动小程序的路径:',obj.path)
 			// console.log('启动小程序的场景值:', obj.scene)
