@@ -45,18 +45,18 @@
 			// },
 			initData(){
 				alert('initData------------begin')
-				if(getStore({ name: 'hasLogin' })){
-					this.SET_HASLOGIN(getStore({ name: 'hasLogin' }));
-				}
-				if(getStore({ name: 'token' })){
-					this.SET_TOKEN(getStore({ name: 'token' }));
-				}
-				if(getStore({ name: 'uniCode' })){
-					this.SET_UNICODE(getStore({ name: 'uniCode' }));
-				}
-				if(getStore({ name: 'userInfo' })){
-					this.SET_USERIFNO(getStore({ name: 'userInfo' }));
-				}
+				// if(getStore({ name: 'hasLogin' })){
+				// 	this.SET_HASLOGIN(getStore({ name: 'hasLogin' }));
+				// }
+				// if(getStore({ name: 'token' })){
+				// 	this.SET_TOKEN(getStore({ name: 'token' }));
+				// }
+				// if(getStore({ name: 'uniCode' })){
+				// 	this.SET_UNICODE(getStore({ name: 'uniCode' }));
+				// }
+				// if(getStore({ name: 'userInfo' })){
+				// 	this.SET_USERIFNO(getStore({ name: 'userInfo' }));
+				// }
 			},
 			browserRedirect(options) {
 				alert('browserRedirect')
