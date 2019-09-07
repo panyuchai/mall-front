@@ -45,19 +45,33 @@
 			// },
 			initData(){
 				alert('initData------------begin')
-				alert(getStore({ name: 'hasLogin' }));
-				if(getStore({ name: 'hasLogin' })){
-					this.SET_HASLOGIN(getStore({ name: 'hasLogin' }));
+				// alert(getStore({ name: 'hasLogin' }));
+				// if(getStore({ name: 'hasLogin' })){
+				// 	this.SET_HASLOGIN(getStore({ name: 'hasLogin' }));
+				// }
+				// if(getStore({ name: 'token' })){
+				// 	this.SET_TOKEN(getStore({ name: 'token' }));
+				// }
+				// if(getStore({ name: 'uniCode' })){
+				// 	this.SET_UNICODE(getStore({ name: 'uniCode' }));
+				// }
+				// if(getStore({ name: 'userInfo' })){
+				// 	this.SET_USERIFNO(getStore({ name: 'userInfo' }));
+				// }
+				if(uni.getStorageSync('hasLogin')){
+					this.SET_HASLOGIN(uni.getStorageSync('hasLogin'));
 				}
-				if(getStore({ name: 'token' })){
-					this.SET_TOKEN(getStore({ name: 'token' }));
+				if(uni.getStorageSync('token')){
+					this.SET_HASLOGIN(uni.getStorageSync('token'));
 				}
-				if(getStore({ name: 'uniCode' })){
-					this.SET_UNICODE(getStore({ name: 'uniCode' }));
+				if(uni.getStorageSync('uniCode')){
+					this.SET_HASLOGIN(uni.getStorageSync('uniCode'));
 				}
+				alert('getStore userInfo-------------开始');
 				if(getStore({ name: 'userInfo' })){
 					this.SET_USERIFNO(getStore({ name: 'userInfo' }));
 				}
+				alert('getStore userInfo-------------结束');
 			},
 			browserRedirect(options) {
 				alert('browserRedirect')

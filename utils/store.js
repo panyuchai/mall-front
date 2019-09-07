@@ -30,9 +30,7 @@ export const getStore = (params) => {
   } = params;
   let obj = {},
       content;
-  aler(name);
   obj = uni.getStorageSync(name);
-  alert(obj);
   if (validatenull(obj)) obj = uni.getStorage(name);
   if (validatenull(obj)) return;
   obj = JSON.parse(obj);
