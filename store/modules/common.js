@@ -19,7 +19,7 @@ const state = {
   hasLogin: false,
   token: '',
   uniCode: '',
-  userInfo: {},
+  userInfo: null,
   baseInfo: {
 	  mallDomain: '',
 	  mallId: '',
@@ -86,7 +86,8 @@ const mutations = {
 	},
 	SET_USERIFNO: (state, userInfo) => {
 	  state.userInfo = userInfo;
-	  setStore({ name: 'userInfo', content: state.userInfo, type: 'sync' });
+	  // setStore({ name: 'userInfo', content: state.userInfo, type: 'sync' });
+	  uni.setStorageSync('userInfo', JSON.stringify(userInfo));
 	},
 	// SET_MALLTYPE: (state, mallType) => {
 	// 	state.mallType = mallType;

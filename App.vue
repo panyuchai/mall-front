@@ -68,8 +68,8 @@
 					this.SET_HASLOGIN(uni.getStorageSync('uniCode'));
 				}
 				alert('getStore userInfo-------------开始');
-				if(getStore({ name: 'userInfo' })){
-					this.SET_USERIFNO(getStore({ name: 'userInfo' }));
+				if(uni.getStorageSync('userInfo')){
+					this.SET_USERIFNO(uni.getStorageSync('userInfo'));
 				}
 				alert('getStore userInfo-------------结束');
 			},
