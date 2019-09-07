@@ -249,7 +249,7 @@
 				        if (res.confirm) {
 				            this.$http.post('/mall/app/car/delete', {
 								...this.baseInfo,
-								accountId: this.userInfo.accountId,
+								accountId: this.userInfo && this.userInfo.accountId,
 								shopcarIds: shopcarId
 							})
 							.then( res => {

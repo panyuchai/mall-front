@@ -166,7 +166,7 @@
 				this.searchData.orderType=orderType || 0;
 				
 				this.$http.post('/mall/app/goods/list', {
-					accountId: this.userInfo.accountId || '',
+					accountId: this.userInfo && this.userInfo.accountId || '',
 					...this.baseInfo,
 					...this.searchData
 				})

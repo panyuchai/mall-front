@@ -8,11 +8,11 @@
 			<view class="user-info-box">
 				<image class="bg" src="/static/img/user-bg.png" mode="scaleToFill"></image>
 				<view class="portrait-box">
-					<image class="portrait" :src="userInfo.customerImage||'/static/img/missing-face.png'" mode="aspectFill"></image>
+					<image class="portrait" :src="userInfo && userInfo.customerImage||'/static/img/missing-face.png'" mode="aspectFill"></image>
 				</view>
 				<view class="info-box" @tap="navTo('#')">
-					<text class="username">{{userInfo.customerName || '游客'}}</text>
-					<text class="userphone">{{userInfo.mobilephone || ''}}</text>
+					<text class="username">{{userInfo && userInfo.customerName || '游客'}}</text>
+					<text class="userphone">{{userInfo && userInfo.mobilephone || ''}}</text>
 				</view>
 			</view>
 			<view class="user-info-setting" @tap="navTo('/pages/accountManage/accountManage')">
@@ -150,7 +150,7 @@
 			initPayNum(){
 				this.$http.post('/mall/app/order/count', {
 					...this.baseInfo,
-					accountId: this.userInfo.accountId,
+					accountId: this.userInfo && this.userInfo.accountId,
 					orderState: [0]
 				})
 				.then( res => {
@@ -165,7 +165,7 @@
 			initToReceivedNum(){
 				this.$http.post('/mall/app/order/count', {
 					...this.baseInfo,
-					accountId: this.userInfo.accountId,
+					accountId: this.userInfo && this.userInfo.accountId,
 					orderState: [1, 2]
 				})
 				.then( res => {

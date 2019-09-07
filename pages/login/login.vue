@@ -286,6 +286,11 @@
 									title: '验证码不正确',
 								});
 								this.phoneData.code='';
+							}else if(res.result.code == '0012'){
+								uni.showToast({
+									icon: 'none',
+									title: '用户不存在'
+								})
 							}
 						}
 					})
@@ -332,6 +337,11 @@
 									title: '账户密码错误',
 								});
 								this.passwordData.password='';
+							}else if(res.result.code == '0012'){
+								uni.showToast({
+									icon: 'none',
+									title: '用户不存在'
+								})
 							}
 						}
 					})
