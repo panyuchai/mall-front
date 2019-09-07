@@ -12,6 +12,7 @@
 		<single-product></single-product>
 		<lines></lines>
 		<recommend></recommend>
+		<button type="primary" @tap="clearInfo">清除登陆</button>
 		<!-- </block> -->
 	</view>
 </template>
@@ -44,6 +45,12 @@
 		},
 		methods: {
 			...mapMutations('common', ['SET_USERIFNO']),
+			clearInfo(){
+				uni.removeStorageSync('hasLogin')
+				uni.removeStorageSync('token')
+				uni.removeStorageSync('uniCode')
+				uni.removeStorageSync('userInfo')
+			},
 			getData() {
 				// this.$http.get('/api/getDecoration?appkey=NGMxNDkwZTktOWI2Zi00YWZjLWE1&decorationId=997c8b76a1974441b416718cdec04ab9').then(res => {
 				// 	console.log(res.data.content);
