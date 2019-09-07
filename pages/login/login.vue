@@ -210,10 +210,11 @@
       //           });
       //       },
 			timeTicking(){
+				this.countdown=60;
 				let that = this;
 				let timer = setInterval(function(){
 					that.countdown--;
-					if(that.countdown < 0){
+					if(that.countdown == 0){
 						clearInterval(timer);
 						that.timeTick=false;
 					}

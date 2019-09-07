@@ -68,14 +68,16 @@
 				var bIsCE = sUserAgent.match(/windows ce/i) == "windows ce";
 				var bIsWM = sUserAgent.match(/windows mobile/i) == "windows mobile";
 				var bIsWeChat = sUserAgent.match(/MicroMessenger/i) == "micromessenger";//微信端
+				alert(sUserAgent)
+				alert(bIsWeChat)
 				if (bIsIpad || bIsIphoneOs || bIsMidp || bIsUc7 || bIsUc || bIsAndroid || bIsCE || bIsWM) {
-					console.log('h5端');
+					alert('h5端');
 					this.SET_BASEINFO({
 						...this.baseInfo,
 						scm: 'pc'
 					});
 				} else if(bIsWeChat) {
-					console.log('wx h5端');
+					alert('wx h5端');
 					this.SET_BASEINFO({
 						...this.baseInfo,
 						scm: 'h5'

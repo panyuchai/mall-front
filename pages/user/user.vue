@@ -38,13 +38,13 @@
 			
 			<!-- 订单 -->
 			<view class="order-section">
-				<view class="order-item" @tap="navTo('/pages/order/order?state=')" hover-class="common-hover"  :hover-stay-time="50">
+				<view class="order-item" @tap="navTo('/pages/order/order?state=0')" hover-class="common-hover"  :hover-stay-time="50">
 					<view class="icon">
 						<text class="iconfont icon-icon iconfont-all"></text>
 					</view>
 					<view class="name">全部订单</view>
 				</view>
-				<view class="order-item" @tap="navTo('/pages/order/order?state=0')"  hover-class="common-hover" :hover-stay-time="50">
+				<view class="order-item" @tap="navTo('/pages/order/order?state=1')"  hover-class="common-hover" :hover-stay-time="50">
 					<view class="icon">
 						<text class="iconfont icon-tianchongxing-"><tui-badge v-if="toPayNum" class="badge" type="danger" size="small">{{toPayNum}}</tui-badge></text>
 					</view>
@@ -62,7 +62,7 @@
 					</view>
 					<view class="name">已完成</view>
 				</view>
-				<view class="order-item" @tap="navTo('/pages/order/order?state=7')" hover-class="common-hover"  :hover-stay-time="50">
+				<view class="order-item" @tap="navTo('/pages/order/order?state=4')" hover-class="common-hover"  :hover-stay-time="50">
 					<view class="icon">
 						<text class="iconfont icon-shouhou iconfont-service"></text>
 					</view>

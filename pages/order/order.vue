@@ -35,10 +35,10 @@
 					>
 						<view class="hd">
 							<view class="number">
-								订单编号：<text>{{item.orderNum}}</text>
+								订单编号：<text>{{item.orderlistMainnum}}</text>
 							</view>
 							<view class="state">
-								<text>{{item.stateTip}}</text>
+								<text>{{item.orderStateName}}</text>
 							</view>
 						</view>
 						<view class="bd" v-for="(good, i) in item.goodsList">
@@ -84,6 +84,9 @@
 </template> 
 
 <script>
+	import {
+		mapState
+	} from 'vuex'
 	import uniLoadMore from '@/components/uni-load-more/uni-load-more.vue';
 	import empty from "@/components/empty/empty";
 	export default {
@@ -249,25 +252,6 @@
 			 * 修复app端点击除全部订单外的按钮进入时不加载数据的问题
 			 * 替换onLoad下代码即可
 			 */
-			switch(options.state){
-				case '':
-					return 0;
-					break;
-				case 0:
-					return 1;
-					break;
-				case 2:
-					return 2;
-					break;
-				case 3:
-					return 3;
-					break;
-				case 7:
-					return 4;
-					break;
-				default:
-					return 0;
-			}
 			this.tabCurrentIndex = +options.state;
 			
 			// #ifndef MP
@@ -282,8 +266,59 @@
 		},
 		 
 		methods: {
+			transOrderState(num){
+				switch(num){
+					case 0:
+						return '未支付';
+						break;
+					case 1:
+						return '未发货';
+						break;
+					case 2:
+						return '已发货';
+						break;
+					case 3:
+						return '已完成';
+						break;
+					case 4:
+						return '已退货';
+						break;
+					case 5:
+						return '已退款';
+						break;
+					case 6:
+						return '已取消';
+						break;
+					case 7:
+						return '退款中';
+						break;
+					case 9:
+						return '备货中';
+						break;
+					default:
+						return '';
+				}
+			},
 			//获取订单列表
 			loadData(source){
+				console.log(source)
+				this.$http.post('/mall/app/order/list', {
+					...this.baseInfo,
+					accountId: this.userInfo.accountId
+				})
+				.then( res => {
+					console.log(res)
+					if(res.code == 0){
+						this.listData=res.result.records;
+						this.listData.map(item => {
+							this.$set(item, 'orderStateName', this.transOrderState(item.orderlistState));
+						})
+						// this.$set(this.listData, 'orderStateName', this.transOrderState(res.result.records.orderlistState))
+					}
+				})
+				.catch( err => {
+					console.log(err);
+				})
 				//这里是将订单挂载到tab列表下
 				let index = this.tabCurrentIndex;
 				let navItem = this.navList[index];
@@ -421,6 +456,9 @@
 				return {stateTip, stateTipColor};
 			}
 		},
+		computed: {
+			...mapState('common', ['baseInfo', 'userInfo'])
+		}
 	}
 </script>
 
