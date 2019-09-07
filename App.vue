@@ -77,7 +77,9 @@
 						...this.baseInfo,
 						scm: 'h5'
 					});
+					alert('defaultwxWebLogin--------------------------')
 					if(!this.hasLogin){
+						alert('defaultwxWebLogin==================begin')
 						this.defaultwxWebLogin(options);
 					}
 				}else {
@@ -89,7 +91,7 @@
 				}
 			},
 			defaultwxWebLogin(options){
-				alert('微信h5环境');
+				alert('微信h5环境defaultwxWebLogin');
 				if (document.referrer) {
 					alert(document.referrer);
 				    uni.setStorageSync('referUrl', document.referrer);
