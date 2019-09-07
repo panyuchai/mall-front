@@ -70,7 +70,7 @@
 				var bIsWeChat = sUserAgent.match(/MicroMessenger/i) == "micromessenger";//微信端
 				alert(sUserAgent)
 				alert(bIsWeChat)
-				if (bIsWeChat) {
+				if(bIsWeChat) {
 					alert('wx h5端');
 					this.SET_BASEINFO({
 						...this.baseInfo,
@@ -79,14 +79,12 @@
 					if(!this.hasLogin){
 						this.defaultwxWebLogin(options);
 					}
-				} else if(bIsWeChat) {
+				}else {
 					alert('h5端');
 					this.SET_BASEINFO({
 						...this.baseInfo,
 						scm: 'pc'
 					});
-				}else {
-					console.log("App.vue--非h5环境");
 				}
 			},
 			defaultwxWebLogin(options){
