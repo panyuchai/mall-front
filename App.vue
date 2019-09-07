@@ -49,15 +49,15 @@
 				if(getStore({ name: 'hasLogin' })){
 					this.SET_HASLOGIN(getStore({ name: 'hasLogin' }));
 				}
-				// if(getStore({ name: 'token' })){
-				// 	this.SET_TOKEN(getStore({ name: 'token' }));
-				// }
-				// if(getStore({ name: 'uniCode' })){
-				// 	this.SET_UNICODE(getStore({ name: 'uniCode' }));
-				// }
-				// if(getStore({ name: 'userInfo' })){
-				// 	this.SET_USERIFNO(getStore({ name: 'userInfo' }));
-				// }
+				if(getStore({ name: 'token' })){
+					this.SET_TOKEN(getStore({ name: 'token' }));
+				}
+				if(getStore({ name: 'uniCode' })){
+					this.SET_UNICODE(getStore({ name: 'uniCode' }));
+				}
+				if(getStore({ name: 'userInfo' })){
+					this.SET_USERIFNO(getStore({ name: 'userInfo' }));
+				}
 			},
 			browserRedirect(options) {
 				alert('browserRedirect')
@@ -78,6 +78,7 @@
 						scm: 'h5'
 					});
 					alert('defaultwxWebLogin--------------------------')
+					alert(this.hasLogin)
 					if(!this.hasLogin){
 						alert('defaultwxWebLogin==================begin')
 						this.defaultwxWebLogin(options);
