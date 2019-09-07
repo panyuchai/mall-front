@@ -44,6 +44,7 @@
 			// 	})
 			// },
 			initData(){
+				alert('initData------------begin')
 				if(getStore({ name: 'hasLogin' })){
 					this.SET_HASLOGIN(getStore({ name: 'hasLogin' }));
 				}
@@ -160,8 +161,10 @@
 		},
 		onLaunch: function(options) {
 			this.checkMallType();
+			alert('checkMallType  --------------end')
 			// this.defaultwxWebLogin();
 			this.initData();
+			alert('initData--------------------------end')
 			console.log('App Launch');
 			// let urlPage = options
 			// var obj = wx.getLaunchOptionsSync()
