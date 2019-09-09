@@ -8917,9 +8917,9 @@ var _store = __webpack_require__(/*! ../utils/store.js */ 8);
 var _index = _interopRequireDefault(__webpack_require__(/*! ../store/index.js */ 13));function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}function _objectSpread(target) {for (var i = 1; i < arguments.length; i++) {var source = arguments[i] != null ? arguments[i] : {};var ownKeys = Object.keys(source);if (typeof Object.getOwnPropertySymbols === 'function') {ownKeys = ownKeys.concat(Object.getOwnPropertySymbols(source).filter(function (sym) {return Object.getOwnPropertyDescriptor(source, sym).enumerable;}));}ownKeys.forEach(function (key) {_defineProperty(target, key, source[key]);});}return target;}function _defineProperty(obj, key, value) {if (key in obj) {Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true });} else {obj[key] = value;}return obj;}
 var test = new _request.default();exports.test = test;
 test.setConfig(function (config) {/* 设置全局配置 */
-  // config.baseUrl = 'http://192.168.1.104:8087';
+  config.baseUrl = 'http://192.168.1.104:8087';
   // config.baseUrl = 'http://192.168.1.110:8086';
-  config.baseUrl = 'http://192.168.1.135:8086';
+  // config.baseUrl = 'http://192.168.1.135:8086';
   config.header = {
     a: 4,
     b: 4
@@ -8964,9 +8964,9 @@ test.interceptor.response(function (response) {/* 请求之后拦截器 */
 // }
 var http = new _request.default();exports.http = http;
 http.setConfig(function (config) {/* 设置全局配置 */
-  // config.baseUrl = "http://192.168.1.104:8087"; /* 根域名不同 */
+  config.baseUrl = "http://192.168.1.104:8087"; /* 根域名不同 */
   // config.baseUrl = 'http://192.168.1.110:8086';
-  config.baseUrl = 'http://192.168.1.135:8086';
+  // config.baseUrl = 'http://192.168.1.135:8086';
   config.header = {
     // 'cookie': uni.getStorageSync('sessionid') || '123',
     a: 5
