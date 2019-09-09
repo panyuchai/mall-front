@@ -9174,16 +9174,17 @@ var state = {
   hasLogin: false,
   token: '',
   uniCode: '',
-  userInfo: {
-    accountId: '',
-    customerName: '',
-    wechatName: '',
-    customerSex: '',
-    customerBirthday: '',
-    customerImage: '',
-    customerId: '',
-    mobilephone: '' },
-
+  // userInfo: {
+  //  accountId: '',
+  //  customerName: '',
+  //  wechatName: '',
+  //  customerSex: '',
+  //  customerBirthday: '',
+  //  customerImage: '',
+  //  customerId: '',
+  //  mobilephone: ''
+  // },
+  userInfo: {},
   baseInfo: {
     mallDomain: '',
     mallId: '',
