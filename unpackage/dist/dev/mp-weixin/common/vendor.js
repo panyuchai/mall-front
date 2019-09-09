@@ -7654,7 +7654,9 @@ var getStore = function getStore(params) {
   alert('---------' + obj);
   alert('++++++++++' + (0, _validate.validatenull)(obj));
   if ((0, _validate.validatenull)(obj)) return;
+  alert('9999999999' + obj);
   obj = JSON.parse(obj);
+
   if (obj.dataType == 'string') {
     content = obj.content;
   } else if (obj.dataType == 'number') {
