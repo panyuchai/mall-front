@@ -33,27 +33,27 @@
 					});
 					alert('静默登陆成功4')
 					
-					// this.setUserInfo();
-					aler('111111')
-					this.$http.post('/mall/app/account/info')
-					.then( res => {
-						if(res.code == 0){
-							if(res.result){
-								let mobilephone = res.result.mobilephone;
-								let {accountId, customerName, wechatName, customerSex, customerBirthday, customerImage, customerId} = res.result.customer;
-								this.SET_USERIFNO({accountId, customerName, wechatName, customerSex, customerBirthday,  customerImage, customerId});
-								this.SET_USERIFNO({
-									...this.userInfo,
-									mobilephone: mobilephone
-								})
-							}
-						}else{
-							console.log('login.vue-- info接口调用失败');
-						}
-					})
-					.catch( err => {
-						console.log('login.vue-- info接口调用错误');
-					})
+					this.setUserInfo();
+					// alert('111111')
+					// this.$http.post('/mall/app/account/info')
+					// .then( res => {
+					// 	if(res.code == 0){
+					// 		if(res.result){
+					// 			let mobilephone = res.result.mobilephone;
+					// 			let {accountId, customerName, wechatName, customerSex, customerBirthday, customerImage, customerId} = res.result.customer;
+					// 			this.SET_USERIFNO({accountId, customerName, wechatName, customerSex, customerBirthday,  customerImage, customerId});
+					// 			this.SET_USERIFNO({
+					// 				...this.userInfo,
+					// 				mobilephone: mobilephone
+					// 			})
+					// 		}
+					// 	}else{
+					// 		console.log('login.vue-- info接口调用失败');
+					// 	}
+					// })
+					// .catch( err => {
+					// 	console.log('login.vue-- info接口调用错误');
+					// })
 					
 					alert('静默登陆成功5')
 					if(uni.getStorageSync('referUrl')){
@@ -76,11 +76,13 @@
 				this.SET_FIRSTLOAD(false);
 			},
 			setUserInfo(){
-				aler('111111')
+				alert('111111')
 				this.$http.post('/mall/app/account/info')
 				.then( res => {
 					if(res.code == 0){
 						if(res.result){
+							// alert(res.result.customer.accountId)
+							// alert(res.result.mobilephone)
 							let mobilephone = res.result.mobilephone;
 							let {accountId, customerName, wechatName, customerSex, customerBirthday, customerImage, customerId} = res.result.customer;
 							this.SET_USERIFNO({accountId, customerName, wechatName, customerSex, customerBirthday,  customerImage, customerId});
@@ -88,6 +90,8 @@
 								...this.userInfo,
 								mobilephone: mobilephone
 							})
+							// alert(res.result.customer.accountId)
+							// alert(res.result.mobilephone)
 						}
 					}else{
 						console.log('login.vue-- info接口调用失败');
@@ -99,7 +103,7 @@
 			},
 		},
 		computed: {
-			...mapState('common', 'baseInfo')
+			...mapState('common', 'baseInfo', 'userInfo')
 		},
 		onLoad(options){
 			this.handleTransfer(options);

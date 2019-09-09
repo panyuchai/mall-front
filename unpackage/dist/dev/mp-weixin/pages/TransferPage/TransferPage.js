@@ -123,7 +123,7 @@ var _store = __webpack_require__(/*! ../../utils/store.js */ 8);function _object
   },
   methods: _objectSpread({},
   (0, _vuex.mapMutations)('common', ['SET_HASLOGIN', 'SET_TOKEN', 'SET_FIRSTLOAD', 'SET_USERIFNO']), {
-    handleTransfer: function handleTransfer(options) {var _this = this;
+    handleTransfer: function handleTransfer(options) {
       if (options.success == 'true') {
         alert('静默登陆成功1');
         this.SET_HASLOGIN(true);
@@ -138,27 +138,27 @@ var _store = __webpack_require__(/*! ../../utils/store.js */ 8);function _object
         });
         alert('静默登陆成功4');
 
-        // this.setUserInfo();
-        aler('111111');
-        this.$http.post('/mall/app/account/info').
-        then(function (res) {
-          if (res.code == 0) {
-            if (res.result) {
-              var mobilephone = res.result.mobilephone;var _res$result$customer =
-              res.result.customer,accountId = _res$result$customer.accountId,customerName = _res$result$customer.customerName,wechatName = _res$result$customer.wechatName,customerSex = _res$result$customer.customerSex,customerBirthday = _res$result$customer.customerBirthday,customerImage = _res$result$customer.customerImage,customerId = _res$result$customer.customerId;
-              _this.SET_USERIFNO({ accountId: accountId, customerName: customerName, wechatName: wechatName, customerSex: customerSex, customerBirthday: customerBirthday, customerImage: customerImage, customerId: customerId });
-              _this.SET_USERIFNO(_objectSpread({},
-              _this.userInfo, {
-                mobilephone: mobilephone }));
-
-            }
-          } else {
-            console.log('login.vue-- info接口调用失败');
-          }
-        }).
-        catch(function (err) {
-          console.log('login.vue-- info接口调用错误');
-        });
+        this.setUserInfo();
+        // alert('111111')
+        // this.$http.post('/mall/app/account/info')
+        // .then( res => {
+        // 	if(res.code == 0){
+        // 		if(res.result){
+        // 			let mobilephone = res.result.mobilephone;
+        // 			let {accountId, customerName, wechatName, customerSex, customerBirthday, customerImage, customerId} = res.result.customer;
+        // 			this.SET_USERIFNO({accountId, customerName, wechatName, customerSex, customerBirthday,  customerImage, customerId});
+        // 			this.SET_USERIFNO({
+        // 				...this.userInfo,
+        // 				mobilephone: mobilephone
+        // 			})
+        // 		}
+        // 	}else{
+        // 		console.log('login.vue-- info接口调用失败');
+        // 	}
+        // })
+        // .catch( err => {
+        // 	console.log('login.vue-- info接口调用错误');
+        // })
 
         alert('静默登陆成功5');
         if (uni.getStorageSync('referUrl')) {
@@ -180,19 +180,23 @@ var _store = __webpack_require__(/*! ../../utils/store.js */ 8);function _object
       }
       this.SET_FIRSTLOAD(false);
     },
-    setUserInfo: function setUserInfo() {var _this2 = this;
-      aler('111111');
+    setUserInfo: function setUserInfo() {var _this = this;
+      alert('111111');
       this.$http.post('/mall/app/account/info').
       then(function (res) {
         if (res.code == 0) {
           if (res.result) {
-            var mobilephone = res.result.mobilephone;var _res$result$customer2 =
-            res.result.customer,accountId = _res$result$customer2.accountId,customerName = _res$result$customer2.customerName,wechatName = _res$result$customer2.wechatName,customerSex = _res$result$customer2.customerSex,customerBirthday = _res$result$customer2.customerBirthday,customerImage = _res$result$customer2.customerImage,customerId = _res$result$customer2.customerId;
-            _this2.SET_USERIFNO({ accountId: accountId, customerName: customerName, wechatName: wechatName, customerSex: customerSex, customerBirthday: customerBirthday, customerImage: customerImage, customerId: customerId });
-            _this2.SET_USERIFNO(_objectSpread({},
-            _this2.userInfo, {
+            // alert(res.result.customer.accountId)
+            // alert(res.result.mobilephone)
+            var mobilephone = res.result.mobilephone;var _res$result$customer =
+            res.result.customer,accountId = _res$result$customer.accountId,customerName = _res$result$customer.customerName,wechatName = _res$result$customer.wechatName,customerSex = _res$result$customer.customerSex,customerBirthday = _res$result$customer.customerBirthday,customerImage = _res$result$customer.customerImage,customerId = _res$result$customer.customerId;
+            _this.SET_USERIFNO({ accountId: accountId, customerName: customerName, wechatName: wechatName, customerSex: customerSex, customerBirthday: customerBirthday, customerImage: customerImage, customerId: customerId });
+            _this.SET_USERIFNO(_objectSpread({},
+            _this.userInfo, {
               mobilephone: mobilephone }));
 
+            // alert(res.result.customer.accountId)
+            // alert(res.result.mobilephone)
           }
         } else {
           console.log('login.vue-- info接口调用失败');
@@ -204,7 +208,7 @@ var _store = __webpack_require__(/*! ../../utils/store.js */ 8);function _object
     } }),
 
   computed: _objectSpread({},
-  (0, _vuex.mapState)('common', 'baseInfo')),
+  (0, _vuex.mapState)('common', 'baseInfo', 'userInfo')),
 
   onLoad: function onLoad(options) {
     this.handleTransfer(options);
