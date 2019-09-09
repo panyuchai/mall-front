@@ -32,7 +32,29 @@
 						return config;
 					});
 					alert('静默登陆成功4')
-					this.setUserInfo();
+					
+					// this.setUserInfo();
+					aler('111111')
+					this.$http.post('/mall/app/account/info')
+					.then( res => {
+						if(res.code == 0){
+							if(res.result){
+								let mobilephone = res.result.mobilephone;
+								let {accountId, customerName, wechatName, customerSex, customerBirthday, customerImage, customerId} = res.result.customer;
+								this.SET_USERIFNO({accountId, customerName, wechatName, customerSex, customerBirthday,  customerImage, customerId});
+								this.SET_USERIFNO({
+									...this.userInfo,
+									mobilephone: mobilephone
+								})
+							}
+						}else{
+							console.log('login.vue-- info接口调用失败');
+						}
+					})
+					.catch( err => {
+						console.log('login.vue-- info接口调用错误');
+					})
+					
 					alert('静默登陆成功5')
 					if(uni.getStorageSync('referUrl')){
 						window.location.href=uni.getStorageSync('referUrl');

@@ -295,7 +295,6 @@ var _store = __webpack_require__(/*! ../../utils/store.js */ 8);function _object
 
     },
     saveAccount: function saveAccount() {var _this2 = this;
-
       var transSexNum = this.transformSexNum(this.formData.transCustomerSex);
       this.$http.post('/mall/app/account/update', _objectSpread({},
       this.baseInfo,

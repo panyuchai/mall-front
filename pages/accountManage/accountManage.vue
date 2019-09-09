@@ -188,7 +188,6 @@
 				});
 			},
 			saveAccount(){
-				
 				let transSexNum = this.transformSexNum(this.formData.transCustomerSex);
 				this.$http.post('/mall/app/account/update', {
 					...this.baseInfo,
