@@ -19,7 +19,16 @@ const state = {
   hasLogin: false,
   token: '',
   uniCode: '',
-  userInfo: {},
+  userInfo: {
+	  accountId: '',
+	  customerName: '',
+	  wechatName: '',
+	  customerSex: '',
+	  customerBirthday: '',
+	  customerImage: '',
+	  customerId: '',
+	  mobilephone: ''
+  },
   baseInfo: {
 	  mallDomain: '',
 	  mallId: '',

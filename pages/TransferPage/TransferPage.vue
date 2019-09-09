@@ -16,6 +16,9 @@
 				initData: '888888888'
 			}
 		},
+		computed: {
+		    ...mapState("common", ['baseInfo', 'userInfo'])
+		},
 		methods: {
 			...mapMutations('common', ['SET_HASLOGIN', 'SET_TOKEN', 'SET_FIRSTLOAD', 'SET_USERIFNO']),
 			handleTransfer(options){
@@ -80,9 +83,6 @@
 					console.log('login.vue-- info接口调用错误');
 				})
 			},
-		},
-		computed: {
-			...mapState('common', 'baseInfo', 'userInfo')
 		},
 		onLoad(options){
 			this.handleTransfer(options);

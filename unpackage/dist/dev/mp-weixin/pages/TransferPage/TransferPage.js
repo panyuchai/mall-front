@@ -121,6 +121,9 @@ var _store = __webpack_require__(/*! ../../utils/store.js */ 8);function _object
       initData: '888888888' };
 
   },
+  computed: _objectSpread({},
+  (0, _vuex.mapState)("common", ['baseInfo', 'userInfo'])),
+
   methods: _objectSpread({},
   (0, _vuex.mapMutations)('common', ['SET_HASLOGIN', 'SET_TOKEN', 'SET_FIRSTLOAD', 'SET_USERIFNO']), {
     handleTransfer: function handleTransfer(options) {
@@ -185,9 +188,6 @@ var _store = __webpack_require__(/*! ../../utils/store.js */ 8);function _object
         console.log('login.vue-- info接口调用错误');
       });
     } }),
-
-  computed: _objectSpread({},
-  (0, _vuex.mapState)('common', 'baseInfo', 'userInfo')),
 
   onLoad: function onLoad(options) {
     this.handleTransfer(options);
