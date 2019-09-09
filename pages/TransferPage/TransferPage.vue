@@ -53,6 +53,7 @@
 						if(res.result){
 							let mobilephone = res.result.mobilephone;
 							let {accountId, customerName, wechatName, customerSex, customerBirthday, customerImage, customerId} = res.result.customer;
+							alert({accountId, customerName, wechatName, customerSex, customerBirthday, customerImage, customerId})
 							this.SET_USERIFNO({accountId, customerName, wechatName, customerSex, customerBirthday,  customerImage, customerId});
 							this.SET_USERIFNO({
 								...this.userInfo,
