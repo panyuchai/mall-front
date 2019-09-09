@@ -7652,6 +7652,7 @@ var getStore = function getStore(params) {
   obj = uni.getStorageSync(name);
   if ((0, _validate.validatenull)(obj)) obj = uni.getStorage(name);
   alert('---------' + obj);
+  alert('++++++++++' + (0, _validate.validatenull)(obj));
   if ((0, _validate.validatenull)(obj)) return;
   obj = JSON.parse(obj);
   if (obj.dataType == 'string') {

@@ -73,11 +73,10 @@
 				// if(uni.getStorageSync('userInfo')){
 				// 	this.SET_USERIFNO(uni.getStorageSync('userInfo'));
 				// }
-				alert('44444444')
-				alert('55555555555555555'+getStore({ name: 'userInfo' }));
-				alert('6666666')
-				if(getStore({ name: 'userInfo' })){
-					this.SET_USERIFNO(getStore({ name: 'userInfo' }));
+				let aaa = getStore({ name: 'userInfo' })
+				alert(aaa)
+				if(aaa){
+					this.SET_USERIFNO(aaa);
 				}
 				alert('getStore userInfo-------------结束');
 			},
