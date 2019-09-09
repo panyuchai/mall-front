@@ -156,8 +156,11 @@ var _store = __webpack_require__(/*! ../../utils/store.js */ 8);function _object
       then(function (res) {
         if (res.code == 0) {
           if (res.result) {
-            var mobilephone = res.result.mobilephone;var _ref =
-            res.result && res.result.customer,accountId = _ref.accountId,customerName = _ref.customerName,wechatName = _ref.wechatName,customerSex = _ref.customerSex,customerBirthday = _ref.customerBirthday,customerImage = _ref.customerImage,customerId = _ref.customerId;
+            aler('111111');
+            var mobilephone = res.result.mobilephone;var _res$result$customer =
+            res.result.customer,accountId = _res$result$customer.accountId,customerName = _res$result$customer.customerName,wechatName = _res$result$customer.wechatName,customerSex = _res$result$customer.customerSex,customerBirthday = _res$result$customer.customerBirthday,customerImage = _res$result$customer.customerImage,customerId = _res$result$customer.customerId;
+            alert(res.result.customer.accountId);
+            alert(res.result.customer.mobilephone);
             _this.SET_USERIFNO({ accountId: accountId, customerName: customerName, wechatName: wechatName, customerSex: customerSex, customerBirthday: customerBirthday, customerImage: customerImage, customerId: customerId });
             _this.SET_USERIFNO(_objectSpread({},
             _this.userInfo, {
