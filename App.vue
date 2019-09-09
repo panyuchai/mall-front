@@ -73,7 +73,7 @@
 				// if(uni.getStorageSync('userInfo')){
 				// 	this.SET_USERIFNO(uni.getStorageSync('userInfo'));
 				// }
-				alert(getStore({ name: 'userInfo' }));
+				alert(55555555555555555+getStore({ name: 'userInfo' }));
 				if(getStore({ name: 'userInfo' })){
 					this.SET_USERIFNO(getStore({ name: 'userInfo' }));
 				}
