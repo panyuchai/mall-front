@@ -20,23 +20,29 @@
 			...mapMutations('common', ['SET_HASLOGIN', 'SET_TOKEN', 'SET_FIRSTLOAD', 'SET_USERIFNO']),
 			handleTransfer(options){
 				if(options.success == 'true'){
-					alert('静默登陆成功')
+					alert('静默登陆成功1')
 					this.SET_HASLOGIN(true);
+					alert('静默登陆成功2')
 					this.SET_TOKEN(options.token);
+					alert('静默登陆成功3')
 					this.$http.setConfig((config) => {
 						// config.header['Authorization'] = 'Bearer ' + getStore({ name: 'token' });
 						config.header['Authorization'] = 'Bearer ' + options.token;
 						return config;
 					});
+					alert('静默登陆成功4')
 					this.setUserInfo();
+					alert('静默登陆成功5')
 					if(uni.getStorageSync('referUrl')){
 						window.location.href=uni.getStorageSync('referUrl');
 						uni.removeStorageSync('referUrl');
 					}else{
+						alert('静默登陆成功6')
 						uni.switchTab({
 							url: '/pages/index/index?'
 						});
 					}
+					alert('静默登陆成功')
 				}else{
 					alert('静默登陆失败')
 					uni.setStorageSync('openid',options.openid)
