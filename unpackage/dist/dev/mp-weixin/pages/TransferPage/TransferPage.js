@@ -173,6 +173,7 @@ var _store = __webpack_require__(/*! ../../utils/store.js */ 8);function _object
             _this.userInfo, {
               mobilephone: mobilephone }));
 
+            alert(_this);
             alert(_this.userInfo.accountId);
             alert(_this.userInfo.mobilephone);
           }
