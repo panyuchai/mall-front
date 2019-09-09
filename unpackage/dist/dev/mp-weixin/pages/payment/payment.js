@@ -309,36 +309,42 @@ var _vuex = __webpack_require__(/*! vuex */ 10);function _objectSpread(target) {
         console.log(err);
       });
     },
-    handleWxWebPay: function handleWxWebPay() {
-      // function onBridgeReady(){
-      //    WeixinJSBridge.invoke(
-      //       'getBrandWCPayRequest', {
-      //          "appId":"wx2421b1c4370ec43b",     //公众号名称，由商户传入     
-      //          "timeStamp":"1395712654",         //时间戳，自1970年以来的秒数     
-      //          "nonceStr":"e61463f8efa94090b1f366cccfbbb444", //随机串     
-      //          "package":"prepay_id=u802345jgfjsdfgsdg888",     
-      //          "signType":"MD5",         //微信签名方式：     
-      //          "paySign":"70EA570631E4BB79628FBCA90534C63FF7FADD89" //微信签名 
-      //       },
-      //       function(res){
-      //       if(res.err_msg == "get_brand_wcpay_request:ok" ){
-      //       // 使用以上方式判断前端返回,微信团队郑重提示：
-      //             //res.err_msg将在用户支付成功后返回ok，但并不保证它绝对可靠。
-      //       } 
-      //    }); 
-      // }
-      // if (typeof WeixinJSBridge == "undefined"){
-      //    if( document.addEventListener ){
-      //        document.addEventListener('WeixinJSBridgeReady', onBridgeReady, false);
-      //    }else if (document.attachEvent){
-      //        document.attachEvent('WeixinJSBridgeReady', onBridgeReady); 
-      //        document.attachEvent('onWeixinJSBridgeReady', onBridgeReady);
-      //    }
-      // }else{
-      //    onBridgeReady();
-      // }
+    handleWxWebPay: function handleWxWebPay() {var _this2 = this;
+      this.$http.post('/mall/app/order/submit', _objectSpread({},
+      data, {
+        payChannels: '6' })).
+
+      then(function (res) {
+        if (res.result.orderState == 1) {
+          uni.showToast({
+            icon: 'none',
+            title: '订单提交成功' });
+
+          setTimeout(function () {
+            uni.redirectTo({
+              url: '/pages/orderDetail/orderDetail' });
+
+          }, 1000);
+        } else {
+          _this2.$http.post('/mall/app/order/submit', _objectSpread({},
+          data, {
+            payChannels: '6',
+            callBackNo: res.result.orderNo })).
+
+          then(function (res) {
+            console.log(res);
+          }).
+          catch(function (err) {
+            console.log(err);
+          });
+        }
+
+      }).
+      catch(function (err) {
+        console.log(err);
+      });
     },
-    handleWebPay: function handleWebPay(data) {var _this2 = this;
+    handleWebPay: function handleWebPay(data) {var _this3 = this;
       this.$http.post('/mall/app/order/submit', _objectSpread({},
       data, {
         payChannels: '2' })).
@@ -355,7 +361,7 @@ var _vuex = __webpack_require__(/*! vuex */ 10);function _objectSpread(target) {
 
           }, 1000);
         } else {
-          _this2.$http.post('/mall/app/order/submit', _objectSpread({},
+          _this3.$http.post('/mall/app/order/submit', _objectSpread({},
           data, {
             payChannels: '2',
             callBackNo: res.result.orderNo })).
@@ -462,7 +468,7 @@ var _vuex = __webpack_require__(/*! vuex */ 10);function _objectSpread(target) {
         this.isWeb = true;
       }
     },
-    getOrderData: function getOrderData() {var _this3 = this;
+    getOrderData: function getOrderData() {var _this4 = this;
       this.$http.post('/mall/app/order/confirm', _objectSpread({},
       this.baseInfo, {
         accountId: this.userInfo.accountId,
@@ -473,18 +479,18 @@ var _vuex = __webpack_require__(/*! vuex */ 10);function _objectSpread(target) {
         console.log(res);
         if (res.code == 0) {
           if (!res.result.address) {
-            _this3.hasAddress = false;
+            _this4.hasAddress = false;
           }
-          _this3.payData = res.result;
-          _this3.address = res.result.address || {};
-          _this3.address.addressRecipients = res.result.address && res.result.address.addressRecipients || '请先去创建地址';
+          _this4.payData = res.result;
+          _this4.address = res.result.address || {};
+          _this4.address.addressRecipients = res.result.address && res.result.address.addressRecipients || '请先去创建地址';
           res.result.goodsListDetailList.map(function (item) {
             item.mallGoodsId = item.id;
-            _this3.goodsList.push(item);
+            _this4.goodsList.push(item);
           });
-          _this3.fee = res.result.express.fee;
+          _this4.fee = res.result.express.fee;
           if (uni.getStorageSync('chooseAddress')) {
-            _this3.address = uni.getStorageSync('chooseAddress');
+            _this4.address = uni.getStorageSync('chooseAddress');
           }
         } else {
           console.log('payment.vue-- confirm接口获取数据失败');

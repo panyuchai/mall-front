@@ -186,11 +186,6 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
-
-
-
-
-
 var _vuex = __webpack_require__(/*! vuex */ 10);function _objectSpread(target) {for (var i = 1; i < arguments.length; i++) {var source = arguments[i] != null ? arguments[i] : {};var ownKeys = Object.keys(source);if (typeof Object.getOwnPropertySymbols === 'function') {ownKeys = ownKeys.concat(Object.getOwnPropertySymbols(source).filter(function (sym) {return Object.getOwnPropertyDescriptor(source, sym).enumerable;}));}ownKeys.forEach(function (key) {_defineProperty(target, key, source[key]);});}return target;}function _defineProperty(obj, key, value) {if (key in obj) {Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true });} else {obj[key] = value;}return obj;}var uniLoadMore = function uniLoadMore() {return __webpack_require__.e(/*! import() | components/uni-load-more/uni-load-more */ "components/uni-load-more/uni-load-more").then(__webpack_require__.bind(null, /*! @/components/uni-load-more/uni-load-more.vue */ 423));};var empty = function empty() {return __webpack_require__.e(/*! import() | components/empty/empty */ "components/empty/empty").then(__webpack_require__.bind(null, /*! @/components/empty/empty */ 430));};var _default =
 
 
@@ -203,40 +198,9 @@ var _vuex = __webpack_require__(/*! vuex */ 10);function _objectSpread(target) {
 
   data: function data() {
     return {
-      tabCurrentIndex: 0,
-      navList: [{
-        state: 0,
-        text: '全部',
-        loadingType: 'more',
-        orderList: [] },
-
-      {
-        state: 1,
-        text: '待付款',
-        loadingType: 'more',
-        orderList: [] },
-
-      {
-        state: 2,
-        text: '待收货',
-        loadingType: 'more',
-        orderList: [] },
-
-      {
-        state: 3,
-        text: '已完成',
-        loadingType: 'more',
-        orderList: [] },
-
-      {
-        state: 4,
-        text: '售后',
-        loadingType: 'more',
-        orderList: [] }],
-
-
       listData: [],
       searchData: {
+        orderState: null,
         accountId: '',
         pageNum: 1,
         query: '' },
@@ -256,14 +220,10 @@ var _vuex = __webpack_require__(/*! vuex */ 10);function _objectSpread(target) {
     }
     this.tabCurrentIndex = +options.state;
 
-
-
-
-
+    this.loadData();
     if (options.state == 0) {
       this.loadData();
     }
-
 
   },
   onReachBottom: function onReachBottom() {
@@ -319,6 +279,7 @@ var _vuex = __webpack_require__(/*! vuex */ 10);function _objectSpread(target) {
             // this.listData.map(item => {
             // 	this.$set(item, 'orderStateName', this.transOrderState(item.orderlistState));
             // });
+            // console.log(this.listData)
             if (_this.searchData.pageNum == 1) {
               if (res.result.records) {
                 _this.listData = res.result.records;
@@ -362,11 +323,11 @@ var _vuex = __webpack_require__(/*! vuex */ 10);function _objectSpread(target) {
         orderList.forEach(function (item) {
           navItem.orderList.push(item);
         });
-        // loaded新字段用于表示数据加载完毕，如果为空可以显示空白页
-        _this.$set(navItem, 'loaded', true);
-
-        //判断是否还有数据， 有改为 more， 没有改为noMore 
-        navItem.loadingType = 'more';
+        // // loaded新字段用于表示数据加载完毕，如果为空可以显示空白页
+        // this.$set(navItem, 'loaded', true);
+        // 
+        // //判断是否还有数据， 有改为 more， 没有改为noMore 
+        // navItem.loadingType = 'more';
       }, 600);
     },
 

@@ -7,74 +7,79 @@
 			</view>
 		</view>
 		<view class="navbar">
-			<view class="nav-item" @tap="doQuery(0)" v-bind:class='searchData.orderType==0 ? "red" : ""'>
-				全部
-			</view>
-			<view class="nav-item" @tap="doQuery(1)" v-bind:class='searchData.orderType==0 ? "red" : ""'>
-				待付款
-			</view>
-			<view class="nav-item" @tap="doQuery(1)" v-bind:class='searchData.orderType==0 ? "red" : ""'>
-				待收货
-			</view>
-			<view class="nav-item" @tap="doQuery(1)" v-bind:class='searchData.orderType==0 ? "red" : ""'>
-				已完成
-			</view>
-			<view class="nav-item" @tap="doQuery(1)" v-bind:class='searchData.orderType==0 ? "red" : ""'>
-				售后
+			<view 
+				v-for="(item, index) in navList" :key="index" 
+				class="nav-item" 
+				:class="{current: tabCurrentIndex === index}"
+				@click="tabClick(index)"
+			>
+				{{item.text}}
 			</view>
 		</view>
-		
-		<view v-if='notFound' class="product-empty">
-			<view class="not-tips">
-				没有找到相关搜索结果
-			</view>
-		</view>
-		<view class="swiper-box">
-			<view class="list-scroll-content">
-				<view class="order-item" v-for="item in listData" @tap="linkToDetail()">
-					<view class="hd">
-						<view class="number">
-							订单编号：<text>{{item.orderlistMainnum}}</text>
-						</view>
-						<view class="state">
-							<text>{{item.orderStateName}}</text>
-						</view>
-					</view>
-					<view class="bd" v-for="(good, i) in item.details">
-						<view class="pic">
-							<image class="img" :src="good.imageUrl" mode="aspectFill"></image>
-						</view>
-						<view class="info">
-							<view class="tit">
-								{{good.goodsProductname}}
+
+		<swiper :current="tabCurrentIndex" class="swiper-box" duration="300" @change="changeTab">
+			<swiper-item class="tab-content" v-for="(tabItem,tabIndex) in navList" :key="tabIndex">
+				<scroll-view 
+					class="list-scroll-content" 
+					scroll-y
+					@scrolltolower="loadData"
+				>
+					<!-- 空白页 -->
+					<empty v-if="tabItem.loaded === true && tabItem.orderList.length === 0"></empty>
+					
+					<!-- 订单列表 -->
+					<view 
+						v-for="(item,index) in tabItem.orderList" :key="index"
+						class="order-item"
+						 @tap="linkToDetail()"
+					>
+						<view class="hd">
+							<view class="number">
+								订单编号：<text>{{item.orderlistMainnum}}</text>
 							</view>
-							<view class="con">
-								<view class="_left">
-									共{{good.goodsCount}}件商品
-								</view>
-								<view class="_right">
-									实付金额：<text class="price">¥{{good.goodsRelprice}}</text>
-								</view>
+							<view class="state">
+								<text>{{item.orderStateName}}</text>
 							</view>
 						</view>
+						<view class="bd" v-for="(good, i) in item.details">
+							<view class="pic">
+								<image class="img" :src="good.imageUrl" mode="aspectFill"></image>
+							</view>
+							<view class="info">
+								<view class="tit">
+									{{good.goodsProductname}}
+								</view>
+								<view class="con">
+									<view class="_left">
+										共{{good.goodsCount}}件商品
+									</view>
+									<view class="_right">
+										实付金额：<text class="price">¥{{good.goodsRelprice}}</text>
+									</view>
+								</view>
+							</view>
+						</view>
+						<view class="fd">
+							<view class="action-btn" v-if="item.state == 1" @tap.stop="cancelOrder()">
+								取消订单
+							</view>
+							<view class="action-btn action-red" v-if="item.state == 1" @tap.stop="linkToPayment()">
+								去付款
+							</view>
+							<view class="action-btn " v-if="item.state==2 || item.state==3 || item.state==4" @tap.stop="linkToDelivery()">
+								查看物流详情
+							</view>
+							<view class="action-btn action-red" v-if="item.state == 2"  @tap.stop="confirmOrder()">
+								确认收货
+							</view>
+						</view>
 					</view>
-					<view class="fd">
-						<view class="action-btn" v-if="item.state == 1" @tap.stop="cancelOrder()">
-							取消订单
-						</view>
-						<view class="action-btn action-red" v-if="item.state == 1" @tap.stop="linkToPayment()">
-							去付款
-						</view>
-						<view class="action-btn " v-if="item.state==2 || item.state==3 || item.state==4" @tap.stop="linkToDelivery()">
-							查看物流详情
-						</view>
-						<view class="action-btn action-red" v-if="item.state == 2"  @tap.stop="confirmOrder()">
-							确认收货
-						</view>
-					</view>
-				</view>
-			</view>
-		</view>
+					 
+					<uni-load-more :status="tabItem.loadingType"></uni-load-more>
+					
+				</scroll-view>
+			</swiper-item>
+		</swiper>
 	</view>
 </template> 
 
@@ -91,9 +96,40 @@
 		},
 		data() {
 			return {
+				tabCurrentIndex: 0,
+				navList: [{
+						state: 0,
+						text: '全部',
+						loadingType: 'more',
+						orderList: []
+					},
+					{
+						state: 1,
+						text: '待付款',
+						loadingType: 'more',
+						orderList: []
+					},
+					{
+						state: 2,
+						text: '待收货',
+						loadingType: 'more',
+						orderList: []
+					},
+					{
+						state: 3,
+						text: '已完成',
+						loadingType: 'more',
+						orderList: []
+					},
+					{
+						state: 4,
+						text: '售后',
+						loadingType: 'more',
+						orderList: []
+					}
+				],
 				listData: [],
 				searchData: {
-					orderState: null,
 					accountId: '',
 					pageNum: 1,
 					query: ''
