@@ -32,7 +32,7 @@ export const getStore = (params) => {
   let obj = {},
       content;
   obj = uni.getStorageSync(name);
-  if (validatenull(obj)) obj = uni.getStorage(name);
+  // if (validatenull(obj)) obj = uni.getStorage(name);
   alert('---------'+ obj )
   alert('++++++++++'+ validatenull(obj) )
   if (validatenull(obj)) return;

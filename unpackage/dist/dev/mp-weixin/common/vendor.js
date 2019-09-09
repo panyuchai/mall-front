@@ -7650,7 +7650,7 @@ var getStore = function getStore(params) {
   var obj = {},
   content;
   obj = uni.getStorageSync(name);
-  if ((0, _validate.validatenull)(obj)) obj = uni.getStorage(name);
+  // if (validatenull(obj)) obj = uni.getStorage(name);
   alert('---------' + obj);
   alert('++++++++++' + (0, _validate.validatenull)(obj));
   if ((0, _validate.validatenull)(obj)) return;
