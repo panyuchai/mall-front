@@ -356,7 +356,7 @@ var _vuex = __webpack_require__(/*! vuex */ 10);function _objectSpread(target) {
           if (res.confirm) {
             _this2.$http.post('/mall/app/car/delete', _objectSpread({},
             _this2.baseInfo, {
-              accountId: _this2.userInfo.accountId,
+              accountId: _this2.userInfo && _this2.userInfo.accountId,
               shopcarIds: shopcarId })).
 
             then(function (res) {

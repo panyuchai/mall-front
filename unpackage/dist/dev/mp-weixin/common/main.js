@@ -101,11 +101,11 @@ var _api = __webpack_require__(/*! ./api/api.js */ 11);function _objectSpread(ta
   methods: _objectSpread({},
   (0, _vuex.mapMutations)("common", ['SET_BASEINFO', 'SET_USERIFNO', 'SET_UNICODE', 'SET_HASLOGIN', 'SET_TOKEN', 'SET_MALLTYPE', 'SET_MALLID']), {
     checkMallType: function checkMallType() {var _this = this;
+      alert('checkMallType');
       this.$http.post('/mall/app/login/mall/shopmall/type', {
         mallDomain: this.mallDomain }).
 
       then(function (res) {
-        // console.log(res);
         if (res.code == 0) {
           _this.SET_BASEINFO(_objectSpread({},
           _this.baseInfo, {
@@ -136,52 +136,74 @@ var _api = __webpack_require__(/*! ./api/api.js */ 11);function _objectSpread(ta
     // 	})
     // },
     initData: function initData() {
-      if ((0, _store.getStore)({ name: 'hasLogin' })) {
-        this.SET_HASLOGIN((0, _store.getStore)({ name: 'hasLogin' }));
+      alert('initData------------begin');
+      // alert(getStore({ name: 'hasLogin' }));
+      // if(getStore({ name: 'hasLogin' })){
+      // 	this.SET_HASLOGIN(getStore({ name: 'hasLogin' }));
+      // }
+      // if(getStore({ name: 'token' })){
+      // 	this.SET_TOKEN(getStore({ name: 'token' }));
+      // }
+      // if(getStore({ name: 'uniCode' })){
+      // 	this.SET_UNICODE(getStore({ name: 'uniCode' }));
+      // }
+      // if(getStore({ name: 'userInfo' })){
+      // 	this.SET_USERIFNO(getStore({ name: 'userInfo' }));
+      // }
+      if (uni.getStorageSync('hasLogin')) {
+        this.SET_HASLOGIN(uni.getStorageSync('hasLogin'));
       }
-      if ((0, _store.getStore)({ name: 'token' })) {
-        this.SET_TOKEN((0, _store.getStore)({ name: 'token' }));
+      if (uni.getStorageSync('token')) {
+        this.SET_TOKEN(uni.getStorageSync('token'));
       }
-      if ((0, _store.getStore)({ name: 'uniCode' })) {
-        this.SET_UNICODE((0, _store.getStore)({ name: 'uniCode' }));
+      if (uni.getStorageSync('uniCode')) {
+        this.SET_UNICODE(uni.getStorageSync('uniCode'));
       }
+      alert('getStore userInfo-------------开始');
+      // if(uni.getStorageSync('userInfo')){
+      // 	this.SET_USERIFNO(uni.getStorageSync('userInfo'));
+      // }
       if ((0, _store.getStore)({ name: 'userInfo' })) {
         this.SET_USERIFNO((0, _store.getStore)({ name: 'userInfo' }));
       }
+      alert('getStore userInfo-------------结束');
     },
     browserRedirect: function browserRedirect(options) {
+      alert('browserRedirect');
       var sUserAgent = navigator.userAgent.toLowerCase();
-      var bIsIpad = sUserAgent.match(/ipad/i) == "ipad";
-      var bIsIphoneOs = sUserAgent.match(/iphone os/i) == "iphone os";
-      var bIsMidp = sUserAgent.match(/midp/i) == "midp";
-      var bIsUc7 = sUserAgent.match(/rv:1.2.3.4/i) == "rv:1.2.3.4";
-      var bIsUc = sUserAgent.match(/ucweb/i) == "ucweb";
-      var bIsAndroid = sUserAgent.match(/android/i) == "android";
-      var bIsCE = sUserAgent.match(/windows ce/i) == "windows ce";
-      var bIsWM = sUserAgent.match(/windows mobile/i) == "windows mobile";
+      // var bIsIpad = sUserAgent.match(/ipad/i) == "ipad";
+      // var bIsIphoneOs = sUserAgent.match(/iphone os/i) == "iphone os";
+      // var bIsMidp = sUserAgent.match(/midp/i) == "midp";
+      // var bIsUc7 = sUserAgent.match(/rv:1.2.3.4/i) == "rv:1.2.3.4";
+      // var bIsUc = sUserAgent.match(/ucweb/i) == "ucweb";
+      // var bIsAndroid = sUserAgent.match(/android/i) == "android";
+      // var bIsCE = sUserAgent.match(/windows ce/i) == "windows ce";
+      // var bIsWM = sUserAgent.match(/windows mobile/i) == "windows mobile";
       var bIsWeChat = sUserAgent.match(/MicroMessenger/i) == "micromessenger"; //微信端
-      if (bIsIpad || bIsIphoneOs || bIsMidp || bIsUc7 || bIsUc || bIsAndroid || bIsCE || bIsWM) {
-        console.log('h5端');
-        this.SET_BASEINFO(_objectSpread({},
-        this.baseInfo, {
-          scm: 'pc' }));
-
-      } else if (bIsWeChat) {
-        console.log('wx h5端');
+      if (bIsWeChat) {
+        alert('wx h5端');
         this.SET_BASEINFO(_objectSpread({},
         this.baseInfo, {
           scm: 'h5' }));
 
+        alert('defaultwxWebLogin--------------------------');
+        alert(this.hasLogin);
         if (!this.hasLogin) {
+          alert('defaultwxWebLogin==================begin');
           this.defaultwxWebLogin(options);
         }
       } else {
-        console.log("App.vue--非h5环境");
+        alert('h5端');
+        this.SET_BASEINFO(_objectSpread({},
+        this.baseInfo, {
+          scm: 'pc' }));
+
       }
     },
     defaultwxWebLogin: function defaultwxWebLogin(options) {
-      alert('微信h5环境');
+      alert('微信h5环境defaultwxWebLogin');
       if (document.referrer) {
+        alert(document.referrer);
         uni.setStorageSync('referUrl', document.referrer);
       }
       var reg = /\/TransferPage\/TransferPage/ig;
@@ -252,11 +274,12 @@ var _api = __webpack_require__(/*! ./api/api.js */ 11);function _objectSpread(ta
 
   onLaunch: function onLaunch(options) {
     this.checkMallType();
+    alert('checkMallType  --------------end');
     // this.defaultwxWebLogin();
     this.initData();
+    alert('initData--------------------------end');
     console.log('App Launch');
     // let urlPage = options
-
     // var obj = wx.getLaunchOptionsSync()
     // console.log('启动小程序的路径:',obj.path)
     // console.log('启动小程序的场景值:', obj.scene)
@@ -269,6 +292,7 @@ var _api = __webpack_require__(/*! ./api/api.js */ 11);function _objectSpread(ta
 
     if (navigator && navigator.userAgent) {
       // 非小程序环境
+      alert('非小程序环境');
       this.browserRedirect(options);
     } else {
       // 小程序环境
@@ -403,6 +427,7 @@ var _api = __webpack_require__(/*! ./api/api.js */ 11);function _objectSpread(ta
   },
   onHide: function onHide() {
     console.log('App Hide');
+
   } };exports.default = _default;
 /* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./node_modules/@dcloudio/uni-mp-weixin/dist/index.js */ 1)["default"]))
 

@@ -218,7 +218,7 @@ var _vuex = __webpack_require__(/*! vuex */ 10);function _objectSpread(target) {
   (0, _vuex.mapState)("common", ['hasLogin', 'userInfo', 'baseInfo'])),
 
   methods: {
-    // ...mapMutations(['logout']),
+    // ...mapMutations('common', ['SET_USERIFNO']),
     bindLogin: function bindLogin() {
       uni.navigateTo({
         url: '../login/login' });
@@ -243,6 +243,7 @@ var _vuex = __webpack_require__(/*! vuex */ 10);function _objectSpread(target) {
         url: url });
 
     },
+
     // userInitData(){
     // 	this.$http.post('/mall/app/account/info')
     // 	.then( res => {
@@ -256,7 +257,7 @@ var _vuex = __webpack_require__(/*! vuex */ 10);function _objectSpread(target) {
     initPayNum: function initPayNum() {var _this = this;
       this.$http.post('/mall/app/order/count', _objectSpread({},
       this.baseInfo, {
-        accountId: this.userInfo.accountId,
+        accountId: this.userInfo && this.userInfo.accountId,
         orderState: [0] })).
 
       then(function (res) {
@@ -271,7 +272,7 @@ var _vuex = __webpack_require__(/*! vuex */ 10);function _objectSpread(target) {
     initToReceivedNum: function initToReceivedNum() {var _this2 = this;
       this.$http.post('/mall/app/order/count', _objectSpread({},
       this.baseInfo, {
-        accountId: this.userInfo.accountId,
+        accountId: this.userInfo && this.userInfo.accountId,
         orderState: [1, 2] })).
 
       then(function (res) {

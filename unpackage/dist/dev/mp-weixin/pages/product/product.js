@@ -273,7 +273,7 @@ var _vuex = __webpack_require__(/*! vuex */ 10);function _objectSpread(target) {
       this.searchData.orderType = orderType || 0;
 
       this.$http.post('/mall/app/goods/list', _objectSpread({
-        accountId: this.userInfo.accountId || '' },
+        accountId: this.userInfo && this.userInfo.accountId || '' },
       this.baseInfo,
       this.searchData)).
 

@@ -105,7 +105,7 @@ __webpack_require__.r(__webpack_exports__);
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-/* WEBPACK VAR INJECTION */(function(uni) {Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0;var uniLoadMore = function uniLoadMore() {return __webpack_require__.e(/*! import() | components/uni-load-more/uni-load-more */ "components/uni-load-more/uni-load-more").then(__webpack_require__.bind(null, /*! @/components/uni-load-more/uni-load-more.vue */ 423));};var empty = function empty() {return __webpack_require__.e(/*! import() | components/empty/empty */ "components/empty/empty").then(__webpack_require__.bind(null, /*! @/components/empty/empty */ 430));};var _default =
+/* WEBPACK VAR INJECTION */(function(uni) {Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0;
 
 
 
@@ -189,6 +189,9 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
+
+
+var _vuex = __webpack_require__(/*! vuex */ 10);function _objectSpread(target) {for (var i = 1; i < arguments.length; i++) {var source = arguments[i] != null ? arguments[i] : {};var ownKeys = Object.keys(source);if (typeof Object.getOwnPropertySymbols === 'function') {ownKeys = ownKeys.concat(Object.getOwnPropertySymbols(source).filter(function (sym) {return Object.getOwnPropertyDescriptor(source, sym).enumerable;}));}ownKeys.forEach(function (key) {_defineProperty(target, key, source[key]);});}return target;}function _defineProperty(obj, key, value) {if (key in obj) {Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true });} else {obj[key] = value;}return obj;}var uniLoadMore = function uniLoadMore() {return __webpack_require__.e(/*! import() | components/uni-load-more/uni-load-more */ "components/uni-load-more/uni-load-more").then(__webpack_require__.bind(null, /*! @/components/uni-load-more/uni-load-more.vue */ 423));};var empty = function empty() {return __webpack_require__.e(/*! import() | components/empty/empty */ "components/empty/empty").then(__webpack_require__.bind(null, /*! @/components/empty/empty */ 430));};var _default =
 
 
 
@@ -232,121 +235,13 @@ __webpack_require__.r(__webpack_exports__);
         orderList: [] }],
 
 
-      listData: [
-      {
-        orderNum: '123451234325',
-        state: 3,
-        goodsList: [
-        {
-          imgSrc: 'https://ss0.bdstatic.com/70cFuHSh_Q1YnxGkpoWK1HF6hhy/it/u=4031878334,2682695508&fm=11&gp=0.jpg',
-          tit: '三只松鼠猪肉铺 猪肉干肉脯 靖江特产休闲靖江特产休闲靖江特产休闲靖江特产休闲靖江特产休闲',
-          num: '1',
-          price: '112.80' }] },
+      listData: [],
+      searchData: {
+        accountId: '',
+        pageNum: 1,
+        query: '' },
 
-
-
-
-      {
-        orderNum: '123451234325',
-        state: 1,
-        goodsList: [
-        {
-          imgSrc: 'https://ss0.bdstatic.com/70cFuHSh_Q1YnxGkpoWK1HF6hhy/it/u=4031878334,2682695508&fm=11&gp=0.jpg',
-          tit: '三只松鼠猪肉铺 猪肉干肉脯 靖江特产休闲',
-          num: '1',
-          price: '112.80' }] },
-
-
-
-
-      {
-        orderNum: '123451234325',
-        state: 4,
-        goodsList: [
-        {
-          imgSrc: 'https://ss0.bdstatic.com/70cFuHSh_Q1YnxGkpoWK1HF6hhy/it/u=4031878334,2682695508&fm=11&gp=0.jpg',
-          tit: '三只松鼠猪肉铺 猪肉干肉脯 靖江特产休闲',
-          num: '1',
-          price: '112.80' }] },
-
-
-
-
-      {
-        orderNum: '123451234325',
-        state: 2,
-        goodsList: [
-        {
-          imgSrc: 'https://ss0.bdstatic.com/70cFuHSh_Q1YnxGkpoWK1HF6hhy/it/u=4031878334,2682695508&fm=11&gp=0.jpg',
-          tit: '三只松鼠猪肉铺 猪肉干肉脯 靖江特产休闲',
-          num: '1',
-          price: '112.80' }]
-
-
-
-
-        // {
-        // 	time: '2019-04-06 11:37',
-        // 	state: 9,
-        // 	goodsList: [{
-        // 		title: '古黛妃 短袖t恤女 春夏装2019新款韩版宽松',
-        // 		price: 179.5,
-        // 		image: 'https://img13.360buyimg.com/n8/jfs/t1/30343/20/1029/481370/5c449438Ecb46a15b/2b2adccb6dc742fd.jpg',
-        // 		number: 1,
-        // 		attr: '珊瑚粉 M'
-        // 	}]
-        // },
-        // {
-        // 	time: '2019-04-06 11:37',
-        // 	state: 1,
-        // 	goodsList: [{
-        // 			image: 'https://img.alicdn.com/imgextra/https://img.alicdn.com/imgextra/i2/2120460599/O1CN01LBPS4C1GINkwsOTXS_!!2120460599.jpg_430x430q90.jpg',
-        // 		},
-        // 		{
-        // 			image: 'https://img.alicdn.com/imgextra/i2/1069876356/TB2ocTQG4WYBuNjy1zkXXXGGpXa_!!1069876356.jpg_430x430q90.jpg',
-        // 		},
-        // 		{
-        // 			image: 'https://img.alicdn.com/imgextra/https://img.alicdn.com/imgextra/i4/2120460599/O1CN01YsmgwZ1GINkv38rkn_!!2120460599.jpg_430x430q90.jpg',
-        // 		}
-        // 	]
-        // },
-        // {
-        // 	time: '2019-04-06 11:37',
-        // 	state: 1,
-        // 	goodsList: [{
-        // 		title: '回力女鞋高帮帆布鞋女学生韩版鞋子女2019潮鞋女鞋新款春季板鞋女',
-        // 		price: 69,
-        // 		image: 'https://img.alicdn.com/imgextra/i3/2128794607/TB2gzzoc41YBuNjy1zcXXbNcXXa_!!2128794607.jpg_430x430q90.jpg',
-        // 		number: 1,
-        // 		attr: '白色-高帮 39'
-        // 	}]
-        // },
-        // {
-        // 	time: '2019-04-06 11:37',
-        // 	state: 1,
-        // 	goodsList: [{
-        // 			image: 'https://img.alicdn.com/imgextra/https://img.alicdn.com/imgextra/i4/3358098495/O1CN01dhYyid2Ccl5MWLDok_!!3358098495.jpg_430x430q90.jpg',
-        // 		},
-        // 		{
-        // 			image: 'https://img.alicdn.com/imgextra/https://img.alicdn.com/imgextra/i3/3358098495/O1CN01AWsnFA2Ccl5OzvqsL_!!3358098495.jpg_430x430q90.jpg',
-        // 		}
-        // 	]
-        // },
-        // {
-        // 	time: '2019-04-06 11:37',
-        // 	state: 1,
-        // 	goodsList: [{
-        // 			image: 'https://img.alicdn.com/imgextra/i4/3470687433/O1CN0124mMQOSERr18L1h_!!3470687433.jpg_430x430q90.jpg',
-        // 		},
-        // 		{
-        // 			image: 'https://img.alicdn.com/imgextra/i3/2888462616/O1CN01ERra5J1VCAbZaKI5n_!!0-item_pic.jpg_430x430q90.jpg',
-        // 		},
-        // 		{
-        // 			image: 'https://gd3.alicdn.com/imgextra/i3/819381730/O1CN01YV4mXj1OeNhQIhQlh_!!819381730.jpg_400x400.jpg',
-        // 		}
-        // 	]
-        // }
-      }] };
+      isPull: false };
 
   },
 
@@ -356,6 +251,9 @@ __webpack_require__.r(__webpack_exports__);
                            * 修复app端点击除全部订单外的按钮进入时不加载数据的问题
                            * 替换onLoad下代码即可
                            */
+    if (options.state == 0) {
+      this.isPull = true;
+    }
     this.tabCurrentIndex = +options.state;
 
 
@@ -368,26 +266,88 @@ __webpack_require__.r(__webpack_exports__);
 
 
   },
-
+  onReachBottom: function onReachBottom() {
+    if (!this.isPull) return;
+    console.log(111);
+  },
   methods: {
+    transOrderState: function transOrderState(num) {
+      switch (num) {
+        case 0:
+          return '未支付';
+          break;
+        case 1:
+          return '未发货';
+          break;
+        case 2:
+          return '已发货';
+          break;
+        case 3:
+          return '已完成';
+          break;
+        case 4:
+          return '已退货';
+          break;
+        case 5:
+          return '已退款';
+          break;
+        case 6:
+          return '已取消';
+          break;
+        case 7:
+          return '退款中';
+          break;
+        case 9:
+          return '备货中';
+          break;
+        default:
+          return '';}
+
+    },
     //获取订单列表
     loadData: function loadData(source) {var _this = this;
+      console.log(source);
+      this.$http.post('/mall/app/order/list', _objectSpread({},
+      this.baseInfo,
+      this.searchData, {
+        accountId: this.userInfo.accountId })).
+
+      then(function (res) {
+        if (res.code == 0) {
+          if (res.result) {
+            // this.listData=res.result.records;
+            // this.listData.map(item => {
+            // 	this.$set(item, 'orderStateName', this.transOrderState(item.orderlistState));
+            // });
+            if (_this.searchData.pageNum == 1) {
+              if (res.result.records) {
+                _this.listData = res.result.records;
+              }
+            } else {
+              _this.listData = _this.listData.concat(res.result.records);
+            }
+          }
+        }
+      }).
+      catch(function (err) {
+        console.log(err);
+      });
       //这里是将订单挂载到tab列表下
       var index = this.tabCurrentIndex;
       var navItem = this.navList[index];
       var state = navItem.state;
 
-      if (source === 'tabChange' && navItem.loaded === true) {
-        //tab切换只有第一次需要加载数据
-        return;
-      }
-      if (navItem.loadingType === 'loading') {
-        //防止重复加载
-        return;
-      }
-
-      navItem.loadingType = 'loading';
-
+      // if(source === 'tabChange' && navItem.loaded === true){
+      // 	//tab切换只有第一次需要加载数据
+      // 	return;
+      // }
+      // if(navItem.loadingType === 'loading'){
+      // 	//防止重复加载
+      // 	return;
+      // }
+      // 
+      // navItem.loadingType = 'loading';
+      // 
       setTimeout(function () {
         var orderList = _this.listData.filter(function (item) {
           //添加不同状态下订单的表现形式
@@ -412,6 +372,11 @@ __webpack_require__.r(__webpack_exports__);
 
     //swiper 切换
     changeTab: function changeTab(e) {
+      if (e.target.current == 0) {
+        this.isPull = true;
+      } else {
+        this.isPull = false;
+      }
       this.tabCurrentIndex = e.target.current;
       this.loadData('tabChange');
     },
@@ -507,7 +472,10 @@ __webpack_require__.r(__webpack_exports__);
         //更多自定义
       }
       return { stateTip: stateTip, stateTipColor: stateTipColor };
-    } } };exports.default = _default;
+    } },
+
+  computed: _objectSpread({},
+  (0, _vuex.mapState)('common', ['baseInfo', 'userInfo'])) };exports.default = _default;
 /* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./node_modules/@dcloudio/uni-mp-weixin/dist/index.js */ 1)["default"]))
 
 /***/ }),

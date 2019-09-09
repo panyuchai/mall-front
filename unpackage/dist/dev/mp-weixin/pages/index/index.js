@@ -103,7 +103,8 @@ __webpack_require__.r(__webpack_exports__);
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0;
+/* WEBPACK VAR INJECTION */(function(uni) {Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0;
+
 
 
 
@@ -149,6 +150,12 @@ var _vuex = __webpack_require__(/*! vuex */ 10);function _objectSpread(target) {
 
   methods: _objectSpread({},
   (0, _vuex.mapMutations)('common', ['SET_USERIFNO']), {
+    clearInfo: function clearInfo() {
+      uni.removeStorageSync('hasLogin');
+      uni.removeStorageSync('token');
+      uni.removeStorageSync('uniCode');
+      uni.removeStorageSync('userInfo');
+    },
     getData: function getData() {
       // this.$http.get('/api/getDecoration?appkey=NGMxNDkwZTktOWI2Zi00YWZjLWE1&decorationId=997c8b76a1974441b416718cdec04ab9').then(res => {
       // 	console.log(res.data.content);
@@ -179,6 +186,7 @@ var _vuex = __webpack_require__(/*! vuex */ 10);function _objectSpread(target) {
     this.getData();
     // this.setUserInfo();
   } };exports.default = _default;
+/* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./node_modules/@dcloudio/uni-mp-weixin/dist/index.js */ 1)["default"]))
 
 /***/ })
 

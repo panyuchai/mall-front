@@ -128,7 +128,13 @@
 						orderList: []
 					}
 				],
-				listData: []
+				listData: [],
+				searchData: {
+					accountId: '',
+					pageNum: 1,
+					query: ''
+				},
+				isPull: false
 			};
 		},
 		
@@ -138,6 +144,9 @@
 			 * 修复app端点击除全部订单外的按钮进入时不加载数据的问题
 			 * 替换onLoad下代码即可
 			 */
+			if(options.state == 0){
+				this.isPull=true;
+			}
 			this.tabCurrentIndex = +options.state;
 			
 			// #ifndef MP
@@ -150,7 +159,10 @@
 			// #endif
 			
 		},
-		 
+		onReachBottom: function(){
+			if(!this.isPull) return;
+			console.log(111);
+		},
 		methods: {
 			transOrderState(num){
 				switch(num){
@@ -190,17 +202,24 @@
 				console.log(source)
 				this.$http.post('/mall/app/order/list', {
 					...this.baseInfo,
-					accountId: this.userInfo.accountId,
-					// pageNum: 10,
-					// query: 'W1712015071'
+					...this.searchData,
+					accountId: this.userInfo.accountId
 				})
 				.then( res => {
-					console.log(res)
 					if(res.code == 0){
-						this.listData=res.result.records;
-						this.listData.map(item => {
-							this.$set(item, 'orderStateName', this.transOrderState(item.orderlistState));
-						})
+						if(res.result){
+							// this.listData=res.result.records;
+							// this.listData.map(item => {
+							// 	this.$set(item, 'orderStateName', this.transOrderState(item.orderlistState));
+							// });
+							if(this.searchData.pageNum == 1){
+								if(res.result.records){
+									this.listData=res.result.records;
+								}
+							}else{
+								this.listData=this.listData.concat(res.result.records);
+							}
+						}
 					}
 				})
 				.catch( err => {
@@ -222,30 +241,35 @@
 				// 
 				// navItem.loadingType = 'loading';
 				// 
-				// setTimeout(()=>{
-				// 	let orderList = this.listData.filter(item=>{
-				// 		//添加不同状态下订单的表现形式
-				// 		item = Object.assign(item, this.orderStateExp(item.state));
-				// 		//演示数据所以自己进行状态筛选
-				// 		if(state === 0){
-				// 			//0为全部订单
-				// 			return item;
-				// 		}
-				// 		return item.state === state
-				// 	});
-				// 	orderList.forEach(item=>{
-				// 		navItem.orderList.push(item);
-				// 	})
-				// 	// loaded新字段用于表示数据加载完毕，如果为空可以显示空白页
-				// 	this.$set(navItem, 'loaded', true);
-				// 	
-				// 	//判断是否还有数据， 有改为 more， 没有改为noMore 
-				// 	navItem.loadingType = 'more';
-				// }, 600);
+				setTimeout(()=>{
+					let orderList = this.listData.filter(item=>{
+						//添加不同状态下订单的表现形式
+						item = Object.assign(item, this.orderStateExp(item.state));
+						//演示数据所以自己进行状态筛选
+						if(state === 0){
+							//0为全部订单
+							return item;
+						}
+						return item.state === state
+					});
+					orderList.forEach(item=>{
+						navItem.orderList.push(item);
+					})
+					// loaded新字段用于表示数据加载完毕，如果为空可以显示空白页
+					this.$set(navItem, 'loaded', true);
+					
+					//判断是否还有数据， 有改为 more， 没有改为noMore 
+					navItem.loadingType = 'more';
+				}, 600);
 			}, 
-
+			
 			//swiper 切换
 			changeTab(e){
+				if(e.target.current == 0){
+					this.isPull=true;
+				}else{
+					this.isPull=false;
+				}
 				this.tabCurrentIndex = e.target.current;
 				this.loadData('tabChange');
 			},

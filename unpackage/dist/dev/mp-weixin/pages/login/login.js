@@ -317,10 +317,11 @@ var _validate = __webpack_require__(/*! ../../utils/validate.js */ 9);function _
     //           });
     //       },
     timeTicking: function timeTicking() {
+      this.countdown = 60;
       var that = this;
       var timer = setInterval(function () {
         that.countdown--;
-        if (that.countdown < 0) {
+        if (that.countdown == 0) {
           clearInterval(timer);
           that.timeTick = false;
         }
@@ -370,7 +371,8 @@ var _validate = __webpack_require__(/*! ../../utils/validate.js */ 9);function _
             _this2.SET_HASLOGIN(true);
             _this2.SET_TOKEN(res.result.token);
             _this2.$http.setConfig(function (config) {
-              config.header['Authorization'] = 'Bearer ' + (0, _store.getStore)({ name: 'token' });
+              // config.header['Authorization'] = 'Bearer ' + getStore({ name: 'token' });
+              config.header['Authorization'] = 'Bearer ' + uni.getStorageSync('token');
               return config;
             });
             _this2.setUserInfo();
@@ -391,6 +393,11 @@ var _validate = __webpack_require__(/*! ../../utils/validate.js */ 9);function _
                 title: '验证码不正确' });
 
               _this2.phoneData.code = '';
+            } else if (res.result.code == '0012') {
+              uni.showToast({
+                icon: 'none',
+                title: '用户不存在' });
+
             }
           }
         }).
@@ -415,7 +422,8 @@ var _validate = __webpack_require__(/*! ../../utils/validate.js */ 9);function _
             _this3.SET_HASLOGIN(true);
             _this3.SET_TOKEN(res.result.token);
             _this3.$http.setConfig(function (config) {
-              config.header['Authorization'] = 'Bearer ' + (0, _store.getStore)({ name: 'token' });
+              // config.header['Authorization'] = 'Bearer ' + getStore({ name: 'token' });
+              config.header['Authorization'] = 'Bearer ' + uni.getStorageSync('token');
               return config;
             });
             _this3.setUserInfo();
@@ -436,6 +444,11 @@ var _validate = __webpack_require__(/*! ../../utils/validate.js */ 9);function _
                 title: '账户密码错误' });
 
               _this3.passwordData.password = '';
+            } else if (res.result.code == '0012') {
+              uni.showToast({
+                icon: 'none',
+                title: '用户不存在' });
+
             }
           }
         }).
@@ -461,7 +474,8 @@ var _validate = __webpack_require__(/*! ../../utils/validate.js */ 9);function _
             _this4.SET_HASLOGIN(true);
             _this4.SET_TOKEN(res.result.token);
             _this4.$http.setConfig(function (config) {
-              config.header['Authorization'] = 'Bearer ' + (0, _store.getStore)({ name: 'token' });
+              // config.header['Authorization'] = 'Bearer ' + getStore({ name: 'token' });
+              config.header['Authorization'] = 'Bearer ' + uni.getStorageSync('token');
               return config;
             });
             _this4.setUserInfo();
@@ -506,7 +520,8 @@ var _validate = __webpack_require__(/*! ../../utils/validate.js */ 9);function _
             _this5.SET_HASLOGIN(true);
             _this5.SET_TOKEN(res.result.token);
             _this5.$http.setConfig(function (config) {
-              config.header['Authorization'] = 'Bearer ' + (0, _store.getStore)({ name: 'token' });
+              // config.header['Authorization'] = 'Bearer ' + getStore({ name: 'token' });
+              config.header['Authorization'] = 'Bearer ' + uni.getStorageSync('token');
               return config;
             });
             _this5.setUserInfo();
@@ -557,6 +572,7 @@ var _validate = __webpack_require__(/*! ../../utils/validate.js */ 9);function _
     wxPhoneLogin: function wxPhoneLogin() {var _this6 = this;
       if (!(0, _validate.validatenull)(this.phoneData.code) && !(0, _validate.isvalidatemobile)(this.phoneData.phone)[0]) {
         this.$http.post('/mall/app/login/mall/wxweb/userinfo', _objectSpread({
+          openid: uni.getStorageSync('openid'),
           mallDomain: this.mallDomain },
         this.phoneData)).
 
@@ -565,7 +581,8 @@ var _validate = __webpack_require__(/*! ../../utils/validate.js */ 9);function _
             _this6.SET_HASLOGIN(true);
             _this6.SET_TOKEN(res.result.token);
             _this6.$http.setConfig(function (config) {
-              config.header['Authorization'] = 'Bearer ' + (0, _store.getStore)({ name: 'token' });
+              // config.header['Authorization'] = 'Bearer ' + getStore({ name: 'token' });
+              config.header['Authorization'] = 'Bearer ' + uni.getStorageSync('token');
               return config;
             });
             _this6.setUserInfo();
@@ -602,6 +619,7 @@ var _validate = __webpack_require__(/*! ../../utils/validate.js */ 9);function _
     wxPasswordLogin: function wxPasswordLogin() {var _this7 = this;
       if (!(0, _validate.validatenull)(this.phoneData.loginName) && !(0, _validate.validatenull)(this.passwordData.password)) {
         this.$http.post('/mall/app/login/mall/wxweb/userinfo', _objectSpread({
+          openid: uni.getStorageSync('openid'),
           mallDomain: this.mallDomain },
         this.passwordData)).
 
@@ -610,7 +628,8 @@ var _validate = __webpack_require__(/*! ../../utils/validate.js */ 9);function _
             _this7.SET_HASLOGIN(true);
             _this7.SET_TOKEN(res.result.token);
             _this7.$http.setConfig(function (config) {
-              config.header['Authorization'] = 'Bearer ' + (0, _store.getStore)({ name: 'token' });
+              // config.header['Authorization'] = 'Bearer ' + getStore({ name: 'token' });
+              config.header['Authorization'] = 'Bearer ' + uni.getStorageSync('token');
               return config;
             });
             _this7.setUserInfo();
@@ -734,7 +753,8 @@ var _validate = __webpack_require__(/*! ../../utils/validate.js */ 9);function _
           _this8.SET_HASLOGIN(true);
           _this8.SET_TOKEN(res.result.token);
           _this8.$http.setConfig(function (config) {
-            config.header['Authorization'] = 'Bearer ' + (0, _store.getStore)({ name: 'token' }).token;
+            // config.header['Authorization'] = 'Bearer ' + getStore({ name: 'token' }).token;
+            config.header['Authorization'] = 'Bearer ' + uni.getStorageSync('token');
             return config;
           });
 
@@ -773,27 +793,16 @@ var _validate = __webpack_require__(/*! ../../utils/validate.js */ 9);function _
     },
     browserRedirect: function browserRedirect() {
       var sUserAgent = navigator.userAgent.toLowerCase();
-      var bIsIpad = sUserAgent.match(/ipad/i) == "ipad";
-      var bIsIphoneOs = sUserAgent.match(/iphone os/i) == "iphone os";
-      var bIsMidp = sUserAgent.match(/midp/i) == "midp";
-      var bIsUc7 = sUserAgent.match(/rv:1.2.3.4/i) == "rv:1.2.3.4";
-      var bIsUc = sUserAgent.match(/ucweb/i) == "ucweb";
-      var bIsAndroid = sUserAgent.match(/android/i) == "android";
-      var bIsCE = sUserAgent.match(/windows ce/i) == "windows ce";
-      var bIsWM = sUserAgent.match(/windows mobile/i) == "windows mobile";
+      // var bIsIpad = sUserAgent.match(/ipad/i) == "ipad";
+      // var bIsIphoneOs = sUserAgent.match(/iphone os/i) == "iphone os";
+      // var bIsMidp = sUserAgent.match(/midp/i) == "midp";
+      // var bIsUc7 = sUserAgent.match(/rv:1.2.3.4/i) == "rv:1.2.3.4";
+      // var bIsUc = sUserAgent.match(/ucweb/i) == "ucweb";
+      // var bIsAndroid = sUserAgent.match(/android/i) == "android";
+      // var bIsCE = sUserAgent.match(/windows ce/i) == "windows ce";
+      // var bIsWM = sUserAgent.match(/windows mobile/i) == "windows mobile";
       var bIsWeChat = sUserAgent.match(/MicroMessenger/i) == "micromessenger"; //微信端
-      if (bIsIpad || bIsIphoneOs || bIsMidp || bIsUc7 || bIsUc || bIsAndroid || bIsCE || bIsWM) {
-        switch (this.mallType) {
-          case 1:
-            this.isPhoneLogin = true;
-            break;
-          case 3:
-            this.isPasswordLogin = true;
-            break;
-          default:
-            console.log("login.vue--未标记商城类型");}
-
-      } else if (bIsWeChat) {
+      if (bIsWeChat) {
         this.isWebWx = true;
         switch (this.mallType) {
           case 1:
@@ -806,7 +815,16 @@ var _validate = __webpack_require__(/*! ../../utils/validate.js */ 9);function _
             console.log("login.vue--未标记商城类型");}
 
       } else {
-        console.log("login.vue--非h5环境");
+        switch (this.mallType) {
+          case 1:
+            this.isPhoneLogin = true;
+            break;
+          case 3:
+            this.isPasswordLogin = true;
+            break;
+          default:
+            console.log("login.vue--未标记商城类型");}
+
       }
     },
     setUserInfo: function setUserInfo() {var _this9 = this;

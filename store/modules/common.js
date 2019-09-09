@@ -19,7 +19,7 @@ const state = {
   hasLogin: false,
   token: '',
   uniCode: '',
-  userInfo: null,
+  userInfo: {},
   baseInfo: {
 	  mallDomain: '',
 	  mallId: '',

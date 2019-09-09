@@ -17,7 +17,7 @@
 			}
 		},
 		methods: {
-			...mapMutations('common', ['SET_HASLOGIN', 'SET_TOKEN', 'SET_FIRSTLOAD']),
+			...mapMutations('common', ['SET_HASLOGIN', 'SET_TOKEN', 'SET_FIRSTLOAD', 'SET_USERIFNO']),
 			handleTransfer(options){
 				if(options.success == 'true'){
 					alert('静默登陆成功')

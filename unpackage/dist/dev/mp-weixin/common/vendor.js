@@ -8911,14 +8911,14 @@ var index_esm = {
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-Object.defineProperty(exports, "__esModule", { value: true });exports.test = exports.http = void 0;var _request = _interopRequireDefault(__webpack_require__(/*! ../utils/lunch-request/request */ 12));
+/* WEBPACK VAR INJECTION */(function(uni) {Object.defineProperty(exports, "__esModule", { value: true });exports.test = exports.http = void 0;var _request = _interopRequireDefault(__webpack_require__(/*! ../utils/lunch-request/request */ 12));
 var _store = __webpack_require__(/*! ../utils/store.js */ 8);
 var _index = _interopRequireDefault(__webpack_require__(/*! ../store/index.js */ 13));function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}function _objectSpread(target) {for (var i = 1; i < arguments.length; i++) {var source = arguments[i] != null ? arguments[i] : {};var ownKeys = Object.keys(source);if (typeof Object.getOwnPropertySymbols === 'function') {ownKeys = ownKeys.concat(Object.getOwnPropertySymbols(source).filter(function (sym) {return Object.getOwnPropertyDescriptor(source, sym).enumerable;}));}ownKeys.forEach(function (key) {_defineProperty(target, key, source[key]);});}return target;}function _defineProperty(obj, key, value) {if (key in obj) {Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true });} else {obj[key] = value;}return obj;}
 var test = new _request.default();exports.test = test;
 test.setConfig(function (config) {/* 设置全局配置 */
-  config.baseUrl = 'http://192.168.1.104:8087';
+  // config.baseUrl = 'http://192.168.1.104:8087';
   // config.baseUrl = 'http://192.168.1.110:8086';
-  // config.baseUrl = 'http://192.168.1.135:8086';
+  config.baseUrl = 'http://192.168.1.135:8086';
   config.header = {
     a: 4,
     b: 4
@@ -8931,7 +8931,8 @@ test.interceptor.request(function (config, cancel) {/* 请求之前拦截器 */
   if (_index.default.getters.token) {
     config.header = _objectSpread({},
     config.header, {
-      Authorization: 'Bearer ' + (0, _store.getStore)({ name: 'token' }) });
+      // Authorization: 'Bearer ' + getStore({ name: 'token' }),
+      Authorization: 'Bearer ' + uni.getStorageSync('token') });
 
   }
   /*
@@ -8962,9 +8963,9 @@ test.interceptor.response(function (response) {/* 请求之后拦截器 */
 // }
 var http = new _request.default();exports.http = http;
 http.setConfig(function (config) {/* 设置全局配置 */
-  config.baseUrl = "http://192.168.1.104:8087"; /* 根域名不同 */
+  // config.baseUrl = "http://192.168.1.104:8087"; /* 根域名不同 */
   // config.baseUrl = 'http://192.168.1.110:8086';
-  // config.baseUrl = 'http://192.168.1.135:8086';
+  config.baseUrl = 'http://192.168.1.135:8086';
   config.header = {
     // 'cookie': uni.getStorageSync('sessionid') || '123',
     a: 5
@@ -8976,7 +8977,8 @@ http.interceptor.request(function (config, cancel) {/* 请求之前拦截器 */
   if (_index.default.getters.token) {
     config.header = _objectSpread({},
     config.header, {
-      Authorization: 'Bearer ' + (0, _store.getStore)({ name: 'token' })
+      // Authorization: 'Bearer ' + getStore({ name: 'token' }),
+      Authorization: 'Bearer ' + uni.getStorageSync('token')
       // config.header['Authorization'] = 'Bearer ' + getStore({ name: 'token' });
     });
   }
@@ -8991,6 +8993,7 @@ http.interceptor.response(function (response) {/* 请求之后拦截器 */
 
   return response.data;
 });
+/* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./node_modules/@dcloudio/uni-mp-weixin/dist/index.js */ 1)["default"]))
 
 /***/ }),
 /* 12 */
@@ -9142,7 +9145,7 @@ store;exports.default = _default;
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0;var _store = __webpack_require__(/*! ../../utils/store.js */ 8);
+/* WEBPACK VAR INJECTION */(function(uni) {Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0;var _store = __webpack_require__(/*! ../../utils/store.js */ 8);
 var state = {
   /**
                * 是否需要强制登录
@@ -9190,13 +9193,13 @@ var mutations = {
   },
   SET_HASLOGIN: function SET_HASLOGIN(state, hasLogin) {
     state.hasLogin = hasLogin;
-    (0, _store.setStore)({ name: 'hasLogin', content: state.hasLogin, type: 'sync' });
-    // uni.setStorageSync('hasLogin', JSON.stringify(hasLogin));
+    // setStore({ name: 'hasLogin', content: state.hasLogin, type: 'sync' });
+    uni.setStorageSync('hasLogin', hasLogin);
   },
   SET_TOKEN: function SET_TOKEN(state, token) {
     state.token = token;
-    (0, _store.setStore)({ name: 'token', content: state.token, type: 'sync' });
-    // uni.setStorageSync('token', JSON.stringify(token));
+    // setStore({ name: 'token', content: state.token, type: 'sync' });
+    uni.setStorageSync('token', token);
   },
   SET_MALLDOMAIN: function SET_MALLDOMAIN(state, mallDomain) {
     state.mallDomain = mallDomain;
@@ -9221,8 +9224,8 @@ var mutations = {
   // },
   SET_UNICODE: function SET_UNICODE(state, uniCode) {
     state.uniCode = uniCode;
-    (0, _store.setStore)({ name: 'uniCode', content: state.uniCode, type: 'sync' });
-    // uni.setStorageSync('uniCode', JSON.stringify(uniCode));
+    // setStore({ name: 'uniCode', content: state.uniCode, type: 'sync' });
+    uni.setStorageSync('uniCode', uniCode);
   },
   SET_BASEINFO: function SET_BASEINFO(state, baseInfo) {
     state.baseInfo = baseInfo;
@@ -9231,6 +9234,7 @@ var mutations = {
   SET_USERIFNO: function SET_USERIFNO(state, userInfo) {
     state.userInfo = userInfo;
     (0, _store.setStore)({ name: 'userInfo', content: state.userInfo, type: 'sync' });
+    // uni.setStorageSync('userInfo', JSON.stringify(userInfo));
   }
   // SET_MALLTYPE: (state, mallType) => {
   // 	state.mallType = mallType;
@@ -9249,6 +9253,7 @@ var getters = {};var _default =
   getters: getters,
   mutations: mutations,
   namespaced: true };exports.default = _default;
+/* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./node_modules/@dcloudio/uni-mp-weixin/dist/index.js */ 1)["default"]))
 
 /***/ }),
 /* 15 */
