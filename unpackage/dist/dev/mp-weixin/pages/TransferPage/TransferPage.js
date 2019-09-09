@@ -137,29 +137,7 @@ var _store = __webpack_require__(/*! ../../utils/store.js */ 8);function _object
           return config;
         });
         alert('静默登陆成功4');
-
         this.setUserInfo();
-        // alert('111111')
-        // this.$http.post('/mall/app/account/info')
-        // .then( res => {
-        // 	if(res.code == 0){
-        // 		if(res.result){
-        // 			let mobilephone = res.result.mobilephone;
-        // 			let {accountId, customerName, wechatName, customerSex, customerBirthday, customerImage, customerId} = res.result.customer;
-        // 			this.SET_USERIFNO({accountId, customerName, wechatName, customerSex, customerBirthday,  customerImage, customerId});
-        // 			this.SET_USERIFNO({
-        // 				...this.userInfo,
-        // 				mobilephone: mobilephone
-        // 			})
-        // 		}
-        // 	}else{
-        // 		console.log('login.vue-- info接口调用失败');
-        // 	}
-        // })
-        // .catch( err => {
-        // 	console.log('login.vue-- info接口调用错误');
-        // })
-
         alert('静默登陆成功5');
         if (uni.getStorageSync('referUrl')) {
           window.location.href = uni.getStorageSync('referUrl');
@@ -170,7 +148,7 @@ var _store = __webpack_require__(/*! ../../utils/store.js */ 8);function _object
             url: '/pages/index/index?' });
 
         }
-        alert('静默登陆成功');
+        alert('静默登陆成功7');
       } else {
         alert('静默登陆失败');
         uni.setStorageSync('openid', options.openid);
@@ -186,8 +164,8 @@ var _store = __webpack_require__(/*! ../../utils/store.js */ 8);function _object
       then(function (res) {
         if (res.code == 0) {
           if (res.result) {
-            // alert(res.result.customer.accountId)
-            // alert(res.result.mobilephone)
+            alert(res.result.customer.accountId);
+            alert(res.result.mobilephone);
             var mobilephone = res.result.mobilephone;var _res$result$customer =
             res.result.customer,accountId = _res$result$customer.accountId,customerName = _res$result$customer.customerName,wechatName = _res$result$customer.wechatName,customerSex = _res$result$customer.customerSex,customerBirthday = _res$result$customer.customerBirthday,customerImage = _res$result$customer.customerImage,customerId = _res$result$customer.customerId;
             _this.SET_USERIFNO({ accountId: accountId, customerName: customerName, wechatName: wechatName, customerSex: customerSex, customerBirthday: customerBirthday, customerImage: customerImage, customerId: customerId });
@@ -195,8 +173,9 @@ var _store = __webpack_require__(/*! ../../utils/store.js */ 8);function _object
             _this.userInfo, {
               mobilephone: mobilephone }));
 
-            // alert(res.result.customer.accountId)
-            // alert(res.result.mobilephone)
+            alert(_this.userInfo);
+            alert(_this.userInfo.accountId);
+            alert(_this.userInfo.mobilephone);
           }
         } else {
           console.log('login.vue-- info接口调用失败');
