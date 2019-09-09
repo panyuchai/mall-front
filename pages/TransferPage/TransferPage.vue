@@ -68,7 +68,6 @@
 								...this.userInfo,
 								mobilephone: mobilephone
 							})
-							alert(this.userInfo)
 							alert(this.userInfo.accountId)
 							alert(this.userInfo.mobilephone)
 						}
