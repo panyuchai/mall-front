@@ -53,12 +53,14 @@
 						if(res.result){
 							let mobilephone = res.result.mobilephone;
 							let {accountId, customerName, wechatName, customerSex, customerBirthday, customerImage, customerId} = res.result.customer;
-							alert({accountId, customerName, wechatName, customerSex, customerBirthday, customerImage, customerId})
 							this.SET_USERIFNO({accountId, customerName, wechatName, customerSex, customerBirthday,  customerImage, customerId});
 							this.SET_USERIFNO({
 								...this.userInfo,
 								mobilephone: mobilephone
 							})
+							alert(this.userInfo)
+							alert(JSON.parse(this.userInfo))
+							alert(JSON.stringify(this.userInfo))
 						}
 					}else{
 						console.log('login.vue-- info接口调用失败');
