@@ -24,7 +24,6 @@ export const setStore = (params) => {
  * 获取localStorage
  */
 export const getStore = (params) => {
-	alert('getStore方法')
   let {
     name,
     type

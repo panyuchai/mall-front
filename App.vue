@@ -9,7 +9,6 @@
 		methods: {
 			...mapMutations("common", ['SET_BASEINFO', 'SET_USERIFNO', 'SET_UNICODE', 'SET_HASLOGIN', 'SET_TOKEN', 'SET_MALLTYPE', 'SET_MALLID']),
 			checkMallType(){
-				alert('checkMallType');
 				this.$http.post('/mall/app/login/mall/shopmall/type', {
 					mallDomain: this.mallDomain
 				})
@@ -23,8 +22,6 @@
 						});
 						this.SET_MALLTYPE(res.result.type);
 						this.SET_MALLID(res.result.mallId);
-						alert(this.baseInfo);
-						alert(this.userInfo);
 					}else{
 						console.log('login--mallTaye 接口调用失败');
 					}
@@ -92,7 +89,6 @@
 						...this.baseInfo,
 						scm: 'h5'
 					});
-					alert(this.hasLogin)
 					if(!this.hasLogin){
 						this.defaultwxWebLogin(options);
 					}
@@ -106,12 +102,10 @@
 			},
 			defaultwxWebLogin(options){
 				if (document.referrer) {
-					alert(document.referrer);
 				    uni.setStorageSync('referUrl', document.referrer);
 				}
 				let reg = /\/TransferPage\/TransferPage/ig;
 				let urlPath = !(reg.test(options.path));
-				alert(this.hasLogin);
 				if(!this.hasLogin){
 					if(urlPath){
 						window.location.href='http://192.168.1.135:8086/mall/app/login/mall/wxweb?mallDomain=yyy';
@@ -177,10 +171,8 @@
 		},
 		onLaunch: function(options) {
 			this.checkMallType();
-			alert('checkMallType  --------------end')
 			// this.defaultwxWebLogin();
 			this.initData();
-			alert('initData--------------------------end')
 			console.log('App Launch');
 			// let urlPage = options
 			// var obj = wx.getLaunchOptionsSync()
@@ -195,7 +187,6 @@
 			
 			if(navigator && navigator.userAgent){
 				// 非小程序环境
-				alert('非小程序环境')
 				this.browserRedirect(options);
 			}else{
 				// 小程序环境

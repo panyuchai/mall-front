@@ -129,7 +129,6 @@ var _store = __webpack_require__(/*! ../../utils/store.js */ 8);function _object
     handleTransfer: function handleTransfer(options) {
       if (options.success == 'true') {
         this.SET_HASLOGIN(true);
-        alert(options.token);
         this.SET_TOKEN(options.token);
         this.$http.setConfig(function (config) {
           // config.header['Authorization'] = 'Bearer ' + getStore({ name: 'token' });
@@ -166,8 +165,6 @@ var _store = __webpack_require__(/*! ../../utils/store.js */ 8);function _object
               mobilephone: mobilephone }));
 
           }
-          alert('setUserInfo 调用成功');
-          alert((0, _store.getStore)({ name: 'userInfo' }));
         } else {
           console.log('login.vue-- info接口调用失败');
         }

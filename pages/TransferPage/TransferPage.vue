@@ -24,7 +24,6 @@
 			handleTransfer(options){
 				if(options.success == 'true'){
 					this.SET_HASLOGIN(true);
-					alert(options.token)
 					this.SET_TOKEN(options.token);
 					this.$http.setConfig((config) => {
 						// config.header['Authorization'] = 'Bearer ' + getStore({ name: 'token' });
@@ -61,8 +60,6 @@
 								mobilephone: mobilephone
 							})
 						}
-						alert('setUserInfo 调用成功')
-						alert(getStore({ name: 'userInfo' }))
 					}else{
 						console.log('login.vue-- info接口调用失败');
 					}

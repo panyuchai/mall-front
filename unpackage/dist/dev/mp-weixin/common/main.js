@@ -101,7 +101,6 @@ var _api = __webpack_require__(/*! ./api/api.js */ 11);function _objectSpread(ta
   methods: _objectSpread({},
   (0, _vuex.mapMutations)("common", ['SET_BASEINFO', 'SET_USERIFNO', 'SET_UNICODE', 'SET_HASLOGIN', 'SET_TOKEN', 'SET_MALLTYPE', 'SET_MALLID']), {
     checkMallType: function checkMallType() {var _this = this;
-      alert('checkMallType');
       this.$http.post('/mall/app/login/mall/shopmall/type', {
         mallDomain: this.mallDomain }).
 
@@ -115,8 +114,6 @@ var _api = __webpack_require__(/*! ./api/api.js */ 11);function _objectSpread(ta
 
           _this.SET_MALLTYPE(res.result.type);
           _this.SET_MALLID(res.result.mallId);
-          alert(_this.baseInfo);
-          alert(_this.userInfo);
         } else {
           console.log('login--mallTaye 接口调用失败');
         }
@@ -184,7 +181,6 @@ var _api = __webpack_require__(/*! ./api/api.js */ 11);function _objectSpread(ta
         this.baseInfo, {
           scm: 'h5' }));
 
-        alert(this.hasLogin);
         if (!this.hasLogin) {
           this.defaultwxWebLogin(options);
         }
@@ -198,12 +194,10 @@ var _api = __webpack_require__(/*! ./api/api.js */ 11);function _objectSpread(ta
     },
     defaultwxWebLogin: function defaultwxWebLogin(options) {
       if (document.referrer) {
-        alert(document.referrer);
         uni.setStorageSync('referUrl', document.referrer);
       }
       var reg = /\/TransferPage\/TransferPage/ig;
       var urlPath = !reg.test(options.path);
-      alert(this.hasLogin);
       if (!this.hasLogin) {
         if (urlPath) {
           window.location.href = 'http://192.168.1.135:8086/mall/app/login/mall/wxweb?mallDomain=yyy';
@@ -269,10 +263,8 @@ var _api = __webpack_require__(/*! ./api/api.js */ 11);function _objectSpread(ta
 
   onLaunch: function onLaunch(options) {
     this.checkMallType();
-    alert('checkMallType  --------------end');
     // this.defaultwxWebLogin();
     this.initData();
-    alert('initData--------------------------end');
     console.log('App Launch');
     // let urlPage = options
     // var obj = wx.getLaunchOptionsSync()
@@ -287,7 +279,6 @@ var _api = __webpack_require__(/*! ./api/api.js */ 11);function _objectSpread(ta
 
     if (navigator && navigator.userAgent) {
       // 非小程序环境
-      alert('非小程序环境');
       this.browserRedirect(options);
     } else {
       // 小程序环境
