@@ -299,7 +299,7 @@
 					console.log(err);
 				})
 			},
-			handleWxWebPay(){
+			handleWxWebPay(data){
 				this.$http.post('/mall/app/order/submit', {
 					...data,
 					payChannels: '6',

@@ -91,153 +91,111 @@
 		},
 		data() {
 			return {
+				pageNum: 1,
+				productData: [],
+				loadding: false,
+				pullUpOn: true,
+				notFound: false,
+				canReachBottom: true,
 				listData: [],
 				searchData: {
-					orderState: null,
+					orderState: '',
 					accountId: '',
 					pageNum: 1,
+					totalPage: null,
 					query: ''
 				},
-				isPull: false
+				scrollTop: 0,
+				old: {
+					scrollTop: 0
+				}
 			};
 		},
-		
-		onLoad(options){
-			console.log(options)
-			/**
-			 * 修复app端点击除全部订单外的按钮进入时不加载数据的问题
-			 * 替换onLoad下代码即可
-			 */
-			if(options.state == 0){
-				this.isPull=true;
-			}
-			this.tabCurrentIndex = +options.state;
-			
-			this.loadData()
-			if(options.state == 0){
-				this.loadData()
-			}
-			
-		},
-		onReachBottom: function(){
-			if(!this.isPull) return;
-			console.log(111);
-		},
 		methods: {
-			transOrderState(num){
-				switch(num){
-					case 0:
-						return '未支付';
-						break;
-					case 1:
-						return '未发货';
-						break;
-					case 2:
-						return '已发货';
-						break;
-					case 3:
-						return '已完成';
-						break;
-					case 4:
-						return '已退货';
-						break;
-					case 5:
-						return '已退款';
-						break;
-					case 6:
-						return '已取消';
-						break;
-					case 7:
-						return '退款中';
-						break;
-					case 9:
-						return '备货中';
-						break;
-					default:
-						return '';
-				}
+			scroll: function(e) {
+				this.old.scrollTop = e.detail.scrollTop
 			},
-			//获取订单列表
-			loadData(source){
-				console.log(source)
+			goTop: function(e) {
+				this.scrollTop = this.old.scrollTop
+				this.$nextTick(function() {
+					this.scrollTop = 0
+				});
+			},
+			// transOrderState(num){
+			// 	switch(num){
+			// 		case 0:
+			// 			return '未支付';
+			// 			break;
+			// 		case 1:
+			// 			return '未发货';
+			// 			break;
+			// 		case 2:
+			// 			return '已发货';
+			// 			break;
+			// 		case 3:
+			// 			return '已完成';
+			// 			break;
+			// 		case 4:
+			// 			return '已退货';
+			// 			break;
+			// 		case 5:
+			// 			return '已退款';
+			// 			break;
+			// 		case 6:
+			// 			return '已取消';
+			// 			break;
+			// 		case 7:
+			// 			return '退款中';
+			// 			break;
+			// 		case 9:
+			// 			return '备货中';
+			// 			break;
+			// 		default:
+			// 			return '';
+			// 	}
+			// },
+			loadData(orderState){
+				this.loadding = true;
+				this.pullUpOn = true;
+				this.searchData.orderState=orderState || '';
+				
 				this.$http.post('/mall/app/order/list', {
 					...this.baseInfo,
 					...this.searchData,
-					accountId: this.userInfo.accountId
+					accountId: this.userInfo && this.userInfo.accountId || '',
 				})
 				.then( res => {
+					// console.log(res)
 					if(res.code == 0){
 						if(res.result){
-							// this.listData=res.result.records;
-							// this.listData.map(item => {
-							// 	this.$set(item, 'orderStateName', this.transOrderState(item.orderlistState));
-							// });
-							// console.log(this.listData)
-							if(this.searchData.pageNum == 1){
-								if(res.result.records){
-									this.listData=res.result.records;
-								}
-							}else{
-								this.listData=this.listData.concat(res.result.records);
-							}
+							this.searchData.totalPage=res.result.totalPage;
+							// if(res.result.mallGoodsList.length == 0){
+							// 	// this.notFound=true;
+							// 	
+							// 	this.loadding = false;
+							// 	this.pullUpOn = false;
+							// }else{
+							// 	this.loadding = false;
+							// }
+							// if(this.searchData.pageNum == 1){
+							// 	if(res.result.mallGoodsList){
+							// 		this.productData=res.result.mallGoodsList;
+							// 	}
+							// }else{
+							// 	this.productData=this.productData.concat(res.result.mallGoodsList);
+							// }
 						}
+						
+					}else{
+						console.log("product.vue-- list获取数据列表失败");
 					}
 				})
 				.catch( err => {
-					console.log(err);
+					console.log("product.vue-- list获取数据列表错误");
 				})
-				//这里是将订单挂载到tab列表下
-				let index = this.tabCurrentIndex;
-				let navItem = this.navList[index];
-				let state = navItem.state;
-				
-				// if(source === 'tabChange' && navItem.loaded === true){
-				// 	//tab切换只有第一次需要加载数据
-				// 	return;
-				// }
-				// if(navItem.loadingType === 'loading'){
-				// 	//防止重复加载
-				// 	return;
-				// }
-				// 
-				// navItem.loadingType = 'loading';
-				// 
-				setTimeout(()=>{
-					let orderList = this.listData.filter(item=>{
-						//添加不同状态下订单的表现形式
-						item = Object.assign(item, this.orderStateExp(item.state));
-						//演示数据所以自己进行状态筛选
-						if(state === 0){
-							//0为全部订单
-							return item;
-						}
-						return item.state === state
-					});
-					orderList.forEach(item=>{
-						navItem.orderList.push(item);
-					})
-					// // loaded新字段用于表示数据加载完毕，如果为空可以显示空白页
-					// this.$set(navItem, 'loaded', true);
-					// 
-					// //判断是否还有数据， 有改为 more， 没有改为noMore 
-					// navItem.loadingType = 'more';
-				}, 600);
-			}, 
+			},
 			
-			//swiper 切换
-			changeTab(e){
-				if(e.target.current == 0){
-					this.isPull=true;
-				}else{
-					this.isPull=false;
-				}
-				this.tabCurrentIndex = e.target.current;
-				this.loadData('tabChange');
-			},
-			//顶部tab点击
-			tabClick(index){
-				this.tabCurrentIndex = index;
-			},
+			
 			// 跳转详情
 			linkToDetail(orderId){
 				uni.navigateTo({
@@ -304,29 +262,14 @@
 				// }, 600)
 			},
 			
-
-			//订单状态文字和颜色
-			orderStateExp(state){
-				let stateTip = '',
-					stateTipColor = '#fa436a';
-				switch(+state){
-					case 1:
-						stateTip = '待付款'; break;
-					case 2:
-						stateTip = '待收货'; break;
-					case 3:
-						stateTip = '已完成'; break;
-					case 4:
-						stateTip = '售后'; break;
-					case 9:
-						stateTip = '订单已关闭'; 
-						stateTipColor = '#909399';
-						break;
-						
-					//更多自定义
-				}
-				return {stateTip, stateTipColor};
-			}
+		},
+		onLoad(options){
+			console.log(options)
+			this.loadData()
+		},
+		onReachBottom: function(){
+			// if(!this.isPull) return;
+			// console.log(111);
 		},
 		computed: {
 			...mapState('common', ['baseInfo', 'userInfo'])

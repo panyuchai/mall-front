@@ -205,7 +205,7 @@ var _vuex = __webpack_require__(/*! vuex */ 10);function _objectSpread(target) {
 {
   data: function data() {
     return {
-      toggle: true,
+      // toggle: true,
       pageNum: 1,
       productData: [],
       loadding: false,

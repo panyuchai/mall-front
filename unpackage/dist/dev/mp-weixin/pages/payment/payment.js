@@ -309,7 +309,7 @@ var _vuex = __webpack_require__(/*! vuex */ 10);function _objectSpread(target) {
         console.log(err);
       });
     },
-    handleWxWebPay: function handleWxWebPay() {var _this2 = this;
+    handleWxWebPay: function handleWxWebPay(data) {var _this2 = this;
       this.$http.post('/mall/app/order/submit', _objectSpread({},
       data, {
         payChannels: '6' })).
