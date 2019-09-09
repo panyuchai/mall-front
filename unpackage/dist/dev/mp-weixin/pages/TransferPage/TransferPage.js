@@ -174,6 +174,8 @@ var _store = __webpack_require__(/*! ../../utils/store.js */ 8);function _object
               mobilephone: mobilephone }));
 
           }
+          alert('setUserInfo 调用成功');
+          alert((0, _store.getStore)({ name: 'userInfo' }));
         } else {
           console.log('login.vue-- info接口调用失败');
         }

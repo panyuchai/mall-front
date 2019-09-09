@@ -69,6 +69,8 @@
 								mobilephone: mobilephone
 							})
 						}
+						alert('setUserInfo 调用成功')
+						alert(getStore({ name: 'userInfo' }))
 					}else{
 						console.log('login.vue-- info接口调用失败');
 					}
