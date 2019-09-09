@@ -33,6 +33,7 @@ export const getStore = (params) => {
       content;
   obj = uni.getStorageSync(name);
   if (validatenull(obj)) obj = uni.getStorage(name);
+  alert('---------'+ obj )
   if (validatenull(obj)) return;
   obj = JSON.parse(obj);
   if (obj.dataType == 'string') {
