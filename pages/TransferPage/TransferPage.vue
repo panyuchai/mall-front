@@ -25,7 +25,7 @@
 					this.SET_TOKEN(options.token);
 					this.$http.setConfig((config) => {
 						// config.header['Authorization'] = 'Bearer ' + getStore({ name: 'token' });
-						config.header['Authorization'] = 'Bearer ' + uni.getStorageSync('token');
+						config.header['Authorization'] = 'Bearer ' + options.token;
 						return config;
 					});
 					this.setUserInfo();
@@ -47,24 +47,18 @@
 				this.SET_FIRSTLOAD(false);
 			},
 			setUserInfo(){
+				aler('111111')
 				this.$http.post('/mall/app/account/info')
 				.then( res => {
 					if(res.code == 0){
 						if(res.result){
-							aler('111111')
 							let mobilephone = res.result.mobilephone;
 							let {accountId, customerName, wechatName, customerSex, customerBirthday, customerImage, customerId} = res.result.customer;
-							alert(res.result.customer.accountId)
-							alert(res.result.customer.mobilephone)
 							this.SET_USERIFNO({accountId, customerName, wechatName, customerSex, customerBirthday,  customerImage, customerId});
 							this.SET_USERIFNO({
 								...this.userInfo,
 								mobilephone: mobilephone
 							})
-							alert(this.userInfo.accountId)
-							alert(this.userInfo.customerName)
-							alert(this.userInfo.wechatName)
-							alert(this.userInfo.accountId)
 						}
 					}else{
 						console.log('login.vue-- info接口调用失败');
