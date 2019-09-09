@@ -7651,12 +7651,7 @@ var getStore = function getStore(params) {
   content;
   obj = uni.getStorageSync(name);
   // if (validatenull(obj)) obj = uni.getStorage(name);
-  alert('---------' + obj);
-  alert('++++++++++' + (0, _validate.validatenull)(obj));
   if ((0, _validate.validatenull)(obj)) return;
-  alert('9999999999' + obj);
-  alert('8888888888' + obj.dataType);
-  alert('77777777777777777777777');
   obj = JSON.parse(obj);
 
   if (obj.dataType == 'string') {
@@ -7668,7 +7663,6 @@ var getStore = function getStore(params) {
   } else if (obj.dataType == 'object') {
     content = obj.content;
   }
-  alert('getStore方法结束');
   return content;
 };
 /**

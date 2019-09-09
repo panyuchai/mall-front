@@ -138,7 +138,6 @@ var _api = __webpack_require__(/*! ./api/api.js */ 11);function _objectSpread(ta
     // 	})
     // },
     initData: function initData() {
-      alert('initData------------begin');
       // alert(getStore({ name: 'hasLogin' }));
       // if(getStore({ name: 'hasLogin' })){
       // 	this.SET_HASLOGIN(getStore({ name: 'hasLogin' }));
@@ -161,19 +160,14 @@ var _api = __webpack_require__(/*! ./api/api.js */ 11);function _objectSpread(ta
       if (uni.getStorageSync('uniCode')) {
         this.SET_UNICODE(uni.getStorageSync('uniCode'));
       }
-      alert('getStore userInfo-------------开始');
       // if(uni.getStorageSync('userInfo')){
       // 	this.SET_USERIFNO(uni.getStorageSync('userInfo'));
       // }
-      var aaa = (0, _store.getStore)({ name: 'userInfo' });
-      alert(aaa);
-      if (aaa) {
-        this.SET_USERIFNO(aaa);
+      if ((0, _store.getStore)({ name: 'userInfo' })) {
+        this.SET_USERIFNO((0, _store.getStore)({ name: 'userInfo' }));
       }
-      alert('getStore userInfo-------------结束');
     },
     browserRedirect: function browserRedirect(options) {
-      alert('browserRedirect');
       var sUserAgent = navigator.userAgent.toLowerCase();
       // var bIsIpad = sUserAgent.match(/ipad/i) == "ipad";
       // var bIsIphoneOs = sUserAgent.match(/iphone os/i) == "iphone os";
@@ -190,10 +184,8 @@ var _api = __webpack_require__(/*! ./api/api.js */ 11);function _objectSpread(ta
         this.baseInfo, {
           scm: 'h5' }));
 
-        alert('defaultwxWebLogin--------------------------');
         alert(this.hasLogin);
         if (!this.hasLogin) {
-          alert('defaultwxWebLogin==================begin');
           this.defaultwxWebLogin(options);
         }
       } else {
@@ -205,7 +197,6 @@ var _api = __webpack_require__(/*! ./api/api.js */ 11);function _objectSpread(ta
       }
     },
     defaultwxWebLogin: function defaultwxWebLogin(options) {
-      alert('微信h5环境defaultwxWebLogin');
       if (document.referrer) {
         alert(document.referrer);
         uni.setStorageSync('referUrl', document.referrer);

@@ -46,7 +46,6 @@
 			// 	})
 			// },
 			initData(){
-				alert('initData------------begin')
 				// alert(getStore({ name: 'hasLogin' }));
 				// if(getStore({ name: 'hasLogin' })){
 				// 	this.SET_HASLOGIN(getStore({ name: 'hasLogin' }));
@@ -69,19 +68,14 @@
 				if(uni.getStorageSync('uniCode')){
 					this.SET_UNICODE(uni.getStorageSync('uniCode'));
 				}
-				alert('getStore userInfo-------------开始');
 				// if(uni.getStorageSync('userInfo')){
 				// 	this.SET_USERIFNO(uni.getStorageSync('userInfo'));
 				// }
-				let aaa = getStore({ name: 'userInfo' })
-				alert(aaa)
-				if(aaa){
-					this.SET_USERIFNO(aaa);
+				if(getStore({ name: 'userInfo' })){
+					this.SET_USERIFNO(getStore({ name: 'userInfo' }));
 				}
-				alert('getStore userInfo-------------结束');
 			},
 			browserRedirect(options) {
-				alert('browserRedirect')
 				var sUserAgent = navigator.userAgent.toLowerCase();
 				// var bIsIpad = sUserAgent.match(/ipad/i) == "ipad";
 				// var bIsIphoneOs = sUserAgent.match(/iphone os/i) == "iphone os";
@@ -98,10 +92,8 @@
 						...this.baseInfo,
 						scm: 'h5'
 					});
-					alert('defaultwxWebLogin--------------------------')
 					alert(this.hasLogin)
 					if(!this.hasLogin){
-						alert('defaultwxWebLogin==================begin')
 						this.defaultwxWebLogin(options);
 					}
 				}else {
@@ -113,7 +105,6 @@
 				}
 			},
 			defaultwxWebLogin(options){
-				alert('微信h5环境defaultwxWebLogin');
 				if (document.referrer) {
 					alert(document.referrer);
 				    uni.setStorageSync('referUrl', document.referrer);
