@@ -23,6 +23,8 @@
 						});
 						this.SET_MALLTYPE(res.result.type);
 						this.SET_MALLID(res.result.mallId);
+						alert(this.baseInfo);
+						alert(this.userInfo);
 					}else{
 						console.log('login--mallTaye 接口调用失败');
 					}
@@ -71,6 +73,7 @@
 				// if(uni.getStorageSync('userInfo')){
 				// 	this.SET_USERIFNO(uni.getStorageSync('userInfo'));
 				// }
+				alert(getStore({ name: 'userInfo' }))
 				if(getStore({ name: 'userInfo' })){
 					this.SET_USERIFNO(getStore({ name: 'userInfo' }));
 				}

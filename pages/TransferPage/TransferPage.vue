@@ -57,13 +57,10 @@
 				this.SET_FIRSTLOAD(false);
 			},
 			setUserInfo(){
-				alert('111111')
 				this.$http.post('/mall/app/account/info')
 				.then( res => {
 					if(res.code == 0){
 						if(res.result){
-							alert(res.result.customer.accountId)
-							alert(res.result.mobilephone)
 							let mobilephone = res.result.mobilephone;
 							let {accountId, customerName, wechatName, customerSex, customerBirthday, customerImage, customerId} = res.result.customer;
 							this.SET_USERIFNO({accountId, customerName, wechatName, customerSex, customerBirthday,  customerImage, customerId});
@@ -71,9 +68,6 @@
 								...this.userInfo,
 								mobilephone: mobilephone
 							})
-							alert(this)
-							alert(this.userInfo.accountId)
-							alert(this.userInfo.mobilephone)
 						}
 					}else{
 						console.log('login.vue-- info接口调用失败');

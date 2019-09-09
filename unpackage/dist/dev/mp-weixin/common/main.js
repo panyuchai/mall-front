@@ -115,6 +115,8 @@ var _api = __webpack_require__(/*! ./api/api.js */ 11);function _objectSpread(ta
 
           _this.SET_MALLTYPE(res.result.type);
           _this.SET_MALLID(res.result.mallId);
+          alert(_this.baseInfo);
+          alert(_this.userInfo);
         } else {
           console.log('login--mallTaye 接口调用失败');
         }
@@ -163,6 +165,7 @@ var _api = __webpack_require__(/*! ./api/api.js */ 11);function _objectSpread(ta
       // if(uni.getStorageSync('userInfo')){
       // 	this.SET_USERIFNO(uni.getStorageSync('userInfo'));
       // }
+      alert((0, _store.getStore)({ name: 'userInfo' }));
       if ((0, _store.getStore)({ name: 'userInfo' })) {
         this.SET_USERIFNO((0, _store.getStore)({ name: 'userInfo' }));
       }
