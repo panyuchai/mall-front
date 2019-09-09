@@ -7641,7 +7641,8 @@ var setStore = function setStore(params) {var
 /**
     * 获取localStorage
     */exports.setStore = setStore;
-var getStore = function getStore(params) {var
+var getStore = function getStore(params) {
+  alert('getStore方法');var
 
   name =
 
@@ -7661,6 +7662,7 @@ var getStore = function getStore(params) {var
   } else if (obj.dataType == 'object') {
     content = obj.content;
   }
+  alert('getStore方法结束');
   return content;
 };
 /**

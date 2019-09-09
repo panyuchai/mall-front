@@ -24,6 +24,7 @@ export const setStore = (params) => {
  * 获取localStorage
  */
 export const getStore = (params) => {
+	alert('getStore方法')
   let {
     name,
     type
@@ -43,6 +44,7 @@ export const getStore = (params) => {
   } else if (obj.dataType == 'object') {
     content = obj.content;
   }
+  alert('getStore方法结束')
   return content;
 }
 /**
