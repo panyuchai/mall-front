@@ -165,7 +165,9 @@ var _api = __webpack_require__(/*! ./api/api.js */ 11);function _objectSpread(ta
       // if(uni.getStorageSync('userInfo')){
       // 	this.SET_USERIFNO(uni.getStorageSync('userInfo'));
       // }
+      alert('44444444');
       alert('55555555555555555' + (0, _store.getStore)({ name: 'userInfo' }));
+      alert('6666666');
       if ((0, _store.getStore)({ name: 'userInfo' })) {
         this.SET_USERIFNO((0, _store.getStore)({ name: 'userInfo' }));
       }
