@@ -23,11 +23,12 @@
 					alert('静默登陆成功1')
 					this.SET_HASLOGIN(true);
 					alert('静默登陆成功2')
+					alert(options.token)
 					this.SET_TOKEN(options.token);
 					alert('静默登陆成功3')
 					this.$http.setConfig((config) => {
 						// config.header['Authorization'] = 'Bearer ' + getStore({ name: 'token' });
-						config.header['Authorization'] = 'Bearer ' + options.token;
+						config.header['Authorization'] = 'Bearer ' + uni.getStorageSync('token');
 						return config;
 					});
 					alert('静默登陆成功4')

@@ -246,7 +246,8 @@ var _store = __webpack_require__(/*! ../../utils/store.js */ 8);function _object
           uni.uploadFile({ // http://192.168.1.104/saas/app/backsite/sysFile/upload
             url: '/saas/app/backsite/sysFile/upload',
             header: {
-              Authorization: 'Bearer ' + (0, _store.getStore)({ name: 'token' }) },
+              // Authorization: 'Bearer ' + getStore({ name: 'token' })
+              Authorization: 'Bearer ' + uni.getStorageSync('token') },
 
             filePath: tempFilePaths[0],
             name: 'file',
