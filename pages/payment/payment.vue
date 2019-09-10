@@ -344,13 +344,13 @@
 				}
 			},
 			handleWxWebPay(data){
-				console.log(1)
+				alert(1)
 				this.$http.post('/mall/app/order/submit', {
 					...data,
 					payChannels: '6',
 				})
 				.then( res => {
-					if(res.result.orderState == 1){
+					if(res.result && res.result.orderState == 1){
 						uni.showToast({
 							icon: 'none',
 							title: '订单提交成功'
