@@ -228,6 +228,27 @@ var _vuex = __webpack_require__(/*! vuex */ 10);function _objectSpread(target) {
         this.scrollTop = 0;
       });
     },
+    transUserState: function transUserState(num) {
+      switch (num) {
+        case 0:
+          return [];
+          break;
+        case 1:
+          return [0];
+          break;
+        case 2:
+          return [1, 2];
+          break;
+        case 3:
+          return [3];
+          break;
+        case 4:
+          return [7];
+          break;
+        default:
+          return [];}
+
+    },
     // transOrderState(num){
     // 	switch(num){
     // 		case 0:
@@ -372,7 +393,7 @@ var _vuex = __webpack_require__(/*! vuex */ 10);function _objectSpread(target) {
 
   onLoad: function onLoad(options) {
     console.log(options);
-    this.loadData();
+    this.loadData(this.transUserState(0));
   },
   onReachBottom: function onReachBottom() {
     // if(!this.isPull) return;

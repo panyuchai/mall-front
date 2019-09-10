@@ -7,19 +7,19 @@
 			</view>
 		</view>
 		<view class="navbar">
-			<view class="nav-item" @tap="doQuery(0)" v-bind:class='searchData.orderType==0 ? "red" : ""'>
+			<view class="nav-item" @tap="doQuery(0)" v-bind:class='searchData.orderState==0 ? "red" : ""'>
 				全部
 			</view>
-			<view class="nav-item" @tap="doQuery(1)" v-bind:class='searchData.orderType==0 ? "red" : ""'>
+			<view class="nav-item" @tap="doQuery(1)" v-bind:class='searchData.orderState==1 ? "red" : ""'>
 				待付款
 			</view>
-			<view class="nav-item" @tap="doQuery(1)" v-bind:class='searchData.orderType==0 ? "red" : ""'>
+			<view class="nav-item" @tap="doQuery(2)" v-bind:class='searchData.orderState==2 ? "red" : ""'>
 				待收货
 			</view>
-			<view class="nav-item" @tap="doQuery(1)" v-bind:class='searchData.orderType==0 ? "red" : ""'>
+			<view class="nav-item" @tap="doQuery(3)" v-bind:class='searchData.orderState==3 ? "red" : ""'>
 				已完成
 			</view>
-			<view class="nav-item" @tap="doQuery(1)" v-bind:class='searchData.orderType==0 ? "red" : ""'>
+			<view class="nav-item" @tap="doQuery(4)" v-bind:class='searchData.orderState==4 ? "red" : ""'>
 				售后
 			</view>
 		</view>
@@ -121,6 +121,27 @@
 					this.scrollTop = 0
 				});
 			},
+			transUserState(num){
+				switch(num){
+					case 0:
+						return [];
+						break;
+					case 1:
+						return [0];
+						break;
+					case 2:
+						return [1, 2];
+						break;
+					case 3:
+						return [3];
+						break;
+					case 4:
+						return [7];
+						break;
+					default:
+						return [];
+				}
+			},
 			// transOrderState(num){
 			// 	switch(num){
 			// 		case 0:
@@ -154,11 +175,17 @@
 			// 			return '';
 			// 	}
 			// },
+			doQuery(orderType){
+				// this.goTop();
+				// this.searchData.pageNum=1;
+				this.loadData(this.transUserState(orderType));
+				// uni.setStorageSync('order_searchType_storage', orderType);
+			},
 			loadData(orderState){
 				this.loadding = true;
 				this.pullUpOn = true;
-				this.searchData.orderState=orderState || '';
-				
+				this.searchData.orderState=orderState || [];
+				console.log(this.searchData)
 				this.$http.post('/mall/app/order/list', {
 					...this.baseInfo,
 					...this.searchData,
@@ -177,13 +204,13 @@
 							// }else{
 							// 	this.loadding = false;
 							// }
-							// if(this.searchData.pageNum == 1){
-							// 	if(res.result.mallGoodsList){
-							// 		this.productData=res.result.mallGoodsList;
-							// 	}
-							// }else{
-							// 	this.productData=this.productData.concat(res.result.mallGoodsList);
-							// }
+							if(this.searchData.pageNum == 1){
+								if(res.result.records){
+									this.listData=res.result.records;
+								}
+							}else{
+								this.listData=this.listData.concat(res.result.records);
+							}
 						}
 						
 					}else{
@@ -264,8 +291,8 @@
 			
 		},
 		onLoad(options){
-			console.log(options)
-			this.loadData()
+			console.log(options.state);
+			this.loadData(this.transUserState(options.state));
 		},
 		onReachBottom: function(){
 			// if(!this.isPull) return;
@@ -454,6 +481,22 @@
 				}
 			}
 		}
+	}
+	.red{
+		color: #E93B3D!important;
+		position: relative;
+		&:after{
+			content: '';
+			position: absolute;
+			left: 50%;
+			bottom: 0;
+			right: 0;
+			transform: translateX(-50%);
+			width: 88upx;
+			height: 8upx;
+			background: #E93B3D;
+		}
+		
 	}
 	
 	.order-item{

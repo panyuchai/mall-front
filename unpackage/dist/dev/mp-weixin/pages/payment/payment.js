@@ -310,6 +310,7 @@ var _vuex = __webpack_require__(/*! vuex */ 10);function _objectSpread(target) {
       });
     },
     handleWxWebPay: function handleWxWebPay(data) {var _this2 = this;
+      console.log(1);
       this.$http.post('/mall/app/order/submit', _objectSpread({},
       data, {
         payChannels: '6' })).
@@ -332,6 +333,7 @@ var _vuex = __webpack_require__(/*! vuex */ 10);function _objectSpread(target) {
             callBackNo: res.result.orderNo })).
 
           then(function (res) {
+            console.log('WxWebPay  接口调用成功');
             console.log(res);
           }).
           catch(function (err) {

@@ -235,7 +235,8 @@
 				address: {},
 				goodsList: [],
 				balanceType: 0,
-				fee: 0
+				fee: 0,
+				payInfo: {}
 			}
 		},
 		methods: {
@@ -299,7 +300,51 @@
 					console.log(err);
 				})
 			},
+			// getPayInfo(params){                                              //调用统一下单接口获取js支付参数  参数：金额、商品名称等 具体可以看统一接口的接收参数类WxPayUnifiedOrderRequest
+			// 	this.$api.gotoPay(params).then(res=>{  
+			// 	  if(res!=null){
+			// 		this.payInfo.appId = res.data.appId;
+			// 		this.payInfo.timeStamp = res.data.timeStamp;
+			// 		this.payInfo.nonceStr = res.data.nonceStr;
+			// 		this.payInfo.packages = res.data.packages;
+			// 		this.payInfo.sign = res.data.sign;
+			// 	  }
+			// 	})
+		 //    },
+			onBridgeReady(){　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　//使用微信浏览器内置的对象调起微信支付插件，并传入统一接口返回的参数
+				WeixinJSBridge.invoke(
+				  'getBrandWCPayRequest', {
+					"appId":this.payInfo.appId,                 //公众号名称，由商户传入
+					"timeStamp":this.payInfo.timeStamp,         //时间戳，自1970年以来的秒数
+					"nonceStr":this.payInfo.nonceStr,           //随机字符串
+					"package":this.payInfo.package,            //支付验证pay_id
+					"signType":this.payInfo.signType,                           //微信签名方式
+					"paySign":this.payInfo.paySign                 //微信签名
+				  },
+				  function(res){
+					if(res.err_msg == "get_brand_wcpay_request:ok" ){
+					  // 使用以上方式判断前端返回,微信团队郑重提示：
+					  //res.err_msg将在用户支付成功后返回ok，但并不保证它绝对可靠。
+					  console.log('res.err_msg == "get_brand_wcpay_request:ok"')
+					}
+				  }
+				)
+			},
+			Gopay(){　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　//点击付款按钮开始支付
+				console.log("开始支付")
+				if (typeof WeixinJSBridge == "undefined"){
+				  if( document.addEventListener ){
+					document.addEventListener('WeixinJSBridgeReady', this.onBridgeReady(), false);
+				  }else if (document.attachEvent){
+					document.attachEvent('WeixinJSBridgeReady', this.onBridgeReady());
+					document.attachEvent('onWeixinJSBridgeReady', this.onBridgeReady());
+				  }
+				}else{
+				  this.onBridgeReady();
+				}
+			},
 			handleWxWebPay(data){
+				console.log(1)
 				this.$http.post('/mall/app/order/submit', {
 					...data,
 					payChannels: '6',
@@ -322,7 +367,16 @@
 							callBackNo: res.result.orderNo
 						})
 						.then( res => {
-							console.log(res)
+							console.log('WxWebPay  接口调用成功')
+							if(res.code == 0){
+								this.payInfo.appId = res.result.payResponse.wxPayResponse.appId;
+								this.payInfo.timeStamp = res.result.payResponse.wxPayResponse.timeStamp;
+								this.payInfo.nonceStr = res.result.payResponse.wxPayResponse.nonceStr;
+								this.payInfo.package = res.result.payResponse.wxPayResponse.packageStr;
+								this.payInfo.signType = res.result.payResponse.wxPayResponse.signType;
+								this.payInfo.paySign = res.result.payResponse.wxPayResponse.paySign;
+								this.onBridgeReady();
+							}
 						})
 						.catch( err => {
 							console.log(err);
@@ -357,7 +411,13 @@
 							callBackNo: res.result.orderNo
 						})
 						.then( res => {
-							console.log(res)
+							console.log(res);
+							this.getPayInfo()
+							this.payInfo.appId = res.data.appId;
+							this.payInfo.timeStamp = res.data.timeStamp;
+							this.payInfo.nonceStr = res.data.nonceStr;
+							this.payInfo.packages = res.data.packages;
+							this.payInfo.sign = res.data.sign;
 						})
 						.catch( err => {
 							console.log(err);

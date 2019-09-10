@@ -5,7 +5,7 @@ const state = {
    */
   mallDomain: 'yyy',
   mallType: '',
-  mallId: '',
+  mallId: null,
   // mallId: '',
   // p: '',
   // scm: '',
