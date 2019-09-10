@@ -7,10 +7,10 @@
 			</view>
 		</view>
 		<view class="navbar">
-			<view class="nav-item" @tap="doQuery(0)" v-bind:class='searchData.orderState==0 ? "red" : ""'>
+			<view class="nav-item" @tap="doQuery(0)" v-bind:class='searchData.orderState=="[]" ? "red" : ""'>
 				全部
 			</view>
-			<view class="nav-item" @tap="doQuery(1)" v-bind:class='searchData.orderState==1 ? "red" : ""'>
+			<view class="nav-item" @tap="doQuery(1)" v-bind:class='searchData.orderState=="[0]" ? "red" : ""'>
 				待付款
 			</view>
 			<view class="nav-item" @tap="doQuery(2)" v-bind:class='searchData.orderState==2 ? "red" : ""'>
