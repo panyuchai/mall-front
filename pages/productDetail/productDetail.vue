@@ -256,7 +256,7 @@
 					<view class="style-yellow operation-button" @click="handleAddCart(goodsInfo.id)">加入购物车</view>
 				</view>
 				<view class="tui-flex-1">
-					<view class="style-red operation-button" @click="showPopup">立即购买</view>
+					<view class="style-red operation-button" @click="linkToPayment(goodsInfo.id)">立即购买</view>
 				</view>
 			</view>
 		</view>
@@ -366,7 +366,7 @@
 				</scroll-view>
 				<view class="tui-operation tui-right-flex popup-btn">
 					<view class="operation-btn style-yellow" @click="handleAddCart(goodsInfo.id)">加入购物车</view>
-					<view class="operation-btn style-red" @click="hidePopup">立即购买</view>
+					<view class="operation-btn style-red" @click="linkToPayment(goodsInfo.id)">立即购买</view>
 				</view>
 				<!-- <view class="tui-icon tui-icon-close-fill tui-icon-close" style="color: #999;font-size:20px" @tap="hidePopup"></view> -->
 				<tui-icon name="close-fill" color="#999" class="popup-close-btn" @tap="hidePopup"></tui-icon>
@@ -428,25 +428,7 @@
 					text: "购物车",
 					size: 23,
 					badge: 2
-				}, 
-				// {
-				// 	icon: "share",
-				// 	text: "分享",
-				// 	size: 26,
-				// 	badge: 0
-				// }
-				// {
-				// 	icon: "kefu",
-				// 	text: "客服小蜜",
-				// 	size: 26,
-				// 	badge: 0
-				// }, 
-				// {
-				// 	icon: "feedback",
-				// 	text: "我要反馈",
-				// 	size: 23,
-				// 	badge: 0
-				// }, 
+				}
 				],
 				menuShow: false,
 				popupShow: false,
@@ -500,27 +482,56 @@
 				this.value = e.value
 			},
 			handleAddCart(mallGoodsId){
+				if(!this.hasLogin){
+					uni.navigateTo({
+					    url: '/pages/login/login'
+					});
+				}else{
+					this.$http.post('/mall/app/car/add', {
+						...this.baseInfo,
+						accountId: this.userInfo.accountId,
+						goodsCount: this.value,
+						mallGoodsId: mallGoodsId
+					})
+					.then( res => {
+						if(res.code == 0){
+							this.getGoodsDetail();
+							uni.showToast({
+								icon: 'none',
+								title: '商品添加成功',
+							});
+						}else{
+							console.log('productDetail.vue-- add接口添加购物车失败');
+						}
+					})
+					.catch( err => {
+						console.log('productDetail.vue-- add接口添加购物车错误');
+					})
+				}
 				this.hidePopup();
-				this.$http.post('/mall/app/car/add', {
-					...this.baseInfo,
-					accountId: this.userInfo.accountId,
-					goodsCount: this.value,
-					mallGoodsId: mallGoodsId
-				})
-				.then( res => {
-					if(res.code == 0){
-						this.getGoodsDetail();
-						uni.showToast({
-							icon: 'none',
-							title: '商品添加成功',
-						});
-					}else{
-						console.log('productDetail.vue-- add接口添加购物车失败');
-					}
-				})
-				.catch( err => {
-					console.log('productDetail.vue-- add接口添加购物车错误');
-				})
+			},
+			linkToPayment(id){
+				if(!this.hasLogin){
+					uni.navigateTo({
+					    url: '/pages/login/login'
+					});
+				}else{
+					let tmpList = [];
+					tmpList.push({
+						mallGoodsId: id,
+						goodsCount: this.value
+					})
+					uni.setStorage({
+						key:'buyList',
+						data:tmpList,
+						success: () => {
+							uni.navigateTo({
+								url:'/pages/payment/payment'
+							})
+						}
+					})
+				}
+				this.hidePopup();
 			},
 			// collecting: function() {
 			// 	this.collected = !this.collected
@@ -539,9 +550,16 @@
 				})
 			},
 			linkToCart(){
-				uni.reLaunch({
-					url: '/pages/car/car'
-				})
+				if(!this.hasLogin){
+					uni.showToast({
+						icon: 'none',
+						title: '请先去登陆吧~'
+					})
+				}else{
+					uni.reLaunch({
+						url: '/pages/car/car'
+					})
+				}
 			},
 			getGoodsDetail(){
 				let goodsId=uni.getStorageSync('goodsId');
@@ -561,7 +579,7 @@
 			}
 		},
 		computed: {
-			...mapState('common', ['baseInfo', 'userInfo'])
+			...mapState('common', ['baseInfo', 'userInfo', 'hasLogin'])
 		},
 		onLoad: function(options) {
 			uni.setStorageSync('goodsId', options);

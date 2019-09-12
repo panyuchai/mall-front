@@ -369,7 +369,7 @@
 					}else{
 						uni.setStorageSync('PAYMENT_ORDER_INFO', JSON.stringify(data))
 						uni.navigateTo({
-						    url: '/pages/payment/cashRegister?orderNo='+res.result.orderNo
+						    url: 'http://testpay.yujianli.cn/#/pages/payment/cashRegister?orderNo='+res.result.orderNo
 						});
 						// this.$http.post('/mall/app/order/submit', {
 						// 	...data,
