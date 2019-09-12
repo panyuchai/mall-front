@@ -241,6 +241,7 @@
 		},
 		onLoad(options){
 			this.getInitData();
+			console.log(options)
 			this.handleSubmit(options.orderNo);
 		},
 	}
