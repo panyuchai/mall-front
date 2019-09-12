@@ -159,6 +159,7 @@
 	export default {
 		data() {
 			return {
+				orderNo: '',
 				payInfo: {},
 				initData: {}
 			}
@@ -197,7 +198,7 @@
 				  this.onBridgeReady();
 				}
 			},
-			handleSubmit(orderNo){
+			handleSubmit(){
 				// let data = JSON.parse(uni.getStorageSync('PAYMENT_ORDER_INFO'));
 				let data = {
 					...this.baseInfo,
@@ -212,7 +213,7 @@
 					remark: this.initData.remark,
 					totalPrice: this.initData.totalPrice,
 					payChannels: '6',
-					callBackNo: orderNo
+					callBackNo: this.orderNo
 				};
 				this.$http.post('/mall/app/order/submit', data)
 				.then( res => {
@@ -232,6 +233,7 @@
 				})
 			},
 			getInitData(){
+				this.orderNo=uni.getStorageSync('ORDER_NO');
 				this.initData=JSON.parse(uni.getStorageSync('PAYMENT_ORDER_INFO'));
 			}
 		},
@@ -241,8 +243,7 @@
 		},
 		onLoad(options){
 			this.getInitData();
-			console.log(options)
-			this.handleSubmit(options.orderNo);
+			uni.setStorageSync('ORDER_NO', options.orderNo);
 		},
 	}
 </script>
