@@ -242,8 +242,8 @@
 			
 		},
 		onLoad(options){
-			this.getInitData();
 			uni.setStorageSync('ORDER_NO', options.orderNo);
+			this.getInitData();
 		},
 	}
 </script>
