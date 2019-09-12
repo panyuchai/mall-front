@@ -211,17 +211,16 @@
 				// let data = JSON.parse(uni.getStorageSync('PAYMENT_ORDER_INFO'));
 				let data = {
 					...this.baseInfo,
-					accountId: this.userInfo.accountId,
-					addressId: this.address.addressId,
-					balance: this.balancePay,
-					isBalance: this.balanceType,
+					accountId: this.initData.accountId,
+					addressId: this.initData.addressId,
+					balance: this.initData.balance,
+					isBalance: this.initData.isBalance,
 					credits: 0,
-					expressFee: this.payData.express.fee,
-					goodsList: this.goodsList,
-					payPrice: this.payPrice,
-					remark: this.remark,
+					expressFee: this.initData.expressFee,
+					goodsList: this.initData.goodsList,
+					payPrice: this.initData.payPrice,
+					remark: this.initData.remark,
 					totalPrice: this.payData.totalPrice,
-					
 					payChannels: '6',
 					callBackNo: orderNo
 				};

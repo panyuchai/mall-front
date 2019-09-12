@@ -236,7 +236,7 @@
 				goodsList: [],
 				balanceType: 0,
 				fee: 0,
-				payInfo: {}
+				// payInfo: {}
 			}
 		},
 		methods: {
