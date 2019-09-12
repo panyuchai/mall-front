@@ -177,7 +177,6 @@
 							this.searchData.totalPage=res.result.totalPage;
 							if(res.result.mallGoodsList.length == 0){
 								// this.notFound=true;
-								
 								this.loadding = false;
 								this.pullUpOn = false;
 							}else{
@@ -277,7 +276,7 @@
 			this.loadding = true;
 			this.searchData.pageNum++;
 			// if(this.canReachBottom){
-			if (this.searchData.pageNum == this.searchData.totalPage) {
+			if (this.searchData.pageNum > this.searchData.totalPage) {
 				this.loadding = false;
 				this.pullUpOn = false;
 			}

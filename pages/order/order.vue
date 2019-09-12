@@ -1,26 +1,28 @@
 <template>
 	<view class="content">
-		<view class="search-box">
-			<view class="search-input">
-				<text class="iconfont icon-sousuo search-icon"></text>
-				<input class="search-info" type="text" placeholder="商品名/商品编号/订单号" />
+		<view class="fixedTop">
+			<view class="search-box">
+				<view class="search-input">
+					<text class="iconfont icon-sousuo search-icon"></text>
+					<input class="search-info" type="text" placeholder="商品名/商品编号/订单号" v-model="searchData.query" @input="handleSearch"/>
+				</view>
 			</view>
-		</view>
-		<view class="navbar">
-			<view class="nav-item" @tap="doQuery(0)" v-bind:class='searchData.orderState=="[]" ? "red" : ""'>
-				全部
-			</view>
-			<view class="nav-item" @tap="doQuery(1)" v-bind:class='searchData.orderState=="[0]" ? "red" : ""'>
-				待付款
-			</view>
-			<view class="nav-item" @tap="doQuery(2)" v-bind:class='searchData.orderState==2 ? "red" : ""'>
-				待收货
-			</view>
-			<view class="nav-item" @tap="doQuery(3)" v-bind:class='searchData.orderState==3 ? "red" : ""'>
-				已完成
-			</view>
-			<view class="nav-item" @tap="doQuery(4)" v-bind:class='searchData.orderState==4 ? "red" : ""'>
-				售后
+			<view class="navbar">
+				<view class="nav-item" @tap="doQuery(0)" v-bind:class='type==0 ? "red" : ""'>
+					全部
+				</view>
+				<view class="nav-item" @tap="doQuery(1)" v-bind:class='type==1 ? "red" : ""'>
+					待付款
+				</view>
+				<view class="nav-item" @tap="doQuery(2)" v-bind:class='type==2 ? "red" : ""'>
+					待收货
+				</view>
+				<view class="nav-item" @tap="doQuery(3)" v-bind:class='type==3 ? "red" : ""'>
+					已完成
+				</view>
+				<view class="nav-item" @tap="doQuery(4)" v-bind:class='type==4 ? "red" : ""'>
+					售后
+				</view>
 			</view>
 		</view>
 		
@@ -31,7 +33,7 @@
 		</view>
 		<view class="swiper-box">
 			<view class="list-scroll-content">
-				<view class="order-item" v-for="item in listData" @tap="linkToDetail()">
+				<view class="order-item" v-for="item in listData" @tap="linkToDetail(item.orderlistId)">
 					<view class="hd">
 						<view class="number">
 							订单编号：<text>{{item.orderlistMainnum}}</text>
@@ -41,40 +43,45 @@
 						</view>
 					</view>
 					<view class="bd" v-for="(good, i) in item.details">
-						<view class="pic">
-							<image class="img" :src="good.imageUrl" mode="aspectFill"></image>
-						</view>
-						<view class="info">
-							<view class="tit">
-								{{good.goodsProductname}}
+						<!-- <view class="" v-for="good in goods.zsscMallGoods"> -->
+							<view class="pic">
+								<image class="img" :src="good.zsscMallGoods.goodsMainimagepath" mode="aspectFill"></image>
 							</view>
-							<view class="con">
-								<view class="_left">
-									共{{good.goodsCount}}件商品
+							<view class="info">
+								<view class="tit">
+									{{good.zsscMallGoods.goodsProductname}}
 								</view>
-								<view class="_right">
-									实付金额：<text class="price">¥{{good.goodsRelprice}}</text>
+								<view class="con">
+									<view class="_left">
+										共{{good.goodsCount}}件商品
+									</view>
+									<view class="_right">
+										实付金额：<text class="price">¥{{good.zsscMallGoods.salePrice}}</text>
+									</view>
 								</view>
 							</view>
-						</view>
+						<!-- </view> -->
 					</view>
 					<view class="fd">
-						<view class="action-btn" v-if="item.state == 1" @tap.stop="cancelOrder()">
+						<view class="action-btn" v-if="item.orderlistState == 0" @tap.stop="cancelOrder(item.orderlistId)">
 							取消订单
 						</view>
-						<view class="action-btn action-red" v-if="item.state == 1" @tap.stop="linkToPayment()">
+						<view class="action-btn action-red" v-if="item.orderlistState == 0" @tap.stop="linkToPayment(item.details)">
 							去付款
 						</view>
-						<view class="action-btn " v-if="item.state==2 || item.state==3 || item.state==4" @tap.stop="linkToDelivery()">
+						<view class="action-btn " v-if="item.orderlistState==2 || item.orderlistState==3 || item.orderlistState==4" @tap.stop="linkToDelivery(item.orderlistId)">
 							查看物流详情
 						</view>
-						<view class="action-btn action-red" v-if="item.state == 2"  @tap.stop="confirmOrder()">
+						<view class="action-btn action-red" v-if="item.orderlistState == 2"  @tap.stop="confirmOrder(item.orderlistId)">
 							确认收货
 						</view>
 					</view>
 				</view>
 			</view>
 		</view>
+		<!--加载loadding-->
+		<tui-loadmore :visible="loadding" :index="3" type="primary"></tui-loadmore>
+		<tui-nomore :visible="!pullUpOn"></tui-nomore>
 	</view>
 </template> 
 
@@ -82,18 +89,19 @@
 	import {
 		mapState
 	} from 'vuex'
-	import uniLoadMore from '@/components/uni-load-more/uni-load-more.vue';
-	import empty from "@/components/empty/empty";
+	import tuiLoadmore from "@/components/loadmore/loadmore"
+	import tuiNomore from "@/components/nomore/nomore"
 	export default {
 		components: {
-			uniLoadMore,
-			empty
+			tuiLoadmore,
+			tuiNomore
 		},
 		data() {
 			return {
+				type:0,
 				pageNum: 1,
 				productData: [],
-				loadding: false,
+				loadding: true,
 				pullUpOn: true,
 				notFound: false,
 				canReachBottom: true,
@@ -110,6 +118,15 @@
 					scrollTop: 0
 				}
 			};
+		},
+		watch: {
+			searchData:  {
+				handler(val, newval){
+					this.searchData.orderState=val.orderState
+					this.searchData.query=val.query
+				},
+				deep: true
+			}
 		},
 		methods: {
 			scroll: function(e) {
@@ -142,50 +159,63 @@
 						return [];
 				}
 			},
-			// transOrderState(num){
-			// 	switch(num){
-			// 		case 0:
-			// 			return '未支付';
-			// 			break;
-			// 		case 1:
-			// 			return '未发货';
-			// 			break;
-			// 		case 2:
-			// 			return '已发货';
-			// 			break;
-			// 		case 3:
-			// 			return '已完成';
-			// 			break;
-			// 		case 4:
-			// 			return '已退货';
-			// 			break;
-			// 		case 5:
-			// 			return '已退款';
-			// 			break;
-			// 		case 6:
-			// 			return '已取消';
-			// 			break;
-			// 		case 7:
-			// 			return '退款中';
-			// 			break;
-			// 		case 9:
-			// 			return '备货中';
-			// 			break;
-			// 		default:
-			// 			return '';
-			// 	}
-			// },
+			transOrderState(num){
+				switch(num){
+					case 0:
+						return '未支付';
+						break;
+					case 1:
+						return '未发货';
+						break;
+					case 2:
+						return '已发货';
+						break;
+					case 3:
+						return '已完成';
+						break;
+					case 4:
+						return '已退货';
+						break;
+					case 5:
+						return '已退款';
+						break;
+					case 6:
+						return '已取消';
+						break;
+					case 7:
+						return '退款中';
+						break;
+					case 9:
+						return '备货中';
+						break;
+					default:
+						return '';
+				}
+			},
 			doQuery(orderType){
-				// this.goTop();
-				// this.searchData.pageNum=1;
+				this.goTop();
+				this.searchData.pageNum=1;
+				this.type=orderType;
 				this.loadData(this.transUserState(orderType));
-				// uni.setStorageSync('order_searchType_storage', orderType);
+				uni.setStorageSync('order_searchType_storage', this.transUserState(orderType));
+			},
+			handleSearch(){
+				this.goTop();
+				this.searchData.pageNum=1;
+				this.type=0;
+				this.$nextTick(() => {
+					this.loadData(this.transUserState(0));
+				});
+				uni.setStorageSync('order_searchType_storage', this.transUserState(0));
 			},
 			loadData(orderState){
 				this.loadding = true;
 				this.pullUpOn = true;
-				this.searchData.orderState=orderState || [];
-				console.log(this.searchData)
+				this.searchData={
+					...this.searchData,
+					orderState: orderState || []
+				}
+				// this.searchData.orderState=orderState || [];
 				this.$http.post('/mall/app/order/list', {
 					...this.baseInfo,
 					...this.searchData,
@@ -195,15 +225,14 @@
 					// console.log(res)
 					if(res.code == 0){
 						if(res.result){
-							this.searchData.totalPage=res.result.totalPage;
-							// if(res.result.mallGoodsList.length == 0){
-							// 	// this.notFound=true;
-							// 	
-							// 	this.loadding = false;
-							// 	this.pullUpOn = false;
-							// }else{
-							// 	this.loadding = false;
-							// }
+							this.searchData.totalPage=res.result.pages;
+							if(res.result.records.length == 0){
+								// this.notFound=true;
+								this.loadding = false;
+								this.pullUpOn = false;
+							}else{
+								this.loadding = false;
+							}
 							if(this.searchData.pageNum == 1){
 								if(res.result.records){
 									this.listData=res.result.records;
@@ -211,6 +240,9 @@
 							}else{
 								this.listData=this.listData.concat(res.result.records);
 							}
+							this.listData.map(item => {
+								this.$set(item, 'orderStateName', this.transOrderState(item.orderlistState));
+							})
 						}
 						
 					}else{
@@ -226,7 +258,7 @@
 			// 跳转详情
 			linkToDetail(orderId){
 				uni.navigateTo({
-					url: '/pages/orderDetail/orderDetail'
+					url: '/pages/orderDetail/orderDetail?orderId=' + orderId
 				})
 			},
 			//取消订单
@@ -263,20 +295,50 @@
 				// }, 600)
 			},
 			// 去付款
-			linkToPayment(){
-				uni.navigateTo({
-					url: '/pages/payment/payment'
+			linkToPayment(order){
+				let payOrder = [];
+				order.map(item => {
+					payOrder.push({
+						goodsCount: item.goodsCount,
+						mallGoodsId: item.zsscMallGoods.id
+					})
+				});
+				// console.log(payOrder)
+				uni.setStorage({
+					key:'buyList',
+					data:payOrder,
+					success: () => {
+						uni.navigateTo({
+							url:'/pages/payment/payment'
+						})
+					}
 				})
 			},
 			// 查看物流详情
-			linkToDelivery(){
+			linkToDelivery(orderId){
 				uni.navigateTo({
-					url: '/pages/delivery/delivery'
+					url: '/pages/delivery/delivery?orderId=' + orderId
 				})
 			},
 			// 确认收货
-			confirmOrder(){
-				console.log("确认收货");
+			confirmOrder(orderId){
+				this.$http.post('/mall/app/order/receive', {
+					...this.baseInfo,
+					accountId: this.userInfo.accountId,
+					orderId: orderId
+				})
+				.then( res => {
+					if(res.code == 0){
+						uni.showToast({
+							icon: 'none',
+							title: '确认收货成功'
+						})
+						this.loadData(uni.getStorageSync('order_searchType_storage'));
+					}
+				})
+				.catch( err => {
+					console.log(err);
+				})
 			},
 			//删除订单
 			deleteOrder(index){
@@ -291,12 +353,19 @@
 			
 		},
 		onLoad(options){
-			console.log(options.state);
-			this.loadData(this.transUserState(options.state));
+			this.loadData(this.transUserState(Number(options.state)));
+			this.type=options.state;
+			uni.setStorageSync('order_searchType_storage', this.transUserState(options.state));
 		},
-		onReachBottom: function(){
-			// if(!this.isPull) return;
-			// console.log(111);
+		onReachBottom: function() {
+			if (!this.pullUpOn) return;
+			this.loadding = true;
+			this.searchData.pageNum++;
+			// if (this.searchData.pageNum > this.searchData.totalPage) {
+			// 	this.loadding = false;
+			// 	this.pullUpOn = false;
+			// }
+			this.loadData(uni.getStorageSync('order_searchType_storage'));
 		},
 		computed: {
 			...mapState('common', ['baseInfo', 'userInfo'])
@@ -310,12 +379,20 @@
 		background: #F7F7F7;
 	}
 	
-	.swiper-box{
-		height: calc(100% - 80upx);
-		// padding-top: 20upx;
-	}
+	// .swiper-box{
+	// 	height: calc(100% - 80upx);
+	// 	// padding-top: 20upx;
+	// }
 	.list-scroll-content{
-		height: 100%;
+		margin-top: 100px;
+		// height: 100%;
+	}
+	.fixedTop{
+		position: fixed;
+		top: 44px;
+		left: 0;
+		right: 0;
+		z-index: 9;
 	}
 	.search-box{
 		background: #fff;
@@ -432,6 +509,7 @@
 				}
 			}
 			.info{
+				flex: 1;
 				.tit{
 					font-size: 28upx;
 					color: #2F2F2F;

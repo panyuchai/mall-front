@@ -1,14 +1,14 @@
 <template>
 	<view class="swiper-box">
 		<swiper class="swiper" circular="true" autoplay="true" @change="swiperChange">
-			<swiper-item class="swiper-item" v-for="swiper in swiperList" :key="swiper.id">
+			<swiper-item class="swiper-item" v-for="swiper in options.list" :key="swiper.id">
 				<image class="img" :src="swiper.img" @tap="toSwiper(swiper)" mode="widthFix"></image>
 			</swiper-item>
 		</swiper>
 		<view class="indicator">
 			<view
 				class="dots"
-				v-for="(swiper, index) in swiperList"
+				v-for="(swiper, index) in options.list"
 				:class="[currentSwiper == index ? 'on' : '']"
 				:key="index"
 			></view>
@@ -21,15 +21,11 @@
 	export default {
 		data() {
 			return {
-				swiperList: [
-					{ id: 1, src: 'url1', img: 'https://aecpm.alicdn.com/simba/img/TB1XotJXQfb_uJkSnhJSuvdDVXa.jpg' },
-					{ id: 2, src: 'url2', img: 'https://gdp.alicdn.com/imgextra/i4/667454208/O1CN01yEBH4A1gxJCM2NRTq_!!667454208.jpg' },
-					{ id: 3, src: 'url3', img: 'https://img.alicdn.com/tfs/TB14jVady_1gK0jSZFqXXcpaXXa-750-291.jpg' },
-					{ id: 4, src: 'url4', img: 'https://img.alicdn.com/tfs/TB1AoVmdAL0gK0jSZFAXXcA9pXa-750-291.jpg' },
-					{ id: 5, src: 'url5', img: 'https://gdp.alicdn.com/imgextra/i4/667454208/O1CN01a5RvRR1gxJCBr29hz_!!667454208.jpg' }
-				],
 				currentSwiper: 0
 			}
+		},
+		props: {
+			options: Object
 		},
 		methods: {
 			//轮播图跳转

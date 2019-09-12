@@ -1,11 +1,32 @@
 <template>
 	<view class="content">
 		<view class="delivery-number">
-			订单编号：W109089823435
+			订单编号：{{deleveryNum}}
 		</view>
 		<!-- ======="state": 0 ,1 ,2 ,3, 4====== -->
 		<view class="state-cont">
-			<block v-for="(item,i) in datas" :key="i">
+			<block>
+				<view class="list-item">
+					<!-- <view class="icon">
+						<text class="icon-font iconfont icon-icon-"></text>
+					</view> -->
+					<view class="info">
+						<!-- <view class="tit">
+							已签收
+						</view> -->
+						<view class="con" v-for="(item,i) in datas" :key="i">
+							<view class="dot con-dot">
+							</view>
+							<view class="text">
+								{{item.context}}
+							</view>
+							<view class="time">
+								{{item.time}}
+								<!-- 2019-07-28<text class="space">18:47</text> -->
+							</view>
+						</view>
+					</view>
+				</view>
 				<!-- <view class="State_Four">
 					<view class="FourBox">
 						<text class="line" :class="[i == 0?'noline':'']"></text>
@@ -25,7 +46,7 @@
 					</view>
 				</view> -->
 			</block>
-			<view class="list-item list-active">
+			<!-- <view class="list-item list-active">
 				<view class="icon">
 					<text class="icon-font iconfont icon-icon-"></text>
 				</view>
@@ -166,7 +187,7 @@
 						</view>
 					</view>
 				</view>
-			</view>
+			</view> -->
 			
 			
 			
@@ -177,7 +198,7 @@
 
 <script>
 	export default{
-		props:["datas","state","ways"],
+		props:["datas","state","deleveryNum"],
 		data(){
 			return{
 				
@@ -289,6 +310,11 @@
 					left: -46upx;
 					z-index: 2;
 					transform: translateY(-50%);
+					&.con-dot{
+						width: 18upx;
+						height: 18upx;
+						left: -50upx;
+					}
 				}
 				.time{
 					margin-top: 10upx;

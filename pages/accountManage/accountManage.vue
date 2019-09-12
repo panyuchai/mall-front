@@ -245,10 +245,12 @@
 								mobilephone: mobilephone
 							})
 							this.formData=this.userInfo;
-							let moment = require('moment');
-							let day = moment(this.userInfo.customerBirthday, moment.ISO_8601);
-							this.formData.transCustomerBirthday=day.format("YYYY-MM-DD");
-							this.formData.transCustomerSex=this.transformSex(this.userInfo.customerSex);
+							if(this.formData.customerBirthday){
+								let moment = require('moment');
+								let day = moment(this.formData.customerBirthday, moment.ISO_8601);
+								this.formData.transCustomerBirthday=day.format("YYYY-MM-DD") || '';
+							}
+							this.formData.transCustomerSex=this.transformSex(this.formData.customerSex);
 						}
 					}else{
 						console.log('login.vue-- info接口调用失败');

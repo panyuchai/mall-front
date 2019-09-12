@@ -1,25 +1,30 @@
 <template>
 	<view class="goods-list">
-		<view class="goods" v-for="(good, index) in goodsData" :key="index">
+		<view class="goods" v-for="(good, index) in options.list" v-if="good.shelf" :key="index">
 			<view class="img">
-				<image :src="good.imgUrl" mode="aspectFit"></image>
+				<image :src="good.goodsImg" mode="aspectFit"></image>
 			</view>
 			<view class="info">
 				<view class="tit">
-					{{good.tit}}
+					{{good.goodsTitle}}
 				</view>
 				<view class="desc">
-					{{good.desc}}
+					{{good.goodsSubTitle}}
 				</view>
 				<view class="saleNum">
-					已售:{{good.saleNum}}
+					<!-- 已售:{{good.saleNum}} -->
 				</view>
 				<view class="sale">
 					<view class="sale-points">
-						<text class="points">{{good.points}}</text>分
+						<view class="saleMoney" v-if="good.goodsPrice">
+							<text class="money">{{good.goodsPrice}}</text>元
+						</view>
+						<view class="salePoints" v-if="good.goodsPoint">
+							+<text class="points">{{good.goodsPoint}}</text>分
+						</view>
 					</view>
 					<view class="sale-action">
-						<view class="sale-btn">
+						<view class="sale-btn" @tap="linkToDetail(good.goodsId)">
 							马上抢
 						</view>
 					</view>
@@ -32,30 +37,22 @@
 <script>
 	export default {
 		props:{
-			// options:{
-			// 	type:Object,
-			// 	default:{}
-			// }
+			options:{
+				type:Object,
+				default:{}
+			}
 		},
 		data() {
 			return {
-				goodsData: [
-					{
-						tit: '中粮福临门胡姬花特香花生油中粮福临门胡姬花特香花生油',
-						desc: '好油特别好的油副标题好油特别好的油副标题',
-						imgUrl:'https://ss1.bdstatic.com/70cFuXSh_Q1YnxGkpoWK1HF6hhy/it/u=1840129408,3057999467&fm=26&gp=0.jpg',
-						saleNum: '1399',
-						points: '500'
-					},
-					{
-						tit: '中粮福临门胡姬花特香花生油中粮福临门胡姬花特香花生油',
-						desc: '好油特别好的油副标题好油特别好的油副标题',
-						imgUrl:'https://gw.alicdn.com/bao/uploaded/i2/3253752910/TB1eAexobGYBuNjy0FoXXciBFXa_!!0-item_pic.jpg',
-						saleNum: '1399',
-						points: '500'
-					}
-				]
+				
 			};
+		},
+		methods: {
+			linkToDetail(e){
+				uni.navigateTo({
+					url: '/pages/productDetail/productDetail?id=' + e
+				});
+			}
 		}
 	}
 </script>
@@ -113,8 +110,20 @@
 					.sale-points{
 						color: #E51700;
 						font-size: 24upx;
-						.points{
-							font-size: 40upx;
+						display: flex;
+						flex-direction:row;
+						justify-content : flex-start;
+						align-items : flex-end;
+						.saleMoney{
+							.money{
+								font-size: 40upx;
+							}
+						}
+						.salePoints{
+							padding-left: 10upx;
+							.points{
+								font-size: 35upx;
+							}
 						}
 					}
 					.sale-action{

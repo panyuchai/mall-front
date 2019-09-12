@@ -3,7 +3,7 @@
 		<view class="search" @click="linkToSearch">
 			<text class="iconfont icon-sousuo search-icon"></text>
 			<!-- <text class="search-info">{{keyword}}</text> -->
-			<input class="search-info" type="text" placeholder="请输入搜索内容" :value=keyword disabled/>
+			<input class="search-info" type="text" placeholder="请输入搜索内容" :value="keyword" disabled/>
 		</view>
 	</view>
 </template>

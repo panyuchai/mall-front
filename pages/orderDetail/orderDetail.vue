@@ -1,14 +1,15 @@
 <template>
 	<view>
 		<view class="order-info">
-			<view class="info-delivery info-mode" @tap="linkToDelivery()">
+			<view class="info-delivery info-mode" v-if="initData.orderlistState == 2 || initData.orderlistState == 3 || initData.orderlistState == 4" @tap="linkToDelivery(initData.orderId)">
 				<view class="iconfont icon-che-tianchong icon-status icon-car"></view>
 				<view class="info">
 					<view class="status">
-						派送中
+						{{expressData.statusName}}
 					</view>
 					<view class="text">
-						快件由快递员张成撒配送中，请注意保持联络(联系电话：1928333225)
+						<!-- 快件由快递员张成撒配送中，请注意保持联络(联系电话：1928333225) -->
+						{{expressData.data.context}}
 					</view>
 					<text class="iconfont icon-arrowRight icon-arrow"></text>
 				</view>
@@ -17,10 +18,10 @@
 				<view class="iconfont icon-biaodiandidian icon-status icon-location"></view>
 				<view class="info">
 					<view class="status">
-						韩莹<text class="phone">1867****451</text>
+						{{initData.receiverName}}<text class="phone">{{initData.receiverPhone}}</text>
 					</view>
 					<view class="text">
-						湖北省武汉市江汉区水塔街道泛海国际soho
+						{{initData.receiverAddress}}
 					</view>
 				</view>
 			</view>
@@ -28,47 +29,26 @@
 		<view class="order-detail mt-20">
 			<view class="hd">
 				<view class="number">
-					订单编号：<text>123451234325</text>
+					订单编号：<text>{{initData.orderlistMainnum}}</text>
 				</view>
 			</view>
-			<view class="bd">
+			<view class="bd" v-for="good in initData.details">
 				<view class="pic">
-					<image class="img" src="https://ss0.bdstatic.com/70cFuHSh_Q1YnxGkpoWK1HF6hhy/it/u=4031878334,2682695508&fm=11&gp=0.jpg" mode="aspectFill"></image>
+					<image class="img" :src="good.goodsMainimagepath" mode="aspectFill"></image>
 				</view>
 				<view class="info">
 					<view class="tit">
-						三只松鼠猪肉铺 猪肉干肉脯 靖江特产休闲靖江特产休闲靖江特产休闲靖江特产休闲靖江特产休闲靖江特产休闲靖江特产休闲
+						{{good.goodsProductname}}
 					</view>
 					<view class="num">
-						<text>香辣味</text>
+						<text>{{good.goodsRelationname}}</text>
 					</view>
 					<view class="con">
 						<view class="_left">
-							¥<text class="price">28</text>.80
+							¥<text class="price">{{good.goodsRelprice}}</text>
 						</view>
 						<view class="_right">
-							<text class="num">x3</text>
-						</view>
-					</view>
-				</view>
-			</view>
-			<view class="bd">
-				<view class="pic">
-					<image class="img" src="https://ss0.bdstatic.com/70cFuHSh_Q1YnxGkpoWK1HF6hhy/it/u=4031878334,2682695508&fm=11&gp=0.jpg" mode="aspectFill"></image>
-				</view>
-				<view class="info">
-					<view class="tit">
-						三只松鼠猪肉铺 猪肉干肉脯 靖江特产休闲靖江特产休闲靖江特产休闲靖江特产休闲靖江特产休闲靖江特产休闲靖江特产休闲
-					</view>
-					<view class="num">
-						<text>香辣味</text>
-					</view>
-					<view class="con">
-						<view class="_left">
-							¥<text class="price">28</text>.80
-						</view>
-						<view class="_right">
-							<text class="num">x3</text>
+							<text class="num">x{{good.goodsCount}}</text>
 						</view>
 					</view>
 				</view>
@@ -79,7 +59,7 @@
 						快递方式
 					</view>
 					<view class="_right">
-						快递：包邮
+						快递：{{initData.expressPay}}
 					</view>
 				</view>
 				<view class="text">
@@ -87,7 +67,7 @@
 						留言
 					</view>
 					<view class="_right">
-						嗯随便留点啥颜吧
+						{{initData.orderlistMessage }}
 					</view>
 				</view>
 			</view>	
@@ -99,7 +79,7 @@
 						应付总金额
 					</view>
 					<view class="_right">
-						¥23.00
+						¥{{initData.orderlistAllprice}}
 					</view>
 				</view>
 				<view class="text">
@@ -107,7 +87,7 @@
 						余额支付
 					</view>
 					<view class="_right">
-						¥0.00
+						¥{{initData.rechargepay }}
 					</view>
 				</view>
 				<view class="text">
@@ -121,7 +101,7 @@
 			</view>
 			<view class="bd">
 				实付金额
-				<text class="num">¥23.00</text>
+				<text class="num">¥{{initData.payPrice}}</text>
 			</view>
 		</view>
 		<view class="list-box mt-20">
@@ -148,7 +128,13 @@
 			<view class="action-btn">
 				联系客服
 			</view>
-			<view class="action-btn action-red">
+			<view class="action-btn" v-if="initData.orderlistState == 0">
+				取消订单
+			</view>
+			<view class="action-btn action-red" v-if="initData.orderlistState == 0" @tap="linkToPayment(initData.details)">
+				去付款
+			</view>
+			<view class="action-btn action-red" v-if="initData.orderlistState == 2">
 				确认收货
 			</view>
 		</view>
@@ -156,18 +142,112 @@
 </template>
 
 <script>
+	import {
+		mapState
+	} from 'vuex';
 	export default {
 		data() {
 			return {
-				
+				initData: {},
+				expressData: {}
 			};
 		},
 		methods: {
-			linkToDelivery(){
+			linkToDelivery(orderId){
 				uni.navigateTo({
-					url: '/pages/delivery/delivery'
+					url: '/pages/delivery/delivery?orderId=' + orderId
+				})
+			},
+			linkToPayment(order){
+				let payOrder = [];
+				order.map(item => {
+					payOrder.push({
+						goodsCount: item.goodsCount,
+						mallGoodsId: item.mallGoodsId
+					})
+				});
+				uni.setStorage({
+					key:'buyList',
+					data:payOrder,
+					success: () => {
+						uni.navigateTo({
+							url:'/pages/payment/payment'
+						})
+					}
+				})
+			},
+			transformStatus(num){
+				switch(num){
+					case -1:
+						return '待查询';
+						break;
+					case 0:
+						return '查询异常';
+						break;
+					case 1:
+						return '暂无记录';
+						break;
+					case 2:
+						return '在途中';
+						break;
+					case 3:
+						return '派送中';
+						break;
+					case 4:
+						return '已签收';
+						break;
+					case 5:
+						return '用户拒签';
+						break;
+					case 6:
+						return '疑难件';
+						break;
+					case 7:
+						return '无效单';
+						break;
+					default:
+						return '';
+				}
+			},
+			initExpress(orderId){
+				this.$http.post('/mall/app/order/express', {
+					...this.baseInfo,
+					accountId: this.userInfo.accountId,
+					orderId: orderId
+				})
+				.then( res => {
+					if(res.code == 0){
+						this.expressData=JSON.parse(res.result.result).showapi_res_body;
+						this.expressData.statusName=this.transformStatus(this.expressData.status);
+						this.expressData.data=this.expressData.data[0];
+					}
+				})
+				.catch( err => {
+					console.log(err);
+				})
+			},
+			loadData(orderId){
+				this.$http.post('/mall/app/order/detail', {
+					...this.baseInfo,
+					accountId: this.userInfo.accountId,
+					orderId: orderId
+				})
+				.then( res => {
+					if(res.code == 0){
+						this.initData=res.result;
+					}
+				})
+				.catch( err => {
+					console.log(err);
 				})
 			}
+		},
+		computed: {
+			...mapState('common', ['baseInfo', 'userInfo'])
+		},
+		onLoad(options){
+			this.loadData(options.orderId);
+			this.initExpress(options.orderId);
 		}
 	}
 </script>
@@ -182,9 +262,9 @@
 	}
 	.info-mode{
 		background: #ffffff;
-		&+.info-mode{
-			border-top: 1px solid #F5F5F5;
-		}
+		// &+.info-mode{
+		// 	border-top: 1px solid #F5F5F5;
+		// }
 		display: flex;
 		justify-content: space-around;
 		align-items: center;
@@ -232,6 +312,7 @@
 		}
 	}
 	.info-address{
+		border-top: 1px solid #F5F5F5;
 		.info{
 			.status{
 				font-size: 28upx;
@@ -278,6 +359,7 @@
 				}
 			}
 			.info{
+				flex: 1;
 				.tit{
 					font-size: 28upx;
 					color: #2F2F2F;

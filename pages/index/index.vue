@@ -1,25 +1,27 @@
 <template>
 	<view>
-		<!-- <block v-for="(item,index) in templateData" :key="item.id"> -->
-		<!-- <Search v-if="item.type==='003'" :options="item.data"></Search>
-			<banner v-if="item.type==='201'" :options="item.data"></banner>
-			<category-list v-if="item.type==='203'" :options="item.data"></category-list>
-			<single-product></single-product>
-			<goods v-if="item.type==='204'" :options="item.data"></goods> -->
-		<search></search>
-		<banner></banner>
-		<category-list></category-list>
-		<single-product></single-product>
-		<lines></lines>
-		<recommend></recommend>
-		<button type="primary" @tap="clearInfo">清除登陆</button>
-		<!-- </block> -->
+		<block v-for="(item,index) in templateData" :key="index">
+			<!-- <Search v-if="item.type==='003'" :options="item.data"></Search>
+				<banner v-if="item.type==='201'" :options="item.data"></banner>
+				<category-list v-if="item.type==='203'" :options="item.data"></category-list>
+				<single-product></single-product>
+				<goods v-if="item.type==='204'" :options="item.data"></goods> -->
+			<search v-if="item.type === '001'" :options="item.data"></search>
+			<banner v-if="item.type === '003'" :options="item.data"></banner>
+			<!-- <category-list></category-list> -->
+			<lines v-if="item.type === '004'" :options="item.data"></lines>
+			<!-- 007 积分展示 -->
+			<!-- 005 1px白线显示 -->
+			<single-product v-if="item.type === '205'" :options="item.data"></single-product>
+			<recommend v-if="item.type === '203'" :options="item.data"></recommend>
+			<!-- <button type="primary" @tap="clearInfo">清除登陆</button> -->
+		</block>
 	</view>
 </template>
 
 <script>
 	import {
-		mapMutations
+		mapState
 	} from 'vuex'
 	import Search from "@/components/search.vue";
 	import Banner from "@/components/banner.vue";
@@ -44,42 +46,27 @@
 			Lines
 		},
 		methods: {
-			...mapMutations('common', ['SET_USERIFNO']),
-			clearInfo(){
-				uni.removeStorageSync('hasLogin')
-				uni.removeStorageSync('token')
-				uni.removeStorageSync('uniCode')
-				uni.removeStorageSync('userInfo')
+			// clearInfo(){
+			// 	uni.removeStorageSync('hasLogin')
+			// 	uni.removeStorageSync('token')
+			// 	uni.removeStorageSync('uniCode')
+			// 	uni.removeStorageSync('userInfo')
+			// },
+			initData() {
+				this.$http.post('/mall/app/backsite/decoration/homepage/'+this.baseInfo.mallId)
+				.then(res => {
+					this.templateData=res.content;
+				})
+				.catch(err => {
+					
+				})
 			},
-			getData() {
-				// this.$http.get('/api/getDecoration?appkey=NGMxNDkwZTktOWI2Zi00YWZjLWE1&decorationId=997c8b76a1974441b416718cdec04ab9').then(res => {
-				// 	console.log(res.data.content);
-				// 	this.templateData=res.data.content;
-				// }).catch(err => {
-				// 
-				// })
-			},
-			// setUserInfo(){
-			// 	this.$http.post('/mall/app/account/info')
-			// 	.then( res => {
-			// 		console.log(res)
-			// 		if(res.code == 0){
-			// 			if(res.result){
-			// 				let {accountId, customerName, customerSex, customerImage, customerId} = res.result.customer;
-			// 				this.SET_USERIFNO({accountId, customerName, customerSex, customerImage, customerId});
-			// 			}
-			// 		}else{
-			// 			console.log('login.vue-- info接口调用失败');
-			// 		}
-			// 	})
-			// 	.catch( err => {
-			// 		console.log('login.vue-- info接口调用错误');
-			// 	})
-			// }
+		},
+		computed: {
+			...mapState('common', ['baseInfo', 'userInfo'])
 		},
 		onLoad() {
-			this.getData();
-			// this.setUserInfo();
+			this.initData();
 		},
 		
 	}

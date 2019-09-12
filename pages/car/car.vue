@@ -389,7 +389,6 @@
 				})
 				.then( res => {
 					if(res.code == 0){
-						console.log(res)
 						this.goodsList=res.result.list;
 						// this.sum();
 						if(!res.result.list){
