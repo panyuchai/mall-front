@@ -159,16 +159,6 @@
 	export default {
 		data() {
 			return {
-				hasAddress: true,
-				isWx: false,
-				isWebWx: false,
-				isWeb: false,
-				remark: '',
-				payData: {},
-				address: {},
-				goodsList: [],
-				balanceType: 0,
-				fee: 0,
 				payInfo: {},
 				initData: {}
 			}
