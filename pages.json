@@ -63,6 +63,12 @@
             	"navigationBarTitleText": "填写订单"
             }
         }
+		,{
+		    "path" : "pages/payment/cashRegister",
+		    "style" : {
+		    	"navigationBarTitleText": "支付订单"
+		    }
+		}
         ,{
             "path" : "pages/coupon/coupon",
             "style" : {

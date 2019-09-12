@@ -128,13 +128,13 @@
 			<view class="action-btn">
 				联系客服
 			</view>
-			<view class="action-btn" v-if="initData.orderlistState == 0">
+			<view class="action-btn" v-if="initData.orderlistState == 0" @tap="cancelOrder(initData.orderlistId)">
 				取消订单
 			</view>
 			<view class="action-btn action-red" v-if="initData.orderlistState == 0" @tap="linkToPayment(initData.details)">
 				去付款
 			</view>
-			<view class="action-btn action-red" v-if="initData.orderlistState == 2">
+			<view class="action-btn action-red" v-if="initData.orderlistState == 2" @tap="confirmOrder(initData.orderlistId)">
 				确认收货
 			</view>
 		</view>
@@ -175,6 +175,61 @@
 						})
 					}
 				})
+			},
+			confirmOrder(orderId){
+				this.$http.post('/mall/app/order/receive', {
+					...this.baseInfo,
+					accountId: this.userInfo.accountId,
+					orderId: orderId
+				})
+				.then( res => {
+					if(res.code == 0){
+						uni.showToast({
+							icon: 'none',
+							title: '确认收货成功'
+						})
+						this.loadData(orderId);
+					}
+				})
+				.catch( err => {
+					console.log(err);
+				})
+			},
+			cancelOrder(orderId){
+				uni.showModal({
+				    title: '提示',
+				    content: '确定取消订单吗？',
+					confirmColor: '#E93B3D',
+				    success: res => {
+				        if (res.confirm) {
+				            this.$http.post('/mall/app/order/cancel', {
+								...this.baseInfo,
+								accountId: this.userInfo.accountId,
+								orderId: orderId
+							})
+							.then( res => {
+								if(res.code == 0){
+									uni.showToast({
+										icon: 'none',
+										title: '取消订单成功'
+									})
+									this.loadData(orderId);
+								}else{
+									uni.showToast({
+										icon: 'none',
+										title: '取消订单失败'
+									})
+									this.loadData();
+								}
+							})
+							.catch( err => {
+								console.log(err);
+							})
+				        } else if (res.cancel) {
+				            console.log('用户点击取消');
+				        }
+				    }
+				});
 			},
 			transformStatus(num){
 				switch(num){

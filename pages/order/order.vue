@@ -262,14 +262,36 @@
 				})
 			},
 			//取消订单
-			cancelOrder(item){
+			cancelOrder(orderId){
 				uni.showModal({
 				    title: '提示',
 				    content: '确定取消订单吗？',
 					confirmColor: '#E93B3D',
-				    success: function (res) {
+				    success: res => {
 				        if (res.confirm) {
-				            console.log('用户点击确定');
+				            this.$http.post('/mall/app/order/cancel', {
+								...this.baseInfo,
+								accountId: this.userInfo.accountId,
+								orderId: orderId
+							})
+							.then( res => {
+								if(res.code == 0){
+									uni.showToast({
+										icon: 'none',
+										title: '取消订单成功'
+									})
+									this.loadData(uni.getStorageSync('order_searchType_storage'));
+								}else{
+									uni.showToast({
+										icon: 'none',
+										title: '取消订单失败'
+									})
+									this.loadData(uni.getStorageSync('order_searchType_storage'));
+								}
+							})
+							.catch( err => {
+								console.log(err);
+							})
 				        } else if (res.cancel) {
 				            console.log('用户点击取消');
 				        }
@@ -355,7 +377,7 @@
 		onLoad(options){
 			this.loadData(this.transUserState(Number(options.state)));
 			this.type=options.state;
-			uni.setStorageSync('order_searchType_storage', this.transUserState(options.state));
+			uni.setStorageSync('order_searchType_storage', this.transUserState(Number(options.state)));
 		},
 		onReachBottom: function() {
 			if (!this.pullUpOn) return;
