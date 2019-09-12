@@ -210,7 +210,7 @@
 					goodsList: this.initData.goodsList,
 					payPrice: this.initData.payPrice,
 					remark: this.initData.remark,
-					totalPrice: this.payData.totalPrice,
+					totalPrice: this.initData.totalPrice,
 					payChannels: '6',
 					callBackNo: orderNo
 				};
