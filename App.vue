@@ -89,8 +89,9 @@
 						...this.baseInfo,
 						scm: 'h5'
 					});
-					if(!JSON.parse(this.hasLogin)){
-						alert(!JSON.parse(this.hasLogin))
+					alert(typeof this.hasLogin)
+					if(!Boolean(this.hasLogin)){
+						alert(!Boolean(this.hasLogin))
 						this.defaultwxWebLogin(options);
 					}
 				}else {
