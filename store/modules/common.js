@@ -4,7 +4,7 @@ const state = {
    * 是否需要强制登录
    */
   baseUrl: 'http://192.168.1.104:8087',
-  mallDomain: 'yyy',
+  mallDomain: '',
   mallType: '',
   mallId: null,
   // mallId: '',

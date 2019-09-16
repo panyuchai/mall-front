@@ -7,7 +7,16 @@
 			...mapState("common", ['uniCode', 'mallDomain', 'baseInfo', 'hasLogin', 'firstLoad', 'baseUrl'])
 		},
 		methods: {
-			...mapMutations("common", ['SET_BASEINFO', 'SET_USERIFNO', 'SET_UNICODE', 'SET_HASLOGIN', 'SET_TOKEN', 'SET_MALLTYPE', 'SET_MALLID']),
+			...mapMutations("common", ['SET_BASEINFO', 'SET_USERIFNO', 'SET_UNICODE', 'SET_HASLOGIN', 'SET_TOKEN', 'SET_MALLTYPE', 'SET_MALLID', 'SET_MALLDOMAIN']),
+			GetQueryString(name){
+			     var reg = new RegExp("(^|&)"+ name +"=([^&]*)(&|$)");
+			     var r = window.location.search.substr(1).match(reg);
+			     if(r!=null)return  unescape(r[2]); return null;
+			},
+			getMallDomain(){
+				let mallDomain = this.GetQueryString('mallDomain');
+				this.SET_MALLDOMAIN(mallDomain);
+			},
 			checkMallType(){
 				this.$http.post('/mall/app/login/mall/shopmall/type', {
 					mallDomain: this.mallDomain
@@ -107,7 +116,7 @@
 				let reg = /\/TransferPage\/TransferPage/ig;
 				let urlPath = !(reg.test(options.path));
 				if(urlPath){
-					window.location.href=this.baseUrl + '/mall/app/login/mall/wxweb?mallDomain=yyy&redirectUrl=http://192.168.1.109:8080/#/TransferPage/TransferPage';
+					window.location.href=this.baseUrl + '/mall/app/login/mall/wxweb?mallDomain=yyy&redirectUrl=http://192.168.1.109:8080/\#/TransferPage/TransferPage';
 				}
 				
 			},
@@ -170,6 +179,7 @@
 		onLaunch: function(options) {
 			console.log(options.path)
 			this.initData();
+			this.getMallDomain();
 			this.checkMallType();
 			// this.defaultwxWebLogin();
 			console.log('App Launch');
