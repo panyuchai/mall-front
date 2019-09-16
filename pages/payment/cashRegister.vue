@@ -216,6 +216,7 @@
 					payChannels: '6',
 					callBackNo: this.orderNo,
 					mallDomain: this.mallDomain,
+					mallId:2
 				};
 				this.$http.post('/mall/app/order/submit', data, {
 					header: {
