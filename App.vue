@@ -56,11 +56,9 @@
 				// if(getStore({ name: 'userInfo' })){
 				// 	this.SET_USERIFNO(getStore({ name: 'userInfo' }));
 				// }
-				debugger;
 				if(uni.getStorageSync('hasLogin')){
 					this.SET_HASLOGIN(uni.getStorageSync('hasLogin'));
 				}
-				debugger;
 				if(uni.getStorageSync('token')){
 					this.SET_TOKEN(uni.getStorageSync('token'));
 				}
@@ -75,7 +73,6 @@
 				}
 			},
 			browserRedirect(options) {
-				debugger;
 				var sUserAgent = navigator.userAgent.toLowerCase();
 				// var bIsIpad = sUserAgent.match(/ipad/i) == "ipad";
 				// var bIsIphoneOs = sUserAgent.match(/iphone os/i) == "iphone os";
@@ -92,10 +89,8 @@
 						...this.baseInfo,
 						scm: 'h5'
 					});
-					debugger;
 					if(!Boolean(this.hasLogin)){
-						debugger;
-						// this.defaultwxWebLogin(options)
+						this.defaultwxWebLogin(options);
 					}
 				}else {
 					alert('h5端');
