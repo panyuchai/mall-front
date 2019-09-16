@@ -108,7 +108,7 @@
 				let urlPath = !(reg.test(options.path));
 				if(!this.hasLogin){
 					if(urlPath){
-						window.location.href='http://192.168.1.135:8086/mall/app/login/mall/wxweb?mallDomain=yyy';
+						window.location.href='http://192.168.1.104:8087/mall/app/login/mall/wxweb?mallDomain=yyy';
 					}
 				}
 				
