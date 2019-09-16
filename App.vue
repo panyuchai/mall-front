@@ -56,6 +56,7 @@
 				// if(getStore({ name: 'userInfo' })){
 				// 	this.SET_USERIFNO(getStore({ name: 'userInfo' }));
 				// }
+				debugger;
 				if(uni.getStorageSync('hasLogin')){
 					this.SET_HASLOGIN(uni.getStorageSync('hasLogin'));
 				}
