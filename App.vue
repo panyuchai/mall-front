@@ -89,10 +89,9 @@
 						...this.baseInfo,
 						scm: 'h5'
 					});
-					alert(typeof this.hasLogin)
+					alert(Boolean(this.hasLogin));
 					if(!Boolean(this.hasLogin)){
-						alert(!Boolean(this.hasLogin))
-						this.defaultwxWebLogin(options);
+						this.defaultwxWebLogin(options)
 					}
 				}else {
 					alert('h5端');
@@ -195,7 +194,7 @@
 					...this.baseInfo,
 					scm: 'wechat'
 				});
-				if(!this.hasLogin){
+				if(!Boolean(this.hasLogin)){
 					this.defaultWxLogin();
 				}
 			};
