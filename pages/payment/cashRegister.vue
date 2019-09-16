@@ -242,7 +242,11 @@
 			
 		},
 		onLoad(options){
+			console.log(options);
+			alert(options)
 			uni.setStorageSync('ORDER_NO', options.orderNo);
+			uni.setStorageSync('mallDomain', options.mallDomain);
+			uni.setStorageSync('paymentrder', options.paymentrder);
 			this.getInitData();
 		},
 	}
