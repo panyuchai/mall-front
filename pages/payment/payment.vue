@@ -355,6 +355,7 @@
 					payChannels: '6',
 				})
 				.then( res => {
+					debugger;
 					if(res.result && res.result.orderState == 1){
 						uni.showToast({
 							icon: 'none',
@@ -367,6 +368,7 @@
 							});
 						}, 1000)
 					}else{
+						debugger;
 						uni.setStorageSync('PAYMENT_ORDER_INFO', JSON.stringify(data));
 						window.location.href=`http://testpay.yujianli.cn/#/pages/payment/cashRegister?orderNo=`+res.result.orderNo
 						// uni.navigateTo({
