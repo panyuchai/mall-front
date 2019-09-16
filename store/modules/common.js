@@ -58,7 +58,7 @@ const mutations = {
 	SET_HASLOGIN: (state, hasLogin) => {
 		state.hasLogin = hasLogin;
 		// setStore({ name: 'hasLogin', content: state.hasLogin, type: 'sync' });
-		uni.setStorageSync('hasLogin', hasLogin);
+		uni.setStorageSync('hasLogin', JSON.stringify(hasLogin));
 	},
 	SET_TOKEN: (state, token) => {
 		state.token = token;
