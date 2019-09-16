@@ -98,9 +98,17 @@
 						...this.baseInfo,
 						scm: 'h5'
 					});
-					if(!Boolean(this.hasLogin)){
-						this.defaultwxWebLogin(options);
+					var url=window.location.host;
+					if(url.indexOf('pay') == -1){
+						alert('paypaypaypaypay');
+						if(!Boolean(this.hasLogin)){
+							this.defaultwxWebLogin(options);
+						}
 					}
+					// if(!Boolean(this.hasLogin)){
+					// 	
+					// 	this.defaultwxWebLogin(options);
+					// }
 				}else {
 					alert('h5端');
 					this.SET_BASEINFO({
@@ -180,12 +188,8 @@
 			this.initData();
 			// this.getMallDomain();
 			this.checkMallType();
-			console.log(window.location.host);
-			var url=window.location.host;
-			if(url.indexOf('pay') != -1){
-				alert('paypaypaypaypay');
-				return;
-			}
+
+			
 			// let urlPage = options
 			// var obj = wx.getLaunchOptionsSync()
 			// console.log('启动小程序的路径:',obj.path)
