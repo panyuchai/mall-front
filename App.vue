@@ -180,10 +180,10 @@
 			this.initData();
 			// this.getMallDomain();
 			this.checkMallType();
-			// this.defaultwxWebLogin();
 			console.log(window.location.host);
 			var url=window.location.host;
-			if(url.contains('pay')){
+			if(url.indexOf('pay') != -1){
+				alert('paypaypaypaypay');
 				return;
 			}
 			// let urlPage = options
