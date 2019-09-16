@@ -112,8 +112,9 @@
 				}
 				let reg = /\/TransferPage\/TransferPage/ig;
 				let urlPath = !(reg.test(options.path));
+				// alert(location.href.replace(this.$route.path,'') );
 				if(urlPath){
-					window.location.href=this.baseUrl + '/mall/app/login/mall/wxweb?mallDomain=yyy';
+					window.location.href=this.baseUrl + '/mall/app/login/mall/wxweb?mallDomain=yyy&redirectUrl='+location.href.replace(this.$route.path,'');
 				}
 				
 			},
@@ -174,6 +175,8 @@
 			}
 		},
 		onLaunch: function(options) {
+			alert(options.path)
+			console.log(options.path)
 			this.initData();
 			this.checkMallType();
 			// this.defaultwxWebLogin();
