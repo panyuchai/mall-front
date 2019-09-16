@@ -4,7 +4,7 @@
 	import { test } from './api/api.js'
 	export default {
 		computed: {
-			...mapState("common", ['uniCode', 'mallDomain', 'baseInfo', 'hasLogin', 'firstLoad'])
+			...mapState("common", ['uniCode', 'mallDomain', 'baseInfo', 'hasLogin', 'firstLoad', 'baseUrl'])
 		},
 		methods: {
 			...mapMutations("common", ['SET_BASEINFO', 'SET_USERIFNO', 'SET_UNICODE', 'SET_HASLOGIN', 'SET_TOKEN', 'SET_MALLTYPE', 'SET_MALLID']),
@@ -90,6 +90,7 @@
 						scm: 'h5'
 					});
 					if(!this.hasLogin){
+						alert(!this.hasLogin);
 						this.defaultwxWebLogin(options);
 					}
 				}else {
@@ -106,10 +107,8 @@
 				}
 				let reg = /\/TransferPage\/TransferPage/ig;
 				let urlPath = !(reg.test(options.path));
-				if(!this.hasLogin){
-					if(urlPath){
-						window.location.href='http://192.168.1.104:8087/mall/app/login/mall/wxweb?mallDomain=yyy';
-					}
+				if(urlPath){
+					window.location.href=this.baseUrl + '/mall/app/login/mall/wxweb?mallDomain=yyy';
 				}
 				
 			},
