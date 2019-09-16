@@ -169,9 +169,9 @@
 			}
 		},
 		onLaunch: function(options) {
+			this.initData();
 			this.checkMallType();
 			// this.defaultwxWebLogin();
-			this.initData();
 			console.log('App Launch');
 			// let urlPage = options
 			// var obj = wx.getLaunchOptionsSync()
