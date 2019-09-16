@@ -8,15 +8,15 @@
 		},
 		methods: {
 			...mapMutations("common", ['SET_BASEINFO', 'SET_USERIFNO', 'SET_UNICODE', 'SET_HASLOGIN', 'SET_TOKEN', 'SET_MALLTYPE', 'SET_MALLID', 'SET_MALLDOMAIN']),
-			GetQueryString(name){
-			     var reg = new RegExp("(^|&)"+ name +"=([^&]*)(&|$)");
-			     var r = window.location.search.substr(1).match(reg);
-			     if(r!=null)return  unescape(r[2]); return null;
-			},
-			getMallDomain(){
-				let mallDomain = this.GetQueryString('mallDomain');
-				this.SET_MALLDOMAIN(mallDomain);
-			},
+			// GetQueryString(name){
+			//      var reg = new RegExp("(^|&)"+ name +"=([^&]*)(&|$)");
+			//      var r = window.location.search.substr(1).match(reg);
+			//      if(r!=null)return  unescape(r[2]); return null;
+			// },
+			// getMallDomain(){
+			// 	let mallDomain = this.GetQueryString('mallDomain');
+			// 	this.SET_MALLDOMAIN(mallDomain);
+			// },
 			checkMallType(){
 				this.$http.post('/mall/app/login/mall/shopmall/type', {
 					mallDomain: this.mallDomain
@@ -177,12 +177,15 @@
 			}
 		},
 		onLaunch: function(options) {
-			console.log(options.path)
 			this.initData();
-			this.getMallDomain();
+			// this.getMallDomain();
 			this.checkMallType();
 			// this.defaultwxWebLogin();
-			console.log('App Launch');
+			console.log(window.location.host);
+			var url=window.location.host;
+			if(url.contains('pay')){
+				return;
+			}
 			// let urlPage = options
 			// var obj = wx.getLaunchOptionsSync()
 			// console.log('启动小程序的路径:',obj.path)
