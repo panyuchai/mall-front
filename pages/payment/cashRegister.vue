@@ -160,6 +160,7 @@
 		data() {
 			return {
 				orderNo: '',
+				mallDomain: '',
 				payInfo: {},
 				initData: {}
 			}
@@ -201,7 +202,7 @@
 			handleSubmit(){
 				// let data = JSON.parse(uni.getStorageSync('PAYMENT_ORDER_INFO'));
 				let data = {
-					...this.baseInfo,
+					// ...this.baseInfo,
 					accountId: this.initData.accountId,
 					addressId: this.initData.addressId,
 					balance: this.initData.balance,
@@ -213,7 +214,8 @@
 					remark: this.initData.remark,
 					totalPrice: this.initData.totalPrice,
 					payChannels: '6',
-					callBackNo: this.orderNo
+					callBackNo: this.orderNo,
+					mallDomain: this.mallDomain,
 				};
 				this.$http.post('/mall/app/order/submit', data)
 				.then( res => {
@@ -234,7 +236,9 @@
 			},
 			getInitData(){
 				this.orderNo=uni.getStorageSync('ORDER_NO');
-				this.initData=JSON.parse(uni.getStorageSync('PAYMENT_ORDER_INFO'));
+				// this.initData=JSON.parse(uni.getStorageSync('PAYMENT_ORDER_INFO'));
+				this.initData=JSON.parse(uni.getStorageSync('paymentrder'));
+				this.mallDomain=uni.getStorageSync('mallDomain');
 			}
 		},
 		computed: {
@@ -242,8 +246,6 @@
 			
 		},
 		onLoad(options){
-			console.log(options);
-			alert(options)
 			uni.setStorageSync('ORDER_NO', options.orderNo);
 			uni.setStorageSync('mallDomain', options.mallDomain);
 			uni.setStorageSync('paymentrder', options.paymentrder);
