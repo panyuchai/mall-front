@@ -129,7 +129,7 @@
             //     }
             // }
 			navTo(url){
-				if(!this.hasLogin){
+				if(!Boolean(this.hasLogin)){
 					url = '/pages/login/login';
 				}
 				uni.navigateTo({  

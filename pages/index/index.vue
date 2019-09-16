@@ -63,7 +63,7 @@
 			},
 		},
 		computed: {
-			...mapState('common', ['baseInfo', 'userInfo', 'hasLogin'])
+			...mapState('common', ['baseInfo', 'userInfo'])
 		},
 		onLoad() {
 			this.initData();

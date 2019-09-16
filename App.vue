@@ -93,10 +93,9 @@
 						scm: 'h5'
 					});
 					debugger;
-					alert(Boolean(this.hasLogin));
 					if(!Boolean(this.hasLogin)){
 						debugger;
-						this.defaultwxWebLogin(options)
+						// this.defaultwxWebLogin(options)
 					}
 				}else {
 					alert('h5端');
@@ -112,9 +111,8 @@
 				}
 				let reg = /\/TransferPage\/TransferPage/ig;
 				let urlPath = !(reg.test(options.path));
-				// alert(location.href.replace(this.$route.path,'') );
 				if(urlPath){
-					window.location.href=this.baseUrl + '/mall/app/login/mall/wxweb?mallDomain=yyy&redirectUrl='+location.href.replace(this.$route.path,'');
+					window.location.href=this.baseUrl + '/mall/app/login/mall/wxweb?mallDomain=yyy&redirectUrl=http://192.168.1.109:8080/#/TransferPage/TransferPage';
 				}
 				
 			},
@@ -175,7 +173,6 @@
 			}
 		},
 		onLaunch: function(options) {
-			alert(options.path)
 			console.log(options.path)
 			this.initData();
 			this.checkMallType();
