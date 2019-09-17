@@ -17,7 +17,7 @@
 			}
 		},
 		computed: {
-		    ...mapState("common", ['baseInfo', 'userInfo', 'mallDomain'])
+		    ...mapState("common", ['baseInfo', 'userInfo', 'baseUrl', 'mallDomain'])
 		},
 		methods: {
 			...mapMutations('common', ['SET_HASLOGIN', 'SET_TOKEN', 'SET_FIRSTLOAD', 'SET_USERIFNO']),
@@ -35,17 +35,17 @@
 						window.location.href=uni.getStorageSync('referUrl');
 						uni.removeStorageSync('referUrl');
 					}else{
-						uni.switchTab({
-							url: '/pages/index/index?mallDomain='+this.mallDomain
-						});
-						// window.location.href=this.baseUrl + '/mall/app/login/mall/wxweb?mallDomain='+this.mallDomain;
+						// uni.reLaunch({
+						// 	url: '/pages/index/index?mallDomain='+this.mallDomain
+						// });
+						window.location.href=this.baseUrl + '/pages/index/index?mallDomain='+this.mallDomain;
 					}
 				}else{
 					uni.setStorageSync('openid',options.openid)
-					uni.switchTab({
-						url: '/pages/index/index?mallDomain='+this.mallDomain
-					});
-					// window.location.href=this.baseUrl + '/mall/app/login/mall/wxweb?mallDomain='+this.mallDomain;
+					// uni.reLaunch({
+					// 	url: '/pages/index/index?mallDomain='+this.mallDomain
+					// });
+					window.location.href=this.baseUrl + '/pages/index/index?mallDomain='+this.mallDomain;
 				}
 				this.SET_FIRSTLOAD(false);
 			},
