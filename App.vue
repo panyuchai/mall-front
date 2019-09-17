@@ -124,9 +124,7 @@
 				let reg = /\/TransferPage\/TransferPage/ig;
 				let urlPath = !(reg.test(options.path));
 				if(urlPath){
-					console.log(this);
-					console.log(this.mallDomain);
-					window.location.href=this.baseUrl + '/mall/app/login/mall/wxweb?mallDomain=yyy'; //&redirectUrl=http://192.168.1.23:8080
+					window.location.href=this.baseUrl + '/mall/app/login/mall/wxweb?mallDomain='+this.mallDomain; //&redirectUrl=http://192.168.1.23:8080
 				}
 				
 			},
