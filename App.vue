@@ -29,6 +29,7 @@
 							mallType: res.result.type,
 							mallId: res.result.mallId
 						});
+						console.log(this.baseInfo)
 						this.SET_MALLTYPE(res.result.type);
 						this.SET_MALLID(res.result.mallId);
 					}else{

@@ -70,7 +70,7 @@
 							{{item.goodsTitle}}
 						</view>
 						<view class="pro-price">
-							<text class="sale-price"><text class="unit">￥</text>{{item.goodsPrice}}</text>
+							<text class="sale-price"><text class="unit">￥</text>{{item.salePrice}}</text>
 						</view>
 					</view>
 				</view>
