@@ -69,11 +69,11 @@
 						
 						this.initData();
 					}else{
-						console.log('login--mallTaye 接口调用失败');
+						console.log('index--mallTaye 接口调用失败');
 					}
 				})
 				.catch( err => {
-					console.log('login--mallTaye 接口调用出错');
+					console.log('index--mallTaye 接口调用出错');
 				})
 			},
 			initData(){
@@ -94,7 +94,7 @@
 			}
 		},
 		computed: {
-			...mapState('common', ['baseInfo', 'userInfo', 'mallDomain'])
+			...mapState('common', ['baseInfo', 'userInfo', 'mallType', 'mallDomain'])
 		},
 		onLoad() {
 			this.getMallType();
