@@ -14,7 +14,7 @@
 			<!-- 005 1px白线显示 -->
 			<single-product v-if="item.type === '205'" :options="item.data"></single-product>
 			<recommend v-if="item.type === '203'" :options="item.data"></recommend>
-			<!-- <button type="primary" @tap="clearInfo">清除登陆</button> -->
+			<button type="primary" @tap="clearInfo">清除登陆</button>
 		</block>
 	</view>
 </template>
@@ -48,12 +48,12 @@
 		},
 		methods: {
 			...mapMutations("common", ['SET_BASEINFO', 'SET_MALLTYPE', 'SET_MALLID']),
-			// clearInfo(){
-			// 	uni.removeStorageSync('hasLogin')
-			// 	uni.removeStorageSync('token')
-			// 	uni.removeStorageSync('uniCode')
-			// 	uni.removeStorageSync('userInfo')
-			// },
+			clearInfo(){
+				uni.removeStorageSync('hasLogin')
+				uni.removeStorageSync('token')
+				uni.removeStorageSync('uniCode')
+				uni.removeStorageSync('userInfo')
+			},
 			checkMallType(){
 				this.$http.post('/mall/app/login/mall/shopmall/type', {
 					mallDomain: this.mallDomain
