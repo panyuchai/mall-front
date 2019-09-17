@@ -17,7 +17,7 @@
 			}
 		},
 		computed: {
-		    ...mapState("common", ['baseInfo', 'userInfo', 'baseUrl', 'mallDomain'])
+		    ...mapState("common", ['baseInfo', 'userInfo', 'mallDomain', 'transferUrl'])
 		},
 		methods: {
 			...mapMutations('common', ['SET_HASLOGIN', 'SET_TOKEN', 'SET_FIRSTLOAD', 'SET_USERIFNO']),
@@ -38,14 +38,14 @@
 						// uni.reLaunch({
 						// 	url: '/pages/index/index?mallDomain='+this.mallDomain
 						// });
-						window.location.href=this.baseUrl + '/pages/index/index?mallDomain='+options.mallDomain;
+						window.location.href=this.transferUrl + '/pages/index/index?mallDomain='+options.mallDomain;
 					}
 				}else{
 					uni.setStorageSync('openid',options.openid)
 					// uni.reLaunch({
 					// 	url: '/pages/index/index?mallDomain='+this.mallDomain
 					// });
-					window.location.href=this.baseUrl + '/pages/index/index?mallDomain='+options.mallDomain;
+					window.location.href=this.transferUrl + '/pages/index/index?mallDomain='+options.mallDomain;
 				}
 				this.SET_FIRSTLOAD(false);
 			},
