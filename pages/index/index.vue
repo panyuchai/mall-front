@@ -46,6 +46,7 @@
 			Lines
 		},
 		methods: {
+			...mapMutations("common", ['SET_BASEINFO', 'SET_MALLTYPE', 'SET_MALLID']),
 			// clearInfo(){
 			// 	uni.removeStorageSync('hasLogin')
 			// 	uni.removeStorageSync('token')
