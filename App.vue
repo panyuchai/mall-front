@@ -93,7 +93,7 @@
 				// var bIsWM = sUserAgent.match(/windows mobile/i) == "windows mobile";
 				var bIsWeChat = sUserAgent.match(/MicroMessenger/i) == "micromessenger";//微信端
 				if(bIsWeChat) {
-					alert('wx h5端');
+					console.log('wx h5端');
 					this.SET_BASEINFO({
 						...this.baseInfo,
 						scm: 'h5'
@@ -109,7 +109,7 @@
 					// 	this.defaultwxWebLogin(options);
 					// }
 				}else {
-					alert('h5端');
+					console.log('h5端');
 					this.SET_BASEINFO({
 						...this.baseInfo,
 						scm: 'pc'

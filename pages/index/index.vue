@@ -73,7 +73,7 @@
 					}
 				})
 				.catch( err => {
-					console.log('index--mallTaye 接口调用出错');
+					console.log('index--mallTaye 接口调用出错'+err);
 				})
 			},
 			initData(){
