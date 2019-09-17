@@ -115,6 +115,7 @@
 						...this.baseInfo,
 						scm: 'pc'
 					});
+					return;
 				}
 			},
 			defaultwxWebLogin(options){
