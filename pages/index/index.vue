@@ -94,7 +94,7 @@
 			}
 		},
 		computed: {
-			...mapState('common', ['baseInfo', 'userInfo',])
+			...mapState('common', ['baseInfo', 'userInfo', 'mallDomain'])
 		},
 		onLoad() {
 			this.getMallType();
