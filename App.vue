@@ -7,7 +7,7 @@
 			...mapState("common", ['uniCode', 'mallDomain', 'baseInfo', 'hasLogin', 'firstLoad', 'baseUrl'])
 		},
 		methods: {
-			...mapMutations("common", ['SET_BASEINFO', 'SET_USERIFNO', 'SET_UNICODE', 'SET_HASLOGIN', 'SET_TOKEN', 'SET_MALLTYPE', 'SET_MALLID', 'SET_MALLDOMAIN', 'SET_INDEXPORT']),
+			...mapMutations("common", ['SET_BASEINFO', 'SET_USERIFNO', 'SET_UNICODE', 'SET_HASLOGIN', 'SET_TOKEN', 'SET_MALLTYPE', 'SET_MALLID', 'SET_MALLDOMAIN']),
 			GetQueryString(name){
 			     var reg = new RegExp("(^|&)"+ name +"=([^&]*)(&|$)");
 			     var r = window.location.search.substr(1).match(reg);
@@ -31,7 +31,6 @@
 						});
 						this.SET_MALLTYPE(res.result.type);
 						this.SET_MALLID(res.result.mallId);
-						this.SET_INDEXPORT(true);
 					}else{
 						console.log('login--mallTaye 接口调用失败');
 					}

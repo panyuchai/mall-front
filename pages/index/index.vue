@@ -52,24 +52,52 @@
 			// 	uni.removeStorageSync('uniCode')
 			// 	uni.removeStorageSync('userInfo')
 			// },
-			initData() {
-				console.log(this.indexPort);
-				if(this.indexPort){
-					this.$http.post('/mall/app/backsite/decoration/homepage/'+this.baseInfo.mallId)
-					.then(res => {
-						this.templateData=res.content;
-					})
-					.catch(err => {
-						console.log(err);
-					})
-				}
+			checkMallType(){
+				this.$http.post('/mall/app/login/mall/shopmall/type', {
+					mallDomain: this.mallDomain
+				})
+				.then( res => {
+					if(res.code == 0){
+						this.SET_BASEINFO({
+							...this.baseInfo,
+							mallDomain: this.mallDomain,
+							mallType: res.result.type,
+							mallId: res.result.mallId
+						});
+						this.SET_MALLTYPE(res.result.type);
+						this.SET_MALLID(res.result.mallId);
+						
+						this.initData();
+					}else{
+						console.log('login--mallTaye 接口调用失败');
+					}
+				})
+				.catch( err => {
+					console.log('login--mallTaye 接口调用出错');
+				})
 			},
+			initData(){
+				this.$http.post('/mall/app/backsite/decoration/homepage/'+this.baseInfo.mallId)
+				.then(res => {
+					this.templateData=res.content;
+				})
+				.catch(err => {
+					console.log(err);
+				})
+			},
+			checkMallType(){
+				if(!this.mallType){
+					this.checkMallType();
+				}else{
+					this.initData();
+				}
+			}
 		},
 		computed: {
-			...mapState('common', ['baseInfo', 'userInfo', 'indexPort'])
+			...mapState('common', ['baseInfo', 'userInfo',])
 		},
 		onLoad() {
-			this.initData();
+			this.checkMallType();
 		},
 		
 	}
