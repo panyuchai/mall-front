@@ -38,14 +38,14 @@
 						// uni.reLaunch({
 						// 	url: '/pages/index/index?mallDomain='+this.mallDomain
 						// });
-						window.location.href=this.transferUrl + '/pages/index/index?mallDomain='+options.mallDomain;
+						window.location.href=this.transferUrl + '?mallDomain='+options.mallDomain+'#/';
 					}
 				}else{
 					uni.setStorageSync('openid',options.openid)
 					// uni.reLaunch({
 					// 	url: '/pages/index/index?mallDomain='+this.mallDomain
 					// });
-					window.location.href=this.transferUrl + '/pages/index/index?mallDomain='+options.mallDomain;
+					window.location.href=this.transferUrl + '?mallDomain='+options.mallDomain+'#/';
 				}
 				this.SET_FIRSTLOAD(false);
 			},
