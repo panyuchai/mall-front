@@ -368,7 +368,7 @@
 						}, 1000)
 					}else{
 						uni.setStorageSync('PAYMENT_ORDER_INFO', JSON.stringify(data));
-						window.location.href=`http://${this.paymentUrl}.yujianli.cn/#/pages/payment/cashRegister?orderNo=`+res.result.orderNo+"&mallDomain=yyy"+"&paymentrder="+JSON.stringify(data)
+						window.location.href=`http://${this.paymentUrl}.yujianli.cn/#/pages/payment/cashRegister?orderNo=`+res.result.orderNo+"&mallDomain=yyy"+"&paymentOrder="+JSON.stringify(data)
 						// uni.navigateTo({
 						//     url: 'http://testpay.yujianli.cn/#/pages/payment/cashRegister?orderNo='+res.result.orderNo
 						// });

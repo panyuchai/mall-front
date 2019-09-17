@@ -14,8 +14,8 @@
 			<!-- 005 1px白线显示 -->
 			<single-product v-if="item.type === '205'" :options="item.data"></single-product>
 			<recommend v-if="item.type === '203'" :options="item.data"></recommend>
-			<button type="primary" @tap="clearInfo">清除登陆</button>
 		</block>
+		<button type="primary" @tap="clearInfo">清除登陆</button>
 	</view>
 </template>
 
@@ -82,6 +82,7 @@
 				this.$http.post('/mall/app/backsite/decoration/homepage/'+this.baseInfo.mallId)
 				.then(res => {
 					this.templateData=res.content;
+					console.log(this.templateData)
 				})
 				.catch(err => {
 					console.log(err);

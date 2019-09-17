@@ -242,7 +242,7 @@
 			getInitData(){
 				this.orderNo=uni.getStorageSync('ORDER_NO');
 				// this.initData=JSON.parse(uni.getStorageSync('PAYMENT_ORDER_INFO'));
-				this.initData=JSON.parse(uni.getStorageSync('paymentrder'));
+				this.initData=JSON.parse(uni.getStorageSync('paymentOrder'));
 				this.mallDomain=uni.getStorageSync('mallDomain');
 			}
 		},
@@ -253,7 +253,7 @@
 		onLoad(options){
 			uni.setStorageSync('ORDER_NO', options.orderNo);
 			uni.setStorageSync('mallDomain', options.mallDomain);
-			uni.setStorageSync('paymentrder', options.paymentrder);
+			uni.setStorageSync('paymentOrder', options.paymentrder);
 			this.getInitData();
 		},
 	}

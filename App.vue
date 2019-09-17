@@ -123,6 +123,7 @@
 				}
 				let reg = /\/TransferPage\/TransferPage/ig;
 				let urlPath = !(reg.test(options.path));
+				alert(urlPath);
 				if(urlPath){
 					window.location.href=this.baseUrl + '/mall/app/login/mall/wxweb?mallDomain='+this.mallDomain; //&redirectUrl=http://192.168.1.23:8080
 				}

@@ -425,7 +425,7 @@
 		flex-wrap: wrap;
 		box-sizing: border-box;
 		padding: 30upx 30upx 0 30upx;
-		background: #fff;
+		// background: #fff;
 	}
 	
 	.pro-item {
@@ -441,7 +441,7 @@
 		position: absolute;
 		height: 200%;
 		width: 200%;
-		border: 1upx solid #eaeef1;
+		border: 1upx solid #e1e1e1;
 		transform-origin: 0 0;
 		-webkit-transform-origin: 0 0;
 		-webkit-transform: scale(0.5);
