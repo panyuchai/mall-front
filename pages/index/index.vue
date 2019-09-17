@@ -79,7 +79,6 @@
 				})
 			},
 			initData(){
-				alert('homepage接口开始');
 				this.$http.post('/mall/app/backsite/decoration/homepage/'+this.baseInfo.mallId)
 				.then(res => {
 					this.templateData=res.content;

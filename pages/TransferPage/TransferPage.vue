@@ -35,15 +35,15 @@
 						window.location.href=uni.getStorageSync('referUrl');
 						uni.removeStorageSync('referUrl');
 					}else{
-						uni.switchTab({
-							url: '/pages/index/index?'
-						});
+						// uni.switchTab({
+						// 	url: '/pages/index/index?'
+						// });
 					}
 				}else{
 					uni.setStorageSync('openid',options.openid)
-					uni.switchTab({
-						url: '/pages/index/index'
-					});
+					// uni.switchTab({
+					// 	url: '/pages/index/index'
+					// });
 				}
 				this.SET_FIRSTLOAD(false);
 			},
