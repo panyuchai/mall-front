@@ -21,7 +21,8 @@
 
 <script>
 	import {
-		mapState
+		mapState,
+		mapMutations
 	} from 'vuex'
 	import Search from "@/components/search.vue";
 	import Banner from "@/components/banner.vue";
