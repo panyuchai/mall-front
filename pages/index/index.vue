@@ -53,7 +53,7 @@
 			// 	uni.removeStorageSync('userInfo')
 			// },
 			initData() {
-				console.log(this.baseInfo+'index');
+				console.log(this.baseInfo.mallId+'index');
 				this.$http.post('/mall/app/backsite/decoration/homepage/'+this.baseInfo.mallId)
 				.then(res => {
 					this.templateData=res.content;
