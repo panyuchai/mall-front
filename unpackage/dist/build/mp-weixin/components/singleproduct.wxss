@@ -69,9 +69,32 @@
 .goods-list .goods .info .sale .sale-points {
           color: #E51700;
           font-size: 24rpx;
+          display: -webkit-box;
+          display: -webkit-flex;
+          display: -ms-flexbox;
+          display: flex;
+          -webkit-box-orient: horizontal;
+          -webkit-box-direction: normal;
+          -webkit-flex-direction: row;
+              -ms-flex-direction: row;
+                  flex-direction: row;
+          -webkit-box-pack: start;
+          -webkit-justify-content: flex-start;
+              -ms-flex-pack: start;
+                  justify-content: flex-start;
+          -webkit-box-align: end;
+          -webkit-align-items: flex-end;
+              -ms-flex-align: end;
+                  align-items: flex-end;
 }
-.goods-list .goods .info .sale .sale-points .points {
+.goods-list .goods .info .sale .sale-points .saleMoney .money {
             font-size: 40rpx;
+}
+.goods-list .goods .info .sale .sale-points .salePoints {
+            padding-left: 10rpx;
+}
+.goods-list .goods .info .sale .sale-points .salePoints .points {
+              font-size: 35rpx;
 }
 .goods-list .goods .info .sale .sale-action .sale-btn {
           width: 176rpx;

@@ -351,8 +351,9 @@ page {
 .info-detail .content-info .content-item {
   background: #fff;
 }
-.info-detail .content-info .content-item .tui-product-img .img {
+.info-detail .content-info .content-item .tui-product-img /deep/ ._img {
     vertical-align: top !important;
+    width: 100% !important;
 }
 .info-detail .content-info .content-item .product-specs .specs-info {
     padding: 30rpx 20rpx;

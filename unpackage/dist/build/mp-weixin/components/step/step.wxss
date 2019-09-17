@@ -76,6 +76,11 @@
             -ms-transform: translateY(-50%);
                 transform: translateY(-50%);
 }
+.list-item .info .con .dot.con-dot {
+          width: 18rpx;
+          height: 18rpx;
+          left: -50rpx;
+}
 .list-item .info .con .time {
         margin-top: 10rpx;
 }

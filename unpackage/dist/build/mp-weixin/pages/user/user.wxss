@@ -133,16 +133,16 @@ page {
         font-size: 48rpx;
         color: #DCA754;
 }
+.order-section .order-item .icon .iconfont .badge {
+          position: absolute;
+          top: 0;
+          left: 8rpx;
+}
 .order-section .order-item .icon .iconfont.iconfont-all {
           font-size: 42rpx;
 }
 .order-section .order-item .icon .iconfont.iconfont-transport {
           font-size: 50rpx;
-}
-.order-section .order-item .icon .iconfont.iconfont-transport .badge {
-            position: absolute;
-            top: 0;
-            left: 8rpx;
 }
 .order-section .order-item .icon .iconfont.iconfont-finished {
           font-size: 54rpx;

@@ -125,9 +125,9 @@
 				let urlPath = !(reg.test(options.path));
 				alert(urlPath);
 				if(urlPath){
+					debugger;
 					window.location.href=this.baseUrl + '/mall/app/login/mall/wxweb?mallDomain='+this.mallDomain; //+'&redirectUrl=http://192.168.1.23:8080'
 				}
-				
 			},
 			defaultWxLogin(){
 				uni.checkSession({

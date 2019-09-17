@@ -21,6 +21,7 @@
 .recommend-list .hd .cell-more {
     font-size: 24rpx;
     color: #747474;
+    padding: 10rpx;
 }
 .recommend-list .hd .cell-more .icon-arrow {
       font-size: 25rpx;
