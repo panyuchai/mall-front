@@ -85,7 +85,7 @@
 					console.log(err);
 				})
 			},
-			checkMallType(){
+			getMallType(){
 				if(!this.mallType){
 					this.checkMallType();
 				}else{
@@ -97,7 +97,7 @@
 			...mapState('common', ['baseInfo', 'userInfo',])
 		},
 		onLoad() {
-			this.checkMallType();
+			this.getMallType();
 		},
 		
 	}
