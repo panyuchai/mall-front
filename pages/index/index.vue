@@ -47,7 +47,7 @@
 			Lines
 		},
 		methods: {
-			...mapMutations("common", ['SET_BASEINFO', 'SET_MALLTYPE', 'SET_MALLID']),
+			...mapMutations("common", ['SET_BASEINFO', 'SET_MALLTYPE', 'SET_MALLID', 'SET_MALLDOMAIN']),
 			clearInfo(){
 				uni.removeStorageSync('hasLogin')
 				uni.removeStorageSync('token')
@@ -99,7 +99,12 @@
 		computed: {
 			...mapState('common', ['baseInfo', 'userInfo', 'mallType', 'mallDomain'])
 		},
-		onLoad() {
+		onLoad(options) {
+			// if(options){
+			// 	this.SET_MALLDOMAIN(options.mallDomain)
+			// }
+			// debugger;
+			// alert(this.mallDomain)
 			this.getMallType();
 		},
 		

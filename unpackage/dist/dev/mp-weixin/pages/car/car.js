@@ -496,7 +496,6 @@ var _vuex = __webpack_require__(/*! vuex */ 10);function _objectSpread(target) {
 
       then(function (res) {
         if (res.code == 0) {
-          console.log(res);
           _this3.goodsList = res.result.list;
           // this.sum();
           if (!res.result.list) {

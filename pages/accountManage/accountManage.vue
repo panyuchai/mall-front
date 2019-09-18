@@ -14,7 +14,7 @@
 					用户名
 				</view>
 				<view class="cell-info">
-					<input class="input" type="text" v-model="formData.customerName" />
+					<input class="input" type="text" v-model="formData.loginname" />
 				</view>
 				<view class="iconfont icon-arrowRight icon-arrow"></view>
 			</view>
@@ -23,7 +23,7 @@
 					昵称
 				</view>
 				<view class="cell-info">
-					<input class="input" type="text"  v-model="formData.wechatName" />
+					<input class="input" type="text"  v-model="formData.customerName" />
 				</view>
 				<view class="iconfont icon-arrowRight icon-arrow"></view>
 			</view>
@@ -238,11 +238,13 @@
 					if(res.code == 0){
 						if(res.result){
 							let mobilephone = res.result.mobilephone;
+							let loginname = res.result.loginname;
 							let {accountId, customerName, wechatName, customerSex, customerBirthday, customerImage, customerId} = res.result.customer;
 							this.SET_USERIFNO({accountId, customerName, wechatName, customerSex, customerBirthday,  customerImage, customerId});
 							this.SET_USERIFNO({
 								...this.userInfo,
-								mobilephone: mobilephone
+								mobilephone: mobilephone,
+								loginname: loginname
 							})
 							this.formData=this.userInfo;
 							if(this.formData.customerBirthday){

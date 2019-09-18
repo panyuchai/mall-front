@@ -123,7 +123,10 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
-var _vuex = __webpack_require__(/*! vuex */ 10);function _objectSpread(target) {for (var i = 1; i < arguments.length; i++) {var source = arguments[i] != null ? arguments[i] : {};var ownKeys = Object.keys(source);if (typeof Object.getOwnPropertySymbols === 'function') {ownKeys = ownKeys.concat(Object.getOwnPropertySymbols(source).filter(function (sym) {return Object.getOwnPropertyDescriptor(source, sym).enumerable;}));}ownKeys.forEach(function (key) {_defineProperty(target, key, source[key]);});}return target;}function _defineProperty(obj, key, value) {if (key in obj) {Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true });} else {obj[key] = value;}return obj;}var Search = function Search() {return __webpack_require__.e(/*! import() | components/search */ "components/search").then(__webpack_require__.bind(null, /*! @/components/search.vue */ 293));};var Banner = function Banner() {return __webpack_require__.e(/*! import() | components/banner */ "components/banner").then(__webpack_require__.bind(null, /*! @/components/banner.vue */ 300));};var CategoryList = function CategoryList() {return __webpack_require__.e(/*! import() | components/categorylist */ "components/categorylist").then(__webpack_require__.bind(null, /*! @/components/categorylist.vue */ 307));};var SingleProduct = function SingleProduct() {return __webpack_require__.e(/*! import() | components/singleproduct */ "components/singleproduct").then(__webpack_require__.bind(null, /*! @/components/singleproduct.vue */ 314));};var Recommend = function Recommend() {return __webpack_require__.e(/*! import() | components/recommend */ "components/recommend").then(__webpack_require__.bind(null, /*! @/components/recommend.vue */ 321));};var Lines = function Lines() {return __webpack_require__.e(/*! import() | components/lines */ "components/lines").then(__webpack_require__.bind(null, /*! @/components/lines.vue */ 328));};var _default =
+
+
+var _vuex = __webpack_require__(/*! vuex */ 10);function _objectSpread(target) {for (var i = 1; i < arguments.length; i++) {var source = arguments[i] != null ? arguments[i] : {};var ownKeys = Object.keys(source);if (typeof Object.getOwnPropertySymbols === 'function') {ownKeys = ownKeys.concat(Object.getOwnPropertySymbols(source).filter(function (sym) {return Object.getOwnPropertyDescriptor(source, sym).enumerable;}));}ownKeys.forEach(function (key) {_defineProperty(target, key, source[key]);});}return target;}function _defineProperty(obj, key, value) {if (key in obj) {Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true });} else {obj[key] = value;}return obj;}var Search = function Search() {return __webpack_require__.e(/*! import() | components/search */ "components/search").then(__webpack_require__.bind(null, /*! @/components/search.vue */ 301));};var Banner = function Banner() {return __webpack_require__.e(/*! import() | components/banner */ "components/banner").then(__webpack_require__.bind(null, /*! @/components/banner.vue */ 308));};var CategoryList = function CategoryList() {return __webpack_require__.e(/*! import() | components/categorylist */ "components/categorylist").then(__webpack_require__.bind(null, /*! @/components/categorylist.vue */ 315));};var SingleProduct = function SingleProduct() {return __webpack_require__.e(/*! import() | components/singleproduct */ "components/singleproduct").then(__webpack_require__.bind(null, /*! @/components/singleproduct.vue */ 322));};var Recommend = function Recommend() {return __webpack_require__.e(/*! import() | components/recommend */ "components/recommend").then(__webpack_require__.bind(null, /*! @/components/recommend.vue */ 329));};var Lines = function Lines() {return __webpack_require__.e(/*! import() | components/lines */ "components/lines").then(__webpack_require__.bind(null, /*! @/components/lines.vue */ 336));};var _default =
+
 
 
 
@@ -149,42 +152,61 @@ var _vuex = __webpack_require__(/*! vuex */ 10);function _objectSpread(target) {
     Lines: Lines },
 
   methods: _objectSpread({},
-  (0, _vuex.mapMutations)('common', ['SET_USERIFNO']), {
+  (0, _vuex.mapMutations)("common", ['SET_BASEINFO', 'SET_MALLTYPE', 'SET_MALLID']), {
     clearInfo: function clearInfo() {
       uni.removeStorageSync('hasLogin');
       uni.removeStorageSync('token');
       uni.removeStorageSync('uniCode');
       uni.removeStorageSync('userInfo');
     },
-    getData: function getData() {
-      // this.$http.get('/api/getDecoration?appkey=NGMxNDkwZTktOWI2Zi00YWZjLWE1&decorationId=997c8b76a1974441b416718cdec04ab9').then(res => {
-      // 	console.log(res.data.content);
-      // 	this.templateData=res.data.content;
-      // }).catch(err => {
-      // 
-      // })
+    checkMallType: function checkMallType() {var _this = this;
+      this.$http.post('/mall/app/login/mall/shopmall/type', {
+        mallDomain: this.mallDomain }).
+
+      then(function (res) {
+        if (res.code == 0) {
+          _this.SET_BASEINFO(_objectSpread({},
+          _this.baseInfo, {
+            mallDomain: _this.mallDomain,
+            mallType: res.result.type,
+            mallId: res.result.mallId }));
+
+          _this.SET_MALLTYPE(res.result.type);
+          _this.SET_MALLID(res.result.mallId);
+
+          _this.initData();
+        } else {
+          console.log('index--mallTaye 接口调用失败');
+        }
+      }).
+      catch(function (err) {
+        console.log('index--mallTaye 接口调用出错' + err);
+      });
+    },
+    initData: function initData() {var _this2 = this;
+      this.$http.post('/mall/app/backsite/decoration/homepage/' + this.baseInfo.mallId).
+      then(function (res) {
+        _this2.templateData = res.content;
+        console.log(_this2.templateData);
+      }).
+      catch(function (err) {
+        console.log(err);
+      });
+    },
+    getMallType: function getMallType() {
+      if (!this.mallType) {
+        this.checkMallType();
+      } else {
+        this.initData();
+      }
     } }),
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+  computed: _objectSpread({},
+  (0, _vuex.mapState)('common', ['baseInfo', 'userInfo', 'mallType', 'mallDomain'])),
 
   onLoad: function onLoad() {
-    this.getData();
-    // this.setUserInfo();
+    debugger;
+    this.getMallType();
   } };exports.default = _default;
 /* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./node_modules/@dcloudio/uni-mp-weixin/dist/index.js */ 1)["default"]))
 

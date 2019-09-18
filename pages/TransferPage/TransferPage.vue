@@ -17,11 +17,12 @@
 			}
 		},
 		computed: {
-		    ...mapState("common", ['baseInfo', 'userInfo', 'mallDomain', 'transferUrl'])
+		    ...mapState("common", ['baseInfo', 'userInfo', 'mallDomain', 'transferUrl', 'isTransferPage'])
 		},
 		methods: {
-			...mapMutations('common', ['SET_HASLOGIN', 'SET_TOKEN', 'SET_FIRSTLOAD', 'SET_USERIFNO']),
+			...mapMutations('common', ['SET_HASLOGIN', 'SET_TOKEN', 'SET_FIRSTLOAD', 'SET_USERIFNO', 'SET_ISTRANSFERPAGE']),
 			handleTransfer(options){
+				debugger;
 				if(options.success == 'true'){
 					this.SET_HASLOGIN(true);
 					this.SET_TOKEN(options.token);
@@ -38,16 +39,27 @@
 						// uni.reLaunch({
 						// 	url: '/pages/index/index?mallDomain='+this.mallDomain
 						// });
-						window.location.href=this.transferUrl + '?mallDomain='+options.mallDomain+'#/';
+						// uni.switchTab({
+						// 	url: '/pages/index/index'
+						// });
+						window.location.href=this.transferUrl + '?mallDomain='+options.mallDomain;
 					}
 				}else{
 					uni.setStorageSync('openid',options.openid)
+					uni.navigateTo({
+						url: '/pages/login/login?mallDomain=yyy'
+					})
 					// uni.reLaunch({
 					// 	url: '/pages/index/index?mallDomain='+this.mallDomain
 					// });
-					window.location.href=this.transferUrl + '?mallDomain='+options.mallDomain+'#/';
+					// uni.switchTab({
+					// 	url: '/pages/index/index'
+					// });
+					// window.location.href=this.transferUrl + '?mallDomain='+options.mallDomain;
+					// window.location.href=this.transferUrl + '?mallDomain=yyy';
+					this.SET_ISTRANSFERPAGE(false)
 				}
-				this.SET_FIRSTLOAD(false);
+				// this.SET_FIRSTLOAD(false);
 			},
 			setUserInfo(){
 				this.$http.post('/mall/app/account/info')
@@ -55,19 +67,21 @@
 					if(res.code == 0){
 						if(res.result){
 							let mobilephone = res.result.mobilephone;
+							let loginname = res.result.loginname;
 							let {accountId, customerName, wechatName, customerSex, customerBirthday, customerImage, customerId} = res.result.customer;
 							this.SET_USERIFNO({accountId, customerName, wechatName, customerSex, customerBirthday,  customerImage, customerId});
 							this.SET_USERIFNO({
 								...this.userInfo,
-								mobilephone: mobilephone
+								mobilephone: mobilephone,
+								loginname: loginname
 							})
 						}
 					}else{
-						console.log('login.vue-- info接口调用失败');
+						console.log('TransferPage.vue-- info接口调用失败');
 					}
 				})
 				.catch( err => {
-					console.log('login.vue-- info接口调用错误');
+					console.log('TransferPage.vue-- info接口调用错误');
 				})
 			},
 		},

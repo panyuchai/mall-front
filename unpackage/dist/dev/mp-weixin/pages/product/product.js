@@ -195,7 +195,7 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
-var _vuex = __webpack_require__(/*! vuex */ 10);function _objectSpread(target) {for (var i = 1; i < arguments.length; i++) {var source = arguments[i] != null ? arguments[i] : {};var ownKeys = Object.keys(source);if (typeof Object.getOwnPropertySymbols === 'function') {ownKeys = ownKeys.concat(Object.getOwnPropertySymbols(source).filter(function (sym) {return Object.getOwnPropertyDescriptor(source, sym).enumerable;}));}ownKeys.forEach(function (key) {_defineProperty(target, key, source[key]);});}return target;}function _defineProperty(obj, key, value) {if (key in obj) {Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true });} else {obj[key] = value;}return obj;}var Search = function Search() {return __webpack_require__.e(/*! import() | components/search */ "components/search").then(__webpack_require__.bind(null, /*! @/components/search.vue */ 293));};var tuiLoadmore = function tuiLoadmore() {return __webpack_require__.e(/*! import() | components/loadmore/loadmore */ "components/loadmore/loadmore").then(__webpack_require__.bind(null, /*! @/components/loadmore/loadmore */ 342));};var tuiNomore = function tuiNomore() {return __webpack_require__.e(/*! import() | components/nomore/nomore */ "components/nomore/nomore").then(__webpack_require__.bind(null, /*! @/components/nomore/nomore */ 349));};var _default =
+var _vuex = __webpack_require__(/*! vuex */ 10);function _objectSpread(target) {for (var i = 1; i < arguments.length; i++) {var source = arguments[i] != null ? arguments[i] : {};var ownKeys = Object.keys(source);if (typeof Object.getOwnPropertySymbols === 'function') {ownKeys = ownKeys.concat(Object.getOwnPropertySymbols(source).filter(function (sym) {return Object.getOwnPropertyDescriptor(source, sym).enumerable;}));}ownKeys.forEach(function (key) {_defineProperty(target, key, source[key]);});}return target;}function _defineProperty(obj, key, value) {if (key in obj) {Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true });} else {obj[key] = value;}return obj;}var Search = function Search() {return __webpack_require__.e(/*! import() | components/search */ "components/search").then(__webpack_require__.bind(null, /*! @/components/search.vue */ 301));};var tuiLoadmore = function tuiLoadmore() {return __webpack_require__.e(/*! import() | components/loadmore/loadmore */ "components/loadmore/loadmore").then(__webpack_require__.bind(null, /*! @/components/loadmore/loadmore */ 350));};var tuiNomore = function tuiNomore() {return __webpack_require__.e(/*! import() | components/nomore/nomore */ "components/nomore/nomore").then(__webpack_require__.bind(null, /*! @/components/nomore/nomore */ 357));};var _default =
 
 
 
@@ -284,7 +284,6 @@ var _vuex = __webpack_require__(/*! vuex */ 10);function _objectSpread(target) {
             _this.searchData.totalPage = res.result.totalPage;
             if (res.result.mallGoodsList.length == 0) {
               // this.notFound=true;
-
               _this.loadding = false;
               _this.pullUpOn = false;
             } else {
@@ -384,7 +383,7 @@ var _vuex = __webpack_require__(/*! vuex */ 10);function _objectSpread(target) {
     this.loadding = true;
     this.searchData.pageNum++;
     // if(this.canReachBottom){
-    if (this.searchData.pageNum == this.searchData.totalPage) {
+    if (this.searchData.pageNum > this.searchData.totalPage) {
       this.loadding = false;
       this.pullUpOn = false;
     }

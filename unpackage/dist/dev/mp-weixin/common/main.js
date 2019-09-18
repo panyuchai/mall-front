@@ -96,10 +96,19 @@ var _vuex = __webpack_require__(/*! vuex */ 10);
 var _api = __webpack_require__(/*! ./api/api.js */ 11);function _objectSpread(target) {for (var i = 1; i < arguments.length; i++) {var source = arguments[i] != null ? arguments[i] : {};var ownKeys = Object.keys(source);if (typeof Object.getOwnPropertySymbols === 'function') {ownKeys = ownKeys.concat(Object.getOwnPropertySymbols(source).filter(function (sym) {return Object.getOwnPropertyDescriptor(source, sym).enumerable;}));}ownKeys.forEach(function (key) {_defineProperty(target, key, source[key]);});}return target;}function _defineProperty(obj, key, value) {if (key in obj) {Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true });} else {obj[key] = value;}return obj;}var _default =
 {
   computed: _objectSpread({},
-  (0, _vuex.mapState)("common", ['uniCode', 'mallDomain', 'baseInfo', 'hasLogin', 'firstLoad'])),
+  (0, _vuex.mapState)("common", ['uniCode', 'mallDomain', 'baseInfo', 'hasLogin', 'firstLoad', 'baseUrl'])),
 
   methods: _objectSpread({},
-  (0, _vuex.mapMutations)("common", ['SET_BASEINFO', 'SET_USERIFNO', 'SET_UNICODE', 'SET_HASLOGIN', 'SET_TOKEN', 'SET_MALLTYPE', 'SET_MALLID']), {
+  (0, _vuex.mapMutations)("common", ['SET_BASEINFO', 'SET_USERIFNO', 'SET_UNICODE', 'SET_HASLOGIN', 'SET_TOKEN', 'SET_MALLTYPE', 'SET_MALLID', 'SET_MALLDOMAIN']), {
+    GetQueryString: function GetQueryString(name) {
+      var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)");
+      var r = window.location.search.substr(1).match(reg);
+      if (r != null) return unescape(r[2]);return null;
+    },
+    getMallDomain: function getMallDomain() {
+      var mallDomain = this.GetQueryString('mallDomain');
+      this.SET_MALLDOMAIN(mallDomain);
+    },
     checkMallType: function checkMallType() {var _this = this;
       this.$http.post('/mall/app/login/mall/shopmall/type', {
         mallDomain: this.mallDomain }).
@@ -176,32 +185,42 @@ var _api = __webpack_require__(/*! ./api/api.js */ 11);function _objectSpread(ta
       // var bIsWM = sUserAgent.match(/windows mobile/i) == "windows mobile";
       var bIsWeChat = sUserAgent.match(/MicroMessenger/i) == "micromessenger"; //微信端
       if (bIsWeChat) {
-        alert('wx h5端');
+        console.log('wx h5端');
         this.SET_BASEINFO(_objectSpread({},
         this.baseInfo, {
           scm: 'h5' }));
 
-        if (!this.hasLogin) {
-          this.defaultwxWebLogin(options);
+        var url = window.location.host;
+        if (url.indexOf('pay') == -1) {
+          if (!Boolean(this.hasLogin)) {
+            this.defaultwxWebLogin(options);
+          }
         }
+        // if(!Boolean(this.hasLogin)){
+        // 	
+        // 	this.defaultwxWebLogin(options);
+        // }
       } else {
-        alert('h5端');
+        console.log('h5端');
         this.SET_BASEINFO(_objectSpread({},
         this.baseInfo, {
           scm: 'pc' }));
 
+        return;
       }
     },
     defaultwxWebLogin: function defaultwxWebLogin(options) {
-      if (document.referrer) {
-        uni.setStorageSync('referUrl', document.referrer);
-      }
+      // if (document.referrer) {
+      //     uni.setStorageSync('referUrl', document.referrer);
+      // }
       var reg = /\/TransferPage\/TransferPage/ig;
       var urlPath = !reg.test(options.path);
-      if (!this.hasLogin) {
-        if (urlPath) {
-          window.location.href = 'http://192.168.1.135:8086/mall/app/login/mall/wxweb?mallDomain=yyy';
-        }
+      var aa = options;
+
+      if (urlPath || aa) {
+
+        alert(urlPath + "---------------------");
+        window.location.href = this.baseUrl + '/mall/app/login/mall/wxweb?mallDomain=' + this.mallDomain + '&redirectUrl=http://192.168.1.123:8080'; //+'&redirectUrl=http://192.168.1.23:8080'
       }
 
     },
@@ -262,10 +281,12 @@ var _api = __webpack_require__(/*! ./api/api.js */ 11);function _objectSpread(ta
     } }),
 
   onLaunch: function onLaunch(options) {
-    this.checkMallType();
-    // this.defaultwxWebLogin();
+    debugger;
     this.initData();
-    console.log('App Launch');
+    this.getMallDomain();
+    this.checkMallType();
+
+
     // let urlPage = options
     // var obj = wx.getLaunchOptionsSync()
     // console.log('启动小程序的路径:',obj.path)
@@ -287,7 +308,7 @@ var _api = __webpack_require__(/*! ./api/api.js */ 11);function _objectSpread(ta
       this.baseInfo, {
         scm: 'wechat' }));
 
-      if (!this.hasLogin) {
+      if (!Boolean(this.hasLogin)) {
         this.defaultWxLogin();
       }
     };

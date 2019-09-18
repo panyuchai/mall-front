@@ -485,7 +485,7 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
-var _vuex = __webpack_require__(/*! vuex */ 10);function _objectSpread(target) {for (var i = 1; i < arguments.length; i++) {var source = arguments[i] != null ? arguments[i] : {};var ownKeys = Object.keys(source);if (typeof Object.getOwnPropertySymbols === 'function') {ownKeys = ownKeys.concat(Object.getOwnPropertySymbols(source).filter(function (sym) {return Object.getOwnPropertyDescriptor(source, sym).enumerable;}));}ownKeys.forEach(function (key) {_defineProperty(target, key, source[key]);});}return target;}function _defineProperty(obj, key, value) {if (key in obj) {Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true });} else {obj[key] = value;}return obj;}var tuiIcon = function tuiIcon() {return __webpack_require__.e(/*! import() | components/icon/icon */ "components/icon/icon").then(__webpack_require__.bind(null, /*! @/components/icon/icon */ 363));};var tuiTag = function tuiTag() {return __webpack_require__.e(/*! import() | components/tag/tag */ "components/tag/tag").then(__webpack_require__.bind(null, /*! @/components/tag/tag */ 370));};var tuiBadge = function tuiBadge() {return __webpack_require__.e(/*! import() | components/badge/badge */ "components/badge/badge").then(__webpack_require__.bind(null, /*! @/components/badge/badge */ 356));};var tuiNomore = function tuiNomore() {return __webpack_require__.e(/*! import() | components/nomore/nomore */ "components/nomore/nomore").then(__webpack_require__.bind(null, /*! @/components/nomore/nomore */ 349));};var tuiButton = function tuiButton() {return __webpack_require__.e(/*! import() | components/button/button */ "components/button/button").then(__webpack_require__.bind(null, /*! @/components/button/button */ 384));};var tuiTopDropdown = function tuiTopDropdown() {return __webpack_require__.e(/*! import() | components/top-dropdown/top-dropdown */ "components/top-dropdown/top-dropdown").then(__webpack_require__.bind(null, /*! @/components/top-dropdown/top-dropdown */ 391));};var tuiBottomPopup = function tuiBottomPopup() {return __webpack_require__.e(/*! import() | components/bottom-popup/bottom-popup */ "components/bottom-popup/bottom-popup").then(__webpack_require__.bind(null, /*! @/components/bottom-popup/bottom-popup */ 398));};var tuiNumberbox = function tuiNumberbox() {return __webpack_require__.e(/*! import() | components/numberbox/numberbox */ "components/numberbox/numberbox").then(__webpack_require__.bind(null, /*! @/components/numberbox/numberbox */ 405));};var _default =
+var _vuex = __webpack_require__(/*! vuex */ 10);function _objectSpread(target) {for (var i = 1; i < arguments.length; i++) {var source = arguments[i] != null ? arguments[i] : {};var ownKeys = Object.keys(source);if (typeof Object.getOwnPropertySymbols === 'function') {ownKeys = ownKeys.concat(Object.getOwnPropertySymbols(source).filter(function (sym) {return Object.getOwnPropertyDescriptor(source, sym).enumerable;}));}ownKeys.forEach(function (key) {_defineProperty(target, key, source[key]);});}return target;}function _defineProperty(obj, key, value) {if (key in obj) {Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true });} else {obj[key] = value;}return obj;}var tuiIcon = function tuiIcon() {return __webpack_require__.e(/*! import() | components/icon/icon */ "components/icon/icon").then(__webpack_require__.bind(null, /*! @/components/icon/icon */ 371));};var tuiTag = function tuiTag() {return __webpack_require__.e(/*! import() | components/tag/tag */ "components/tag/tag").then(__webpack_require__.bind(null, /*! @/components/tag/tag */ 378));};var tuiBadge = function tuiBadge() {return __webpack_require__.e(/*! import() | components/badge/badge */ "components/badge/badge").then(__webpack_require__.bind(null, /*! @/components/badge/badge */ 364));};var tuiNomore = function tuiNomore() {return __webpack_require__.e(/*! import() | components/nomore/nomore */ "components/nomore/nomore").then(__webpack_require__.bind(null, /*! @/components/nomore/nomore */ 357));};var tuiButton = function tuiButton() {return __webpack_require__.e(/*! import() | components/button/button */ "components/button/button").then(__webpack_require__.bind(null, /*! @/components/button/button */ 392));};var tuiTopDropdown = function tuiTopDropdown() {return __webpack_require__.e(/*! import() | components/top-dropdown/top-dropdown */ "components/top-dropdown/top-dropdown").then(__webpack_require__.bind(null, /*! @/components/top-dropdown/top-dropdown */ 399));};var tuiBottomPopup = function tuiBottomPopup() {return __webpack_require__.e(/*! import() | components/bottom-popup/bottom-popup */ "components/bottom-popup/bottom-popup").then(__webpack_require__.bind(null, /*! @/components/bottom-popup/bottom-popup */ 406));};var tuiNumberbox = function tuiNumberbox() {return __webpack_require__.e(/*! import() | components/numberbox/numberbox */ "components/numberbox/numberbox").then(__webpack_require__.bind(null, /*! @/components/numberbox/numberbox */ 413));};var _default =
 
 
 
@@ -535,24 +535,6 @@ var _vuex = __webpack_require__(/*! vuex */ 10);function _objectSpread(target) {
         text: "购物车",
         size: 23,
         badge: 2 }],
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
       menuShow: false,
@@ -607,27 +589,56 @@ var _vuex = __webpack_require__(/*! vuex */ 10);function _objectSpread(target) {
       this.value = e.value;
     },
     handleAddCart: function handleAddCart(mallGoodsId) {var _this = this;
+      if (!this.hasLogin) {
+        uni.navigateTo({
+          url: '/pages/login/login' });
+
+      } else {
+        this.$http.post('/mall/app/car/add', _objectSpread({},
+        this.baseInfo, {
+          accountId: this.userInfo.accountId,
+          goodsCount: this.value,
+          mallGoodsId: mallGoodsId })).
+
+        then(function (res) {
+          if (res.code == 0) {
+            _this.getGoodsDetail();
+            uni.showToast({
+              icon: 'none',
+              title: '商品添加成功' });
+
+          } else {
+            console.log('productDetail.vue-- add接口添加购物车失败');
+          }
+        }).
+        catch(function (err) {
+          console.log('productDetail.vue-- add接口添加购物车错误');
+        });
+      }
       this.hidePopup();
-      this.$http.post('/mall/app/car/add', _objectSpread({},
-      this.baseInfo, {
-        accountId: this.userInfo.accountId,
-        goodsCount: this.value,
-        mallGoodsId: mallGoodsId })).
+    },
+    linkToPayment: function linkToPayment(id) {
+      if (!this.hasLogin) {
+        uni.navigateTo({
+          url: '/pages/login/login' });
 
-      then(function (res) {
-        if (res.code == 0) {
-          _this.getGoodsDetail();
-          uni.showToast({
-            icon: 'none',
-            title: '商品添加成功' });
+      } else {
+        var tmpList = [];
+        tmpList.push({
+          mallGoodsId: id,
+          goodsCount: this.value });
 
-        } else {
-          console.log('productDetail.vue-- add接口添加购物车失败');
-        }
-      }).
-      catch(function (err) {
-        console.log('productDetail.vue-- add接口添加购物车错误');
-      });
+        uni.setStorage({
+          key: 'buyList',
+          data: tmpList,
+          success: function success() {
+            uni.navigateTo({
+              url: '/pages/payment/payment' });
+
+          } });
+
+      }
+      this.hidePopup();
     },
     // collecting: function() {
     // 	this.collected = !this.collected
@@ -646,9 +657,16 @@ var _vuex = __webpack_require__(/*! vuex */ 10);function _objectSpread(target) {
 
     },
     linkToCart: function linkToCart() {
-      uni.reLaunch({
-        url: '/pages/car/car' });
+      if (!this.hasLogin) {
+        uni.showToast({
+          icon: 'none',
+          title: '请先去登陆吧~' });
 
+      } else {
+        uni.reLaunch({
+          url: '/pages/car/car' });
+
+      }
     },
     getGoodsDetail: function getGoodsDetail() {var _this2 = this;
       var goodsId = uni.getStorageSync('goodsId');
@@ -668,7 +686,7 @@ var _vuex = __webpack_require__(/*! vuex */ 10);function _objectSpread(target) {
     } },
 
   computed: _objectSpread({},
-  (0, _vuex.mapState)('common', ['baseInfo', 'userInfo'])),
+  (0, _vuex.mapState)('common', ['baseInfo', 'userInfo', 'hasLogin'])),
 
   onLoad: function onLoad(options) {var _this3 = this;
     uni.setStorageSync('goodsId', options);

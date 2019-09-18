@@ -4,8 +4,9 @@ const state = {
    * 是否需要强制登录
    */
   baseUrl: 'http://192.168.1.104:8087',
+  // baseUrl: 'http://192.168.1.135:8086',
   paymentUrl: 'testpay',
-  transferUrl: 'http://192.168.1.10:8888',
+  transferUrl: 'http://192.168.1.123:8080',
   mallDomain: '',
   mallType: '',
   mallId: null,
@@ -15,6 +16,7 @@ const state = {
   // accountId:'',
   forcedLogin: false,
   firstLoad: true,
+  isTransferPage: true,
   // hasLogin: getStore({ name: 'hasLogin' }) && getStore({ name: 'hasLogin' }).hasLogin || false,
   // token: getStore({ name: 'token' }) && getStore({ name: 'token' }).token || '',
   // uniCode: getStore({ name: 'uniCode' }) && getStore({ name: 'uniCode' }).uniCode || '',
@@ -56,6 +58,10 @@ const mutations = {
 	// },
 	SET_FIRSTLOAD: (state, firstLoad) => {
 		state.firstLoad = firstLoad;
+	},
+	SET_ISTRANSFERPAGE: (state, isTransferPage) => {
+		state.isTransferPage = isTransferPage;
+		uni.setStorageSync('isTransferPage', isTransferPage);
 	},
 	SET_HASLOGIN: (state, hasLogin) => {
 		state.hasLogin = hasLogin;
