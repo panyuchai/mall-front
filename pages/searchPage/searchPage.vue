@@ -8,7 +8,7 @@
 				<!-- #ifdef H5 -->
 				<view><tui-icon name="search" :size='16' color='#333' @tap="handleSearch"></tui-icon></view>
 				<!-- #endif -->
-				<input confirm-type="search" placeholder="大家都在搜：2019退役球星" :focus="true" auto-focus placeholder-class="tui-input-plholder"
+				<input confirm-type="search" placeholder="大家都在搜：2019退役球星" @keyup.84='handleSearch' :focus="true" auto-focus placeholder-class="tui-input-plholder"
 				 class="tui-input" v-model.trim="keyword" />
 				<!-- #ifdef APP-PLUS || MP -->
 				<icon type="clear" :size='13' color='#bcbcbc' @tap="cleanKey" v-show="keyword"></icon>
@@ -115,6 +115,12 @@
 					})
 				}
 			},
+			unique(arr) {
+			    var obj = {};
+			    return arr.filter(function(item, index, arr){
+			        return obj.hasOwnProperty(typeof item + item) ? false : (obj[typeof item + item] = true)
+			    })
+			},
 			getHistoryData(){
 				this.$http.post('/mall/app/search/history/query', {
 					...this.baseInfo,
@@ -123,7 +129,8 @@
 				.then( res => {
 					if(res.code == 0){
 						if(res.result.list){
-							this.historyData=res.result.list;
+							this.historyData=this.unique(res.result.list);
+							console.log(this.historyData)
 						}else{
 							this.historyShow=false;
 						}

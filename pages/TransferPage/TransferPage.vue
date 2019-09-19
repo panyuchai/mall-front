@@ -46,9 +46,9 @@
 					}
 				}else{
 					uni.setStorageSync('openid',options.openid)
-					uni.navigateTo({
-						url: '/pages/login/login?mallDomain=yyy'
-					})
+					// uni.navigateTo({
+					// 	url: '/pages/login/login?mallDomain=yyy'
+					// })
 					// uni.reLaunch({
 					// 	url: '/pages/index/index?mallDomain='+this.mallDomain
 					// });

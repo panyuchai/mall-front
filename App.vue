@@ -19,9 +19,9 @@
 			GetQueryString(name) {
 				debugger;
 				var reg = new RegExp('(^|&)' + name + '=([^&]*)(&|$)', 'i');
-				var r = window.location.hash.match(reg);
+				var r = window.location.search.substr(1).match(reg);
 				if (r != null) {
-				return unescape(r[2]);
+					return unescape(r[2]);
 				}
 				return null;
 			},
@@ -37,7 +37,9 @@
 			getMallDomain(){
 				debugger;
 				let mallDomain = this.GetQueryString('mallDomain');
-				this.SET_MALLDOMAIN(mallDomain);
+				if(mallDomain){
+					this.SET_MALLDOMAIN(mallDomain);
+				}
 				alert(this.mallDomain)
 			},
 			checkMallType(){
@@ -79,6 +81,9 @@
 				debugger;
 				if(uni.getStorageSync('isTransferPage')){
 					this.SET_ISTRANSFERPAGE(uni.getStorageSync('isTransferPage'));
+				}
+				if(uni.getStorageSync('mallDomain')){
+					this.SET_MALLDOMAIN(uni.getStorageSync('mallDomain'));
 				}
 				// alert(getStore({ name: 'hasLogin' }));
 				// if(getStore({ name: 'hasLogin' })){

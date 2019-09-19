@@ -91,6 +91,7 @@
 			getMallType(){
 				if(!this.mallType){
 					this.checkMallType();
+					this.initData();
 				}else{
 					this.initData();
 				}

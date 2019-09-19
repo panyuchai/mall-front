@@ -19,7 +19,13 @@
 							{{item.goodsSubTitle}}
 						</view>
 						<view class="pro-price">
-							<text class="sale-price"><text class="unit">￥</text>{{item.goodsPrice}}</text>
+							<!-- <text class="sale-price"><text class="unit">￥</text>{{item.goodsPrice}}</text> -->
+							<view class="sale-price" v-if="item.goodsPrice">
+								<text class="money">{{item.goodsPrice}}</text>元
+							</view>
+							<view class="sale-points" v-if="item.goodsPoint">
+								+<text class="points">{{item.goodsPoint}}</text>分
+							</view>
 						</view>
 					</view>
 				</view>
@@ -148,6 +154,11 @@
 	
 	.pro-price {
 		padding-top: 14upx;
+		color: #E51700;
+		display: flex;
+		flex-direction:row;
+		justify-content : flex-start;
+		align-items : flex-end;
 	}
 	
 	.sale-price {
@@ -155,6 +166,13 @@
 		color: #ea1500;
 		.unit{
 			font-size: 24rpx;
+		}
+	}
+	.sale-points{
+		padding-left: 10upx;
+		font-size: 28upx;
+		.points{
+			
 		}
 	}
 	.tag{

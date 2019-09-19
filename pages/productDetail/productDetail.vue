@@ -256,7 +256,7 @@
 					<view class="style-yellow operation-button" @click="handleAddCart(goodsInfo.id)">加入购物车</view>
 				</view>
 				<view class="tui-flex-1">
-					<view class="style-red operation-button" @click="linkToPayment(goodsInfo.id)">立即购买</view>
+					<view class="style-red operation-button" @click="showPopup">立即购买</view>
 				</view>
 			</view>
 		</view>
@@ -567,6 +567,7 @@
 				.then( res => {
 					// console.log(res);
 					if(res.code == 0){
+						console.log(res.result);
 						this.goodsInfo=res.result;
 						this.banner=res.result.pics;
 					}else{
