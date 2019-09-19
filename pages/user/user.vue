@@ -193,7 +193,7 @@
 				})
 			}
         },
-		onLoad: function(){
+		onShow: function(){
 			this.userInitData();
 			
 			// this.initPayNum();
