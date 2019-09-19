@@ -88,7 +88,6 @@
 			},
 		},
 		onLoad(options){
-			debugger
 			this.handleTransfer(options);
 		}
 	}

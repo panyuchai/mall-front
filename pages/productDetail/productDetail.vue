@@ -496,7 +496,7 @@
 						...this.baseInfo,
 						accountId: this.userInfo.accountId,
 						goodsCount: this.value,
-						mallGoodsId: mallGoodsId
+						mallGoodsId: mallGoodsId,
 					})
 					.then( res => {
 						if(res.code == 0){
