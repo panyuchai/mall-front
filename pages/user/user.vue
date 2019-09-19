@@ -195,7 +195,6 @@
         },
 		onLoad: function(){
 			this.userInitData();
-			debugger;
 			
 			// this.initPayNum();
 			// this.initToReceivedNum();

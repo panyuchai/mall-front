@@ -10,7 +10,7 @@
 			</view>
 		</view>
 		<view class="bd">
-			<view class="pro-item" @tap="linkToDetail(item.goodsold)" v-for="(item,index) in options.list" v-if="item.shelf" :key="index">
+			<view class="pro-item" @tap="linkToDetail(item.goodsId)" v-for="(item,index) in options.list" v-if="item.shelf" :key="index">
 				<image :src="item.goodsImg" class="pro-img" mode="widthFix" />
 				<view class="pro-content">
 					<view class="pro-tit">{{item.goodsTitle}}</view>
