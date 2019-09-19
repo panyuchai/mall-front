@@ -6,7 +6,7 @@ const state = {
   // baseUrl: 'http://192.168.1.104:8087',
   baseUrl: 'http://192.168.1.135:8086',
   paymentUrl: 'testpay',
-  transferUrl: 'http://192.168.1.123:8080',
+  transferUrl: 'http://192.168.1.112:8080',
   mallDomain: '',
   mallType: '',
   mallId: null,

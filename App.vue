@@ -157,7 +157,7 @@
 				let urlPath = !(reg.test(options.path));
 				if(urlPath){
 					alert(urlPath+"---------------------");
-					window.location.href=this.baseUrl + '/mall/app/login/mall/wxweb?mallDomain='+this.mallDomain+'&redirectUrl=http://192.168.1.123:8080'; //+'&redirectUrl=http://192.168.1.23:8080'
+					window.location.href=this.baseUrl + '/mall/app/login/mall/wxweb?mallDomain='+this.mallDomain+'&redirectUrl=http://192.168.1.112:8080'; //+'&redirectUrl=http://192.168.1.23:8080'
 				}
 				// alert(this.isTransferPage)
 				// if(this.isTransferPage){
