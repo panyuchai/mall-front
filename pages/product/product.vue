@@ -61,7 +61,7 @@
 		</view>
 		<view class="product-list" @scroll="scroll" :scroll-top="scrollTop">
 			<!--商品列表-->
-			<view class="pro-item" @tap="linkToDetail(item.id)" v-for="(item,index) in productData" :key="index">
+			<view class="pro-item" @tap="linkToDetail(item.goodspoolId)" v-for="(item,index) in productData" :key="index">
 				<image :src="item.goodsMainimagepath" class="pro-img" mode="widthFix" />
 				<view class="pro-content">
 					<view class="pro-tit">{{item.goodsProductname}}</view>

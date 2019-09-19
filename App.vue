@@ -8,14 +8,6 @@
 		},
 		methods: {
 			...mapMutations("common", ['SET_BASEINFO', 'SET_USERIFNO', 'SET_UNICODE', 'SET_HASLOGIN', 'SET_TOKEN', 'SET_MALLTYPE', 'SET_MALLID', 'SET_MALLDOMAIN', 'SET_ISTRANSFERPAGE']),
-			// GetQueryString(name){
-			// 	debugger;
-			//      var reg = new RegExp('(^|&)' + name + '=([^&]*)(&|$)', 'i');
-			// 	 // var preR = window.location.hash;
-			// 	 // var r = preR.substr(1).match(reg);
-			//      var r = window.location.search.substr(1).match(reg);
-			//      if(r!=null)return  unescape(r[2]); return null;
-			// },
 			GetQueryString(name) {
 				var reg = new RegExp('(^|&)' + name + '=([^&]*)(&|$)', 'i');
 				var r = window.location.search.substr(1).match(reg);
@@ -24,21 +16,11 @@
 				}
 				return null;
 			},
-			// GetRequest() {
-			// 	debugger;
-			//    var url = location.hash; //获取url中"?"符后的字串
-			//    if (url.indexOf("?") != -1) {    //判断是否有参数
-			//       var str = url.substr(1); //从第一个字符开始 因为第0个是?号 获取所有除问号的所有符串
-			//       var strs = str.split("=");   //用等号进行分隔 （因为知道只有一个参数 所以直接用等号进分隔 如果有多个参数 要用&号分隔 再用等号进行分隔）
-			//       return strs[1];         //直接弹出第一个参数 （如果有多个参数 还要进行循环的）
-			//    }
-			// },
 			getMallDomain(){
 				let mallDomain = this.GetQueryString('mallDomain');
 				if(mallDomain){
 					this.SET_MALLDOMAIN(mallDomain);
 				}
-				alert(this.mallDomain)
 			},
 			checkMallType(){
 				this.$http.post('/mall/app/login/mall/shopmall/type', {

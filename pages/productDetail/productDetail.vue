@@ -562,10 +562,12 @@
 				}
 			},
 			getGoodsDetail(){
-				let goodsId=uni.getStorageSync('goodsId');
+				let goodsId=uni.getStorageSync('goodsId') || '',
+				    id=uni.getStorageSync('id') || '';
 				this.$http.post('/mall/app/goods/detail', {
 					...this.baseInfo,
-					goodsId: goodsId
+					goodsId: goodsId,
+					id: id
 				})
 				.then( res => {
 					// console.log(res);
@@ -586,7 +588,12 @@
 			...mapState('common', ['baseInfo', 'userInfo', 'hasLogin'])
 		},
 		onLoad: function(options) {
-			uni.setStorageSync('goodsId', options.goodsId);
+			if(options.goodsId){
+				uni.setStorageSync('goodsId', options.goodsId);
+			}
+			if(options.id){
+				uni.setStorageSync('id', options.id);
+			}
 			this.getGoodsDetail();
 			
 			let obj = {};

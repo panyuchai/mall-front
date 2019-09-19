@@ -144,12 +144,14 @@
 						if(res.result){
 							let mobilephone = res.result.mobilephone;
 							let loginname = res.result.loginname;
-							let {accountId, customerName, wechatName, customerSex, customerBirthday, customerImage, customerId} = res.result.customer;
-							this.SET_USERIFNO({accountId, customerName, wechatName, customerSex, customerBirthday,  customerImage, customerId});
+							let accountId = res.result.id;
+							let {customerName, wechatName, customerSex, customerBirthday, customerImage, customerId} = res.result.customer;
+							this.SET_USERIFNO({customerName, wechatName, customerSex, customerBirthday,  customerImage, customerId});
 							this.SET_USERIFNO({
 								...this.userInfo,
 								mobilephone: mobilephone,
-								loginname: loginname
+								loginname: loginname,
+								accountId: accountId
 							});
 							this.initPayNum();
 							this.initToReceivedNum();
