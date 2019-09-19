@@ -75,12 +75,13 @@
 			// 	})
 			// },
 			initData(){
-				if(uni.getStorageSync('isTransferPage')){
-					this.SET_ISTRANSFERPAGE(uni.getStorageSync('isTransferPage'));
-				}
-				if(uni.getStorageSync('mallDomain')){
-					this.SET_MALLDOMAIN(uni.getStorageSync('mallDomain'));
-				}
+				// if(uni.getStorageSync('isTransferPage')){
+				// 	this.SET_ISTRANSFERPAGE(uni.getStorageSync('isTransferPage'));
+				// }
+				// if(uni.getStorageSync('mallDomain')){
+				// 	this.SET_MALLDOMAIN(uni.getStorageSync('mallDomain'));
+				// }
+				// 
 				// alert(getStore({ name: 'hasLogin' }));
 				// if(getStore({ name: 'hasLogin' })){
 				// 	this.SET_HASLOGIN(getStore({ name: 'hasLogin' }));
@@ -157,14 +158,13 @@
 				};
 				if(urlPath && isTransferPage){
 					alert(urlPath+"---------------------");
-					window.location.href=this.baseUrl + '/mall/app/login/mall/wxweb?mallDomain='+this.mallDomain; //+'&redirectUrl=http://192.168.1.23:8080'
+					window.location.href=this.baseUrl + '/mall/app/login/mall/wxweb?mallDomain='+this.mallDomain+'&redirectUrl=http://192.168.1.112:8080'; //+'&redirectUrl=http://192.168.1.23:8080'
 				}
 				// alert(this.isTransferPage)
 				// if(this.isTransferPage){
 				// 	window.location.href=this.baseUrl + '/mall/app/login/mall/wxweb?mallDomain='+this.mallDomain+'&redirectUrl=http://192.168.1.123:8080'; //+'&redirectUrl=http://192.168.1.23:8080'
 				// 	debugger;
 				// }
-				
 			},
 			defaultWxLogin(){
 				uni.checkSession({
