@@ -111,7 +111,7 @@
             ...mapState("common", ['hasLogin', 'userInfo', 'baseInfo'])
         },
         methods: {
-            // ...mapMutations('common', ['SET_USERIFNO']),
+            ...mapMutations('common', ['SET_USERIFNO']),
             bindLogin() {
                 uni.navigateTo({
                     url: '../login/login',
@@ -137,16 +137,31 @@
 				})  
 			},
 			
-			// userInitData(){
-			// 	this.$http.post('/mall/app/account/info')
-			// 	.then( res => {
-			// 		console.log(res);
-			// 	})
-			// 	.catch( err => {
-			// 		console.log('user.vue-- info接口调用错误');
-			// 	})
-			// 	
-			// },
+			userInitData(){
+				this.$http.post('/mall/app/account/info')
+				.then( res => {
+					if(res.code == 0){
+						if(res.result){
+							let mobilephone = res.result.mobilephone;
+							let loginname = res.result.loginname;
+							let {accountId, customerName, wechatName, customerSex, customerBirthday, customerImage, customerId} = res.result.customer;
+							this.SET_USERIFNO({accountId, customerName, wechatName, customerSex, customerBirthday,  customerImage, customerId});
+							this.SET_USERIFNO({
+								...this.userInfo,
+								mobilephone: mobilephone,
+								loginname: loginname
+							});
+							this.initPayNum();
+							this.initToReceivedNum();
+						}
+					}else{
+						console.log('login.vue-- info接口调用失败');
+					}
+				})
+				.catch( err => {
+					console.log('login.vue-- info接口调用错误');
+				})
+			},
 			initPayNum(){
 				this.$http.post('/mall/app/order/count', {
 					...this.baseInfo,
@@ -179,9 +194,11 @@
 			}
         },
 		onLoad: function(){
-			// this.userInitData();
-			this.initPayNum();
-			this.initToReceivedNum();
+			this.userInitData();
+			debugger;
+			
+			// this.initPayNum();
+			// this.initToReceivedNum();
 		}
     }
 </script>

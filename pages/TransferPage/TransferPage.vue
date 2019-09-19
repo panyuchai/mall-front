@@ -31,7 +31,7 @@
 						config.header['Authorization'] = 'Bearer ' + uni.getStorageSync('token');
 						return config;
 					});
-					this.setUserInfo();
+					// this.setUserInfo();
 					if(uni.getStorageSync('referUrl')){
 						window.location.href=uni.getStorageSync('referUrl');
 						uni.removeStorageSync('referUrl');
@@ -55,7 +55,7 @@
 					// uni.switchTab({
 					// 	url: '/pages/index/index'
 					// });
-					// window.location.href=this.transferUrl + '?mallDomain='+options.mallDomain;
+					window.location.href=this.transferUrl + '?mallDomain='+options.mallDomain;
 					// window.location.href=this.transferUrl + '?mallDomain=yyy';
 					this.SET_ISTRANSFERPAGE(false)
 				}
