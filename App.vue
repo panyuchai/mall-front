@@ -155,9 +155,13 @@
 				}
 				let reg = /\/TransferPage\/TransferPage/ig;
 				let urlPath = !(reg.test(options.path));
-				if(urlPath){
+				let isTransferPage = uni.getStorageSync('isTransferPage')
+				if(isTransferPage === ''){
+					isTransferPage = true;
+				}
+				if(urlPath && isTransferPage){
 					alert(urlPath+"---------------------");
-					window.location.href=this.baseUrl + '/mall/app/login/mall/wxweb?mallDomain='+this.mallDomain+'&redirectUrl=http://192.168.1.10:8888'; //+'&redirectUrl=http://192.168.1.23:8080'
+					window.location.href=this.baseUrl + '/mall/app/login/mall/wxweb?mallDomain='+this.mallDomain; //+'&redirectUrl=http://192.168.1.23:8080'
 				}
 				// alert(this.isTransferPage)
 				// if(this.isTransferPage){

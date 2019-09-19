@@ -17,7 +17,6 @@ const state = {
   // accountId:'',
   forcedLogin: false,
   firstLoad: true,
-  isTransferPage: true,
   // hasLogin: getStore({ name: 'hasLogin' }) && getStore({ name: 'hasLogin' }).hasLogin || false,
   // token: getStore({ name: 'token' }) && getStore({ name: 'token' }).token || '',
   // uniCode: getStore({ name: 'uniCode' }) && getStore({ name: 'uniCode' }).uniCode || '',

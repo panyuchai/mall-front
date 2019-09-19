@@ -45,7 +45,8 @@
 						window.location.href=this.transferUrl + '?mallDomain='+options.mallDomain;
 					}
 				}else{
-					uni.setStorageSync('openid',options.openid)
+					uni.setStorageSync('openid',options.openid);
+					
 					// uni.navigateTo({
 					// 	url: '/pages/login/login?mallDomain=yyy'
 					// })
@@ -55,9 +56,9 @@
 					// uni.switchTab({
 					// 	url: '/pages/index/index'
 					// });
+					uni.setStorageSync('isTransferPage', false);
 					window.location.href=this.transferUrl + '?mallDomain='+options.mallDomain;
 					// window.location.href=this.transferUrl + '?mallDomain=yyy';
-					this.SET_ISTRANSFERPAGE(false)
 				}
 				// this.SET_FIRSTLOAD(false);
 			},
