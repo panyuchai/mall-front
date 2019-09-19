@@ -50,7 +50,7 @@
 		methods: {
 			linkToDetail(e){
 				uni.navigateTo({
-					url: '/pages/productDetail/productDetail?id=' + e
+					url: '/pages/productDetail/productDetail?goodsId=' + e
 				});
 			}
 		}
