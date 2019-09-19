@@ -563,7 +563,10 @@
 			},
 			getGoodsDetail(){
 				let goodsId=uni.getStorageSync('goodsId');
-				this.$http.post('/mall/app/goods/detail', goodsId)
+				this.$http.post('/mall/app/goods/detail', {
+					...this.baseInfo,
+					goodsId: goodsId
+				})
 				.then( res => {
 					// console.log(res);
 					if(res.code == 0){
@@ -583,7 +586,7 @@
 			...mapState('common', ['baseInfo', 'userInfo', 'hasLogin'])
 		},
 		onLoad: function(options) {
-			uni.setStorageSync('goodsId', options);
+			uni.setStorageSync('goodsId', options.goodsId);
 			this.getGoodsDetail();
 			
 			let obj = {};

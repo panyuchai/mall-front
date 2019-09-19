@@ -4,7 +4,7 @@
 	import { test } from './api/api.js'
 	export default {
 		computed: {
-			...mapState("common", ['uniCode', 'mallDomain', 'baseInfo', 'hasLogin', 'firstLoad', 'baseUrl', 'isTransferPage'])
+			...mapState("common", ['uniCode', 'mallDomain', 'transferUrl', 'baseInfo', 'hasLogin', 'firstLoad', 'baseUrl', 'isTransferPage'])
 		},
 		methods: {
 			...mapMutations("common", ['SET_BASEINFO', 'SET_USERIFNO', 'SET_UNICODE', 'SET_HASLOGIN', 'SET_TOKEN', 'SET_MALLTYPE', 'SET_MALLID', 'SET_MALLDOMAIN', 'SET_ISTRANSFERPAGE']),
@@ -157,7 +157,7 @@
 					isTransferPage = true;
 				}
 				if(urlPath && isTransferPage){
-					window.location.href=this.baseUrl + '/mall/app/login/mall/wxweb?mallDomain='+this.mallDomain; // +'&redirectUrl=http://192.168.1.112:8080'
+					window.location.href=this.baseUrl + '/mall/app/login/mall/wxweb?mallDomain='+this.mallDomain+'&redirectUrl='+this.transferUrl; // +'&redirectUrl=http://192.168.1.112:8080'
 				}
 				if(isTransferPage === false){
 					uni.removeStorageSync('isTransferPage');
