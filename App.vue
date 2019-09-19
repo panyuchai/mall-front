@@ -17,7 +17,6 @@
 			//      if(r!=null)return  unescape(r[2]); return null;
 			// },
 			GetQueryString(name) {
-				debugger;
 				var reg = new RegExp('(^|&)' + name + '=([^&]*)(&|$)', 'i');
 				var r = window.location.search.substr(1).match(reg);
 				if (r != null) {
@@ -35,7 +34,6 @@
 			//    }
 			// },
 			getMallDomain(){
-				debugger;
 				let mallDomain = this.GetQueryString('mallDomain');
 				if(mallDomain){
 					this.SET_MALLDOMAIN(mallDomain);
@@ -43,7 +41,6 @@
 				alert(this.mallDomain)
 			},
 			checkMallType(){
-				debugger;
 				this.$http.post('/mall/app/login/mall/shopmall/type', {
 					mallDomain: this.mallDomain
 				})
@@ -78,7 +75,6 @@
 			// 	})
 			// },
 			initData(){
-				debugger;
 				if(uni.getStorageSync('isTransferPage')){
 					this.SET_ISTRANSFERPAGE(uni.getStorageSync('isTransferPage'));
 				}
@@ -155,10 +151,10 @@
 				}
 				let reg = /\/TransferPage\/TransferPage/ig;
 				let urlPath = !(reg.test(options.path));
-				let isTransferPage = uni.getStorageSync('isTransferPage')
+				let isTransferPage = uni.getStorageSync('isTransferPage');
 				if(isTransferPage === ''){
 					isTransferPage = true;
-				}
+				};
 				if(urlPath && isTransferPage){
 					alert(urlPath+"---------------------");
 					window.location.href=this.baseUrl + '/mall/app/login/mall/wxweb?mallDomain='+this.mallDomain; //+'&redirectUrl=http://192.168.1.23:8080'
