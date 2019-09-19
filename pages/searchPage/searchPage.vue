@@ -27,7 +27,7 @@
 			</view>
 			<view class="tui-history-content">
 				<block v-for="(item,index) in historyData" :key="index">
-					<tui-tag class="default-tag" type="gray" @tap="chooseKeywords(item.keyword)" shape="circle">{{item.keyword}}</tui-tag>
+					<tui-tag class="default-tag" type="gray" @tap="chooseKeywords(item)" shape="circle">{{item}}</tui-tag>
 				</block>
 			</view>
 		</view>
@@ -116,10 +116,15 @@
 				}
 			},
 			unique(arr) {
-			    var obj = {};
-			    return arr.filter(function(item, index, arr){
-			        return obj.hasOwnProperty(typeof item + item) ? false : (obj[typeof item + item] = true)
-			    })
+			    // var obj = {};
+			    // return arr.filter(function(item, index, arr){
+			    //     return obj.hasOwnProperty(typeof item + item) ? false : (obj[typeof item + item] = true)
+			    // })
+				var list = [];
+				arr.map(item => {
+					list.push(item.keyword);
+				});
+				return [...new Set(list)];
 			},
 			getHistoryData(){
 				this.$http.post('/mall/app/search/history/query', {
