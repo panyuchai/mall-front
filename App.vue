@@ -157,7 +157,7 @@
 					isTransferPage = true;
 				}
 				if(urlPath && isTransferPage){
-					window.location.href=this.baseUrl + '/mall/app/login/mall/wxweb?mallDomain='+this.mallDomain; //+'&redirectUrl=http://192.168.1.23:8080'
+					window.location.href=this.baseUrl + '/mall/app/login/mall/wxweb?mallDomain='+this.mallDomain; // +'&redirectUrl=http://192.168.1.112:8080'
 				}
 				if(isTransferPage === false){
 					uni.removeStorageSync('isTransferPage');
