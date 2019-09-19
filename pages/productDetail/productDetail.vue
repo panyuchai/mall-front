@@ -52,7 +52,12 @@
 				<view class="pro-pricebox tui-padding">
 					<view class="pro-price">
 						<view class="sale-price">
-							￥<text class="num">{{goodsInfo.salePrice}}</text>
+							<view class="saleMoney" v-if="goodsInfo.salePrice">
+								<text class="money">{{goodsInfo.salePrice}}</text>元
+							</view>
+							<view class="salePoints" v-if="goodsInfo.credits">
+								+<text class="points">{{goodsInfo.credits}}</text>分
+							</view>
 						</view>
 						<!-- <view class="original-price">
 							<text class="line-through">￥199.00</text>
@@ -562,12 +567,10 @@
 				}
 			},
 			getGoodsDetail(){
-				let goodsId=uni.getStorageSync('goodsId') || '',
-				    id=uni.getStorageSync('id') || '';
+				let goodsId=uni.getStorageSync('goodsId') || '';
 				this.$http.post('/mall/app/goods/detail', {
 					...this.baseInfo,
-					goodsId: goodsId,
-					id: id
+					goodsId: goodsId
 				})
 				.then( res => {
 					// console.log(res);
@@ -588,12 +591,7 @@
 			...mapState('common', ['baseInfo', 'userInfo', 'hasLogin'])
 		},
 		onLoad: function(options) {
-			if(options.goodsId){
-				uni.setStorageSync('goodsId', options.goodsId);
-			}
-			if(options.id){
-				uni.setStorageSync('id', options.id);
-			}
+			uni.setStorageSync('goodsId', options.goodsId);
 			this.getGoodsDetail();
 			
 			let obj = {};
@@ -909,10 +907,22 @@
 			.sale-price{
 				font-size: 32rpx;
 				color: #E11F17;
-				font-weight: 600;
 				padding-right: 10px;
-				.num{
-					font-size: 48rpx;
+				display: flex;
+				flex-direction:row;
+				justify-content : flex-start;
+				align-items : flex-end;
+				.saleMoney{
+					font-weight: 600;
+					.money{
+						font-size: 48upx;
+					}
+				}
+				.salePoints{
+					padding-left: 10upx;
+					.points{
+						font-size: 35upx;
+					}
 				}
 			}
 			.original-price{

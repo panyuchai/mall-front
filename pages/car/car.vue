@@ -24,7 +24,7 @@
 								</view>
 							</view>
 							<!-- 商品信息 -->
-							<view class="goods-info" @tap="linkToDetail(row.mallGoodsId)">
+							<view class="goods-info" @tap="linkToDetail(row.goodsId)">
 								<view class="img">
 									<image :src="row.goodsMainimagepath"></image>
 								</view>
@@ -206,7 +206,7 @@
 			//商品跳转
 			linkToDetail(e){
 				uni.navigateTo({
-					url: '/pages/productDetail/productDetail?id=' + e
+					url: '/pages/productDetail/productDetail?goodsId=' + e
 				});
 			},
 			//跳转确认订单页面
