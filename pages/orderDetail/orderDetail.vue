@@ -9,7 +9,7 @@
 					</view>
 					<view class="text">
 						<!-- 快件由快递员张成撒配送中，请注意保持联络(联系电话：1928333225) -->
-						{{expressData.data.context}}
+						{{expressData.data && expressData.data.context}}
 					</view>
 					<text class="iconfont icon-arrowRight icon-arrow"></text>
 				</view>
@@ -79,7 +79,12 @@
 						应付总金额
 					</view>
 					<view class="_right">
-						¥{{initData.orderlistAllprice}}
+						<view class="salePrice">
+							¥{{initData.orderlistAllprice}}
+						</view>
+						<view class="saleAdd">
+							
+						</view>
 					</view>
 				</view>
 				<view class="text">
@@ -111,7 +116,7 @@
 						下单时间
 					</view>
 					<view class="_right">
-						2019-03-24<text class="space">5:28</text>
+						{{initData.transOrderlistTime}}<!-- <text class="space">5:28</text> -->
 					</view>
 				</view>
 				<view class="text">
@@ -119,7 +124,7 @@
 						付款时间
 					</view>
 					<view class="_right">
-						2019-03-24<text class="space">5:28</text>
+						{{initData.transPayTime}}
 					</view>
 				</view>
 			</view>
@@ -281,6 +286,11 @@
 					console.log(err);
 				})
 			},
+			transformTime(time){
+				let moment = require('moment');
+				let day = moment(time, moment.ISO_8601);
+				return day.format("YYYY-MM-DD  h:mm:ss") || '';
+			},
 			loadData(orderId){
 				this.$http.post('/mall/app/order/detail', {
 					...this.baseInfo,
@@ -290,6 +300,8 @@
 				.then( res => {
 					if(res.code == 0){
 						this.initData=res.result;
+						this.initData.transOrderlistTime=this.transformTime(res.result.orderlistTime);
+						this.initData.transPayTime=this.transformTime(res.result.payTime);
 					}
 				})
 				.catch( err => {

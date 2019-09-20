@@ -239,7 +239,7 @@
 		</view>
 
 		<!--底部操作栏-->
-		<view class="tui-operation">
+		<view class="tui-operation" v-if='goodsInfo.isOnsale'>
 			<view class="tui-operation-left tui-col-2">
 				<!-- <view class="tui-operation-item" hover-class="opcity" :hover-stay-time="150">
 					<tui-icon name="kefu" :size="22" color='#333'></tui-icon>
@@ -369,7 +369,7 @@
 						
 					</view>
 				</scroll-view>
-				<view class="tui-operation tui-right-flex popup-btn">
+				<view class="tui-operation tui-right-flex popup-btn" v-if='goodsInfo.isOnsale'>
 					<view class="operation-btn style-yellow" @click="handleAddCart(goodsInfo.id)">加入购物车</view>
 					<view class="operation-btn style-red" @click="linkToPayment(goodsInfo.id)">立即购买</view>
 				</view>

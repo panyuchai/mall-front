@@ -70,7 +70,13 @@
 							{{item.goodsTitle}}
 						</view>
 						<view class="pro-price">
-							<text class="sale-price"><text class="unit">￥</text>{{item.salePrice}}</text>
+							<text class="sale-price"><text class="unit">￥</text></text>
+							<view class="saleMoney" v-if="item.salePrice">
+								<text class="money">{{item.salePrice}}</text>元
+							</view>
+							<view class="salePoints" v-if="item.credits">
+								+<text class="points">{{item.credits}}</text>分
+							</view>
 						</view>
 					</view>
 				</view>
@@ -487,13 +493,27 @@
 	
 	.pro-price {
 		padding-top: 14upx;
-	}
-	
-	.sale-price {
 		font-size: 32upx;
 		color: #ea1500;
-		.unit{
-			font-size: 24rpx;
+		display: flex;
+		flex-direction:row;
+		justify-content : flex-start;
+		align-items : flex-end;
+		.sale-price {
+			.unit{
+				font-size: 24upx;
+			}
+		}
+		.saleMoney{
+			.money{
+				font-size: 32upx;
+			}
+		}
+		.salePoints{
+			padding-left: 10upx;
+			.points{
+				font-size: 28upx;
+			}
 		}
 	}
 	.tag{
