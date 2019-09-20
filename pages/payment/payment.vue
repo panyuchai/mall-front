@@ -27,8 +27,17 @@
 					<view class="title clamp">{{row.goodsProductname}}</view>
 					<view class="spec">{{row.goodsTitle}}</view>
 					<view class="price-box">
-						<text class="price">￥<text class="num">{{row.salePrice}}</text></text>
-						<text class="number">x {{row.goodsCount}}</text>
+						<view class="priceInfo">
+							<!-- ￥<text class="num">{{row.salePrice}}</text> -->
+							<view class="salePrice" v-if="row.salePrice">
+								¥<text class="price">{{row.salePrice}}</text>
+							</view>
+							<view class="and" v-if="row.salePrice && row.credits">+</view>
+							<view class="salePoints" v-if="row.credits">
+								<text class="points">{{row.credits}}</text>分
+							</view>
+						</view>
+						<view class="number">x {{row.goodsCount}}</view>
 					</view>
 				</view>
 			</view>
@@ -122,6 +131,14 @@
 				</view>
 				<view class="cell-tip">
 					<text class="red">¥<text class="num">{{balancePay}}</text></text>
+				</view>
+			</view>
+			<view class="yt-list-cell" v-if='payData.credits'>
+				<view class="cell-tit">
+					积分支付
+				</view>
+				<view class="cell-tip">
+					<text class="red"><text class="num">{{payData.credits}}</text>分</text>
 				</view>
 			</view>
 			<view class="yt-list-cell">
@@ -733,10 +750,14 @@
 				bottom: -6upx;
 				right: 0;
 				font-size: 24upx;
-				.price {
+				.priceInfo{
 					color: #E93548;
-					.num{
-						font-size: 32upx;
+					display: flex;
+					flex-direction: row;
+					justify-content : flex-start;
+					align-items : flex-end;
+					.and{
+						padding-left: 10upx;
 					}
 				}
 				.number{
