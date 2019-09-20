@@ -476,7 +476,7 @@
 					addressId: this.address.addressId,
 					balance: this.balancePay,
 					isBalance: this.balanceType,
-					credits: 0,
+					credits: this.payData.credits,
 					expressFee: this.payData.express.fee,
 					goodsList: this.goodsList,
 					payPrice: this.payPrice,

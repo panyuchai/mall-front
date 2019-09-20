@@ -36,22 +36,15 @@
 				if(e.type == 3){
 					uni.navigateTo({
 						url: '/pages/productDetail/productDetail?goodsId='+e.value
-					})
+					});
 				}else if(e.type == 4){
 					uni.switchTab({
 						url: '/pages/product/product'
-					})
+					});
 				}else if(e.type == 6){
 					window.location.href=e.value
 				}else if(e.type == 7){
-					this.SET_BASEINFO({
-						...this.baseInfo,
-						mallId: res.result.mallId
-					});
-					this.SET_MALLID(res.result.mallId);
-					uni.switchTab({
-						url: '/pages/index/index'
-					})
+					this.$emit('reLoadIndex',e.value);
 				}
 			},
 			//轮播图指示器

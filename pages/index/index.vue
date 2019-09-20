@@ -7,7 +7,7 @@
 				<single-product></single-product>
 				<goods v-if="item.type==='204'" :options="item.data"></goods> -->
 			<search v-if="item.type === '001'" :options="item.data"></search>
-			<banner v-if="item.type === '003'" :options="item.data"></banner>
+			<banner v-if="item.type === '003'" :options="item.data" @reLoadIndex='getDecoration'></banner>
 			<!-- <category-list></category-list> -->
 			<lines v-if="item.type === '004'" :options="item.data"></lines>
 			<!-- 007 积分展示 -->
@@ -80,6 +80,16 @@
 			},
 			initData(){
 				this.$http.post('/mall/app/backsite/decoration/homepage/'+this.baseInfo.mallId)
+				.then(res => {
+					this.templateData=res.content;
+				})
+				.catch(err => {
+					console.log(err);
+				})
+			},
+			getDecoration(decorationId){
+				console.log(decorationId)
+				this.$http.post('/mall/app/backsite/decoration/'+decorationId)
 				.then(res => {
 					this.templateData=res.content;
 				})

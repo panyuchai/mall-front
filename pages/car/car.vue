@@ -71,7 +71,15 @@
 					</view>
 					<view class="delBtn" @tap="deleteList" v-if="selectedList.length>0">删除</view>
 					<view class="settlement">
-						<view class="sum">价格:<view class="money">{{sumPrice}}元</view></view>
+						<view class="sum">
+							<view class='_left'>
+								合计：
+							</view>
+							<view class='_right'>
+								<view class="money" v-if="sumPrice">{{sumPrice}}元</view>
+								<view class="points" v-if='sumPoints'>{{sumPoints}}分</view>
+							</view>
+						</view>
 						<view class="btn" @tap="linkToPayment">去结算</view>
 					</view>
 				</view>
@@ -94,7 +102,8 @@
 	export default {
 		data() {
 			return {
-				sumPrice:'0.00',
+				sumPrice:0,
+				sumPoints:0,
 				headerPosition:"fixed",
 				headerTop:null,
 				statusTop:null,
@@ -371,13 +380,16 @@
 			// 合计
 			sum(e,index){
 				this.sumPrice=0;
+				this.sumPoints=0;
 				let len = this.goodsList.length;
 				for(let i=0;i<len;i++){
 					if(this.goodsList[i].checked) {
 						if(e && i==index){
 							this.sumPrice = this.sumPrice + (e.detail.value*this.goodsList[i].salePrice);
+							this.sumPoints = this.sumPoints + (e.detail.value*this.goodsList[i].credits);
 						}else{
 							this.sumPrice = this.sumPrice + (this.goodsList[i].goodsCount*this.goodsList[i].salePrice);
+							this.sumPoints = this.sumPoints + (this.goodsList[i].goodsCount*this.goodsList[i].credits);
 						}
 					}
 				}
@@ -789,11 +801,18 @@
 				font-size: 28upx;
 				margin-right: 10upx;
 				display: flex;
-				justify-content: flex-end;
-				color: #2F2F2F;
-				.money{
+				justify-content: space-between;
+				flex-direction: row;
+				align-items: center;
+				padding: 0 5upx 0 10upx;
+				._left{
+					display: flex;
+					text-align: right;
+					flex-direction: column;
+				}
+				._right{
 					color: #E51700;
-					padding: 0 5upx 0 10upx;
+					text-align: right;
 				}
 			}
 			.btn{
