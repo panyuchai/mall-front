@@ -41,11 +41,17 @@
 						{{good.goodsProductname}}
 					</view>
 					<view class="num">
-						<text>{{good.goodsRelationname}}</text>
+						<text>{{good.goodsTitle}}</text>
 					</view>
 					<view class="con">
-						<view class="_left">
-							¥<text class="price">{{good.goodsRelprice}}</text>
+						<view class="_left mode_price">
+							<view class="salePrice" v-if="good.goodsRelprice">
+								¥<text class="price">{{good.goodsRelprice}}</text>
+							</view>
+							<view v-if="good.goodsRelprice && good.credits">+</view>
+							<view class="salePoints" v-if="good.credits">
+								<text class="points">{{good.credits}}</text>分
+							</view>
 						</view>
 						<view class="_right">
 							<text class="num">x{{good.goodsCount}}</text>
@@ -78,21 +84,22 @@
 					<view class="_left">
 						应付总金额
 					</view>
-					<view class="_right">
-						<view class="salePrice">
-							¥{{initData.orderlistAllprice}}
+					<view class="_right mode_price">
+						<view class="salePrice" v-if="initData.orderlistAllprice">
+							¥<text class="price">{{initData.orderlistAllprice}}</text>
 						</view>
-						<view class="saleAdd">
-							
+						<view class="and" v-if="initData.orderlistAllprice && initData.credits">+</view>
+						<view class="salePoints" v-if="initData.credits">
+							<text class="points">{{initData.credits}}</text>分
 						</view>
 					</view>
 				</view>
-				<view class="text">
+				<view class="text" v-if="initData.rechargepay">
 					<view class="_left">
 						余额支付
 					</view>
 					<view class="_right">
-						¥{{initData.rechargepay }}
+						¥{{initData.rechargepay}}
 					</view>
 				</view>
 				<view class="text">
@@ -103,11 +110,27 @@
 						¥0.00
 					</view>
 				</view>
+				<view class="text" v-if="initData.credits">
+					<view class="_left">
+						积分支付
+					</view>
+					<view class="_right">
+						{{initData.credits}}分
+					</view>
+				</view>
+				<view class="text" v-if="initData.payPrice">
+					<view class="_left">
+						微信支付
+					</view>
+					<view class="_right">
+						¥{{initData.payPrice}}
+					</view>
+				</view>
 			</view>
-			<view class="bd">
+			<!-- <view class="bd">
 				实付金额
 				<text class="num">¥{{initData.payPrice}}</text>
-			</view>
+			</view> -->
 		</view>
 		<view class="list-box mt-20">
 			<view class="hd">
@@ -116,7 +139,7 @@
 						下单时间
 					</view>
 					<view class="_right">
-						{{initData.transOrderlistTime}}<!-- <text class="space">5:28</text> -->
+						{{initData.orderlistTime}}<!-- <text class="space">5:28</text> -->
 					</view>
 				</view>
 				<view class="text">
@@ -124,7 +147,7 @@
 						付款时间
 					</view>
 					<view class="_right">
-						{{initData.transPayTime}}
+						{{initData.payTime}}
 					</view>
 				</view>
 			</view>
@@ -277,7 +300,7 @@
 				})
 				.then( res => {
 					if(res.code == 0){
-						this.expressData=JSON.parse(res.result.result).showapi_res_body;
+						this.expressData=JSON.parse(res.result.express).showapi_res_body;
 						this.expressData.statusName=this.transformStatus(this.expressData.status);
 						this.expressData.data=this.expressData.data[0];
 					}
@@ -286,11 +309,11 @@
 					console.log(err);
 				})
 			},
-			transformTime(time){
-				let moment = require('moment');
-				let day = moment(time, moment.ISO_8601);
-				return day.format("YYYY-MM-DD  h:mm:ss") || '';
-			},
+			// transformTime(time){
+			// 	let moment = require('moment');
+			// 	let day = moment(time, moment.ISO_8601);
+			// 	return day.format("YYYY-MM-DD  h:mm:ss") || '';
+			// },
 			loadData(orderId){
 				this.$http.post('/mall/app/order/detail', {
 					...this.baseInfo,
@@ -300,8 +323,8 @@
 				.then( res => {
 					if(res.code == 0){
 						this.initData=res.result;
-						this.initData.transOrderlistTime=this.transformTime(res.result.orderlistTime);
-						this.initData.transPayTime=this.transformTime(res.result.payTime);
+						// this.initData.transOrderlistTime=this.transformTime(res.result.orderlistTime);
+						// this.initData.transPayTime=this.transformTime(res.result.payTime);
 					}
 				})
 				.catch( err => {
@@ -326,6 +349,15 @@
 	}
 	.mt-20{
 		margin-top: 20upx;
+	}
+	.mode_price{
+		display: flex;
+		flex-direction:row;
+		justify-content : flex-start;
+		align-items : flex-end;
+		.and{
+			padding-left: 10upx;
+		}
 	}
 	.info-mode{
 		background: #ffffff;
@@ -427,6 +459,7 @@
 			}
 			.info{
 				flex: 1;
+				position: relative;
 				.tit{
 					font-size: 28upx;
 					color: #2F2F2F;
@@ -443,6 +476,10 @@
 					margin-top: 4upx;
 				}
 				.con{
+					// position: absolute;
+					// left: 0;
+					// right: 0;
+					// bottom: 15upx;
 					display: flex;
 					justify-content: space-between;
 					align-items: center;
@@ -450,8 +487,15 @@
 					._left{
 						font-size: 24upx;
 						color: #E93548;
-						.price{
-							font-size: 32upx;
+						.salePrice{
+							.price{
+								font-size: 32upx;
+							}
+						}
+						.salePoints{
+							.points{
+								font-size: 28upx;
+							}
 						}
 					}
 					._right{
@@ -502,29 +546,29 @@
 				}
 			}
 		}
-		.bd{
-			position: relative;
-			padding: 20upx 0;
-			display: flex;
-			justify-content: flex-end;
-			align-items: center;
-			font-size: 28upx;
-			color: #333333;
-			&:before{
-				content: '';
-				position: absolute;
-				left: 0;
-				right: 0;
-				top: 0;
-				height: 1px;
-				background: #E8E8E8;
-			}
-			.num{
-				font-size: 32upx;
-				color: #E93548;
-				padding-left: 20upx;
-			}
-		}
+		// .bd{
+		// 	position: relative;
+		// 	padding: 20upx 0;
+		// 	display: flex;
+		// 	justify-content: flex-end;
+		// 	align-items: center;
+		// 	font-size: 28upx;
+		// 	color: #333333;
+		// 	&:before{
+		// 		content: '';
+		// 		position: absolute;
+		// 		left: 0;
+		// 		right: 0;
+		// 		top: 0;
+		// 		height: 1px;
+		// 		background: #E8E8E8;
+		// 	}
+		// 	.num{
+		// 		font-size: 32upx;
+		// 		color: #E93548;
+		// 		padding-left: 20upx;
+		// 	}
+		// }
 	}
 	.action-box{
 		position: fixed;

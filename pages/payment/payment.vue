@@ -269,9 +269,9 @@
 							})
 							uni.removeStorageSync('chooseAddress');
 							setTimeout(function(){
-								uni.reLaunch({
-								    url: '/pages/order/order'
-								});
+								uni.redirectTo({
+									url: '/pages/orderDetail/orderDetail?orderId='+res.result.orderId
+								})
 							}, 1000)
 						}else{
 							this.$http.post('/mall/app/order/submit', {
@@ -363,15 +363,16 @@
 				})
 				.then( res => {
 					if(res.result && res.result.orderState == 1){
+						console.log(res);
 						uni.showToast({
 							icon: 'none',
 							title: '订单提交成功'
 						})
 						uni.removeStorageSync('chooseAddress');
 						setTimeout(function(){
-							uni.reLaunch({
-							    url: '/pages/order/order'
-							});
+							uni.redirectTo({
+								url: '/pages/orderDetail/orderDetail?orderId='+res.result.orderId
+							})
 						}, 1000)
 					}else{
 						uni.setStorageSync('PAYMENT_ORDER_INFO', JSON.stringify(data));
@@ -414,15 +415,16 @@
 				})
 				.then( res => {
 					if(res.result.orderState == 1){
+						console.log(res);
 						uni.showToast({
 							icon: 'none',
 							title: '订单提交成功'
 						})
 						uni.removeStorageSync('chooseAddress');
 						setTimeout(function(){
-							uni.reLaunch({
-							    url: '/pages/order/order'
-							});
+							uni.redirectTo({
+								url: '/pages/orderDetail/orderDetail?orderId='+res.result.orderId
+							})
 						}, 1000)
 					}else{
 						this.$http.post('/mall/app/order/submit', {
@@ -546,6 +548,8 @@
 					if(res.code == 0){
 						if(!res.result.address){
 							this.hasAddress=false;
+						}else{
+							this.hasAddress=true;
 						}
 						this.payData=res.result;
 						this.address=res.result.address || {};

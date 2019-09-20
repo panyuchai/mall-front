@@ -17,7 +17,9 @@
 </template>
 
 <script>
-	
+	import {
+		mapMutations
+	} from 'vuex';
 	export default {
 		data() {
 			return {
@@ -28,9 +30,29 @@
 			options: Object
 		},
 		methods: {
+			...mapMutations('common', ['SET_BASEINFO', 'SET_MALLID']),
 			//轮播图跳转
 			toSwiper(e) {
-				uni.showToast({ title: e.src, icon: 'none' });
+				if(e.type == 3){
+					uni.navigateTo({
+						url: '/pages/productDetail/productDetail?goodsId='+e.value
+					})
+				}else if(e.type == 4){
+					uni.switchTab({
+						url: '/pages/product/product'
+					})
+				}else if(e.type == 6){
+					window.location.href=e.value
+				}else if(e.type == 7){
+					this.SET_BASEINFO({
+						...this.baseInfo,
+						mallId: res.result.mallId
+					});
+					this.SET_MALLID(res.result.mallId);
+					uni.switchTab({
+						url: '/pages/index/index'
+					})
+				}
 			},
 			//轮播图指示器
 			swiperChange(event) {

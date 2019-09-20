@@ -1,6 +1,6 @@
 <template>
 	<view class="content">
-		<step :state="expressData.status" :datas="expressData.data" :deleveryNum="expressData.mailNo"></step>
+		<step :state="expressData.status" :datas="expressData.data" :deleveryNum="deleveryNum"></step>
 	</view>
 </template>
 
@@ -16,6 +16,7 @@ export default {
 	data() {
 		return {
 			expressData: {},
+			deleveryNum: ''
 		};
 	},
 	methods: {
@@ -27,7 +28,8 @@ export default {
 			})
 			.then( res => {
 				if(res.code == 0){
-					this.expressData=JSON.parse(res.result.result).showapi_res_body;
+					this.expressData=JSON.parse(res.result.express).showapi_res_body;
+					this.deleveryNum=res.result.orderNo;
 				}
 			})
 			.catch( err => {

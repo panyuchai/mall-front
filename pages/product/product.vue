@@ -70,7 +70,7 @@
 							{{item.goodsTitle}}
 						</view>
 						<view class="pro-price">
-							<text class="sale-price"><text class="unit">￥</text></text>
+							<text class="salePrice"><text class="unit">￥</text></text>
 							<view class="saleMoney" v-if="item.salePrice">
 								<text class="money">{{item.salePrice}}</text>元
 							</view>
@@ -499,7 +499,7 @@
 		flex-direction:row;
 		justify-content : flex-start;
 		align-items : flex-end;
-		.sale-price {
+		.saleprice {
 			.unit{
 				font-size: 24upx;
 			}

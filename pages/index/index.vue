@@ -82,7 +82,6 @@
 				this.$http.post('/mall/app/backsite/decoration/homepage/'+this.baseInfo.mallId)
 				.then(res => {
 					this.templateData=res.content;
-					console.log(this.templateData)
 				})
 				.catch(err => {
 					console.log(err);

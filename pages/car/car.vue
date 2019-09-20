@@ -32,9 +32,13 @@
 									<view class="title">{{row.goodsProductname}}</view>
 									<view class="spec">{{row.goodsTitle}}</view>
 									<view class="price-number">
-										<view class="price">
-											<view class="sale-price">
-												￥<text class="num">{{row.salePrice}}</text>
+										<view class="sale-info">
+											<view class="sale-price" v-if="row.salePrice">
+												￥<text class="price">{{row.salePrice}}</text>
+											</view>
+											<view class="and" v-if="row.salePrice && row.credits">+</view>
+											<view class="sale-points" v-if="row.credits">
+												<text class="points">{{row.credits}}</text>分
 											</view>
 											<!-- <view class="factory-price">
 												￥{{row.price}}
@@ -683,23 +687,33 @@
 							align-items: flex-end;
 							font-size: 28upx;
 							height: 60upx;
-							.price{
-								display: flex;
-								// justify-content: flex-start;
+							.sale-info{
 								line-height: 40rpx;
+								color: #E93548;
+								display: flex;
+								flex-direction:row;
+								justify-content : flex-start;
+								align-items : flex-end;
 								.sale-price{
 									font-size: 24rpx;
-									color: #E93548;
-									.num{
+									.price{
 										font-size: 32rpx;
 									}
 								}
-								.factory-price{
-									padding-left: 15rpx;
-									font-size: 24rpx;
-									color: #B3B3B3;
-									text-decoration: line-through;
+								.and{
+									padding-left: 10upx;
 								}
+								.sale-points{
+									.points{
+										font-size: 28rpx;
+									}
+								}
+								// .factory-price{
+								// 	padding-left: 15rpx;
+								// 	font-size: 24rpx;
+								// 	color: #B3B3B3;
+								// 	text-decoration: line-through;
+								// }
 							}
 							.number{
 								display: flex;
