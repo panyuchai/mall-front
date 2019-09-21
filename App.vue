@@ -223,6 +223,8 @@
 			}
 		},
 		onLaunch: function(options) {
+			alert('566666666')
+			debugger;
 			console.log(options);
 			this.initData();
 			this.getMallDomain();
