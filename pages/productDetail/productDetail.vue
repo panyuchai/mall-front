@@ -332,10 +332,10 @@
 								{{item}}
 							</view>
 						</view> -->
-						<view v-for="attrs in goodsInfo.attrs">
+						<view v-for="(attrs,j) in goodsInfo.attrs">
 							<view class="tui-bold tui-attr-title">{{attrs.attributeName}}</view>
 							<view class="tui-attr-box">
-								<view class="tui-attr-item" v-for="(item, index) in attrs.attributeValue.split(',')" @tap="handleChooseAttrs(item)" :class='item==attrs.activeAttrs ? "tui-attr-active" : ""'>
+								<view class="tui-attr-item" v-for="(item, index) in attrs.attributeValue.split(',')" @tap="handleChooseAttrs(item,j)" :class='item==attrs.selectAttributeValue ? "tui-attr-active" : ""'>
 									{{item}}
 								</view>
 							</view>
@@ -416,13 +416,27 @@
 				menuShow: false,
 				popupShow: false,
 				value: 1,
-				collected: false
+				collected: false,
+				typeStr: '',
+				subGoodsId: ''
 			}
 		},
 		methods: {
-			handleChooseAttrs(e){
-				this.activeAttrs=e;
-				
+			handleChooseAttrs(e, i){
+				console.log(e, i);
+				this.goodsInfo.attrs[i].selectAttributeValue = e;
+				let typeStr=this.goodsInfo.attrs.map(item=>{
+					return item.selectAttributeValue;
+				}).join(",");
+				// console.log(typeStr)
+				this.goodsInfo.subGoods.map(item=>{
+					if(item.attributeKey === typeStr){
+						this.subGoodsId = item.subGoodsId
+					}
+				})
+				uni.setStorageSync('goodsId', this.subGoodsId);
+				this.getGoodsDetail();
+				this.showPopup();
 			},
 			bannerChange: function(e) {
 				this.bannerIndex = e.detail.current
@@ -549,10 +563,11 @@
 				}
 			},
 			getGoodsDetail(){
-				let goodsId=uni.getStorageSync('goodsId') || '';
+				let goodsId=uni.getStorageSync('goodsId');
 				this.$http.post('/mall/app/goods/detail', {
 					...this.baseInfo,
-					goodsId: goodsId
+					goodsId: goodsId,
+					accountId: this.userInfo.accountId || ''
 				})
 				.then( res => {
 					// console.log(res);

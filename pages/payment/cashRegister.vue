@@ -101,7 +101,7 @@
 					商品金额
 				</view>
 				<view class="cell-tip">
-					<text class="red">¥<text class="num">{{initData.totalPrice}}688888888888888888889</text></text>
+					<text class="red">¥<text class="num">{{initData.totalPrice}}</text></text>
 				</view>
 			</view>
 			<view class="yt-list-cell">
