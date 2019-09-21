@@ -47,7 +47,7 @@
 			Lines
 		},
 		methods: {
-			...mapMutations("common", ['SET_BASEINFO', 'SET_MALLTYPE', 'SET_MALLID', 'SET_MALLDOMAIN']),
+			...mapMutations("common", ['SET_BASEINFO', 'SET_MALLTYPE', 'SET_MALLID', 'SET_MALLNAME', 'SET_MALLLOGO', 'SET_MALLDOMAIN']),
 			clearInfo(){
 				uni.removeStorageSync('hasLogin')
 				uni.removeStorageSync('token')
@@ -68,6 +68,8 @@
 						});
 						this.SET_MALLTYPE(res.result.type);
 						this.SET_MALLID(res.result.mallId);
+						this.SET_MALLNAME(res.result.mallName);
+						this.SET_MALLLOGO(res.result.mallLogo);
 						
 						this.initData();
 					}else{
@@ -107,10 +109,9 @@
 			}
 		},
 		computed: {
-			...mapState('common', ['baseInfo', 'userInfo', 'mallType', 'mallDomain'])
+			...mapState('common', ['baseInfo', 'userInfo', 'mallType', 'mallDomain', 'mallName'])
 		},
 		onLoad(options) {
-			debugger;
 			// if(options){
 			// 	this.SET_MALLDOMAIN(options.mallDomain)
 			// }

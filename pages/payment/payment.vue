@@ -395,7 +395,7 @@
 						debugger;
 						// uni.setStorageSync('PAYMENT_ORDER_INFO', JSON.stringify(data));
 						// window.location.href=`http://${this.paymentUrl}.yujianli.cn/#/pages/payment/cashRegister?orderNo=`+res.result.orderNo+"&mallDomain="+this.baseInfo.mallDomain+'&paymentOrderInfo'+JSON.stringify(data);
-						window.location.href=`http://${this.paymentUrl}.yujianli.cn/#/pages/payment/cashRegister?orderNo=`+res.result.orderNo+"&mallDomain="+this.baseInfo.mallDomain;
+						window.location.href=`http://${this.paymentUrl}.yujianli.cn/#/pages/payment/cashRegister?orderNo=`+res.result.orderNo+"&mallDomain="+this.baseInfo.mallDomain+'&token='+this.token;
 						
 						
 						// this.$http.post('/mall/app/order/submit', {
@@ -589,7 +589,7 @@
 			}
 		},
 		computed: {
-			...mapState('common', ['baseInfo', 'userInfo', 'paymentUrl']),
+			...mapState('common', ['baseInfo', 'userInfo', 'paymentUrl', 'token']),
 			// ...mapState('order', ['order_goodsList'])
 			
 			// balancePay(){

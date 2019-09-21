@@ -55,8 +55,11 @@
 							<view class="saleMoney" v-if="goodsInfo.salePrice">
 								<text class="money">{{goodsInfo.salePrice}}</text>元
 							</view>
+							<view class="and" v-if="goodsInfo.salePrice && goodsInfo.credits">
+								+
+							</view>
 							<view class="salePoints" v-if="goodsInfo.credits">
-								+<text class="points">{{goodsInfo.credits}}</text>分
+								<text class="points">{{goodsInfo.credits}}</text>分
 							</view>
 						</view>
 						<!-- <view class="original-price">
@@ -317,25 +320,27 @@
 				<view class="tui-product-box tui-padding">
 					<image :src="goodsInfo.goodsMainimagepath" class="tui-popup-img"></image>
 					<view class="tui-popup-price">
-						<view class="tui-amount tui-bold">￥<text class="num">{{goodsInfo.salePrice}}</text></view>
+						<view class="tui-amount">
+							<!-- ￥<text class="num">{{goodsInfo.salePrice}}</text> -->
+							<view class="saleMoney" v-if="goodsInfo.salePrice">
+								<text class="money">{{goodsInfo.salePrice}}</text>元
+							</view>
+							<view class="and" v-if="goodsInfo.salePrice && goodsInfo.credits">
+								+
+							</view>
+							<view class="salePoints" v-if="goodsInfo.credits">
+								<text class="points">{{goodsInfo.credits}}</text>分
+							</view>
+						</view>
 						<view class="tui-number">货号：{{goodsInfo.goodsGoodsnum}}</view>
 					</view>
 				</view>
 				<scroll-view scroll-y class="tui-popup-scroll">
 					<view class="tui-scrollview-box">
-						<!-- <view class="tui-attr-title">颜色</view>
-						<view class="tui-attr-box">
-							<view class="tui-attr-item tui-attr-active">
-								黑色
-							</view>
-							<view class="tui-attr-item" v-for="item in goodsInfo.subGoods">
-								{{item}}
-							</view>
-						</view> -->
 						<view v-for="(attrs,j) in goodsInfo.attrs">
 							<view class="tui-bold tui-attr-title">{{attrs.attributeName}}</view>
 							<view class="tui-attr-box">
-								<view class="tui-attr-item" v-for="(item, index) in attrs.attributeValue.split(',')" @tap="handleChooseAttrs(item,j)" :class='item==attrs.selectAttributeValue ? "tui-attr-active" : ""'>
+								<view class="tui-attr-item" v-for="item in attrs.attributeValue.split(',')" @tap="handleChooseAttrs(item,j)" :class='item==attrs.selectAttributeValue ? "tui-attr-active" : ""'>
 									{{item}}
 								</view>
 							</view>
@@ -422,9 +427,8 @@
 			}
 		},
 		methods: {
-			handleChooseAttrs(e, i){
-				console.log(e, i);
-				this.goodsInfo.attrs[i].selectAttributeValue = e;
+			handleChooseAttrs(e, j){
+				this.goodsInfo.attrs[j].selectAttributeValue = e;
 				let typeStr=this.goodsInfo.attrs.map(item=>{
 					return item.selectAttributeValue;
 				}).join(",");
@@ -915,8 +919,10 @@
 						font-size: 48upx;
 					}
 				}
-				.salePoints{
+				.and{
 					padding-left: 10upx;
+				}
+				.salePoints{
 					.points{
 						font-size: 35upx;
 					}
@@ -1513,10 +1519,25 @@
 	}
 
 	.tui-amount {
-		color: #ff201f;
-		font-size: 24upx;
-		.num{
-			font-size: 32upx;
+		font-size: 32rpx;
+		color: #E11F17;
+		padding-right: 10px;
+		display: flex;
+		flex-direction:row;
+		justify-content : flex-start;
+		align-items : flex-end;
+		.saleMoney{
+			.money{
+				font-size: 32upx;
+			}
+		}
+		.and{
+			padding-left: 10upx;
+		}
+		.salePoints{
+			.points{
+				font-size: 28upx;
+			}
 		}
 	}
 

@@ -163,7 +163,8 @@
 				mallDomain: '',
 				payInfo: {},
 				initData: {},
-				mallId: ''
+				mallId: '',
+				token: ''
 			}
 		},
 		methods: {
@@ -243,6 +244,7 @@
 			getInitInfo(){
 				this.orderNo=uni.getStorageSync('ORDER_NO');
 				this.mallDomain=uni.getStorageSync('mallDomain');
+				this.token=uni.getStorageSync('token');
 				// this.initData=JSON.parse(uni.getStorageSync('PAYMENT_ORDER_INFO'));
 			},
 			checkMallType(){
@@ -259,6 +261,8 @@
 						// });
 						// this.SET_MALLTYPE(res.result.type);
 						// this.SET_MALLID(res.result.mallId);
+						// this.SET_MALLNAME(res.result.mallName);
+						// this.SET_MALLLOGO(res.result.mallLogo);
 						this.mallId=res.result.mallId;
 						this.getInitData();
 					}else{
@@ -272,7 +276,11 @@
 			getInitData(){
 				this.$http.post('/mall/app/order/checkstand', {
 					callBackNo: this.orderNo,
-					mallId: this.mallId
+					mallId: this.mallId,
+				},{
+					header: {
+						Authorization: 'Bearer '+this.token
+					}
 				})
 				.then(res => {
 					console.log(res);
@@ -290,6 +298,7 @@
 			debugger;
 			uni.setStorageSync('ORDER_NO', options.orderNo);
 			uni.setStorageSync('mallDomain', options.mallDomain);
+			uni.setStorageSync('token', options.token);
 			// uni.setStorageSync('PAYMENT_ORDER_INFO', options.paymentOrderInfo);
 			this.getInitInfo();
 			this.checkMallType();

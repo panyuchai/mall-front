@@ -11,6 +11,8 @@ const state = {
   mallDomain: '',
   mallType: '',
   mallId: null,
+  mallName: '',
+  mallLogo: '',
   // mallId: '',
   // p: '',
   // scm: '',
@@ -81,6 +83,12 @@ const mutations = {
 	},
 	SET_MALLID: (state, mallId) => {
 		state.mallId = mallId;
+	},
+	SET_MALLNAME: (state, mallName) => {
+		state.mallName = mallName
+	},
+	SET_MALLLOGO: (state, mallLogo) => {
+		state.mallLogo = mallLogo
 	},
 	// SET_MALLID: (state, mallId) => {
 	// 	state.mallId = mallId;
