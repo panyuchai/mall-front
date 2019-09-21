@@ -214,23 +214,21 @@
 					</view>
 				</view>
 				<view class="content-info">
-					<view class="content-item content-item-active" v-if="showCont">
+					<view class="content-item" v-if="showCont">
 						<view class="tui-product-img" v-html="goodsInfo.details">
 							<!-- <image class="img" :src="img.url" v-for="(img,index) in goodsInfo.details" :key="index" mode="widthFix"></image> -->
 							{{goodsInfo.details}}
 						</view>
 					</view>
 					<view class="content-item" v-if="!showCont">
-						<view class="product-specs">
-							<view class="specs-info">
-								<view class="table-list">
-									<view class="list-cell" v-for="item in goodsInfo.specs" :key="item.sort">
-										<text class="cell skey">{{item.skey}}</text>
-										<text class="cell svalue">{{item.svalue}}</text>
-									</view>
+						<!-- <view class="product-specs">
+							<view class="table-list"> -->
+								<view class="list-cell" v-for="item in goodsInfo.specs" :key="item.sort">
+									<text class="cell skey">{{item.skey}}</text>
+									<text class="cell svalue">{{item.svalue}}</text>
 								</view>
-							</view>
-						</view>
+							<!-- </view>
+						</view> -->
 					</view>
 				</view>
 			</view>
@@ -325,43 +323,23 @@
 				</view>
 				<scroll-view scroll-y class="tui-popup-scroll">
 					<view class="tui-scrollview-box">
-						<view class="tui-attr-title">颜色</view>
+						<!-- <view class="tui-attr-title">颜色</view>
 						<view class="tui-attr-box">
 							<view class="tui-attr-item tui-attr-active">
 								黑色
 							</view>
-							<view class="tui-attr-item">
-								红色
+							<view class="tui-attr-item" v-for="item in goodsInfo.subGoods">
+								{{item}}
+							</view>
+						</view> -->
+						<view v-for="attrs in goodsInfo.attrs">
+							<view class="tui-bold tui-attr-title">{{attrs.attributeName}}</view>
+							<view class="tui-attr-box">
+								<view class="tui-attr-item" v-for="(item, index) in attrs.attributeValue.split(',')" @tap="handleChooseAttrs(item)" :class='item==attrs.activeAttrs ? "tui-attr-active" : ""'>
+									{{item}}
+								</view>
 							</view>
 						</view>
-						<view class="tui-bold tui-attr-title">尺寸</view>
-						<view class="tui-attr-box">
-							<view class="tui-attr-item tui-attr-active">
-								23
-							</view>
-							<view class="tui-attr-item">
-								25
-							</view>
-							<view class="tui-attr-item">
-								29
-							</view>
-							<view class="tui-attr-item">
-								12
-							</view>
-							<view class="tui-attr-item">
-								26
-							</view>
-							<view class="tui-attr-item">
-								29
-							</view>
-							<view class="tui-attr-item">
-								12
-							</view>
-							<view class="tui-attr-item">
-								26
-							</view>
-						</view>
-
 						<view class="tui-number-box tui-attr-title">
 							<view class="tui-attr-title">数量</view>
 							<tui-numberbox :max="9999" :min="1" :value="value" @change="change"></tui-numberbox>
@@ -442,6 +420,10 @@
 			}
 		},
 		methods: {
+			handleChooseAttrs(e){
+				this.activeAttrs=e;
+				
+			},
 			bannerChange: function(e) {
 				this.bannerIndex = e.detail.current
 			},
@@ -464,8 +446,8 @@
 					case 1:
 						this.showCont=false;
 						break;
-					default:
-						this.showCont=true;
+					// default:
+					// 	this.showCont=true;
 				}
 			},
 			back: function() {
@@ -1030,32 +1012,59 @@
 						width: 100%!important;
 					}
 				}
-				.product-specs{
-					.specs-info{
-						padding: 30upx 20upx;
-						.table-list{
-							border-top: 1px solid #ccc;
-							border-left: 1px solid #ccc;
-							.list-cell{
-								display: flex;
-								align-items: center;
-								.cell{
-									border-bottom: 1px solid #ccc;
-									border-right: 1px solid #ccc;
-									padding: 10upx 20upx;
-									font-size: 24upx;
-									color: #747474;
-									&.skey{
-										min-width: 80upx;
-									}
-									&.svalue{
-										flex: 1;
-									}
-								}
-							}
+				// .product-specs{
+				// 	border:5px blue solid;
+				// 	
+				// 	.table-list{
+				// 		margin: 30upx 20upx;
+				// 		border-top: 1px solid #ccc;
+				// 		border-left: 1px solid #ccc;
+				// 		.list-cell{
+				// 			margin: 30upx 20upx;
+				// 			border-top: 1px solid #ccc;
+				// 			border-left: 1px solid #ccc;
+				// 			display: flex;
+				// 			align-items: center;
+				// 			.cell{
+				// 				border-bottom: 1px solid #ccc;
+				// 				border-right: 1px solid #ccc;
+				// 				padding: 10upx 20upx;
+				// 				font-size: 24upx;
+				// 				color: #747474;
+				// 				&.skey{
+				// 					min-width: 80upx;
+				// 				}
+				// 				&.svalue{
+				// 					flex: 1;
+				// 				}
+				// 			}
+				// 		}
+				// 	}
+				// }
+				.list-cell{
+					&:first-child{
+						border-top: 1px solid #ccc;
+					}
+					margin: 0 20upx;
+					// border-top: 1px solid #ccc;
+					border-left: 1px solid #ccc;
+					display: flex;
+					align-items: center;
+					.cell{
+						border-bottom: 1px solid #ccc;
+						border-right: 1px solid #ccc;
+						padding: 10upx 20upx;
+						font-size: 24upx;
+						color: #747474;
+						&.skey{
+							min-width: 120upx;
+						}
+						&.svalue{
+							flex: 1;
 						}
 					}
 				}
+				
 			}
 		}
 		

@@ -13,7 +13,7 @@
 	export default {
 		data() {
 			return {
-				initData: '888888888'
+				initData: '加载中......'
 			}
 		},
 		computed: {
@@ -31,18 +31,41 @@
 						return config;
 					});
 					// this.setUserInfo();
-					if(uni.getStorageSync('referUrl')){
-						window.location.href=uni.getStorageSync('referUrl');
-						uni.removeStorageSync('referUrl');
-					}else{
-						// uni.reLaunch({
-						// 	url: '/pages/index/index?mallDomain='+this.mallDomain
-						// });
-						// uni.switchTab({
-						// 	url: '/pages/index/index'
-						// });
-						window.location.href=this.transferUrl + '?mallDomain='+options.mallDomain;
-					}
+					this.$http.post('/mall/app/account/info')
+					.then( res => {
+						if(res.code == 0){
+							if(res.result){
+								let mobilephone = res.result.mobilephone;
+								let loginname = res.result.loginname;
+								let accountId = res.result.id;
+								let {customerName, wechatName, customerSex, customerBirthday, customerImage, customerId} = res.result.customer;
+								this.SET_USERIFNO({customerName, wechatName, customerSex, customerBirthday,  customerImage, customerId});
+								this.SET_USERIFNO({
+									...this.userInfo,
+									mobilephone: mobilephone,
+									loginname: loginname,
+									accountId: accountId
+								});
+								if(uni.getStorageSync('referUrl')){
+									window.location.href=uni.getStorageSync('referUrl');
+									uni.removeStorageSync('referUrl');
+								}else{
+									window.location.href=this.transferUrl + '?mallDomain='+options.mallDomain;
+								}
+							}
+						}else{
+							console.log('TransferPage.vue-- info接口调用失败');
+						}
+					})
+					.catch( err => {
+						console.log('TransferPage.vue-- info接口调用错误');
+					})
+					// if(uni.getStorageSync('referUrl')){
+					// 	window.location.href=uni.getStorageSync('referUrl');
+					// 	uni.removeStorageSync('referUrl');
+					// }else{
+					// 	window.location.href=this.transferUrl + '?mallDomain='+options.mallDomain;
+					// }
 				}else{
 					uni.setStorageSync('openid',options.openid);
 					

@@ -223,6 +223,7 @@
 			}
 		},
 		onLaunch: function(options) {
+			console.log(options);
 			this.initData();
 			this.getMallDomain();
 			this.checkMallType();

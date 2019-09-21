@@ -162,7 +162,8 @@
 				orderNo: '',
 				mallDomain: '',
 				payInfo: {},
-				initData: {}
+				initData: {},
+				mallId: ''
 			}
 		},
 		methods: {
@@ -216,7 +217,7 @@
 					payChannels: '6',
 					callBackNo: this.orderNo,
 					mallDomain: this.mallDomain,
-					mallId:2
+					mallId:this.mallId
 				};
 				this.$http.post('/mall/app/order/submit', data, {
 					header: {
@@ -239,11 +240,46 @@
 					console.log(err);
 				})
 			},
-			getInitData(){
+			getInitInfo(){
 				this.orderNo=uni.getStorageSync('ORDER_NO');
-				// this.initData=JSON.parse(uni.getStorageSync('PAYMENT_ORDER_INFO'));
-				this.initData=JSON.parse(uni.getStorageSync('paymentOrder'));
 				this.mallDomain=uni.getStorageSync('mallDomain');
+				// this.initData=JSON.parse(uni.getStorageSync('PAYMENT_ORDER_INFO'));
+			},
+			checkMallType(){
+				this.$http.post('/mall/app/login/mall/shopmall/type', {
+					mallDomain: this.mallDomain
+				})
+				.then( res => {
+					if(res.code == 0){
+						// this.SET_BASEINFO({
+						// 	...this.baseInfo,
+						// 	mallDomain: this.mallDomain,
+						// 	mallType: res.result.type,
+						// 	mallId: res.result.mallId
+						// });
+						// this.SET_MALLTYPE(res.result.type);
+						// this.SET_MALLID(res.result.mallId);
+						this.mallId=res.result.mallId;
+						this.getInitData();
+					}else{
+						console.log('cashRegister--mallTaye 接口调用失败');
+					}
+				})
+				.catch( err => {
+					console.log('cashRegister--mallTaye 接口调用出错');
+				})
+			},
+			getInitData(){
+				this.$http.post('/mall/app/order/checkstand', {
+					callBackNo: this.orderNo,
+					mallId: this.mallId
+				})
+				.then(res => {
+					console.log(res);
+				})
+				.catch(err => {
+					console.log(err);
+				})
 			}
 		},
 		computed: {
@@ -251,10 +287,12 @@
 			
 		},
 		onLoad(options){
+			debugger;
 			uni.setStorageSync('ORDER_NO', options.orderNo);
 			uni.setStorageSync('mallDomain', options.mallDomain);
-			uni.setStorageSync('paymentOrder', options.paymentrder);
-			this.getInitData();
+			// uni.setStorageSync('PAYMENT_ORDER_INFO', options.paymentOrderInfo);
+			this.getInitInfo();
+			this.checkMallType();
 		},
 	}
 </script>

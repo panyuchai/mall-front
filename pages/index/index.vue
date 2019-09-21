@@ -110,6 +110,7 @@
 			...mapState('common', ['baseInfo', 'userInfo', 'mallType', 'mallDomain'])
 		},
 		onLoad(options) {
+			debugger;
 			// if(options){
 			// 	this.SET_MALLDOMAIN(options.mallDomain)
 			// }

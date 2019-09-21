@@ -72,7 +72,7 @@
 					<view class="delBtn" @tap="deleteList" v-if="selectedList.length>0">删除</view>
 					<view class="settlement">
 						<view class="sum">
-							<view class='_left'>
+							<view class='_left' v-if="sumPrice || sumPoints">
 								合计：
 							</view>
 							<view class='_right'>
@@ -393,7 +393,7 @@
 						}
 					}
 				}
-				this.sumPrice = this.sumPrice.toFixed(2);
+				// this.sumPrice = this.sumPrice.toFixed(2);
 			},
 			discard() {
 				//丢弃

@@ -136,34 +136,6 @@
 					url
 				})  
 			},
-			
-			userInitData(){
-				this.$http.post('/mall/app/account/info')
-				.then( res => {
-					if(res.code == 0){
-						if(res.result){
-							let mobilephone = res.result.mobilephone;
-							let loginname = res.result.loginname;
-							let accountId = res.result.id;
-							let {customerName, wechatName, customerSex, customerBirthday, customerImage, customerId} = res.result.customer;
-							this.SET_USERIFNO({customerName, wechatName, customerSex, customerBirthday,  customerImage, customerId});
-							this.SET_USERIFNO({
-								...this.userInfo,
-								mobilephone: mobilephone,
-								loginname: loginname,
-								accountId: accountId
-							});
-							this.initPayNum();
-							this.initToReceivedNum();
-						}
-					}else{
-						console.log('login.vue-- info接口调用失败');
-					}
-				})
-				.catch( err => {
-					console.log('login.vue-- info接口调用错误');
-				})
-			},
 			initPayNum(){
 				this.$http.post('/mall/app/order/count', {
 					...this.baseInfo,
@@ -196,10 +168,8 @@
 			}
         },
 		onShow: function(){
-			this.userInitData();
-			
-			// this.initPayNum();
-			// this.initToReceivedNum();
+			this.initPayNum();
+			this.initToReceivedNum();
 		}
     }
 </script>

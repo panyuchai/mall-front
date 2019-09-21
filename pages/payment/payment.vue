@@ -114,7 +114,7 @@
 					商品金额
 				</view>
 				<view class="cell-tip">
-					<text class="red">¥<text class="num">{{payData.totalPrice}}</text></text>
+					<text class="red">¥<text class="num">{{totalPriceDecrease}}</text></text>
 				</view>
 			</view>
 			<view class="yt-list-cell">
@@ -392,11 +392,11 @@
 							})
 						}, 1000)
 					}else{
-						uni.setStorageSync('PAYMENT_ORDER_INFO', JSON.stringify(data));
-						window.location.href=`http://${this.paymentUrl}.yujianli.cn/#/pages/payment/cashRegister?orderNo=`+res.result.orderNo+"&mallDomain=yyy"+"&paymentOrder="+JSON.stringify(data)
-						// uni.navigateTo({
-						//     url: 'http://testpay.yujianli.cn/#/pages/payment/cashRegister?orderNo='+res.result.orderNo
-						// });
+						debugger;
+						// uni.setStorageSync('PAYMENT_ORDER_INFO', JSON.stringify(data));
+						// window.location.href=`http://${this.paymentUrl}.yujianli.cn/#/pages/payment/cashRegister?orderNo=`+res.result.orderNo+"&mallDomain="+this.baseInfo.mallDomain+'&paymentOrderInfo'+JSON.stringify(data);
+						window.location.href=`http://${this.paymentUrl}.yujianli.cn/#/pages/payment/cashRegister?orderNo=`+res.result.orderNo+"&mallDomain="+this.baseInfo.mallDomain;
+						
 						
 						// this.$http.post('/mall/app/order/submit', {
 						// 	...data,
@@ -481,7 +481,7 @@
 					goodsList: this.goodsList,
 					payPrice: this.payPrice,
 					remark: this.remark,
-					totalPrice: this.payData.totalPrice,
+					totalPrice: this.totalPriceDecrease,
 					address: this.address
 				};
 				if(this.isWx){
@@ -591,11 +591,21 @@
 		computed: {
 			...mapState('common', ['baseInfo', 'userInfo', 'paymentUrl']),
 			// ...mapState('order', ['order_goodsList'])
+			
+			// balancePay(){
+			// 	return this.payData.totalPrice+this.fee>this.payData.balance ? this.payData.balance : this.payData.totalPrice+this.fee
+			// },
+			// payPrice(){
+			// 	return this.balanceType ? this.payData.totalPrice+this.fee - this.balancePay : this.payData.totalPrice+this.fee
+			// },
+			totalPriceDecrease(){
+				return this.payData.totalPrice-(this.payData.express && this.payData.express.fee)
+			},
 			balancePay(){
-				return this.payData.totalPrice+this.fee>this.payData.balance ? this.payData.balance : this.payData.totalPrice+this.fee
+				return this.totalPriceDecrease+this.fee>this.payData.balance ? this.payData.balance : this.totalPriceDecrease+this.fee
 			},
 			payPrice(){
-				return this.balanceType ? this.payData.totalPrice+this.fee - this.balancePay : this.payData.totalPrice+this.fee
+				return this.balanceType ? this.totalPriceDecrease+this.fee - this.balancePay : this.totalPriceDecrease+this.fee
 			}
 		},
 		onShow(){
