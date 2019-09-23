@@ -69,12 +69,12 @@
 				</view>
 				<view class="cell-tip">快递费用:{{initData.express && initData.express.fee}}</view>
 			</view>
-			<view class="yt-list-cell" v-if="initData.remark">
+			<view class="yt-list-cell" v-if="initData.orderlistMessage">
 				<view class="cell-tit">
 					备注
 				</view>
 				<view class="cell-tip cell-remark-tip">
-					<input class="action-input" type="text" disabled v-model="initData.remark" />
+					<input class="action-input" type="text" disabled v-model="initData.orderlistMessage" />
 				</view>
 			</view>
 		</view>
@@ -220,12 +220,11 @@
 					accountId: this.initData.accountId,
 					addressId: this.initData.addressId,
 					balance: this.initData.balance,
-					isBalance: this.initData.isBalance,
-					credits: 0,
-					expressFee: this.initData.expressFee,
-					goodsList: this.initData.goodsList,
-					payPrice: this.initData.payPrice,
-					remark: this.initData.remark,
+					coupons: this.initData.coupons,
+					credits: this.initData.credits,
+					expressFee: initData.express.fee,
+					goodsList: this.initData.goodsListDetailList,
+					payPrice: this.payPrice,
 					totalPrice: this.initData.totalPrice,
 					payChannels: '6',
 					callBackNo: this.orderNo,
