@@ -246,7 +246,7 @@
 				this.orderNo=uni.getStorageSync('ORDER_NO');
 				this.mallDomain=uni.getStorageSync('mallDomain');
 				this.token=uni.getStorageSync('token');
-				this.payPrice=uni.getStorageSync('payPrice');
+				this.payPrice=Number(uni.getStorageSync('payPrice'));
 				// this.initData=JSON.parse(uni.getStorageSync('PAYMENT_ORDER_INFO'));
 			},
 			checkMallType(){
