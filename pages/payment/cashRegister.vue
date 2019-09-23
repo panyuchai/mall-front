@@ -223,7 +223,7 @@
 				};
 				this.$http.post('/mall/app/order/submit', data, {
 					header: {
-						Authorization: 'Bearer eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJhY2NvdW50SWQiOiI5YTE4YjY1MDM1YmM0N2E3ODUwN2E3OWU0NDU5MDU4ZSIsImNvbXBhbnlJZCI6ImRiMDQzNWFmYjQyOTRjNjNhNGU3ODM4NTM5ZTlhYzdiIiwidXNlcl9uYW1lIjoib1pMYmhzbHFyNFBDaWpLZWhSdHAtczJlN1BMdyIsInNjb3BlIjpbImFsbCJdLCJsb2dpbk5hbWUiOiJvWkxiaHNscXI0UENpaktlaFJ0cC1zMmU3UEx3IiwidXNlclR5cGUiOjIsImV4cCI6MTU2ODA5Njg4OSwidXNlcklkIjoxMTcwMjcxODQyMzQ3NzAwMjI2LCJhdXRob3JpdGllcyI6WyJST0xFX0FDVElWSVRJX1VTRVIiXSwianRpIjoiZmZlMWJhYWYtY2EzZi00NmZlLWEyYWUtMDg2YjlkYjZkODNjIiwiY2xpZW50X2lkIjoiZGIwNDM1YWZiNDI5NGM2M2E0ZTc4Mzg1MzllOWFjN2IifQ.OON7DvWhohAPYJodJsbEs7xKl8O3WvqHts_-FM4aRv9ET1kPOJfmqNRtTLCGbit5gkdDpYjER0J4l6EWhrqyWBIlAaH7_SFCspiebeW8cS9VoK3LctL_2rZaQvZRUNM6rXGTMLi-LfGmrTIlN9uzcHEIavxoC305a5tFgViMEsXB3YficlujGBVk7Cwmo6N7jLZPUdTXV1N_O1I-Six93JAkDkUj1KAyt8l6UxUhDCVwCOQbtCWHeFvbOh0H5jAr7dG0yJZLtc7hOw8b-WEkBa1OhtuVd925_-sR-nM_utkjExJixR8OmKmezgm_7E17gH7F7sqHvdQTP1FeV8tWGQ'
+						Authorization: 'Bearer '+this.token
 					}
 				})
 				.then( res => {
@@ -286,7 +286,9 @@
 					}
 				})
 				.then(res => {
-					console.log(res);
+					if(res.code == 0){
+						this.initData=res.result
+					}
 				})
 				.catch(err => {
 					console.log(err);
