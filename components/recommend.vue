@@ -23,8 +23,11 @@
 							<view class="sale-price" v-if="item.goodsPrice">
 								<text class="money">{{item.goodsPrice}}</text>元
 							</view>
+							<view class="and" v-if="item.goodsPrice && item.goodsPoint">
+								+
+							</view>
 							<view class="sale-points" v-if="item.goodsPoint">
-								+<text class="points">{{item.goodsPoint}}</text>分
+								<text class="points">{{item.goodsPoint}}</text>分
 							</view>
 						</view>
 					</view>
@@ -154,25 +157,25 @@
 	
 	.pro-price {
 		padding-top: 14upx;
-		color: #E51700;
+		color: #ea1500;
 		display: flex;
 		flex-direction:row;
 		justify-content : flex-start;
 		align-items : flex-end;
+		font-size: 32upx;
 	}
 	
 	.sale-price {
-		font-size: 32upx;
-		color: #ea1500;
-		.unit{
-			font-size: 24rpx;
+		.money{
+			font-size: 32upx;
 		}
 	}
-	.sale-points{
+	.and{
 		padding-left: 10upx;
-		font-size: 28upx;
+	}
+	.sale-points{
 		.points{
-			
+			font-size: 28upx;
 		}
 	}
 	.tag{

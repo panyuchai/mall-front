@@ -487,10 +487,11 @@
 				this.value = e.value
 			},
 			handleAddCart(mallGoodsId){
-				if(!this.hasLogin){
+				if(!Boolean(this.hasLogin)){
 					uni.navigateTo({
 					    url: '/pages/login/login'
 					});
+					return;
 				}else{
 					this.$http.post('/mall/app/car/add', {
 						...this.baseInfo,

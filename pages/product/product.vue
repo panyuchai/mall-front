@@ -70,12 +70,15 @@
 							{{item.goodsTitle}}
 						</view>
 						<view class="pro-price">
-							<text class="salePrice"><text class="unit">￥</text></text>
+							<text class="salePrice" v-if="item.salePrice"><text class="unit">￥</text></text>
 							<view class="saleMoney" v-if="item.salePrice">
 								<text class="money">{{item.salePrice}}</text>元
 							</view>
+							<view class="and" v-if="item.salePrice && item.credits">
+								+
+							</view>
 							<view class="salePoints" v-if="item.credits">
-								+<text class="points">{{item.credits}}</text>分
+								<text class="points">{{item.credits}}</text>分
 							</view>
 						</view>
 					</view>
@@ -509,8 +512,10 @@
 				font-size: 32upx;
 			}
 		}
-		.salePoints{
+		.and{
 			padding-left: 10upx;
+		}
+		.salePoints{
 			.points{
 				font-size: 28upx;
 			}

@@ -19,8 +19,11 @@
 						<view class="saleMoney" v-if="good.goodsPrice">
 							<text class="money">{{good.goodsPrice}}</text>元
 						</view>
+						<view class="and" v-if="good.goodsPrice && good.goodsPoint">
+							+
+						</view>
 						<view class="salePoints" v-if="good.goodsPoint">
-							+<text class="points">{{good.goodsPoint}}</text>分
+							<text class="points">{{good.goodsPoint}}</text>分
 						</view>
 					</view>
 					<view class="sale-action">
@@ -119,8 +122,10 @@
 								font-size: 40upx;
 							}
 						}
-						.salePoints{
+						.and{
 							padding-left: 10upx;
+						}
+						.salePoints{
 							.points{
 								font-size: 35upx;
 							}

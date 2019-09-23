@@ -164,7 +164,8 @@
 				payInfo: {},
 				initData: {},
 				mallId: '',
-				token: ''
+				token: '',
+				payPrice: 0
 			}
 		},
 		methods: {
@@ -245,6 +246,7 @@
 				this.orderNo=uni.getStorageSync('ORDER_NO');
 				this.mallDomain=uni.getStorageSync('mallDomain');
 				this.token=uni.getStorageSync('token');
+				this.payPrice=uni.getStorageSync('payPrice');
 				// this.initData=JSON.parse(uni.getStorageSync('PAYMENT_ORDER_INFO'));
 			},
 			checkMallType(){
@@ -277,6 +279,7 @@
 				this.$http.post('/mall/app/order/checkstand', {
 					callBackNo: this.orderNo,
 					mallId: this.mallId,
+					payPrice: this.payPrice
 				},{
 					header: {
 						Authorization: 'Bearer '+this.token
@@ -299,6 +302,7 @@
 			uni.setStorageSync('ORDER_NO', options.orderNo);
 			uni.setStorageSync('mallDomain', options.mallDomain);
 			uni.setStorageSync('token', options.token);
+			uni.setStorageSync('payPrice', options.orderPayPrice);
 			// uni.setStorageSync('PAYMENT_ORDER_INFO', options.paymentOrderInfo);
 			this.getInitInfo();
 			this.checkMallType();

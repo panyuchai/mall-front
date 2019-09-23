@@ -1,7 +1,7 @@
 <template>
     <view class="content">
 		<view class="logo">
-			<image class="img" mode="widthFix" src="/static/img/logo.png"></image>
+			<image class="img" mode="widthFix" :src="mallLogo"></image>
 		</view>
         <view class="oauth-row" v-if="showOauthBtn">
 			<view class="oauth-btn">
@@ -77,7 +77,7 @@
             }
         },
         computed: {
-			...mapState("common", ['mallDomain', 'mallType', 'userInfo', 'baseInfo']),
+			...mapState("common", ['mallDomain', 'mallType', 'userInfo', 'baseInfo', 'mallLogo']),
 			showOauthBtn() {
 				return this.isMiniprogram
 			}
