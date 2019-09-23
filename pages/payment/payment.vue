@@ -117,7 +117,7 @@
 					<text class="red">¥<text class="num">{{totalPriceDecrease}}</text></text>
 				</view>
 			</view>
-			<view class="yt-list-cell">
+			<view class="yt-list-cell" v-if="payData.express && payData.express.fee">
 				<view class="cell-tit">
 					快递费
 				</view>
@@ -141,12 +141,12 @@
 					<text class="red"><text class="num">{{payData.credits}}</text>分</text>
 				</view>
 			</view>
-			<view class="yt-list-cell">
+			<view class="yt-list-cell" v-if="payData.coupons">
 				<view class="cell-tit">
 					优惠支付
 				</view>
 				<view class="cell-tip">
-					<text class="red">¥<text class="num">0.00</text></text>
+					<text class="red">¥<text class="num">{{payData.coupons}}</text></text>
 				</view>
 			</view>
 			<view class="yt-list-cell border-top">

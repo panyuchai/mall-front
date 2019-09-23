@@ -42,7 +42,7 @@
 		display: flex;
 		align-items: center;
 		justify-content: space-between;
-		font-size: 32upx;
+		font-size: 30upx;
 		.name{
 			color: #474747;
 		}
