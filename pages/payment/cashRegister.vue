@@ -67,14 +67,14 @@
 				<view class="cell-tit">
 					快递方式
 				</view>
-				<view class="cell-tip">快递费用:{{initData.expressFee}}</view>
+				<view class="cell-tip">快递费用:{{initData.express && initData.express.fee}}</view>
 			</view>
-			<view class="yt-list-cell">
+			<view class="yt-list-cell" v-if="initData.remark">
 				<view class="cell-tit">
 					备注
 				</view>
 				<view class="cell-tip cell-remark-tip">
-					<input class="action-input" type="text" disabled v-model="initData.remark" placeholder="无" />
+					<input class="action-input" type="text" disabled v-model="initData.remark" />
 				</view>
 			</view>
 		</view>
@@ -100,7 +100,7 @@
 			</view> -->
 		</view>
 		<view class="yt-list mt-20">
-			<view class="yt-list-cell">
+			<view class="yt-list-cell" v-if="initData.totalPrice">
 				<view class="cell-tit">
 					商品金额
 				</view>
@@ -108,12 +108,12 @@
 					<text class="red">¥<text class="num">{{initData.totalPrice}}</text></text>
 				</view>
 			</view>
-			<view class="yt-list-cell">
+			<view class="yt-list-cell" v-if="initData.express && initData.express.fee">
 				<view class="cell-tit">
 					快递费
 				</view>
 				<view class="cell-tip">
-					<text class="red">¥<text class="num">{{initData.expressFee}}</text></text>
+					<text class="red">¥<text class="num">{{initData.express.fee}}</text></text>
 				</view>
 			</view>
 			<view class="yt-list-cell" v-if='initData.balance'>
@@ -122,6 +122,14 @@
 				</view>
 				<view class="cell-tip">
 					<text class="red">¥<text class="num">{{initData.balance}}</text></text>
+				</view>
+			</view>
+			<view class="yt-list-cell" v-if='initData.credits'>
+				<view class="cell-tit">
+					积分支付
+				</view>
+				<view class="cell-tip">
+					<text class="red">¥<text class="num">{{initData.credits}}</text>分</text>
 				</view>
 			</view>
 			<view class="yt-list-cell" v-if="initData.coupons">

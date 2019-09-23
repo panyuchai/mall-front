@@ -109,7 +109,7 @@
 			</view>
 		</view>
 		<view class="yt-list mt-20">
-			<view class="yt-list-cell">
+			<view class="yt-list-cell" v-if="totalPriceDecrease">
 				<view class="cell-tit">
 					商品金额
 				</view>
