@@ -90,7 +90,6 @@
 					uni.setNavigationBarTitle({
 					    title: this.mallName
 					});
-					console.log(this.templateData)
 				})
 				.catch(err => {
 					console.log(err);

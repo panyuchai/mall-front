@@ -7,7 +7,7 @@
 			...mapState("common", ['uniCode', 'mallDomain', 'transferUrl', 'baseInfo', 'hasLogin', 'firstLoad', 'baseUrl', 'isTransferPage'])
 		},
 		methods: {
-			...mapMutations("common", ['SET_BASEINFO', 'SET_USERIFNO', 'SET_UNICODE', 'SET_HASLOGIN', 'SET_TOKEN', 'SET_MALLTYPE', 'SET_MALLID', 'SET_MALLNAME', 'SET_MALLLOGO', 'SET_MALLDOMAIN', 'SET_ISTRANSFERPAGE']),
+			...mapMutations("common", ['SET_BASEINFO', 'SET_USERIFNO', 'SET_BASEINFO', 'SET_UNICODE', 'SET_HASLOGIN', 'SET_TOKEN', 'SET_MALLTYPE', 'SET_MALLID', 'SET_MALLNAME', 'SET_MALLLOGO', 'SET_MALLDOMAIN', 'SET_ISTRANSFERPAGE']),
 			GetQueryString(name) {
 				var reg = new RegExp('(^|&)' + name + '=([^&]*)(&|$)', 'i');
 				var r = window.location.search.substr(1).match(reg);
@@ -17,17 +17,14 @@
 				return null;
 			},
 			clearUserInfo(){
-				debugger;
 				uni.removeStorageSync('hasLogin');
 				uni.removeStorageSync('token');
 				uni.removeStorageSync('uniCode');
-				uni.removeStorageSync('userInfo');
 			},
 			getMallDomain(){
-				debugger;
 				let mallDomain = this.GetQueryString('mallDomain');
 				if(mallDomain){
-					let storageMallDomain = uni.getStorageSync('mallDomain');
+					let storageMallDomain = this.baseInfo.mallDomain;
 					if(storageMallDomain && storageMallDomain!==mallDomain){
 						this.clearUserInfo();
 					}
@@ -103,8 +100,13 @@
 				// if(uni.getStorageSync('userInfo')){
 				// 	this.SET_USERIFNO(uni.getStorageSync('userInfo'));
 				// }
-				if(getStore({ name: 'userInfo' })){
-					this.SET_USERIFNO(getStore({ name: 'userInfo' }));
+				let storageUserInfo = getStore({ name: 'userInfo' }),
+					storageBaseInfo = getStore({ name: 'baseInfo' });
+				if(storageUserInfo){
+					this.SET_USERIFNO(storageUserInfo);
+				}
+				if(storageBaseInfo){
+					this.SET_BASEINFO(storageBaseInfo);
 				}
 			},
 			browserRedirect(options) {

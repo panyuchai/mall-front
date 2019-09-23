@@ -179,6 +179,11 @@
 				payPrice: 0
 			}
 		},
+		onBackPress(eve) {
+			debugger;
+			alert(eve);
+			return;
+		},
 		methods: {
 			onBridgeReady(){　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　//使用微信浏览器内置的对象调起微信支付插件，并传入统一接口返回的参数
 				WeixinJSBridge.invoke(
@@ -237,7 +242,6 @@
 					}
 				})
 				.then( res => {
-					console.log('WxWebPay  接口调用成功')
 					if(res.code == 0){
 						this.payInfo.appId = res.result.payResponse.wxPayResponse.appId;
 						this.payInfo.timeStamp = res.result.payResponse.wxPayResponse.timeStamp;
@@ -310,7 +314,6 @@
 			
 		},
 		onLoad(options){
-			debugger;
 			uni.setStorageSync('ORDER_NO', options.orderNo);
 			uni.setStorageSync('mallDomain', options.mallDomain);
 			uni.setStorageSync('token', decodeURIComponent(options.token));
