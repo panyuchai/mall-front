@@ -186,7 +186,8 @@
 			return false;
 		},
 		methods: {
-			onBridgeReady(){　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　//使用微信浏览器内置的对象调起微信支付插件，并传入统一接口返回的参数
+			onBridgeReady(){　　　　　　　　　　　　　　　　　　　　　　　　　　　//使用微信浏览器内置的对象调起微信支付插件，并传入统一接口返回的参数
+			alert('onBridgeReady 开始调用-------------');
 				WeixinJSBridge.invoke(
 				  'getBrandWCPayRequest', {
 					"appId":this.payInfo.appId,                 //公众号名称，由商户传入
@@ -205,19 +206,19 @@
 				  }
 				)
 			},
-			Gopay(){　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　//点击付款按钮开始支付
-				console.log("开始支付")
-				if (typeof WeixinJSBridge == "undefined"){
-				  if( document.addEventListener ){
-					document.addEventListener('WeixinJSBridgeReady', this.onBridgeReady(), false);
-				  }else if (document.attachEvent){
-					document.attachEvent('WeixinJSBridgeReady', this.onBridgeReady());
-					document.attachEvent('onWeixinJSBridgeReady', this.onBridgeReady());
-				  }
-				}else{
-				  this.onBridgeReady();
-				}
-			},
+			// Gopay(){　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　//点击付款按钮开始支付
+			// 	console.log("开始支付")
+			// 	if (typeof WeixinJSBridge == "undefined"){
+			// 	  if( document.addEventListener ){
+			// 		document.addEventListener('WeixinJSBridgeReady', this.onBridgeReady(), false);
+			// 	  }else if (document.attachEvent){
+			// 		document.attachEvent('WeixinJSBridgeReady', this.onBridgeReady());
+			// 		document.attachEvent('onWeixinJSBridgeReady', this.onBridgeReady());
+			// 	  }
+			// 	}else{
+			// 	  this.onBridgeReady();
+			// 	}
+			// },
 			handleSubmit(){
 				// let data = JSON.parse(uni.getStorageSync('PAYMENT_ORDER_INFO'));
 				let data = {
@@ -249,7 +250,16 @@
 						this.payInfo.package = res.result.payResponse.wxPayResponse.packageStr;
 						this.payInfo.signType = res.result.payResponse.wxPayResponse.signType;
 						this.payInfo.paySign = res.result.payResponse.wxPayResponse.paySign;
-						this.onBridgeReady();
+						if (typeof WeixinJSBridge == "undefined"){
+						  if( document.addEventListener ){
+							document.addEventListener('WeixinJSBridgeReady', this.onBridgeReady(), false);
+						  }else if (document.attachEvent){
+							document.attachEvent('WeixinJSBridgeReady', this.onBridgeReady());
+							document.attachEvent('onWeixinJSBridgeReady', this.onBridgeReady());
+						  }
+						}else{
+						  this.onBridgeReady();
+						}
 					}
 				})
 				.catch( err => {
