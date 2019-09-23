@@ -9,7 +9,7 @@
 						<text class="name">{{initData.address && initData.address.addressRecipients}}</text>
 						<text class="mobile">{{initData.address && initData.address.addressPhone}}</text>
 					</view>
-					<view class="address">{{initData.address && initData.address.addressSheng}}{{initData.address && initData.address.addressShi}}{{initData.address && initData.address.addressQu}}{{initData.address && initData.address.addressAddress}}</view>
+					<view class="address">{{initData.address && initData.address.addressDetail}}</view>
 				</view>
 				<!-- <text class="iconfont icon-arrowRight icon-you"></text> -->
 			</view>
@@ -19,13 +19,21 @@
 
 		<view class="goods-section mt-20">
 			<!-- 商品列表 -->
-			<view class="g-item border-bottom" v-for="(row, index) in initData.goodsList">
+			<view class="g-item border-bottom" v-for="(row, index) in initData.goodsListDetailList">
 				<image :src="row.goodsMainimagepath"></image>
 				<view class="right">
 					<view class="title clamp">{{row.goodsProductname}}</view>
 					<view class="spec">{{row.goodsTitle}}</view>
 					<view class="price-box">
-						<text class="price">￥<text class="num">{{row.salePrice}}</text></text>
+						<text class="priceInfo">
+							<view class="salePrice" v-if="row.salePrice">
+								¥<text class="price">{{row.salePrice}}</text>
+							</view>
+							<view class="and" v-if="row.salePrice && row.credits">+</view>
+							<view class="salePoints" v-if="row.credits">
+								<text class="points">{{row.credits}}</text>分
+							</view>
+						</text>
 						<text class="number">x {{row.goodsCount}}</text>
 					</view>
 				</view>
@@ -82,18 +90,14 @@
 					</view>
 				</view>
 			</view> -->
-			<view class="yt-list-cell">
+			<!-- <view class="yt-list-cell" v-if="initData.coupons">
 				<view class="cell-tit ticket-tit">
 					<text class="ticket-name">优惠券</text>
-					<!-- <text class="ticket">
-						<text class="num">0</text>张可用
-					</text> -->
 				</view>
 				<view class="cell-tip cell-coupon-tip">
-					<view class="red">-¥<text class="num">0.00</text></view>
-					<!-- <view class="icon-arrow iconfont icon-arrowRight"></view> -->
+					<view class="red">-¥<text class="num">{{initData.coupons}}</text></view>
 				</view>
-			</view>
+			</view> -->
 		</view>
 		<view class="yt-list mt-20">
 			<view class="yt-list-cell">
@@ -112,21 +116,20 @@
 					<text class="red">¥<text class="num">{{initData.expressFee}}</text></text>
 				</view>
 			</view>
-			<view class="yt-list-cell" v-if='balanceType'>
+			<view class="yt-list-cell" v-if='initData.balance'>
 				<view class="cell-tit">
 					余额支付
 				</view>
 				<view class="cell-tip">
-					<text class="red" v-if="initData.isBalance">¥<text class="num">{{initData.balance}}</text></text>
-					<text class="red" v-if="!initData.isBalance">¥<text class="num">0</text></text>
+					<text class="red">¥<text class="num">{{initData.balance}}</text></text>
 				</view>
 			</view>
-			<view class="yt-list-cell">
+			<view class="yt-list-cell" v-if="initData.coupons">
 				<view class="cell-tit">
 					优惠支付
 				</view>
 				<view class="cell-tip">
-					<text class="red">¥<text class="num">0.00</text></text>
+					<text class="red">¥<text class="num">{{initData.coupons}}</text></text>
 				</view>
 			</view>
 			<view class="yt-list-cell border-top">
@@ -134,7 +137,7 @@
 					
 				</view>
 				<view class="cell-tip cell-amount-tip">
-					实付金额<text class="price red">¥<text class="num">{{initData.payPrice}}</text></text>
+					实付金额<text class="price red">¥<text class="num">{{payPrice}}</text></text>
 				</view>
 			</view>
 		</view>
@@ -448,10 +451,14 @@
 				bottom: -6upx;
 				right: 0;
 				font-size: 24upx;
-				.price {
+				.priceInfo{
 					color: #E93548;
-					.num{
-						font-size: 32upx;
+					display: flex;
+					flex-direction: row;
+					justify-content : flex-start;
+					align-items : flex-end;
+					.and{
+						padding-left: 10upx;
 					}
 				}
 				.number{
