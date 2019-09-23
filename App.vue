@@ -17,12 +17,14 @@
 				return null;
 			},
 			clearUserInfo(){
+				debugger;
 				uni.removeStorageSync('hasLogin');
 				uni.removeStorageSync('token');
 				uni.removeStorageSync('uniCode');
 				uni.removeStorageSync('userInfo');
 			},
 			getMallDomain(){
+				debugger;
 				let mallDomain = this.GetQueryString('mallDomain');
 				if(mallDomain){
 					let storageMallDomain = uni.getStorageSync('mallDomain');
