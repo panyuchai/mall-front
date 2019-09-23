@@ -207,6 +207,7 @@
 					}else{
 						alert(this.transferUrl);
 						alert('支付失败-----------------');
+						window.location.href='http://192.168.1.10:8888?mallDomain='+this.mallDomain;
 					}
 				  }
 				)
