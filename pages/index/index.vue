@@ -14,6 +14,7 @@
 			<!-- 005 1px白线显示 -->
 			<single-product v-if="item.type === '205'" :options="item.data"></single-product>
 			<recommend v-if="item.type === '203'" :options="item.data"></recommend>
+			<points v-if="item.type === '007'" :options="item.renderData" :customerName='userInfo.customerName'></points>
 		</block>
 		<button type="primary" @tap="clearInfo">清除登陆</button>
 	</view>
@@ -30,6 +31,7 @@
 	import SingleProduct from "@/components/singleproduct.vue";
 	import Recommend from "@/components/recommend.vue";
 	import Lines from "@/components/lines.vue";
+	import Points from "@/components/points.vue";
 
 	export default {
 		data() {
@@ -44,7 +46,8 @@
 			CategoryList,
 			SingleProduct,
 			Recommend,
-			Lines
+			Lines,
+			Points
 		},
 		methods: {
 			...mapMutations("common", ['SET_BASEINFO', 'SET_MALLTYPE', 'SET_MALLID', 'SET_MALLNAME', 'SET_MALLLOGO', 'SET_MALLDOMAIN']),
@@ -87,6 +90,7 @@
 					uni.setNavigationBarTitle({
 					    title: this.mallName
 					});
+					console.log(this.templateData)
 				})
 				.catch(err => {
 					console.log(err);
