@@ -215,6 +215,7 @@
 			},
 			handleSubmit(){
 				// let data = JSON.parse(uni.getStorageSync('PAYMENT_ORDER_INFO'));
+				alert('11111111111111')
 				let data = {
 					// ...this.baseInfo,
 					accountId: this.initData.accountId,
@@ -222,7 +223,7 @@
 					balance: this.initData.balance,
 					coupons: this.initData.coupons,
 					credits: this.initData.credits,
-					expressFee: initData.express.fee,
+					expressFee: this.initData.express.fee,
 					goodsList: this.initData.goodsListDetailList,
 					payPrice: this.payPrice,
 					totalPrice: this.initData.totalPrice,
