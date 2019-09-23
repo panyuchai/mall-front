@@ -50,7 +50,8 @@
 									window.location.href=uni.getStorageSync('referUrl');
 									uni.removeStorageSync('referUrl');
 								}else{
-									window.location.href=this.transferUrl + '?mallDomain='+options.mallDomain;
+									// window.location.href=this.transferUrl + '?mallDomain='+options.mallDomain;
+									window.location.href='http://192.168.1.10:8888?mallDomain='+options.mallDomain;
 								}
 							}
 						}else{
