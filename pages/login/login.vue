@@ -704,6 +704,9 @@
 						case 3:
 							this.isPasswordLogin=true;
 							break;
+						case 4:
+							this.isPhoneLogin=true;
+							break;
 						default:
 							console.log("login.vue--未标记商城类型");
 					}
@@ -714,6 +717,9 @@
 							break;
 						case 3:
 							this.isPasswordLogin=true;
+							break;
+						case 4:
+							this.isPhoneLogin=true;
 							break;
 						default:
 							console.log("login.vue--未标记商城类型");
