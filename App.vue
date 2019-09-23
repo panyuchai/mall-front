@@ -16,9 +16,19 @@
 				}
 				return null;
 			},
+			clearUserInfo(){
+				uni.removeStorageSync('hasLogin');
+				uni.removeStorageSync('token');
+				uni.removeStorageSync('uniCode');
+				uni.removeStorageSync('userInfo');
+			},
 			getMallDomain(){
 				let mallDomain = this.GetQueryString('mallDomain');
 				if(mallDomain){
+					let storageMallDomain = uni.getStorageSync('mallDomain');
+					if(storageMallDomain && storageMallDomain!==mallDomain){
+						this.clearUserInfo();
+					}
 					this.SET_MALLDOMAIN(mallDomain);
 				}
 			},

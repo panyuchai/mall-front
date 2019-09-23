@@ -313,7 +313,7 @@
 			debugger;
 			uni.setStorageSync('ORDER_NO', options.orderNo);
 			uni.setStorageSync('mallDomain', options.mallDomain);
-			uni.setStorageSync('token', options.token);
+			uni.setStorageSync('token', decodeURIComponent(options.token));
 			uni.setStorageSync('payPrice', options.orderPayPrice);
 			// uni.setStorageSync('PAYMENT_ORDER_INFO', options.paymentOrderInfo);
 			this.getInitInfo();

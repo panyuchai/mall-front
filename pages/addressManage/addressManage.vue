@@ -87,10 +87,6 @@
 					this.tui.toast("请输入正确的手机号码")
 					return;
 				}
-				if(!data.addressQu){
-					this.tui.toast("请在地图选择所在位置")
-					return;
-				}
 				if(!data.addressAddress){
 					this.tui.toast("请填写详细门牌号信息")
 					return;
