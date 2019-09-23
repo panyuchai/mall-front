@@ -181,8 +181,9 @@
 		},
 		onBackPress(eve) {
 			debugger;
+			alert('11111111111111')
 			alert(eve);
-			return;
+			return false;
 		},
 		methods: {
 			onBridgeReady(){　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　//使用微信浏览器内置的对象调起微信支付插件，并传入统一接口返回的参数
@@ -196,7 +197,6 @@
 					"paySign":this.payInfo.paySign                 //微信签名
 				  },
 				  function(res){
-					alert(res)
 					if(res.err_msg == "get_brand_wcpay_request:ok" ){
 					  // 使用以上方式判断前端返回,微信团队郑重提示：
 					  //res.err_msg将在用户支付成功后返回ok，但并不保证它绝对可靠。
@@ -311,7 +311,6 @@
 		},
 		computed: {
 			...mapState('common', ['baseInfo', 'userInfo']),
-			
 		},
 		onLoad(options){
 			uni.setStorageSync('ORDER_NO', options.orderNo);
