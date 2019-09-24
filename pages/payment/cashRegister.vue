@@ -208,8 +208,9 @@
 				  
 				}else{
 					alert('支付失败-----------------');
-					alert(that.mallDomain)
-					// window.location.href=that.transferUrl + '?mallDomain='+that.mallDomain;
+					alert(that.mallDomain);
+					alert(that.transferUrl + '?mallDomain='+that.mallDomain+'#/pages/order/order?state=1');
+					window.location.href=that.transferUrl + '?mallDomain='+that.mallDomain+'#/pages/order/order?state=1';
 				}
 			  }
 			)
