@@ -117,13 +117,15 @@
 		computed: {
 			...mapState('common', ['baseInfo', 'userInfo', 'mallType', 'mallDomain', 'mallName'])
 		},
+		onShow(){
+			this.getMallType();
+		},
 		onLoad(options) {
 			// if(options){
 			// 	this.SET_MALLDOMAIN(options.mallDomain)
 			// }
 			// debugger;
 			// alert(this.mallDomain)
-			this.getMallType();
 		},
 		
 	}

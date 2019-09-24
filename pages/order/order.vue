@@ -60,9 +60,9 @@
 											实付金额：
 										</view>
 										<view class="priceInfo">
-											<text class="salePrice" v-if="good.zsscMallGoods.salePrice"><text class="unit">￥</text></text>
+											<!-- <text class="salePrice" v-if="good.zsscMallGoods.salePrice"><text class="unit"></text></text> -->
 											<view class="saleMoney" v-if="good.zsscMallGoods.salePrice">
-												<text class="money">{{good.zsscMallGoods.salePrice}}</text>元
+												￥<text class="money">{{good.zsscMallGoods.salePrice}}</text>
 											</view>
 											<view class="and" v-if="good.zsscMallGoods.salePrice && good.zsscMallGoods.credits">
 												+
