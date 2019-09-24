@@ -208,6 +208,7 @@
 				  
 				}else{
 					alert('支付失败-----------------');
+					alert(this.mallDomain)
 					// window.location.href=that.transferUrl + '?mallDomain='+this.mallDomain;
 				}
 			  }
