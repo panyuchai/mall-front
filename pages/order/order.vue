@@ -332,7 +332,7 @@
 			},
 			// 去付款
 			linkToPayment(order){
-				window.location.href=`http://${this.paymentUrl}.yujianli.cn/#/pages/payment/cashRegister?orderNo=`+order.orderlistMainnum+"&mallDomain="+this.baseInfo.mallDomain+'&orderPayPrice='+order.payPrice+'&token='+encodeURIComponent(this.token);
+				window.location.href=`http://${this.paymentUrl}.yujianli.cn/#/pages/payment/cashRegister?orderNo=`+order.orderListnum+"&mallDomain="+this.baseInfo.mallDomain+'&orderPayPrice='+order.payPrice+'&token='+encodeURIComponent(this.token);
 			},
 			// 查看物流详情
 			linkToDelivery(orderId){
