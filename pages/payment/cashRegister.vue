@@ -199,18 +199,22 @@
 				"paySign":this.payInfo.paySign                 //微信签名
 			  },
 			  function(res){
+				  alert(JSON.stringify(res));
 				if(res.err_msg == "get_brand_wcpay_request:ok" ){
 				  // 使用以上方式判断前端返回,微信团队郑重提示：
 				  //res.err_msg将在用户支付成功后返回ok，但并不保证它绝对可靠。
 				  alert('支付成功-----------------');
+				  
 				  alert('res.err_msg == "get_brand_wcpay_request:ok"');
 				  // window.location.href=this.transferUrl + '?mallDomain='+this.mallDomain;
+				  // '/pages/orderDetail/orderDetail?orderId=' + orderId
 				  
+				  // uni.removeStorageSync('chooseAddress');
+				  window.location.href=that.transferUrl + '?mallDomain='+that.mallDomain + '#/pages/orderDetail/orderDetail?orderId='+''
 				}else{
 					alert('支付失败-----------------');
-					alert(that.mallDomain);
-					alert(that.transferUrl + '?mallDomain='+that.mallDomain+'#/pages/order/order?state=1');
-					window.location.href=that.transferUrl + '?mallDomain='+that.mallDomain+'#/pages/order/order?state=1';
+					// uni.removeStorageSync('chooseAddress');
+					window.location.href=that.transferUrl + '?mallDomain='+that.mallDomain + '#/pages/order/order?state=0';
 				}
 			  }
 			)
