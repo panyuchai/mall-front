@@ -207,9 +207,8 @@
 				  // window.location.href=this.transferUrl + '?mallDomain='+this.mallDomain;
 				  
 				}else{
-					alert(that.transferUrl)
 					alert('支付失败-----------------');
-					// window.location.href='http://192.168.1.10:8888?mallDomain='+this.mallDomain;
+					window.location.href=that.transferUrl + '?mallDomain='+this.mallDomain+'/pages/order/order?state=0';
 				}
 			  }
 			)
