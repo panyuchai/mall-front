@@ -183,34 +183,36 @@
 			debugger;
 			alert('11111111111111')
 			alert(eve);
-			return false;
+			return true;
 		},
 		methods: {
 			onBridgeReady(){　　　　　　　　　　　　　　　　　　　　　　　　　　　//使用微信浏览器内置的对象调起微信支付插件，并传入统一接口返回的参数
 			alert('onBridgeReady 开始调用-------------');
-				WeixinJSBridge.invoke(
-				  'getBrandWCPayRequest', {
-					"appId":this.payInfo.appId,                 //公众号名称，由商户传入
-					"timeStamp":this.payInfo.timeStamp,         //时间戳，自1970年以来的秒数
-					"nonceStr":this.payInfo.nonceStr,           //随机字符串
-					"package":this.payInfo.package,            //支付验证pay_id
-					"signType":this.payInfo.signType,                           //微信签名方式
-					"paySign":this.payInfo.paySign                 //微信签名
-				  },
-				  function(res){
-					if(res.err_msg == "get_brand_wcpay_request:ok" ){
-					  // 使用以上方式判断前端返回,微信团队郑重提示：
-					  //res.err_msg将在用户支付成功后返回ok，但并不保证它绝对可靠。
-					  alert('支付成功-----------------');
-					  alert('res.err_msg == "get_brand_wcpay_request:ok"');
-					  // window.location.href=this.transferUrl + '?mallDomain='+this.mallDomain;
-					}else{
-						alert(this.transferUrl);
-						alert('支付失败-----------------');
-						// window.location.href='http://192.168.1.10:8888?mallDomain='+this.mallDomain;
-					}
-				  }
-				)
+			var that = this;
+			WeixinJSBridge.invoke(
+			  'getBrandWCPayRequest', {
+				"appId":this.payInfo.appId,                 //公众号名称，由商户传入
+				"timeStamp":this.payInfo.timeStamp,         //时间戳，自1970年以来的秒数
+				"nonceStr":this.payInfo.nonceStr,           //随机字符串
+				"package":this.payInfo.package,            //支付验证pay_id
+				"signType":this.payInfo.signType,                           //微信签名方式
+				"paySign":this.payInfo.paySign                 //微信签名
+			  },
+			  function(res){
+				if(res.err_msg == "get_brand_wcpay_request:ok" ){
+				  // 使用以上方式判断前端返回,微信团队郑重提示：
+				  //res.err_msg将在用户支付成功后返回ok，但并不保证它绝对可靠。
+				  alert('支付成功-----------------');
+				  alert('res.err_msg == "get_brand_wcpay_request:ok"');
+				  // window.location.href=this.transferUrl + '?mallDomain='+this.mallDomain;
+				  
+				}else{
+					alert(that.transferUrl)
+					alert('支付失败-----------------');
+					// window.location.href='http://192.168.1.10:8888?mallDomain='+this.mallDomain;
+				}
+			  }
+			)
 			},
 			// Gopay(){　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　//点击付款按钮开始支付
 			// 	console.log("开始支付")
