@@ -44,12 +44,13 @@
 						}
 					}
 					this.SET_MALLDOMAIN(mallDomain);
-				}else{
-					uni.showToast({
-						icon: 'none',
-						title: '当前链接未携带mallDomain参数'
-					})
 				}
+				// else{
+				// 	uni.showToast({
+				// 		icon: 'none',
+				// 		title: '当前链接未携带mallDomain参数'
+				// 	})
+				// }
 			},
 			checkMallType(){
 				this.$http.post('/mall/app/login/mall/shopmall/type', {

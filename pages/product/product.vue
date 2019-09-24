@@ -83,7 +83,7 @@
 						</view>
 					</view>
 				</view>
-				<view v-if="item.tag" class="tag">
+				<view v-if="item.label" class="tag">
 					{{item.label}}
 				</view>
 			</view>

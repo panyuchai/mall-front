@@ -144,7 +144,7 @@
     },
     "globalStyle": {
 		"navigationBarTextStyle": "black",
-		"navigationBarTitleText": "专属商城",
+		"navigationBarTitleText": "",
 		"navigationBarBackgroundColor": "#ffffff",
 		"backgroundColor": "#F8F8F8"
 		

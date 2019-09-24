@@ -428,7 +428,7 @@
 			handleWebPay(data){
 				this.$http.post('/mall/app/order/submit', {
 					...data,
-					payChannels: '2',
+					payChannels: '',
 				})
 				.then( res => {
 					if(res.result.orderState == 1){
