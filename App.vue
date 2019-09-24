@@ -20,15 +20,36 @@
 				uni.removeStorageSync('hasLogin');
 				uni.removeStorageSync('token');
 				uni.removeStorageSync('uniCode');
+				removeStore({ name: 'userInfo' });
 			},
 			getMallDomain(){
 				let mallDomain = this.GetQueryString('mallDomain');
 				if(mallDomain){
-					let storageMallDomain = this.baseInfo.mallDomain;
+					let storageMallDomain = this.mallDomain;
 					if(storageMallDomain && storageMallDomain!==mallDomain){
 						this.clearUserInfo();
+					}else{
+						if(uni.getStorageSync('hasLogin')){
+							this.SET_HASLOGIN(uni.getStorageSync('hasLogin'));
+						}
+						if(uni.getStorageSync('token')){
+							this.SET_TOKEN(uni.getStorageSync('token'));
+						}
+						if(uni.getStorageSync('uniCode')){
+							this.SET_UNICODE(uni.getStorageSync('uniCode'));
+						}
+						let storageUserInfo = getStore({ name: 'userInfo' });
+						if(storageUserInfo){
+							this.SET_USERIFNO(storageUserInfo);
+						}
 					}
 					this.SET_MALLDOMAIN(mallDomain);
+				}else{
+					uni.showToast({
+						icon: 'none',
+						title: '当前链接未携带mallDomain参数'
+					})
+					return;
 				}
 			},
 			checkMallType(){
@@ -88,26 +109,10 @@
 				// if(getStore({ name: 'userInfo' })){
 				// 	this.SET_USERIFNO(getStore({ name: 'userInfo' }));
 				// }
-				if(uni.getStorageSync('hasLogin')){
-					this.SET_HASLOGIN(uni.getStorageSync('hasLogin'));
+				if(uni.getStorageSync('mallDomain')){
+					this.SET_MALLDOMAIN(uni.getStorageSync('mallDomain'));
 				}
-				if(uni.getStorageSync('token')){
-					this.SET_TOKEN(uni.getStorageSync('token'));
-				}
-				if(uni.getStorageSync('uniCode')){
-					this.SET_UNICODE(uni.getStorageSync('uniCode'));
-				}
-				// if(uni.getStorageSync('userInfo')){
-				// 	this.SET_USERIFNO(uni.getStorageSync('userInfo'));
-				// }
-				let storageUserInfo = getStore({ name: 'userInfo' }),
-					storageBaseInfo = getStore({ name: 'baseInfo' });
-				if(storageUserInfo){
-					this.SET_USERIFNO(storageUserInfo);
-				}
-				if(storageBaseInfo){
-					this.SET_BASEINFO(storageBaseInfo);
-				}
+				
 			},
 			browserRedirect(options) {
 				var sUserAgent = navigator.userAgent.toLowerCase();

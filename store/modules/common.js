@@ -77,7 +77,7 @@ const mutations = {
 	},
 	SET_MALLDOMAIN: (state, mallDomain) => {
 		state.mallDomain = mallDomain;
-		
+		uni.setStorageSync('mallDomain', mallDomain)
 	},
 	SET_MALLTYPE: (state, mallType) => {
 		state.mallType = mallType;

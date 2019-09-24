@@ -203,11 +203,11 @@
 					  //res.err_msg将在用户支付成功后返回ok，但并不保证它绝对可靠。
 					  alert('支付成功-----------------');
 					  alert('res.err_msg == "get_brand_wcpay_request:ok"');
-					  window.location.href=this.transferUrl + '?mallDomain='+this.mallDomain;
+					  // window.location.href=this.transferUrl + '?mallDomain='+this.mallDomain;
 					}else{
 						alert(this.transferUrl);
 						alert('支付失败-----------------');
-						window.location.href='http://192.168.1.10:8888?mallDomain='+this.mallDomain;
+						// window.location.href='http://192.168.1.10:8888?mallDomain='+this.mallDomain;
 					}
 				  }
 				)
