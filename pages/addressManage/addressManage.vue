@@ -69,7 +69,11 @@
 						this.addressData.addressSheng=data.address.slice(0,Sheng+1);
 						this.addressData.addressShi=data.address.slice(Sheng+1,Shi+1);
 						this.addressData.addressQu=data.address.slice(Shi+1,Qu+1);
-						this.addressData.addressAddress=data.address.slice(Shi+1);
+						if(this.addressData.addressQu){
+							this.addressData.addressAddress=data.address.slice(Qu+1);
+						}else{
+							this.addressData.addressAddress=data.address.slice(Shi+1);
+						}
 					}
 				})
 			},

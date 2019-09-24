@@ -49,7 +49,6 @@
 						icon: 'none',
 						title: '当前链接未携带mallDomain参数'
 					})
-					return;
 				}
 			},
 			checkMallType(){

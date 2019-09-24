@@ -56,7 +56,21 @@
 										共{{good.goodsCount}}件商品
 									</view>
 									<view class="_right">
-										实付金额：<text class="price">¥{{good.zsscMallGoods.salePrice}}</text>
+										<view class="tit">
+											实付金额：
+										</view>
+										<view class="priceInfo">
+											<text class="salePrice" v-if="good.zsscMallGoods.salePrice"><text class="unit">￥</text></text>
+											<view class="saleMoney" v-if="good.zsscMallGoods.salePrice">
+												<text class="money">{{good.zsscMallGoods.salePrice}}</text>元
+											</view>
+											<view class="and" v-if="good.zsscMallGoods.salePrice && good.zsscMallGoods.credits">
+												+
+											</view>
+											<view class="salePoints" v-if="good.zsscMallGoods.credits">
+												<text class="points">{{good.zsscMallGoods.credits}}</text>分
+											</view>
+										</view>
 									</view>
 								</view>
 							</view>
@@ -546,16 +560,40 @@
 					padding-bottom: 14upx;
 					display: flex;
 					justify-content: space-between;
-					align-items: center;
+					align-items: flex-end;
 					color: #A0A0A0;
 					._left{
 						font-size: 24upx;
 					}
 					._right{
 						font-size: 28upx;
-						.price{
-							font-size: 24upx;
-							color: #2F2F2F;
+						display: flex;
+						justify-content : flex-start;
+						align-items : flex-end;
+						.priceInfo{
+							// font-size: 24upx;
+							display: flex;
+							flex-direction:row;
+							justify-content : flex-start;
+							align-items : flex-end;
+							.saleprice {
+								.unit{
+									// font-size: 24upx;
+								}
+							}
+							.saleMoney{
+								.money{
+									// font-size: 32upx;
+								}
+							}
+							.and{
+								padding-left: 10upx;
+							}
+							.salePoints{
+								.points{
+									// font-size: 28upx;
+								}
+							}
 						}
 					}
 				}
