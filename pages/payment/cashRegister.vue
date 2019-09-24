@@ -205,17 +205,17 @@
 				  //res.err_msg将在用户支付成功后返回ok，但并不保证它绝对可靠。
 				  alert('支付成功-----------------');
 				  // uni.removeStorageSync('chooseAddress');
-				  // window.location.href=that.transferUrl + '?mallDomain='+that.mallDomain + '#/pages/orderDetail/orderDetail?orderId='+that.initData.orderId;
-				  uni.redirectTo({
-					  url: that.transferUrl+'?mallDomain='+that.mallDomain+'&orderId='+that.initData.orderId
-				  })
+				  window.location.href=that.transferUrl + '?mallDomain='+that.mallDomain + '#/pages/orderDetail/orderDetail?orderId='+that.initData.orderId;
+				  // uni.redirectTo({
+					 //  url: that.transferUrl+'?mallDomain='+that.mallDomain+'&orderId='+that.initData.orderId
+				  // })
 				}else{
 					alert('支付失败-----------------');
 					// uni.removeStorageSync('chooseAddress');
-					// window.location.href=that.transferUrl + '?mallDomain='+that.mallDomain + '#/pages/order/order?state=0';
-					uni.redirectTo({
-					   url: that.transferUrl+'?mallDomain='+that.mallDomain+'&orderId='+that.initData.orderId
-					})
+					window.location.href=that.transferUrl + '?mallDomain='+that.mallDomain + '#/pages/order/order?state=0';
+					// uni.redirectTo({
+					//    url: that.transferUrl+'?mallDomain='+that.mallDomain+'&orderId='+that.initData.orderId
+					// })
 				}
 			  }
 			)
