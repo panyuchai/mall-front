@@ -80,7 +80,7 @@
 						<view class="action-btn" v-if="item.orderlistState == 0" @tap.stop="cancelOrder(item.orderlistId)">
 							取消订单
 						</view>
-						<view class="action-btn action-red" v-if="item.orderlistState == 0" @tap.stop="linkToPayment(item.details)">
+						<view class="action-btn action-red" v-if="item.orderlistState == 0" @tap.stop="linkToPayment(item)">
 							去付款
 						</view>
 						<view class="action-btn " v-if="item.orderlistState==2 || item.orderlistState==3 || item.orderlistState==4" @tap.stop="linkToDelivery(item.orderlistId)">
@@ -236,7 +236,7 @@
 					accountId: this.userInfo && this.userInfo.accountId || '',
 				})
 				.then( res => {
-					// console.log(res)
+					console.log(res)
 					if(res.code == 0){
 						if(res.result){
 							this.searchData.totalPage=res.result.pages;
@@ -332,23 +332,7 @@
 			},
 			// 去付款
 			linkToPayment(order){
-				let payOrder = [];
-				order.map(item => {
-					payOrder.push({
-						goodsCount: item.goodsCount,
-						mallGoodsId: item.zsscMallGoods.id
-					})
-				});
-				// console.log(payOrder)
-				uni.setStorage({
-					key:'buyList',
-					data:payOrder,
-					success: () => {
-						uni.navigateTo({
-							url:'/pages/payment/payment'
-						})
-					}
-				})
+				window.location.href=`http://${this.paymentUrl}.yujianli.cn/#/pages/payment/cashRegister?orderNo=`+order.orderlistMainnum+"&mallDomain="+this.baseInfo.mallDomain+'&orderPayPrice='+order.relPayPrice+'&token='+encodeURIComponent(this.token);
 			},
 			// 查看物流详情
 			linkToDelivery(orderId){
@@ -404,7 +388,7 @@
 			this.loadData(uni.getStorageSync('order_searchType_storage'));
 		},
 		computed: {
-			...mapState('common', ['baseInfo', 'userInfo'])
+			...mapState('common', ['baseInfo', 'userInfo', 'paymentUrl', 'token'])
 		}
 	}
 </script>

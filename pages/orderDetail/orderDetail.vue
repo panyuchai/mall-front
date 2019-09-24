@@ -159,7 +159,7 @@
 			<view class="action-btn" v-if="initData.orderlistState == 0" @tap="cancelOrder(initData.orderlistId)">
 				取消订单
 			</view>
-			<view class="action-btn action-red" v-if="initData.orderlistState == 0" @tap="linkToPayment(initData.details)">
+			<view class="action-btn action-red" v-if="initData.orderlistState == 0" @tap="linkToPayment(initData)">
 				去付款
 			</view>
 			<view class="action-btn action-red" v-if="initData.orderlistState == 2" @tap="confirmOrder(initData.orderlistId)">
@@ -187,22 +187,7 @@
 				})
 			},
 			linkToPayment(order){
-				let payOrder = [];
-				order.map(item => {
-					payOrder.push({
-						goodsCount: item.goodsCount,
-						mallGoodsId: item.mallGoodsId
-					})
-				});
-				uni.setStorage({
-					key:'buyList',
-					data:payOrder,
-					success: () => {
-						uni.navigateTo({
-							url:'/pages/payment/payment'
-						})
-					}
-				})
+				window.location.href=`http://${this.paymentUrl}.yujianli.cn/#/pages/payment/cashRegister?orderNo=`+order.orderlistMainnum+"&mallDomain="+this.baseInfo.mallDomain+'&orderPayPrice='+order.relPayPrice+'&token='+encodeURIComponent(this.token);
 			},
 			confirmOrder(orderId){
 				this.$http.post('/mall/app/order/receive', {
@@ -333,7 +318,7 @@
 			}
 		},
 		computed: {
-			...mapState('common', ['baseInfo', 'userInfo'])
+			...mapState('common', ['baseInfo', 'userInfo', 'paymentUrl', 'token'])
 		},
 		onLoad(options){
 			this.loadData(options.orderId);
