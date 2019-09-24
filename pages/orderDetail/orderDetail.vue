@@ -187,7 +187,7 @@
 				})
 			},
 			linkToPayment(order){
-				window.location.href=`http://${this.paymentUrl}.yujianli.cn/#/pages/payment/cashRegister?orderNo=`+order.orderListnum+"&mallDomain="+this.baseInfo.mallDomain+'&orderPayPrice='+order.payPrice+'&token='+encodeURIComponent(this.token);
+				window.location.href=`http://${this.paymentUrl}.yujianli.cn/#/pages/payment/cashRegister?orderNo=`+order.orderlistNum+"&mallDomain="+this.baseInfo.mallDomain+'&orderPayPrice='+order.payPrice+'&token='+encodeURIComponent(this.token);
 			},
 			confirmOrder(orderId){
 				this.$http.post('/mall/app/order/receive', {
