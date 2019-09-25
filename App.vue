@@ -21,6 +21,7 @@
 				uni.removeStorageSync('token');
 				uni.removeStorageSync('uniCode');
 				removeStore({ name: 'userInfo' });
+				removeStore({ name: 'baseInfo' });
 			},
 			getMallDomain(){
 				let mallDomain = this.GetQueryString('mallDomain');
