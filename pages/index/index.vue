@@ -56,6 +56,7 @@
 				uni.removeStorageSync('token')
 				uni.removeStorageSync('uniCode')
 				uni.removeStorageSync('userInfo')
+				uni.removeStorageSync('baseInfo');
 			},
 			checkMallType(){
 				this.$http.post('/mall/app/login/mall/shopmall/type', {
