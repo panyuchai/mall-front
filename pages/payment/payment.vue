@@ -95,6 +95,14 @@
 					</view>
 				</view>
 			</view>
+			<view class="yt-list-cell border-bottom">
+				<view class="cell-tit">
+					剩余积分
+				</view>
+				<view class="cell-tip cell-account-tip">
+					<view class="num red">{{payData.userCredits}}</view>
+				</view>
+			</view>
 			<view class="yt-list-cell" @tap="linkToCoupon">
 				<view class="cell-tit ticket-tit">
 					<text class="ticket-name">优惠券</text>
