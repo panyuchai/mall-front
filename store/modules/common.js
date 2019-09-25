@@ -4,10 +4,8 @@ const state = {
    * 是否需要强制登录
    */
   baseUrl: 'http://mall-api.yujianli.cn',
-  // baseUrl: 'http://192.168.1.135:8086',
+  // transferUrl: '',
   paymentUrl: 'testpay',
-  transferUrl: 'http://192.168.1.10:8888',
-  // transferUrl: 'http://192.168.1.108:8080',
   mallDomain: '',
   mallType: '',
   mallId: null,
@@ -58,8 +56,15 @@ const mutations = {
 	// 	removeStore({ name: 'userInfo' });
 	// 	removeStore({ name: 'hasLogin' });
 	// },
+	
 	SET_FIRSTLOAD: (state, firstLoad) => {
 		state.firstLoad = firstLoad;
+	},
+	SET_BASEURL: (state, baseUrl) => {
+		state.baseUrl = baseUrl;
+	},
+	SET_TRANSFERURL: (state, transferUrl) => {
+		state.transferUrl = transferUrl;
 	},
 	SET_ISTRANSFERPAGE: (state, isTransferPage) => {
 		state.isTransferPage = isTransferPage;

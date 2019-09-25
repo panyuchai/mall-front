@@ -24,7 +24,14 @@
 				removeStore({ name: 'baseInfo' });
 			},
 			getMallDomain(){
+				 // ncs.yujianli.cn
 				let mallDomain = this.GetQueryString('mallDomain');
+				// if(!mallDomain){
+				// 	let hostName = window.location.hostname,
+				// 		hostMallDomain = window.location.hostname.split('.')[0];
+				// 	// this.SET_TRANSFERURL(hostName);
+				// 	this.SET_MALLDOMAIN(hostMallDomain);
+				// }
 				if(mallDomain){
 					let storageMallDomain = this.mallDomain;
 					if(storageMallDomain && storageMallDomain!==mallDomain){
@@ -165,7 +172,7 @@
 					isTransferPage = true;
 				}
 				if(urlPath && isTransferPage){
-					window.location.href=this.baseUrl + '/mall/app/login/mall/wxweb?mallDomain='+this.mallDomain+'&redirectUrl='+this.transferUrl; // +'&redirectUrl=http://192.168.1.112:8080'
+					window.location.href=this.baseUrl + '/mall/app/login/mall/wxweb?mallDomain='+this.mallDomain; // +'&redirectUrl='+this.transferUrl
 				}
 				if(isTransferPage === false){
 					uni.removeStorageSync('isTransferPage');
