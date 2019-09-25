@@ -153,7 +153,7 @@
 			</view>
 		</view>
 		<view class="action-box">
-			<view class="action-btn">
+			<view class="action-btn" @tap="makePhoneCall">
 				联系客服
 			</view>
 			<view class="action-btn" v-if="initData.orderlistState == 0" @tap="cancelOrder(initData.orderlistId)">
@@ -242,6 +242,11 @@
 				            console.log('用户点击取消');
 				        }
 				    }
+				});
+			},
+			makePhoneCall(){
+				uni.makePhoneCall({
+				    phoneNumber: '4009006669'
 				});
 			},
 			transformStatus(num){

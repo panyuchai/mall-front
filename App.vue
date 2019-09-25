@@ -249,7 +249,7 @@
 			}
 		},
 		onLaunch: function(options) {
-			alert(JSON.stringify(options)+'-------------------------');
+			// alert(JSON.stringify(options)+'-------------------------');
 			this.initData();
 			this.getMallDomain();
 			this.checkMallType();

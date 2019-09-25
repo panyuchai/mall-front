@@ -260,9 +260,15 @@
 		},
 		methods: {
 			linkToAddress(){
-				uni.navigateTo({
-					url: '/pages/address/address?source=1'
-				})
+				if(this.address.addressRecipients === '请先去创建地址'){
+					uni.navigateTo({
+						url: `/pages/addressManage/addressManage?type=add`
+					})
+				}else{
+					uni.navigateTo({
+						url: '/pages/address/address?source=1'
+					})
+				}
 			},
 			linkToCoupon(){
 				uni.redirectTo({

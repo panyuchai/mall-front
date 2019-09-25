@@ -77,7 +77,7 @@
 					</view>
 					<text class="iconfont icon-arrowRight icon-arrow"></text>
 				</view>
-				<view class="list-cell">
+				<view class="list-cell" @tap="makePhoneCall">
 					<view class="cell-tit">
 						联系客服
 					</view>
@@ -135,6 +135,11 @@
 				uni.navigateTo({  
 					url
 				})  
+			},
+			makePhoneCall(){
+				uni.makePhoneCall({
+				    phoneNumber: '4009006669'
+				});
 			},
 			initPayNum(){
 				this.$http.post('/mall/app/order/count', {
