@@ -571,6 +571,7 @@
 			// 	WeixinJSBridge.call('hideOptionMenu');
 			// },
 			weixinSendAppMessage(title,desc,link,imgUrl){
+				alert('weixinSendAppMessage开始---------------')
 				WeixinJSBridge.invoke('sendAppMessage',{
 				//”appid”:appId,
 				'img_url':'',
