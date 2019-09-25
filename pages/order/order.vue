@@ -372,6 +372,9 @@
 			},
 			
 		},
+		onShow(){
+			alert(document.referrer);
+		},
 		onLoad(options){
 			this.loadData(this.transUserState(Number(options.state)));
 			this.type=options.state;
