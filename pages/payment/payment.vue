@@ -480,7 +480,7 @@
 					goodsList: this.goodsList,
 					payPrice: this.payPrice,
 					remark: this.remark,
-					totalPrice: this.totalPriceDecrease,
+					totalPrice: this.payData.totalPrice,
 					address: this.address
 				};
 				if(this.isWx){
