@@ -398,10 +398,16 @@
 							})
 						}, 1000)
 					}else{
-						
-						// uni.setStorageSync('PAYMENT_ORDER_INFO', JSON.stringify(data));
-						// window.location.href=`http://${this.paymentUrl}.yujianli.cn/#/pages/payment/cashRegister?orderNo=`+res.result.orderNo+"&mallDomain="+this.baseInfo.mallDomain+'&paymentOrderInfo'+JSON.stringify(data);
-						window.location.href=`http://${this.paymentUrl}.yujianli.cn/#/pages/payment/cashRegister?orderNo=`+res.result.orderNo+"&mallDomain="+this.baseInfo.mallDomain+'&orderPayPrice='+data.payPrice+'&token='+encodeURIComponent(this.token);
+						if(res.code == 0){
+							// uni.setStorageSync('PAYMENT_ORDER_INFO', JSON.stringify(data));
+							// window.location.href=`http://${this.paymentUrl}.yujianli.cn/#/pages/payment/cashRegister?orderNo=`+res.result.orderNo+"&mallDomain="+this.baseInfo.mallDomain+'&paymentOrderInfo'+JSON.stringify(data);
+							window.location.href=`http://${this.paymentUrl}.yujianli.cn/#/pages/payment/cashRegister?orderNo=`+res.result.orderNo+"&mallDomain="+this.baseInfo.mallDomain+'&orderPayPrice='+data.payPrice+'&token='+encodeURIComponent(this.token);
+						}else{
+							uni.showToast({
+								icon: 'none',
+								title: res.message
+							})
+						}
 						
 						
 						// this.$http.post('/mall/app/order/submit', {
@@ -645,8 +651,9 @@
 		.order-content {
 			display: flex;
 			align-items: center;
+			min-height: 60upx;
+			padding-bottom: 5upx;
 		}
-
 		.cen {
 			font-size: 28upx;
 			color: #343434;
@@ -655,21 +662,17 @@
 			flex: 1;
 			margin-right: 30upx;
 		}
-
 		.name {
 			margin-right: 24upx;
 		}
-
 		.address {
 			font-size: 28upx;
 			color: #848484;
 		}
-
 		.icon-you {
 			font-size: 40upx;
 			color: #C6C6C6;
 		}
-
 		.a-bg {
 			position: absolute;
 			left: 0;

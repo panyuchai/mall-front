@@ -19,14 +19,14 @@
 			<view class="tit">详细地址</view>
 			<input class="input" type="text" v-model="addressData.addressAddress" placeholder="请输入详细地址" placeholder-class="placeholder" />
 		</view>
-		<!-- <view class="row">
+		<view class="row">
 			<view class="tit">设为默认地址</view>
 			<switch class="switchBtn" :checked='Boolean(addressData.addressSelected)' @change="switchChange" style="transform:scale(0.8)" color="#E93548" />
-		</view> -->
+		</view>
 		
 		<!-- <view class="row default-row">
 			<text class="tit">设为默认</text>
-			<switch :checked="addressData.defaule" color="#fa436a" @change="switchChange" />
+			<switch :checked="addressData.addressSelected" color="#fa436a" @change="switchChange" />
 		</view> -->
 		<button class="add-btn" @click="confirm">确定</button>
 		<button class="delete-btn" @click="deleteAddress">删除</button>
@@ -50,13 +50,13 @@
 					addressShi: '',
 					addressQu: '',
 					addressAddress: '',
-					addressSelected: 0
+					selected: 0
 				}
 			}
 		},
 		methods: {
 			// switchChange(e){
-			// 	this.addressData.default = e.detail;
+			// 	this.addressData.selected = e.detail;
 			// },
 			
 			//地图选择地址
@@ -78,7 +78,7 @@
 				})
 			},
 			switchChange(val){
-				this.addressData.addressSelected=Number(val.detail.value);
+				this.addressData.selected=Number(val.detail.value);
 			},
 			//提交
 			confirm(){
@@ -123,7 +123,7 @@
 						city: this.addressData.addressShi,
 						district: this.addressData.addressQu,
 						address: this.addressData.addressAddress,
-						addressSelected: this.addressData.addressSelected
+						selected: this.addressData.selected
 					})
 					.then( res => {
 						if(res.code == 0){
@@ -147,7 +147,7 @@
 						city: this.addressData.addressShi,
 						district: this.addressData.addressQu,
 						address: this.addressData.addressAddress,
-						addressSelected: this.addressData.addressSelected
+						selected: this.addressData.selected
 					})
 					.then( res => {
 						if(res.code == 0){

@@ -1,11 +1,11 @@
 <template>
 	<view class="content">
 		<view class="list border-bottom" v-for="(item, index) in addressList" :key="index" @click="checkAddress(item,index)">
-			<view class="checkbox-box" @tap.stop="changeDefaultAddress(item.addressId)">
+			<!-- <view class="checkbox-box" @tap.stop="changeDefaultAddress(item.addressId)">
 				<view class="checkbox" :class="[item.addressSelected?'on':'']">
 					<view :class="[item.addressSelected?'on':'']"></view>
 				</view>
-			</view>
+			</view> -->
 			<view class="wrapper">
 				<view class="u-box">
 					<text class="name">{{item.addressRecipients}}</text>
