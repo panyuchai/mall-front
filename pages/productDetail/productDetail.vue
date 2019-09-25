@@ -567,6 +567,9 @@
 					})
 				}
 			},
+			onBridgeReady() {
+				WeixinJSBridge.call('hideOptionMenu');
+			},
 			getGoodsDetail(){
 				let goodsId=uni.getStorageSync('goodsId');
 				this.$http.post('/mall/app/goods/detail', {
@@ -582,6 +585,16 @@
 						this.banner=res.result.pics;
 					}else{
 						console.log('productDetail.vue-- detail接口获取数据失败');
+					};
+					if (typeof WeixinJSBridge == "undefined") {
+					    if (document.addEventListener) {
+					        document.addEventListener('WeixinJSBridgeReady', this.onBridgeReady(), false);
+					    } else if (document.attachEvent) {
+					        document.attachEvent('WeixinJSBridgeReady', this.onBridgeReady());
+					        document.attachEvent('onWeixinJSBridgeReady', this.onBridgeReady());
+					    }
+					} else {
+					    this.onBridgeReady();
 					}
 				})
 				.catch( err => {
