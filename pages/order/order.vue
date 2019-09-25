@@ -373,14 +373,6 @@
 			},
 			
 		},
-		onBackPress(){
-			alert(this.referrerPay);
-			if(this.referrerPay){
-				alert('从收银台页面过来的返回按钮');
-				return true;
-			}
-			return true;
-		},
 		onShow(){
 			let orderReferrer = document.referrer;
 			if(orderReferrer.indexOf('pay') !== -1){
