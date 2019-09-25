@@ -38,9 +38,13 @@
 						if(uni.getStorageSync('uniCode')){
 							this.SET_UNICODE(uni.getStorageSync('uniCode'));
 						}
-						let storageUserInfo = getStore({ name: 'userInfo' });
+						let storageUserInfo = getStore({ name: 'userInfo' }),
+							storageBaseInfo = getStore({ name: 'baseInfo' });
 						if(storageUserInfo){
 							this.SET_USERIFNO(storageUserInfo);
+						}
+						if(storageBaseInfo){
+							this.SET_BASEINFO(storageBaseInfo);
 						}
 					}
 					this.SET_MALLDOMAIN(mallDomain);

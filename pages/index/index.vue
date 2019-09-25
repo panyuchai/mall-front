@@ -83,6 +83,9 @@
 					console.log('index--mallTaye 接口调用出错'+err);
 				})
 			},
+			onBridgeReady() {
+				WeixinJSBridge.call('hideOptionMenu');
+			},
 			initData(){
 				this.$http.post('/mall/app/backsite/decoration/homepage/'+this.baseInfo.mallId)
 				.then(res => {
@@ -94,6 +97,16 @@
 				.catch(err => {
 					console.log(err);
 				})
+				if (typeof WeixinJSBridge == "undefined") {
+				    if (document.addEventListener) {
+				        document.addEventListener('WeixinJSBridgeReady', this.onBridgeReady, false);
+				    } else if (document.attachEvent) {
+				        document.attachEvent('WeixinJSBridgeReady', this.onBridgeReady);
+				        document.attachEvent('onWeixinJSBridgeReady', this.onBridgeReady);
+				    }
+				} else {
+				    this.onBridgeReady();
+				}
 			},
 			getDecoration(decorationId){
 				console.log(decorationId)
