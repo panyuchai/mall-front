@@ -130,7 +130,8 @@
 				scrollTop: 0,
 				old: {
 					scrollTop: 0
-				}
+				},
+				referrerPay: false
 			};
 		},
 		watch: {
@@ -372,8 +373,17 @@
 			},
 			
 		},
+		onBackPress(){
+			if(this.referrerPay){
+				alert('从收银台页面过来的返回按钮');
+				return true;
+			}
+		},
 		onShow(){
-			alert(document.referrer);
+			let orderReferrer = document.referrer;
+			if(orderReferrer.indexOf('pay') !== -1){
+				this.referrerPay=true;
+			}
 		},
 		onLoad(options){
 			this.loadData(this.transUserState(Number(options.state)));
