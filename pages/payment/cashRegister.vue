@@ -264,10 +264,10 @@
 						this.payInfo.paySign = res.result.payResponse.wxPayResponse.paySign;
 						if (typeof WeixinJSBridge == "undefined"){
 						  if( document.addEventListener ){
-							document.addEventListener('WeixinJSBridgeReady', this.onBridgeReady(), false);
+							document.addEventListener('WeixinJSBridgeReady', this.onBridgeReady, false);
 						  }else if (document.attachEvent){
-							document.attachEvent('WeixinJSBridgeReady', this.onBridgeReady());
-							document.attachEvent('onWeixinJSBridgeReady', this.onBridgeReady());
+							document.attachEvent('WeixinJSBridgeReady', this.onBridgeReady);
+							document.attachEvent('onWeixinJSBridgeReady', this.onBridgeReady);
 						  }
 						}else{
 						  this.onBridgeReady();
