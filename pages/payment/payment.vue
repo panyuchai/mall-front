@@ -392,7 +392,7 @@
 							})
 						}, 1000)
 					}else{
-						debugger;
+						
 						// uni.setStorageSync('PAYMENT_ORDER_INFO', JSON.stringify(data));
 						// window.location.href=`http://${this.paymentUrl}.yujianli.cn/#/pages/payment/cashRegister?orderNo=`+res.result.orderNo+"&mallDomain="+this.baseInfo.mallDomain+'&paymentOrderInfo'+JSON.stringify(data);
 						window.location.href=`http://${this.paymentUrl}.yujianli.cn/#/pages/payment/cashRegister?orderNo=`+res.result.orderNo+"&mallDomain="+this.baseInfo.mallDomain+'&orderPayPrice='+data.payPrice+'&token='+encodeURIComponent(this.token);
@@ -481,6 +481,7 @@
 					payPrice: this.payPrice,
 					remark: this.remark,
 					totalPrice: this.payData.totalPrice,
+					goodsPrice: this.totalPriceDecrease,
 					address: this.address
 				};
 				if(this.isWx){

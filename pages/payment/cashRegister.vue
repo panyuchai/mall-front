@@ -100,12 +100,12 @@
 			</view> -->
 		</view>
 		<view class="yt-list mt-20">
-			<view class="yt-list-cell" v-if="initData.totalPrice">
+			<view class="yt-list-cell" v-if="initData.goodsPrice">
 				<view class="cell-tit">
 					商品金额
 				</view>
 				<view class="cell-tip">
-					<text class="red">¥<text class="num">{{initData.totalPrice}}</text></text>
+					<text class="red">¥<text class="num">{{initData.goodsPrice}}</text></text>
 				</view>
 			</view>
 			<view class="yt-list-cell" v-if="initData.express && initData.express.fee">
