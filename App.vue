@@ -7,7 +7,7 @@
 			...mapState("common", ['transferUrl', 'baseUrl', 'uniCode', 'mallDomain', 'baseInfo', 'hasLogin', 'isTransferPage'])
 		},
 		methods: {
-			...mapMutations("common", ['SET_TRANSFERURL', 'SET_BASEURL', 'SET_BASEINFO', 'SET_USERIFNO', 'SET_BASEINFO', 'SET_UNICODE', 'SET_TOKEN', 'SET_MALLTYPE', 'SET_MALLID', 'SET_MALLNAME', 'SET_MALLLOGO', 'SET_MALLDOMAIN', 'SET_ISTRANSFERPAGE']),
+			...mapMutations("common", ['SET_TRANSFERURL', 'SET_BASEURL', 'SET_USERIFNO', 'SET_BASEINFO', 'SET_HASLOGIN', 'SET_UNICODE', 'SET_TOKEN', 'SET_MALLTYPE', 'SET_MALLID', 'SET_MALLNAME', 'SET_MALLLOGO', 'SET_MALLDOMAIN', 'SET_ISTRANSFERPAGE']),
 			GetQueryString(name) {
 				var reg = new RegExp('(^|&)' + name + '=([^&]*)(&|$)', 'i');
 				var r = window.location.search.substr(1).match(reg);
@@ -20,10 +20,13 @@
 				uni.removeStorageSync('hasLogin');
 				uni.removeStorageSync('token');
 				uni.removeStorageSync('uniCode');
-				removeStore({ name: 'userInfo' });
-				removeStore({ name: 'baseInfo' });
+				// removeStore({ name: 'userInfo' });
+				// removeStore({ name: 'baseInfo' });
+				uni.removeStorageSync('userInfo');
+				uni.removeStorageSync('baseInfo');
 			},
 			getStorageInfo(storageMallDomain, mallDomain){
+				debugger;
 				alert('getStorageInfo开始')
 				if(storageMallDomain && storageMallDomain!==mallDomain){
 					this.clearUserInfo();
@@ -67,10 +70,10 @@
 				}
 				if(!mallDomain){
 					mallDomain = window.location.hostname.split('.')[0];
-					aler(storageMallDomain+'---------1  mallDomain');
+					alert(storageMallDomain+'---------1  '+mallDomain);
 					this.getStorageInfo(storageMallDomain, mallDomain);
 				}else{
-					aler(storageMallDomain+'---------2  mallDomain');
+					alert(storageMallDomain+'---------2  '+mallDomain);
 					this.getStorageInfo(storageMallDomain, mallDomain);
 				}
 				
@@ -301,7 +304,6 @@
 			console.log('App Show')
 		},
 		onLaunch: function(options) {
-			alert('onLaunch');
 			debugger;
 			// alert(JSON.stringify(options)+'-------------------------');
 			this.initData();
