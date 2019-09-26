@@ -62,6 +62,7 @@
 					default:
 						this.SET_TRANSFERURL('//mall-api.yujianli.cn');
 				}
+				alert(this.transferUrl+'------------');
 				if(!mallDomain){
 					mallDomain = window.location.hostname.split('.')[0];
 					this.getStorageInfo(storageMallDomain, mallDomain);
@@ -209,7 +210,7 @@
 					isTransferPage = true;
 				}
 				if(urlPath && isTransferPage){
-					alert(this.transferUrl+'------------');
+					
 					window.location.href=this.transferUrl + '/mall/app/login/mall/wxweb?mallDomain='+this.mallDomain; // +'&redirectUrl='+this.transferUrl
 				}
 				if(isTransferPage === false){
