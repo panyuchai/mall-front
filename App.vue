@@ -4,10 +4,10 @@
 	import { test } from './api/api.js'
 	export default {
 		computed: {
-			...mapState("common", ['uniCode', 'mallDomain', 'transferUrl', 'baseInfo', 'hasLogin', 'firstLoad', 'baseUrl', 'isTransferPage'])
+			...mapState("common", ['transferUrl', 'uniCode', 'mallDomain', 'baseInfo', 'hasLogin', 'isTransferPage'])
 		},
 		methods: {
-			...mapMutations("common", ['SET_BASEINFO', 'SET_USERIFNO', 'SET_BASEINFO', 'SET_UNICODE', 'SET_HASLOGIN', 'SET_TOKEN', 'SET_MALLTYPE', 'SET_MALLID', 'SET_MALLNAME', 'SET_MALLLOGO', 'SET_MALLDOMAIN', 'SET_ISTRANSFERPAGE']),
+			...mapMutations("common", ['SET_TRANSFERURL', 'SET_BASEINFO', 'SET_USERIFNO', 'SET_BASEINFO', 'SET_UNICODE', 'SET_TOKEN', 'SET_MALLTYPE', 'SET_MALLID', 'SET_MALLNAME', 'SET_MALLLOGO', 'SET_MALLDOMAIN', 'SET_ISTRANSFERPAGE']),
 			GetQueryString(name) {
 				var reg = new RegExp('(^|&)' + name + '=([^&]*)(&|$)', 'i');
 				var r = window.location.search.substr(1).match(reg);
@@ -23,45 +23,82 @@
 				removeStore({ name: 'userInfo' });
 				removeStore({ name: 'baseInfo' });
 			},
+			getStorageInfo(storageMallDomain, mallDomain){
+				if(storageMallDomain && storageMallDomain!==mallDomain){
+					this.clearUserInfo();
+				}else{
+					if(uni.getStorageSync('hasLogin')){
+						this.SET_HASLOGIN(uni.getStorageSync('hasLogin'));
+					}
+					if(uni.getStorageSync('token')){
+						this.SET_TOKEN(uni.getStorageSync('token'));
+					}
+					if(uni.getStorageSync('uniCode')){
+						this.SET_UNICODE(uni.getStorageSync('uniCode'));
+					}
+					let storageUserInfo = getStore({ name: 'userInfo' }),
+						storageBaseInfo = getStore({ name: 'baseInfo' });
+					if(storageUserInfo){
+						this.SET_USERIFNO(storageUserInfo);
+					}
+					if(storageBaseInfo){
+						this.SET_BASEINFO(storageBaseInfo);
+					}
+				}
+				this.SET_MALLDOMAIN(mallDomain);
+			},
 			getMallDomain(){
 				 // ncs.yujianli.cn
-				let mallDomain = this.GetQueryString('mallDomain');
+				let mallDomain = this.GetQueryString('mallDomain'),
+					storageMallDomain = this.mallDomain,
+					host = window.location.host;
+				switch(host){
+					case 'localhost:8080':
+						this.SET_TRANSFERURL('//192.168.1.104:8087');
+						break;
+					case '192.168.1.10:8888':
+						this.SET_TRANSFERURL('//192.168.1.104:8087');
+						break;
+					default:
+						this.SET_TRANSFERURL('//mall-api.yujianli.cn');
+				}
+				if(!mallDomain){
+					mallDomain = window.location.hostname.split('.')[0];
+					this.getStorageInfo(storageMallDomain, mallDomain);
+				}else{
+					this.getStorageInfo(storageMallDomain, mallDomain);
+				}
+				
 				// if(!mallDomain){
 				// 	let hostName = window.location.hostname,
 				// 		hostMallDomain = window.location.hostname.split('.')[0];
-				// 	// this.SET_TRANSFERURL(hostName);
+				// 	this.SET_TRANSFERURL(hostName);
 				// 	this.SET_MALLDOMAIN(hostMallDomain);
 				// }
-				if(mallDomain){
-					let storageMallDomain = this.mallDomain;
-					if(storageMallDomain && storageMallDomain!==mallDomain){
-						this.clearUserInfo();
-					}else{
-						if(uni.getStorageSync('hasLogin')){
-							this.SET_HASLOGIN(uni.getStorageSync('hasLogin'));
-						}
-						if(uni.getStorageSync('token')){
-							this.SET_TOKEN(uni.getStorageSync('token'));
-						}
-						if(uni.getStorageSync('uniCode')){
-							this.SET_UNICODE(uni.getStorageSync('uniCode'));
-						}
-						let storageUserInfo = getStore({ name: 'userInfo' }),
-							storageBaseInfo = getStore({ name: 'baseInfo' });
-						if(storageUserInfo){
-							this.SET_USERIFNO(storageUserInfo);
-						}
-						if(storageBaseInfo){
-							this.SET_BASEINFO(storageBaseInfo);
-						}
-					}
-					this.SET_MALLDOMAIN(mallDomain);
-				}
-				// else{
-				// 	uni.showToast({
-				// 		icon: 'none',
-				// 		title: '当前链接未携带mallDomain参数'
-				// 	})
+				// if(mallDomain){
+				// 	let storageMallDomain = this.mallDomain;
+				// 	if(storageMallDomain && storageMallDomain!==mallDomain){
+				// 		this.clearUserInfo();
+				// 	}else{
+				// 		if(uni.getStorageSync('hasLogin')){
+				// 			this.SET_HASLOGIN(uni.getStorageSync('hasLogin'));
+				// 		}
+				// 		if(uni.getStorageSync('token')){
+				// 			this.SET_TOKEN(uni.getStorageSync('token'));
+				// 		}
+				// 		if(uni.getStorageSync('uniCode')){
+				// 			this.SET_UNICODE(uni.getStorageSync('uniCode'));
+				// 		}
+				// 		let storageUserInfo = getStore({ name: 'userInfo' }),
+				// 			storageBaseInfo = getStore({ name: 'baseInfo' });
+				// 		if(storageUserInfo){
+				// 			this.SET_USERIFNO(storageUserInfo);
+				// 		}
+				// 		if(storageBaseInfo){
+				// 			this.SET_BASEINFO(storageBaseInfo);
+				// 		}
+				// 	}
+				// 	this.SET_MALLDOMAIN(mallDomain);
 				// }
 			},
 			checkMallType(){
@@ -172,7 +209,7 @@
 					isTransferPage = true;
 				}
 				if(urlPath && isTransferPage){
-					window.location.href=this.baseUrl + '/mall/app/login/mall/wxweb?mallDomain='+this.mallDomain; // +'&redirectUrl='+this.transferUrl
+					window.location.href=this.transferUrl + '/mall/app/login/mall/wxweb?mallDomain='+this.mallDomain; // +'&redirectUrl='+this.transferUrl
 				}
 				if(isTransferPage === false){
 					uni.removeStorageSync('isTransferPage');

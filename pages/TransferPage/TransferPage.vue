@@ -17,10 +17,10 @@
 			}
 		},
 		computed: {
-		    ...mapState("common", ['baseInfo', 'userInfo', 'mallDomain', 'transferUrl', 'isTransferPage'])
+		    ...mapState("common", ['baseInfo', 'userInfo', 'mallDomain', 'isTransferPage'])
 		},
 		methods: {
-			...mapMutations('common', ['SET_HASLOGIN', 'SET_TOKEN', 'SET_FIRSTLOAD', 'SET_USERIFNO', 'SET_ISTRANSFERPAGE']),
+			...mapMutations('common', ['SET_HASLOGIN', 'SET_TOKEN', 'SET_USERIFNO', 'SET_ISTRANSFERPAGE']),
 			handleTransfer(options){
 				if(options.success == 'true'){
 					this.SET_HASLOGIN(true);
@@ -50,7 +50,7 @@
 									window.location.href=uni.getStorageSync('referUrl');
 									uni.removeStorageSync('referUrl');
 								}else{
-									window.location.href=this.transferUrl + '?mallDomain='+options.mallDomain;
+									window.location.href=window.location.host + '?mallDomain='+options.mallDomain;
 								}
 							}
 						}else{
@@ -79,10 +79,9 @@
 					// 	url: '/pages/index/index'
 					// });
 					uni.setStorageSync('isTransferPage', false);
-					window.location.href=this.transferUrl + '?mallDomain='+options.mallDomain;
+					window.location.href=window.location.host + '?mallDomain='+options.mallDomain;
 					// window.location.href=this.transferUrl + '?mallDomain=yyy';
 				}
-				// this.SET_FIRSTLOAD(false);
 			},
 			setUserInfo(){
 				this.$http.post('/mall/app/account/info')

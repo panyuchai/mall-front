@@ -3,8 +3,7 @@ const state = {
   /**
    * 是否需要强制登录
    */
-  baseUrl: 'http://mall-api.yujianli.cn',
-  // transferUrl: '',
+  transferUrl: '',
   paymentUrl: 'testpay',
   mallDomain: '',
   mallType: '',
@@ -56,13 +55,6 @@ const mutations = {
 	// 	removeStore({ name: 'userInfo' });
 	// 	removeStore({ name: 'hasLogin' });
 	// },
-	
-	SET_FIRSTLOAD: (state, firstLoad) => {
-		state.firstLoad = firstLoad;
-	},
-	SET_BASEURL: (state, baseUrl) => {
-		state.baseUrl = baseUrl;
-	},
 	SET_TRANSFERURL: (state, transferUrl) => {
 		state.transferUrl = transferUrl;
 	},
