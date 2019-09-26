@@ -232,6 +232,7 @@
 								</view>
 							</view>
 						<!-- </view> -->
+						
 					</view>
 				</view>
 			</view>
@@ -377,6 +378,9 @@
 	import tuiTopDropdown from "@/components/top-dropdown/top-dropdown"
 	import tuiBottomPopup from "@/components/bottom-popup/bottom-popup"
 	import tuiNumberbox from "@/components/numberbox/numberbox"
+	// import tTable from '@/components/t-table/t-table.vue'
+	// import tTable from '@/components/t-table/t-tr.vue'
+	// import tTable from '@/components/t-table/t-td.vue'
 	export default {
 		components: {
 			tuiIcon,
