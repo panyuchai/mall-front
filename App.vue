@@ -48,7 +48,6 @@
 				this.SET_MALLDOMAIN(mallDomain);
 			},
 			getMallDomain(){
-				alert('1111111')
 				 // ncs.yujianli.cn
 				let mallDomain = this.GetQueryString('mallDomain'),
 					storageMallDomain = this.mallDomain,
@@ -63,6 +62,7 @@
 					default:
 						this.SET_TRANSFERURL('//mall-api.yujianli.cn');
 				}
+				console.log(this.transferUrl);
 				alert(this.transferUrl+'------------');
 				if(!mallDomain){
 					mallDomain = window.location.hostname.split('.')[0];
