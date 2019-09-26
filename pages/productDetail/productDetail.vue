@@ -225,13 +225,19 @@
 					</view>
 					<view class="content-item" v-if="!showCont">
 						<!-- <view class="product-specs"> -->
-							<view class="table-list">
+							<!-- <view class="table-list">
 								<view class="list-cell" v-for="item in goodsInfo.specs" :key="item.sort">
 									<view class="cell skey">{{item.skey}}</view>
 									<view class="cell svalue">{{item.svalue}}</view>
 								</view>
-							</view>
+							</view> -->
 						<!-- </view> -->
+						<t-table border="1" border-color="#ccc" class="table-list" v-if="goodsInfo.specs">
+							<t-tr font-size="14" color="#747474" class='list-cell' align="left" v-for="item in goodsInfo.specs" :key="item.sort">
+								<t-td align="left" class="cell-name">{{item.skey}}</t-td>
+								<t-td align="left" class="cell-value">{{item.svalue}}</t-td>
+							</t-tr>
+						</t-table>
 						
 					</view>
 				</view>
@@ -378,9 +384,9 @@
 	import tuiTopDropdown from "@/components/top-dropdown/top-dropdown"
 	import tuiBottomPopup from "@/components/bottom-popup/bottom-popup"
 	import tuiNumberbox from "@/components/numberbox/numberbox"
-	// import tTable from '@/components/t-table/t-table.vue'
-	// import tTable from '@/components/t-table/t-tr.vue'
-	// import tTable from '@/components/t-table/t-td.vue'
+	import tTable from '@/components/t-table/t-table.vue'
+	import tTr from '@/components/t-table/t-tr.vue'
+	import tTd from '@/components/t-table/t-td.vue'
 	export default {
 		components: {
 			tuiIcon,
@@ -390,7 +396,10 @@
 			tuiButton,
 			tuiTopDropdown,
 			tuiBottomPopup,
-			tuiNumberbox
+			tuiNumberbox,
+			tTable,
+			tTr,
+			tTd
 		},
 		data() {
 			return {
@@ -1093,39 +1102,55 @@
 				// 	}
 				// }
 				.table-list{
-					border-right: 1px solid #ccc;
-					border-bottom: 1px solid #ccc;
 					margin: 0 20upx 20upx 20upx;
+					width: calc(100% - 40upx);
 					.list-cell{
-						// &:first-child{
-						// 	border-top: 1px solid #ccc;
-						// }
-						// margin: 0 20upx;
-						border-top: 1px solid #ccc;
-						border-left: 1px solid #ccc;
-						display: flex;
-						align-items: center;
-						// width: calc(100% - 40upx);
-						// box-sizing: border-box;
-						.cell{
-							// border-bottom: 1px solid #ccc;
-							// border-right: 1px solid #ccc;
-							padding: 10upx 20upx;
-							font-size: 24upx;
-							color: #747474;
-							box-sizing: border-box;
-							// float: left;
-							&.skey{
-								min-width: 200upx;
-							}
-							&.svalue{
-								flex: 1;
-								// width: calc(100% - 240upx);
-								border-left: 1px solid #ccc;
-							}
+						/deep/ .t-td{
+							flex: auto!important;
+							text-align: left!important;
+						}
+						/deep/ .cell-name{
+							width: 200upx!important;
+						}
+						/deep/ .cell-value{
+							flex: 1;
 						}
 					}
 				}
+				// .table-list{
+				// 	border-right: 1px solid #ccc;
+				// 	border-bottom: 1px solid #ccc;
+				// 	margin: 0 20upx 20upx 20upx;
+				// 	.list-cell{
+				// 		// &:first-child{
+				// 		// 	border-top: 1px solid #ccc;
+				// 		// }
+				// 		// margin: 0 20upx;
+				// 		border-top: 1px solid #ccc;
+				// 		border-left: 1px solid #ccc;
+				// 		display: flex;
+				// 		align-items: center;
+				// 		// width: calc(100% - 40upx);
+				// 		// box-sizing: border-box;
+				// 		.cell{
+				// 			// border-bottom: 1px solid #ccc;
+				// 			// border-right: 1px solid #ccc;
+				// 			padding: 10upx 20upx;
+				// 			font-size: 24upx;
+				// 			color: #747474;
+				// 			box-sizing: border-box;
+				// 			// float: left;
+				// 			&.skey{
+				// 				min-width: 200upx;
+				// 			}
+				// 			&.svalue{
+				// 				flex: 1;
+				// 				// width: calc(100% - 240upx);
+				// 				border-left: 1px solid #ccc;
+				// 			}
+				// 		}
+				// 	}
+				// }
 				
 			}
 		}
