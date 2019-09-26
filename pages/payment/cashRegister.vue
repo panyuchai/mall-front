@@ -336,7 +336,7 @@
 			}
 		},
 		computed: {
-			...mapState('common', ['baseInfo', 'transferUrl']),
+			...mapState('common', ['baseInfo', 'transferUrl', 'baseUrl']),
 		},
 		onLoad(options){
 			uni.setStorageSync('ORDER_NO', options.orderNo);
