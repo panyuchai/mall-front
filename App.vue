@@ -297,6 +297,7 @@
 			}
 		},
 		onLaunch: function(options) {
+			debugger;
 			// alert(JSON.stringify(options)+'-------------------------');
 			this.initData();
 			this.getMallDomain();
