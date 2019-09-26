@@ -212,8 +212,6 @@
 					isTransferPage = true;
 				}
 				if(urlPath && isTransferPage){
-					alert(this.baseUrl+'baseUrl-----------App.vue');
-					alert(this.transferUrl+'transferUrl------------App.vue');
 					window.location.href=this.transferUrl + '/mall/app/login/mall/wxweb?mallDomain='+this.mallDomain; // +'&redirectUrl='+this.transferUrl
 				}
 				if(isTransferPage === false){
@@ -297,7 +295,11 @@
 				};
 			}
 		},
+		onShow: function(){
+			console.log('App Show')
+		},
 		onLaunch: function(options) {
+			alert('onLaunch');
 			debugger;
 			// alert(JSON.stringify(options)+'-------------------------');
 			this.initData();
@@ -431,10 +433,6 @@
 			// 	
 			// }
 			
-		},
-		onShow: function(options) {
-			console.log('App Show');
-			// alert(options)
 		},
 		onHide: function() {
 			console.log('App Hide');

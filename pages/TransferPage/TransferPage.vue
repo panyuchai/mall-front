@@ -23,8 +23,6 @@
 			...mapMutations('common', ['SET_HASLOGIN', 'SET_TOKEN', 'SET_USERIFNO', 'SET_ISTRANSFERPAGE']),
 			handleTransfer(options){
 				debugger;
-				alert(this.baseUrl+'baseUrl-----------transferPage.vue');
-				alert(this.transferUrl+'transferUrl------------transferPage.vue');
 				if(options.success == 'true'){
 					this.SET_HASLOGIN(true);
 					this.SET_TOKEN(options.token);
@@ -54,10 +52,10 @@
 									uni.removeStorageSync('referUrl');
 								}else{
 									// window.location.href=this.baseUrl + '?mallDomain='+options.mallDomain;
-									// window.location.href='?mallDomain='+options.mallDomain;
-									uni.switchTab({
-										url: '/pages/index/index'
-									})
+									window.location.href='?mallDomain='+options.mallDomain;
+									// uni.switchTab({
+									// 	url: '/pages/index/index'
+									// })
 								}
 							}
 						}else{
@@ -86,10 +84,10 @@
 					// 	url: '/pages/index/index'
 					// });
 					uni.setStorageSync('isTransferPage', false);
-					// window.location.href='?mallDomain='+options.mallDomain;
-					uni.switchTab({
-						url: '/pages/index/index'
-					})
+					window.location.href='?mallDomain='+options.mallDomain;
+					// uni.switchTab({
+					// 	url: '/pages/index/index'
+					// })
 				}
 			},
 			setUserInfo(){
