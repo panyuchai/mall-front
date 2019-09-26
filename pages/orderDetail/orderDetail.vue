@@ -156,7 +156,7 @@
 			<view class="action-btn" @tap="makePhoneCall">
 				联系客服
 			</view>
-			<view class="action-btn" v-if="initData.orderlistState == 0" @tap="cancelOrder(initData.orderlistId)">
+			<view class="action-btn" v-if="initData.canCancel" @tap="cancelOrder(initData.orderlistId)">
 				取消订单
 			</view>
 			<view class="action-btn action-red" v-if="initData.orderlistState == 0" @tap="linkToPayment(initData)">

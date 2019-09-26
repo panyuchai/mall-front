@@ -426,7 +426,7 @@
 		}
 	}
 	.product-list {
-		margin-top: 94px;
+		margin-top: 80px;
 		display: flex;
 		display: -webkit-flex;
 		justify-content: space-between;
@@ -442,7 +442,7 @@
 		box-sizing: border-box;
 		width: 48.8%;
 		position: relative;
-		margin-bottom: 2.5%;
+		margin-bottom: 2.8%;
 	}
 	
 	.pro-item::after {

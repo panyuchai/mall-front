@@ -405,15 +405,20 @@
 		height: 100%;
 		background: #F7F7F7;
 	}
-	
 	// .swiper-box{
 	// 	height: calc(100% - 80upx);
 	// 	// padding-top: 20upx;
 	// }
 	.list-scroll-content{
-		margin-top: 100px;
+		// border: 1px blue solid;
+		margin-top: 120px;
 		// height: 100%;
 	}
+	/*  #ifdef  H5  */
+	.list-scroll-content{
+		margin-top: 100px;
+	}
+	/*  #endif  */
 	.fixedTop{
 		position: fixed;
 		top: 44px;
