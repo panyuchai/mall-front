@@ -52,6 +52,7 @@
 				let mallDomain = this.GetQueryString('mallDomain'),
 					storageMallDomain = this.mallDomain,
 					host = window.location.host;
+				alert(host);
 				switch(host){
 					case 'localhost:8080':
 						this.SET_TRANSFERURL('//192.168.1.104:8087');
@@ -62,7 +63,6 @@
 					default:
 						this.SET_TRANSFERURL('//mall-api.yujianli.cn');
 				}
-				console.log(this.transferUrl);
 				alert(this.transferUrl+'------------');
 				if(!mallDomain){
 					mallDomain = window.location.hostname.split('.')[0];
