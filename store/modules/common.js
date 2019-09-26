@@ -3,6 +3,7 @@ const state = {
   /**
    * 是否需要强制登录
    */
+  baseUrl: '',
   transferUrl: '',
   paymentUrl: 'testpay',
   mallDomain: '',
@@ -55,6 +56,9 @@ const mutations = {
 	// 	removeStore({ name: 'userInfo' });
 	// 	removeStore({ name: 'hasLogin' });
 	// },
+	SET_BASEURL: (state, baseUrl) => {
+		state.baseUrl = baseUrl;
+	},
 	SET_TRANSFERURL: (state, transferUrl) => {
 		state.transferUrl = transferUrl;
 	},

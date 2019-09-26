@@ -17,12 +17,14 @@
 			}
 		},
 		computed: {
-		    ...mapState("common", ['transferUrl', 'baseInfo', 'userInfo', 'mallDomain', 'isTransferPage'])
+		    ...mapState("common", ['transferUrl', 'baseUrl', 'baseInfo', 'userInfo', 'mallDomain', 'isTransferPage'])
 		},
 		methods: {
 			...mapMutations('common', ['SET_HASLOGIN', 'SET_TOKEN', 'SET_USERIFNO', 'SET_ISTRANSFERPAGE']),
 			handleTransfer(options){
-				alert(this.transferUrl);
+				debugger;
+				alert(this.baseUrl+'baseUrl-----------transferPage.vue');
+				alert(this.transferUrl+'transferUrl------------transferPage.vue');
 				if(options.success == 'true'){
 					this.SET_HASLOGIN(true);
 					this.SET_TOKEN(options.token);
@@ -51,7 +53,7 @@
 									window.location.href=uni.getStorageSync('referUrl');
 									uni.removeStorageSync('referUrl');
 								}else{
-									window.location.href=this.transferUrl + '?mallDomain='+options.mallDomain;
+									window.location.href=this.baseUrl + '?mallDomain='+options.mallDomain;
 								}
 							}
 						}else{
@@ -80,7 +82,7 @@
 					// 	url: '/pages/index/index'
 					// });
 					uni.setStorageSync('isTransferPage', false);
-					window.location.href=this.transferUrl + '?mallDomain='+options.mallDomain;
+					window.location.href=this.baseUrl + '?mallDomain='+options.mallDomain;
 					// window.location.href=this.transferUrl + '?mallDomain=yyy';
 				}
 			},

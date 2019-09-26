@@ -4,10 +4,10 @@
 	import { test } from './api/api.js'
 	export default {
 		computed: {
-			...mapState("common", ['transferUrl', 'uniCode', 'mallDomain', 'baseInfo', 'hasLogin', 'isTransferPage'])
+			...mapState("common", ['transferUrl', 'baseUrl', 'uniCode', 'mallDomain', 'baseInfo', 'hasLogin', 'isTransferPage'])
 		},
 		methods: {
-			...mapMutations("common", ['SET_TRANSFERURL', 'SET_BASEINFO', 'SET_USERIFNO', 'SET_BASEINFO', 'SET_UNICODE', 'SET_TOKEN', 'SET_MALLTYPE', 'SET_MALLID', 'SET_MALLNAME', 'SET_MALLLOGO', 'SET_MALLDOMAIN', 'SET_ISTRANSFERPAGE']),
+			...mapMutations("common", ['SET_TRANSFERURL', 'SET_BASEURL', 'SET_BASEINFO', 'SET_USERIFNO', 'SET_BASEINFO', 'SET_UNICODE', 'SET_TOKEN', 'SET_MALLTYPE', 'SET_MALLID', 'SET_MALLNAME', 'SET_MALLLOGO', 'SET_MALLDOMAIN', 'SET_ISTRANSFERPAGE']),
 			GetQueryString(name) {
 				var reg = new RegExp('(^|&)' + name + '=([^&]*)(&|$)', 'i');
 				var r = window.location.search.substr(1).match(reg);
@@ -53,7 +53,8 @@
 				let mallDomain = this.GetQueryString('mallDomain'),
 					storageMallDomain = this.mallDomain,
 					host = window.location.host;
-				alert(host);
+				alert('当前host为'+host);
+				this.SET_BASEURL(host);
 				switch(host){
 					case 'localhost:8080':
 						this.SET_TRANSFERURL('//192.168.1.104:8087');
@@ -64,7 +65,6 @@
 					default:
 						this.SET_TRANSFERURL('//mall-api.yujianli.cn');
 				}
-				alert(this.transferUrl+'------------');
 				if(!mallDomain){
 					mallDomain = window.location.hostname.split('.')[0];
 					this.getStorageInfo(storageMallDomain, mallDomain);
@@ -212,7 +212,8 @@
 					isTransferPage = true;
 				}
 				if(urlPath && isTransferPage){
-					
+					alert(this.baseUrl+'baseUrl-----------App.vue');
+					alert(this.transferUrl+'transferUrl------------App.vue');
 					window.location.href=this.transferUrl + '/mall/app/login/mall/wxweb?mallDomain='+this.mallDomain; // +'&redirectUrl='+this.transferUrl
 				}
 				if(isTransferPage === false){
