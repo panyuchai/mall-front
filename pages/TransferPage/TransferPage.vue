@@ -22,7 +22,6 @@
 		methods: {
 			...mapMutations('common', ['SET_HASLOGIN', 'SET_TOKEN', 'SET_USERIFNO', 'SET_ISTRANSFERPAGE']),
 			handleTransfer(options){
-				debugger;
 				if(options.success == 'true'){
 					this.SET_HASLOGIN(true);
 					this.SET_TOKEN(options.token);

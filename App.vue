@@ -26,8 +26,6 @@
 				uni.removeStorageSync('baseInfo');
 			},
 			getStorageInfo(storageMallDomain, mallDomain){
-				debugger;
-				alert('getStorageInfo开始')
 				if(storageMallDomain && storageMallDomain!==mallDomain){
 					this.clearUserInfo();
 				}else{
@@ -52,7 +50,6 @@
 				this.SET_MALLDOMAIN(mallDomain);
 			},
 			getMallDomain(){
-				debugger;
 				 // ncs.yujianli.cn
 				let mallDomain = this.GetQueryString('mallDomain'),
 					storageMallDomain = this.mallDomain,
@@ -70,10 +67,8 @@
 				}
 				if(!mallDomain){
 					mallDomain = window.location.hostname.split('.')[0];
-					alert(storageMallDomain+'---------1  '+mallDomain);
 					this.getStorageInfo(storageMallDomain, mallDomain);
 				}else{
-					alert(storageMallDomain+'---------2  '+mallDomain);
 					this.getStorageInfo(storageMallDomain, mallDomain);
 				}
 				
@@ -304,7 +299,6 @@
 			console.log('App Show')
 		},
 		onLaunch: function(options) {
-			debugger;
 			// alert(JSON.stringify(options)+'-------------------------');
 			this.initData();
 			this.getMallDomain();
