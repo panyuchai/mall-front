@@ -224,14 +224,14 @@
 						</view>
 					</view>
 					<view class="content-item" v-if="!showCont">
-						<!-- <view class="product-specs">
-							<view class="table-list"> -->
+						<!-- <view class="product-specs"> -->
+							<view class="table-list">
 								<view class="list-cell" v-for="item in goodsInfo.specs" :key="item.sort">
-									<text class="cell skey">{{item.skey}}</text>
-									<text class="cell svalue">{{item.svalue}}</text>
+									<view class="cell skey">{{item.skey}}</view>
+									<view class="cell svalue">{{item.svalue}}</view>
 								</view>
-							<!-- </view>
-						</view> -->
+							</view>
+						<!-- </view> -->
 					</view>
 				</view>
 			</view>
@@ -1061,7 +1061,7 @@
 				}
 				// .product-specs{
 				// 	border:5px blue solid;
-				// 	
+					
 				// 	.table-list{
 				// 		margin: 30upx 20upx;
 				// 		border-top: 1px solid #ccc;
@@ -1088,26 +1088,37 @@
 				// 		}
 				// 	}
 				// }
-				.list-cell{
-					&:first-child{
+				.table-list{
+					border-right: 1px solid #ccc;
+					border-bottom: 1px solid #ccc;
+					margin: 0 20upx 20upx 20upx;
+					.list-cell{
+						// &:first-child{
+						// 	border-top: 1px solid #ccc;
+						// }
+						// margin: 0 20upx;
 						border-top: 1px solid #ccc;
-					}
-					margin: 0 20upx;
-					// border-top: 1px solid #ccc;
-					border-left: 1px solid #ccc;
-					display: flex;
-					align-items: center;
-					.cell{
-						border-bottom: 1px solid #ccc;
-						border-right: 1px solid #ccc;
-						padding: 10upx 20upx;
-						font-size: 24upx;
-						color: #747474;
-						&.skey{
-							min-width: 120upx;
-						}
-						&.svalue{
-							flex: 1;
+						border-left: 1px solid #ccc;
+						display: flex;
+						align-items: center;
+						// width: calc(100% - 40upx);
+						// box-sizing: border-box;
+						.cell{
+							// border-bottom: 1px solid #ccc;
+							// border-right: 1px solid #ccc;
+							padding: 10upx 20upx;
+							font-size: 24upx;
+							color: #747474;
+							box-sizing: border-box;
+							// float: left;
+							&.skey{
+								min-width: 200upx;
+							}
+							&.svalue{
+								flex: 1;
+								// width: calc(100% - 240upx);
+								border-left: 1px solid #ccc;
+							}
 						}
 					}
 				}

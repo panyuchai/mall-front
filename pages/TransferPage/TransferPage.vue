@@ -53,7 +53,8 @@
 									window.location.href=uni.getStorageSync('referUrl');
 									uni.removeStorageSync('referUrl');
 								}else{
-									window.location.href=this.baseUrl + '?mallDomain='+options.mallDomain;
+									// window.location.href=this.baseUrl + '?mallDomain='+options.mallDomain;
+									window.location.href='?mallDomain='+options.mallDomain;
 								}
 							}
 						}else{
@@ -82,7 +83,7 @@
 					// 	url: '/pages/index/index'
 					// });
 					uni.setStorageSync('isTransferPage', false);
-					window.location.href=this.baseUrl + '?mallDomain='+options.mallDomain;
+					window.location.href='?mallDomain='+options.mallDomain;
 					// window.location.href=this.transferUrl + '?mallDomain=yyy';
 				}
 			},
