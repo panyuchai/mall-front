@@ -209,6 +209,7 @@
 					isTransferPage = true;
 				}
 				if(urlPath && isTransferPage){
+					alert(this.transferUrl+'------------');
 					window.location.href=this.transferUrl + '/mall/app/login/mall/wxweb?mallDomain='+this.mallDomain; // +'&redirectUrl='+this.transferUrl
 				}
 				if(isTransferPage === false){
