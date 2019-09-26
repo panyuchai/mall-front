@@ -48,6 +48,7 @@
 				this.SET_MALLDOMAIN(mallDomain);
 			},
 			getMallDomain(){
+				debugger;
 				 // ncs.yujianli.cn
 				let mallDomain = this.GetQueryString('mallDomain'),
 					storageMallDomain = this.mallDomain,
