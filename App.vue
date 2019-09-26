@@ -24,6 +24,7 @@
 				removeStore({ name: 'baseInfo' });
 			},
 			getStorageInfo(storageMallDomain, mallDomain){
+				alert('getStorageInfo开始')
 				if(storageMallDomain && storageMallDomain!==mallDomain){
 					this.clearUserInfo();
 				}else{
@@ -53,7 +54,6 @@
 				let mallDomain = this.GetQueryString('mallDomain'),
 					storageMallDomain = this.mallDomain,
 					host = window.location.host;
-				alert('当前host为'+host);
 				this.SET_BASEURL(host);
 				switch(host){
 					case 'localhost:8080':
@@ -67,8 +67,10 @@
 				}
 				if(!mallDomain){
 					mallDomain = window.location.hostname.split('.')[0];
+					aler(storageMallDomain+'---------1  mallDomain');
 					this.getStorageInfo(storageMallDomain, mallDomain);
 				}else{
+					aler(storageMallDomain+'---------2  mallDomain');
 					this.getStorageInfo(storageMallDomain, mallDomain);
 				}
 				
