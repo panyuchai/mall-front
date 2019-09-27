@@ -188,53 +188,32 @@
 		},
 		methods: {
 			onBridgeReady(){　　　　　　　　　　　　　　　　　　　　　　　　　　　//使用微信浏览器内置的对象调起微信支付插件，并传入统一接口返回的参数
-			var that = this;
-			WeixinJSBridge.invoke(
-			  'getBrandWCPayRequest', {
-				"appId":this.payInfo.appId,                 //公众号名称，由商户传入
-				"timeStamp":this.payInfo.timeStamp,         //时间戳，自1970年以来的秒数
-				"nonceStr":this.payInfo.nonceStr,           //随机字符串
-				"package":this.payInfo.package,            //支付验证pay_id
-				"signType":this.payInfo.signType,                           //微信签名方式
-				"paySign":this.payInfo.paySign                 //微信签名
-			  },
-			  function(res){
-				  alert(that.baseUrl);
-				if(res.err_msg == "get_brand_wcpay_request:ok" ){
-				  // 使用以上方式判断前端返回,微信团队郑重提示：
-				  //res.err_msg将在用户支付成功后返回ok，但并不保证它绝对可靠。
-				  // uni.removeStorageSync('chooseAddress');
-				  window.location.href=that.baseUrl + '?mallDomain='+that.mallDomain + '#/pages/orderDetail/orderDetail?orderId='+that.initData.orderId;
-				  // uni.redirectTo({
-					 //  url: that.transferUrl+'?mallDomain='+that.mallDomain+'&orderId='+that.initData.orderId
-				  // })
-				}else{
-					// uni.removeStorageSync('chooseAddress');
-					window.location.href=that.baseUrl + '?mallDomain='+that.mallDomain + '#/pages/order/order?state=0';
-					// uni.redirectTo({
-					//    url: that.transferUrl+'?mallDomain='+that.mallDomain+'&orderId='+that.initData.orderId
-					// })
-				}
-			  }
-			)
+				var that = this;
+				WeixinJSBridge.invoke(
+				  'getBrandWCPayRequest', {
+					"appId":this.payInfo.appId,                 //公众号名称，由商户传入
+					"timeStamp":this.payInfo.timeStamp,         //时间戳，自1970年以来的秒数
+					"nonceStr":this.payInfo.nonceStr,           //随机字符串
+					"package":this.payInfo.package,            //支付验证pay_id
+					"signType":this.payInfo.signType,                           //微信签名方式
+					"paySign":this.payInfo.paySign                 //微信签名
+				  },
+				  function(res){
+					alert(that.baseUrl);
+					if(res.err_msg == "get_brand_wcpay_request:ok" ){
+					  // 使用以上方式判断前端返回,微信团队郑重提示：
+					  //res.err_msg将在用户支付成功后返回ok，但并不保证它绝对可靠。
+					  // uni.removeStorageSync('chooseAddress');
+					    window.location.href=that.baseUrl + '?mallDomain='+that.mallDomain + '#/pages/orderDetail/orderDetail?orderId='+that.initData.orderId;
+					}else{
+						// uni.removeStorageSync('chooseAddress');
+						window.location.href=that.baseUrl + '?mallDomain='+that.mallDomain + '#/pages/order/order?state=0';
+					}
+				  }
+				)
 			},
-			// Gopay(){　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　//点击付款按钮开始支付
-			// 	console.log("开始支付")
-			// 	if (typeof WeixinJSBridge == "undefined"){
-			// 	  if( document.addEventListener ){
-			// 		document.addEventListener('WeixinJSBridgeReady', this.onBridgeReady(), false);
-			// 	  }else if (document.attachEvent){
-			// 		document.attachEvent('WeixinJSBridgeReady', this.onBridgeReady());
-			// 		document.attachEvent('onWeixinJSBridgeReady', this.onBridgeReady());
-			// 	  }
-			// 	}else{
-			// 	  this.onBridgeReady();
-			// 	}
-			// },
 			handleSubmit(){
-				// let data = JSON.parse(uni.getStorageSync('PAYMENT_ORDER_INFO'));
 				let data = {
-					// ...this.baseInfo,
 					accountId: this.initData.accountId,
 					addressId: this.initData.address.addressId,
 					balance: this.initData.balance,
@@ -288,7 +267,6 @@
 				this.mallDomain=uni.getStorageSync('mallDomain');
 				this.token=uni.getStorageSync('token');
 				this.payPrice=Number(uni.getStorageSync('payPrice'));
-				// this.initData=JSON.parse(uni.getStorageSync('PAYMENT_ORDER_INFO'));
 				this.baseUrl=uni.getStorageSync('baseUrl');
 			},
 			checkMallType(){
@@ -346,7 +324,6 @@
 			uni.setStorageSync('token', decodeURIComponent(options.token));
 			uni.setStorageSync('payPrice', options.orderPayPrice);
 			uni.setStorageSync('baseUrl', options.baseUrl);
-			// uni.setStorageSync('PAYMENT_ORDER_INFO', options.paymentOrderInfo);
 			this.getInitInfo();
 			this.checkMallType();
 		},

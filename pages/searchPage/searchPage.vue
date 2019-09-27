@@ -84,18 +84,12 @@
 					});
 				}else{
 					uni.setStorageSync('searchKeyword', this.keyword);
-					// uni.$emit('handleSearchKeywor', this.keyword);
 					uni.switchTab({
 						url: '/pages/product/product'
 					});
 				}
 			},
 			itemClick: function(e) {
-				// let index = e.index;
-				// if (index == 0) {
-				// 	this.showActionSheet = false;
-				// 	this.history = []
-				// }
 				let index = e.index;
 				if(index == 0){
 					this.showActionSheet = false;
@@ -116,10 +110,6 @@
 				}
 			},
 			unique(arr) {
-			    // var obj = {};
-			    // return arr.filter(function(item, index, arr){
-			    //     return obj.hasOwnProperty(typeof item + item) ? false : (obj[typeof item + item] = true)
-			    // })
 				var list = [];
 				arr.map(item => {
 					list.push(item.keyword);

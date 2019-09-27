@@ -43,38 +43,35 @@
 						</view>
 					</view>
 					<view class="bd" v-for="(good, i) in item.details">
-						<!-- <view class="" v-for="good in goods.zsscMallGoods"> -->
-							<view class="pic">
-								<image class="img" :src="good.zsscMallGoods.goodsMainimagepath" mode="aspectFill"></image>
+						<view class="pic">
+							<image class="img" :src="good.zsscMallGoods.goodsMainimagepath" mode="aspectFill"></image>
+						</view>
+						<view class="info">
+							<view class="tit">
+								{{good.zsscMallGoods.goodsProductname}}
 							</view>
-							<view class="info">
-								<view class="tit">
-									{{good.zsscMallGoods.goodsProductname}}
+							<view class="con">
+								<view class="_left">
+									共{{good.goodsCount}}件商品
 								</view>
-								<view class="con">
-									<view class="_left">
-										共{{good.goodsCount}}件商品
+								<view class="_right">
+									<view class="tit">
+										实付金额：
 									</view>
-									<view class="_right">
-										<view class="tit">
-											实付金额：
+									<view class="priceInfo">
+										<view class="saleMoney" v-if="good.zsscMallGoods.salePrice">
+											￥<text class="money">{{good.zsscMallGoods.salePrice}}</text>
 										</view>
-										<view class="priceInfo">
-											<!-- <text class="salePrice" v-if="good.zsscMallGoods.salePrice"><text class="unit"></text></text> -->
-											<view class="saleMoney" v-if="good.zsscMallGoods.salePrice">
-												￥<text class="money">{{good.zsscMallGoods.salePrice}}</text>
-											</view>
-											<view class="and" v-if="good.zsscMallGoods.salePrice && good.zsscMallGoods.credits">
-												+
-											</view>
-											<view class="salePoints" v-if="good.zsscMallGoods.credits">
-												<text class="points">{{good.zsscMallGoods.credits}}</text>分
-											</view>
+										<view class="and" v-if="good.zsscMallGoods.salePrice && good.zsscMallGoods.credits">
+											+
+										</view>
+										<view class="salePoints" v-if="good.zsscMallGoods.credits">
+											<text class="points">{{good.zsscMallGoods.credits}}</text>分
 										</view>
 									</view>
 								</view>
 							</view>
-						<!-- </view> -->
+						</view>
 					</view>
 					<view class="fd">
 						<view class="action-btn" v-if="item.orderlistState == 0" @tap.stop="cancelOrder(item.orderlistId)">
@@ -230,7 +227,6 @@
 					...this.searchData,
 					orderState: orderState || []
 				}
-				// this.searchData.orderState=orderState || [];
 				this.$http.post('/mall/app/order/list', {
 					...this.baseInfo,
 					...this.searchData,
@@ -242,7 +238,6 @@
 						if(res.result){
 							this.searchData.totalPage=res.result.pages;
 							if(res.result.records.length == 0){
-								// this.notFound=true;
 								this.loadding = false;
 								this.pullUpOn = false;
 							}else{
@@ -312,24 +307,6 @@
 				        }
 				    }
 				});
-				// uni.showLoading({
-				// 	title: '请稍后'
-				// })
-				// setTimeout(()=>{
-				// 	let {stateTip, stateTipColor} = this.orderStateExp(9);
-				// 	item = Object.assign(item, {
-				// 		state: 9,
-				// 		stateTip, 
-				// 		stateTipColor
-				// 	})
-				// 	
-				// 	//取消订单后删除待付款中该项
-				// 	let list = this.navList[1].orderList;
-				// 	let index = list.findIndex(val=>val.id === item.id);
-				// 	index !== -1 && list.splice(index, 1);
-				// 	
-				// 	uni.hideLoading();
-				// }, 600)
 			},
 			// 去付款
 			linkToPayment(order){
@@ -388,10 +365,6 @@
 			if (!this.pullUpOn) return;
 			this.loadding = true;
 			this.searchData.pageNum++;
-			// if (this.searchData.pageNum > this.searchData.totalPage) {
-			// 	this.loadding = false;
-			// 	this.pullUpOn = false;
-			// }
 			this.loadData(uni.getStorageSync('order_searchType_storage'));
 		},
 		computed: {
@@ -405,14 +378,8 @@
 		height: 100%;
 		background: #F7F7F7;
 	}
-	// .swiper-box{
-	// 	height: calc(100% - 80upx);
-	// 	// padding-top: 20upx;
-	// }
 	.list-scroll-content{
-		// border: 1px blue solid;
 		margin-top: 120px;
-		// height: 100%;
 	}
 	/*  #ifdef  H5  */
 	.list-scroll-content{

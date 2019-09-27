@@ -1,22 +1,13 @@
 <template>
 	<view>
 		<block v-for="(item,index) in templateData" :key="index">
-			<!-- <Search v-if="item.type==='003'" :options="item.data"></Search>
-				<banner v-if="item.type==='201'" :options="item.data"></banner>
-				<category-list v-if="item.type==='203'" :options="item.data"></category-list>
-				<single-product></single-product>
-				<goods v-if="item.type==='204'" :options="item.data"></goods> -->
 			<search v-if="item.type === '001'" :options="item.data"></search>
 			<banner v-if="item.type === '003'" :options="item.data" @reLoadIndex='getDecoration'></banner>
-			<!-- <category-list></category-list> -->
 			<lines v-if="item.type === '004'" :options="item.data"></lines>
-			<!-- 007 积分展示 -->
-			<!-- 005 1px白线显示 -->
 			<single-product v-if="item.type === '205'" :options="item.data"></single-product>
 			<recommend v-if="item.type === '203'" :options="item.data"></recommend>
 			<points v-if="item.type === '007'" :options="item.renderData" :customerName='userInfo.customerName'></points>
 		</block>
-		<button type="primary" @tap="clearInfo">清除登陆</button>
 	</view>
 </template>
 
@@ -51,13 +42,6 @@
 		},
 		methods: {
 			...mapMutations("common", ['SET_BASEINFO', 'SET_MALLTYPE', 'SET_MALLID', 'SET_MALLNAME', 'SET_MALLLOGO', 'SET_MALLDOMAIN']),
-			clearInfo(){
-				uni.removeStorageSync('hasLogin')
-				uni.removeStorageSync('token')
-				uni.removeStorageSync('uniCode')
-				uni.removeStorageSync('userInfo')
-				uni.removeStorageSync('baseInfo');
-			},
 			checkMallType(){
 				this.$http.post('/mall/app/login/mall/shopmall/type', {
 					mallDomain: this.mallDomain
@@ -122,11 +106,7 @@
 			this.getMallType();
 		},
 		onLoad(options) {
-			// if(options){
-			// 	this.SET_MALLDOMAIN(options.mallDomain)
-			// }
-			// debugger;
-			// alert(this.mallDomain)
+			
 		},
 		
 	}

@@ -136,10 +136,9 @@
 				uni.chooseImage({
 				    success: (chooseImageRes) => {
 				        const tempFilePaths = chooseImageRes.tempFilePaths;
-				        uni.uploadFile({  // http://192.168.1.104/saas/app/backsite/sysFile/upload
+				        uni.uploadFile({
 				            url: '/saas/app/backsite/sysFile/upload',
 							header:{
-								// Authorization: 'Bearer ' + getStore({ name: 'token' })
 								Authorization: 'Bearer ' + uni.getStorageSync('token')
 							},
 				            filePath: tempFilePaths[0],

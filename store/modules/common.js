@@ -11,29 +11,9 @@ const state = {
   mallId: null,
   mallName: '',
   mallLogo: '',
-  // mallId: '',
-  // p: '',
-  // scm: '',
-  // accountId:'',
-  forcedLogin: false,
-  firstLoad: true,
-  // hasLogin: getStore({ name: 'hasLogin' }) && getStore({ name: 'hasLogin' }).hasLogin || false,
-  // token: getStore({ name: 'token' }) && getStore({ name: 'token' }).token || '',
-  // uniCode: getStore({ name: 'uniCode' }) && getStore({ name: 'uniCode' }).uniCode || '',
-  // userInfo: getStore({ name: 'userInfo' }) || {},
   hasLogin: false,
   token: '',
   uniCode: '',
-  // userInfo: {
-	 //  accountId: '',
-	 //  customerName: '',
-	 //  wechatName: '',
-	 //  customerSex: '',
-	 //  customerBirthday: '',
-	 //  customerImage: '',
-	 //  customerId: '',
-	 //  mobilephone: ''
-  // },
   userInfo: {},
   baseInfo: {
 	  mallDomain: '',
@@ -68,12 +48,10 @@ const mutations = {
 	},
 	SET_HASLOGIN: (state, hasLogin) => {
 		state.hasLogin = hasLogin;
-		// setStore({ name: 'hasLogin', content: state.hasLogin, type: 'sync' });
 		uni.setStorageSync('hasLogin', hasLogin);
 	},
 	SET_TOKEN: (state, token) => {
 		state.token = token;
-		// setStore({ name: 'token', content: state.token, type: 'sync' });
 		uni.setStorageSync('token', token);
 	},
 	SET_MALLDOMAIN: (state, mallDomain) => {
@@ -92,21 +70,8 @@ const mutations = {
 	SET_MALLLOGO: (state, mallLogo) => {
 		state.mallLogo = mallLogo
 	},
-	// SET_MALLID: (state, mallId) => {
-	// 	state.mallId = mallId;
-	// },
-	// SET_P: (state, p) => {
-	// 	state.p = p;
-	// },
-	// SET_SCM: (state, scm) => {
-	// 	state.scm = scm;
-	// },
-	// SET_ACCOUNTID: (state, accountId) => {
-	// 	state.accountId = accountId;
-	// },
 	SET_UNICODE: (state, uniCode) => {
 		state.uniCode = uniCode;
-		// setStore({ name: 'uniCode', content: state.uniCode, type: 'sync' });
 		uni.setStorageSync('uniCode', uniCode);
 	},
 	SET_BASEINFO: (state, baseInfo) => {
@@ -116,11 +81,7 @@ const mutations = {
 	SET_USERIFNO: (state, userInfo) => {
 	  state.userInfo = userInfo;
 	  setStore({ name: 'userInfo', content: state.userInfo, type: 'sync' });
-	  // uni.setStorageSync('userInfo', JSON.stringify(userInfo));
 	},
-	// SET_MALLTYPE: (state, mallType) => {
-	// 	state.mallType = mallType;
-	// },
 }
 const actions = {
 

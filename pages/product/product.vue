@@ -23,36 +23,7 @@
 						<text class="iconfont icon-icon_sanjiaoxing icon-bottom" v-bind:class='[searchData.orderType==3 && !searchData.isDesc ? "red" : ""]'></text>
 					</text>
 				</view>
-				<!-- <view class="item">
-					分类
-				</view> -->
 			</view>
-			<!-- <view class="classify-bottom">
-				<text class="item">
-					家居用品
-				</text>
-				<text class="item">
-					家居用品
-				</text>
-				<text class="item">
-					家居用品
-				</text>
-				<text class="item">
-					家居用品
-				</text>
-				<text class="item">
-					家居用品
-				</text>
-				<text class="item">
-					家居用品
-				</text>
-				<text class="item">
-					家居用品
-				</text>
-				<text class="item">
-					家居用品
-				</text>
-			</view> -->
 		</view>
 		<view v-if='notFound' class="product-empty">
 			<view class="not-tips">
@@ -107,7 +78,6 @@
 	export default {
 		data() {
 			return {
-				// toggle: true,
 				pageNum: 1,
 				productData: [],
 				loadding: false,
@@ -143,16 +113,6 @@
 					url: '/pages/productDetail/productDetail?goodsId=' + e
 				});
 			},
-			// goTop: function() {
-			// 	// this.toggle = false;
-			// 	uni.pageScrollTo({
-			// 		scrollTop: 0,
-			// 		// duration: 5
-			// 	})
-			// 	// setTimeout(() => {
-			// 	// 	this.toggle = true
-			// 	// }, 10)
-			// },
 			doQuery(orderType){
 				this.goTop();
 				this.searchData.pageNum=1;
@@ -180,12 +140,10 @@
 					...this.searchData
 				})
 				.then( res => {
-					// console.log(res)
 					if(res.code == 0){
 						if(res.result){
 							this.searchData.totalPage=res.result.totalPage;
 							if(res.result.mallGoodsList.length == 0){
-								// this.notFound=true;
 								this.loadding = false;
 								this.pullUpOn = false;
 							}else{
@@ -209,32 +167,9 @@
 				})
 			},
 			initSearch(){
-				// let keyword = uni.getStorageSync('searchKeyword') || '';
-				// this.searchData.keyword=keyword;
 				this.searchData.pageNum=1;
-				// this.notFound=false;
-				// this.canReachBottom=true;
-				// this.pullUpOn=true;
 				this.productData=[];
 			}
-			// initProductData(){
-			// 	this.doSearch();
-			// 	// this.$http.post('/mall/app/goods/list', {
-			// 	// 	...this.baseInfo,
-			// 	// 	pageNum: this.pageNum
-			// 	// })
-			// 	// .then( res => {
-			// 	// 	if(res.code == 0){
-			// 	// 		this.productData=res.result.mallGoodsList
-			// 	// 	}else{
-			// 	// 		console.log("product.vue-- list获取数据列表失败");
-			// 	// 	}
-			// 	// 	console.log(res)
-			// 	// })
-			// 	// .catch( err => {
-			// 	// 	console.log("product.vue-- list获取数据列表错误");
-			// 	// })
-			// }
 		},
 		computed: {
 			...mapState("common", ['baseInfo', 'userInfo']),
@@ -252,47 +187,15 @@
 			uni.removeStorageSync('searchKeyword');
 			uni.removeStorageSync('product_searchType_storage');
 		},
-		// onShow(){  
-		//     // 监听事件  
-		//     uni.$on('handleSearchKeywor',(keyword)=>{  
-		//         this.searchData.keyword = keyword;  
-		// 		console.log(this.searchData.keyword)
-		//     })  
-		// },  
-		// onHide() {  
-		//     // 移除监听事件  
-		// 	uni.$off('handleSearchKeywor');  
-		// }, 
-		/**
-		 * 页面相关事件处理函数--监听用户下拉动作
-		 */
-		onPullDownRefresh: function() {
-			//延时为了看效果
-			// setTimeout(() => {
-			// 	this.productList = this.loadData;
-			// 	this.pageNum = 1;
-			// 	this.pullUpOn = true;
-			// 	this.loadding = false;
-			// 	uni.stopPullDownRefresh();
-			// 	this.tui.toast("刷新成功")
-			// }, 200)
-		},
-		/**
-		 * 页面上拉触底事件的处理函数
-		 */
+		// 页面上拉触底事件的处理函数
 		onReachBottom: function() {
 			if (!this.pullUpOn) return;
 			this.loadding = true;
 			this.searchData.pageNum++;
-			// if(this.canReachBottom){
 			if (this.searchData.pageNum > this.searchData.totalPage) {
 				this.loadding = false;
 				this.pullUpOn = false;
 			}
-			// }else{
-			// 	this.loadding = false;
-			// }
-			
 			this.doSearch(uni.getStorageSync('product_searchType_storage'));
 		},
 		components: {

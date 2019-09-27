@@ -6,7 +6,6 @@
 				商品详情
 			</view>
 			<view class="tui-header-icon" :style="{marginTop:top+'px'}">
-				<!-- <view class="uni-btn-icon tui-icon icon-back" :style="{color:opcity>=1?'#000':'#fff',background:'rgba(0, 0, 0,'+iconOpcity+')'}"></view> -->
 				<view class="tui-icon icon-back iconfont icon-fanhui1" :style="{color:opcity>=1?'#000':'#fff',background:'rgba(0, 0, 0,'+iconOpcity+')'}"
 				 @tap="back"></view>
 				<view class="tui-icon icon-more-fill iconfont icon-gengduo  tui-icon-ml" :style="{color:opcity>=1?'#000':'#fff',background:'rgba(0, 0, 0,'+iconOpcity+')',fontSize:'20px'}"
@@ -32,23 +31,6 @@
 
 		<view class="tui-pro-detail">
 			<view class="tui-product-title">
-				<!-- <view class="tui-pro-pricebox tui-padding">
-					<view class="tui-pro-price">
-						<view>￥<text class="tui-price">49</text>.00</view>
-						<tui-tag size="small" :plain="true" type="high-green" shape="circle">新品</tui-tag>
-						<view class="tui-original-price tui-gray">
-							<text class="tui-line-through">￥199.00</text>
-						</view>
-					</view>
-					<view class="tui-collection tui-size" @tap="collecting">
-						<view class="tui-icon tui-icon-collection" :class="['tui-icon-'+(collected?'like-fill':'like')]" :style="{color:collected?'#ff201f':'#333',fontSize:'20px'}"></view>
-						<view class="tui-scale" :class="[collected?'tui-icon-red':'']">收藏</view>
-					</view>
-					<view class="we-share" @tap="onShare">
-						<view class="icon-share iconfont icon-fenxiang"></view>
-						<view class="share-name">分享</view>
-					</view>
-				</view> -->
 				<view class="pro-pricebox tui-padding">
 					<view class="pro-price">
 						<view class="sale-price">
@@ -62,29 +44,16 @@
 								<text class="points">{{goodsInfo.credits}}</text>分
 							</view>
 						</view>
-						<!-- <view class="original-price">
-							<text class="line-through">￥199.00</text>
-						</view> -->
 					</view>
-					<view class="pro-action">
+					<!-- <view class="pro-action">
 						<button  open-type="share" class="we-share">
 							<view class="icon-share iconfont icon-fenxiang"></view>
 							<view class="share-name">分享</view>
 						</button>
-					</view>
+					</view> -->
 				</view>
-				<!-- <view class="tui-original-price tui-gray">
-					价格
-					<text class="tui-line-through">￥199.00</text>
-				</view> -->
 				<view class="pro-titbox">
 					<view class="pro-title">{{goodsInfo.goodsProductname}}</view>
-					<!-- <button open-type="share" class="tui-share-btn tui-share-position">
-						<tui-tag type="gray" tui-tag-class="tui-tag-share tui-size" shape="circleLeft" size="small">
-							<view class="tui-icon tui-icon-partake" style="color:#999;font-size:15px"></view>
-							<text class="tui-share-text tui-gray">分享</text>
-						</tui-tag>
-					</button> -->
 					<view class="pro-subtitle">
 						<view class="sub-title">
 							{{goodsInfo.goodsTitle}}
@@ -95,14 +64,6 @@
 						</view>
 					</view>
 				</view>
-				<!-- <view class="tui-padding">
-					<view class="tui-sub-title tui-size tui-gray">此商品将于2019-06-28,10点结束闪购特卖，时尚美饰联合专场</view>
-					<view class="tui-sale-info tui-size tui-gray">
-						<view>快递：0.00</view>
-						<view>月销2000</view>
-						<view>浙江杭州</view>
-					</view>
-				</view> -->
 			</view>
 			
 			<view class="base-info">
@@ -111,102 +72,7 @@
 					<view class="iconfont icon-arrowRight"></view>
 				</view>
 			</view>
-			<!-- <view class="tui-discount-box tui-radius-all tui-mtop">
-				<view class="tui-list-cell" @tap="showPopup">
-					<view class="tui-bold tui-cell-title">领券</view>
-					<view class="tui-tag-coupon-box">
-						<tui-tag size="small" type="red" shape="circle" tui-tag-class="tui-tag-coupon">满99减8</tui-tag>
-						<tui-tag size="small" type="red" shape="circle" tui-tag-class="tui-tag-coupon">满59减5</tui-tag>
-					</view>
-					<tui-icon name="more-fill" :size="20" class="tui-right tui-top40" color="#666"></tui-icon>
-				</view>
-
-				<view class="tui-list-cell tui-last" @tap="showPopup">
-					<view class="tui-bold tui-cell-title">促销</view>
-					<view>
-						<view class="tui-promotion-box">
-							<tui-tag size="small" type="red" :plain="true" tui-tag-class="tui-inline-block">多买优惠</tui-tag>
-							<text>满1件，立减最低1件商品价格，包邮（限中国内地）</text>
-						</view>
-						<view class="tui-promotion-box">
-							<tui-tag size="small" type="red" :plain="true" tui-tag-class="tui-inline-block">满额返券</tui-tag>
-							<text>满2件，立减最低2件商品价格，包邮（限中国内地）</text>
-						</view>
-						<view class="tui-promotion-box">
-							<tui-tag size="small" type="red" :plain="true" tui-tag-class="tui-inline-block">特别赠品</tui-tag>
-							<text>满3件，立减最低3件商品价格，包邮（限中国内地）</text>
-						</view>
-					</view>
-					<tui-icon name="more-fill" :size="20" class="tui-right tui-top40" color="#666"></tui-icon>
-				</view>
-
-			</view> -->
-
-			<!-- <view class="tui-basic-info tui-mtop tui-radius-all">
-				<view class="tui-list-cell" @tap="showPopup">
-					<view class="tui-bold tui-cell-title">已选</view>
-					<view class="tui-selected-box">个性水滴耳环【A2】,1个，可选服务</view>
-					<tui-icon name="more-fill" :size="20" class="tui-right" color="#666"></tui-icon>
-				</view>
-				<view class="tui-list-cell" @tap="showPopup">
-					<view class="tui-bold tui-cell-title">送至</view>
-					<view class="tui-addr-box">
-						<view class="tui-addr-item">北京朝阳区三环到四环之间</view>
-						<view class="tui-addr-item">今日23:59前完成下单，预计6月28日23:30前发货，7月1日24:00前送达</view>
-					</view>
-					<tui-icon name="more-fill" :size="20" class="tui-right" color="#666"></tui-icon>
-				</view>
-				<view class="tui-list-cell tui-last">
-					<view class="tui-bold tui-cell-title">运费</view>
-					<view class="tui-selected-box">在线支付免运费</view>
-				</view>
-				<view class="tui-guarantee">
-					<view class="tui-guarantee-item">
-						<tui-icon name="circle-selected" :size="14" color="#999"></tui-icon>
-						<text class="tui-pl">可配送海外</text>
-					</view>
-					<view class="tui-guarantee-item">
-						<tui-icon name="circle-selected" :size="14" color="#999"></tui-icon>
-						<text class="tui-pl">店铺发货&售后</text>
-					</view>
-					<view class="tui-guarantee-item">
-						<tui-icon name="circle-selected" :size="14" color="#999"></tui-icon>
-						<text class="tui-pl">7天无理由退货</text>
-					</view>
-					<view class="tui-guarantee-item">
-						<tui-icon name="circle-selected" :size="14" color="#999"></tui-icon>
-						<text class="tui-pl">闪电退款</text>
-					</view>
-					<view class="tui-guarantee-item">
-						<tui-icon name="circle-selected" :size="14" color="#999"></tui-icon>
-						<text class="tui-pl">极速审核</text>
-					</view>
-				</view>
-			</view> -->
-
-			<!-- <view class="tui-cmt-box tui-mtop">
-				<view class="tui-list-cell tui-last tui-between">
-					<view class="tui-bold tui-cell-title">评价</view>
-					<view @tap="common">
-						<text class="tui-cmt-all">查看全部</text>
-						<view class="tui-icon tui-icon-more-fill" style="color:#ff201f; font-size: 20px;"></view>
-						<tui-icon name="more-fill" size="20" color="#ff201f"></tui-icon>
-					</view>
-				</view>
-
-				<view class="tui-cmt-content tui-padding">
-					<view class="tui-cmt-user">
-						<image src="../../../static/images/news/avatar_2.jpg" class="tui-acatar"></image>
-						<view>z***9</view>
-					</view>
-					<view class="tui-cmt">物流很快，很适合我的风格❤</view>
-					<view class="tui-attr">颜色：叠层钛钢流苏耳环（A74）</view>
-				</view>
-
-				<view class="tui-cmt-btn">
-					<tui-tag type="black" :plain="true" tui-tag-class="tui-tag-cmt" @tap="common">查看全部评价</tui-tag>
-				</view>
-			</view> -->
+			
 			<view class="info-detail tui-mtop">
 				<view class="title-name">
 					<view class="title-item" @tap="handleChangeCont(0)" :class="showCont ? 'title-item-active' : ''">
@@ -219,19 +85,10 @@
 				<view class="content-info">
 					<view class="content-item" v-if="showCont">
 						<view class="tui-product-img" v-html="goodsInfo.details">
-							<!-- <image class="img" :src="img.url" v-for="(img,index) in goodsInfo.details" :key="index" mode="widthFix"></image> -->
 							{{goodsInfo.details}}
 						</view>
 					</view>
 					<view class="content-item" v-if="!showCont">
-						<!-- <view class="product-specs"> -->
-							<!-- <view class="table-list">
-								<view class="list-cell" v-for="item in goodsInfo.specs" :key="item.sort">
-									<view class="cell skey">{{item.skey}}</view>
-									<view class="cell svalue">{{item.svalue}}</view>
-								</view>
-							</view> -->
-						<!-- </view> -->
 						<t-table border="1" border-color="#ccc" class="table-list" v-if="goodsInfo.specs">
 							<t-tr font-size="14" color="#747474" class='list-cell' align="left" v-for="item in goodsInfo.specs" :key="item.sort">
 								<t-td align="left" class="cell-name">{{item.skey}}</t-td>
@@ -243,21 +100,11 @@
 				</view>
 			</view>
 			<tui-nomore text="已经到最底了" :visible="true" bgcolor="#f7f7f7"></tui-nomore>
-			<!-- <view class="tui-safearea-bottom"></view> -->
 		</view>
 
 		<!--底部操作栏-->
 		<view class="tui-operation" v-if='goodsInfo.isOnsale'>
 			<view class="tui-operation-left tui-col-2">
-				<!-- <view class="tui-operation-item" hover-class="opcity" :hover-stay-time="150">
-					<tui-icon name="kefu" :size="22" color='#333'></tui-icon>
-					<view class="tui-operation-text tui-scale-small">客服</view>
-				</view>
-				<view class="tui-operation-item" hover-class="opcity" :hover-stay-time="150">
-					<tui-icon name="shop" :size="22" color='#333'></tui-icon>
-					<view class="tui-operation-text tui-scale-small">店铺</view>
-				</view> -->
-				<!-- <view class="tui-operation-item" hover-class="opcity" :hover-stay-time="150"> -->
 				<view class="tui-operation-item" @tap="linkToCart">
 					<tui-icon name="cart" :size="22" color='#333'></tui-icon>
 					<view class="tui-operation-text tui-scale-small">购物车</view>
@@ -285,15 +132,6 @@
 					功能直达
 				</view>
 				<view class="tui-menu-itembox">
-					<!-- <block v-for="(item,index) in topMenu" :key="index">
-						<view class="tui-menu-item" hover-class="tui-opcity" :hover-stay-time="150" @tap="common">
-							<view class="tui-badge-box">
-								<tui-icon :name="item.icon" color="#fff" :size="item.size"></tui-icon>
-								<tui-badge type="red" tui-badge-class="tui-menu-badge" size="small" v-if="item.badge">{{item.badge}}</tui-badge>
-							</view>
-							<view class="tui-menu-text">{{item.text}}</view>
-						</view>
-					</block> -->
 					<view class="tui-menu-item" hover-class="tui-opcity" :hover-stay-time="150" @tap="linkToIndex">
 						<view class="tui-badge-box">
 							<tui-icon name="home" color="#fff" :size="23"></tui-icon>
@@ -315,7 +153,6 @@
 					</view>
 				</view>
 				<view class="tui-icon icon-up iconfont icon-shouqi" style="color: #fff; font-size: 20px;" @tap.stop="closeMenu"></view>
-				<!-- <tui-icon name="up" color="#fff" size="26" class="tui-icon-up" @tap.stop="closeMenu"></tui-icon> -->
 			</view>
 
 		</tui-top-dropdown>
@@ -328,7 +165,6 @@
 					<image :src="goodsInfo.goodsMainimagepath" class="tui-popup-img"></image>
 					<view class="tui-popup-price">
 						<view class="tui-amount">
-							<!-- ￥<text class="num">{{goodsInfo.salePrice}}</text> -->
 							<view class="saleMoney" v-if="goodsInfo.salePrice">
 								<text class="money">{{goodsInfo.salePrice}}</text>元
 							</view>
@@ -363,7 +199,6 @@
 					<view class="operation-btn style-yellow" @click="handleAddCart(goodsInfo.id)">加入购物车</view>
 					<view class="operation-btn style-red" @click="linkToPayment(goodsInfo.id)">立即购买</view>
 				</view>
-				<!-- <view class="tui-icon tui-icon-close-fill tui-icon-close" style="color: #999;font-size:20px" @tap="hidePopup"></view> -->
 				<tui-icon name="close-fill" color="#999" class="popup-close-btn" @tap="hidePopup"></tui-icon>
 			</view>
 		</tui-bottom-popup>
@@ -403,6 +238,7 @@
 		},
 		data() {
 			return {
+				detailTitlt: '',
 				goodsInfo: {},
 				showCont: true,
 				height: 64, //header高度
@@ -445,7 +281,6 @@
 				let typeStr=this.goodsInfo.attrs.map(item=>{
 					return item.selectAttributeValue;
 				}).join(",");
-				// console.log(typeStr)
 				this.goodsInfo.subGoods.map(item=>{
 					if(item.attributeKey === typeStr){
 						this.subGoodsId = item.subGoodsId
@@ -552,12 +387,6 @@
 				}
 				this.hidePopup();
 			},
-			// collecting: function() {
-			// 	this.collected = !this.collected
-			// },
-			// common: function() {
-			// 	this.tui.toast("功能开发中~")
-			// },
 			linkToIndex(){
 				uni.reLaunch({
 					url: '/pages/index/index'
@@ -583,18 +412,18 @@
 			// onBridgeReady() {
 			// 	WeixinJSBridge.call('hideOptionMenu');
 			// },
-			weixinSendAppMessage(title,desc,link,imgUrl){
-				alert('weixinSendAppMessage开始---------------')
-				WeixinJSBridge.invoke('sendAppMessage',{
-				//”appid”:appId,
-				'img_url':'',
-				//”img_width”:”640″,
-				//”img_height”:”640″,
-				'link':'https://www.baidu.com/',
-				'desc':'描述',
-				'title':'123123'
-				});
-			},
+			// weixinSendAppMessage(title,desc,link,imgUrl){
+			// 	alert('weixinSendAppMessage开始---------------')
+			// 	WeixinJSBridge.invoke('sendAppMessage',{
+			// 	//”appid”:appId,
+			// 	'img_url':'',
+			// 	//”img_width”:”640″,
+			// 	//”img_height”:”640″,
+			// 	'link':'https://www.baidu.com/',
+			// 	'desc':'描述',
+			// 	'title':'123123'
+			// 	});
+			// },
 			getGoodsDetail(){
 				let goodsId=uni.getStorageSync('goodsId');
 				this.$http.post('/mall/app/goods/detail', {
@@ -603,7 +432,6 @@
 					accountId: this.userInfo.accountId || ''
 				})
 				.then( res => {
-					// console.log(res);
 					if(res.code == 0){
 						console.log(res.result);
 						this.goodsInfo=res.result;
@@ -654,12 +482,6 @@
 				}
 			})
 		},
-		// onPullDownRefresh() {
-		// 	console.log('refresh');
-		// 	setTimeout(function () {
-		// 		uni.stopPullDownRefresh();
-		// 	}, 1000);
-		// },
 		onPageScroll(e) {
 			let scroll = e.scrollTop <= 0 ? 0 : e.scrollTop;
 			let opcity = scroll / this.scrollH;
@@ -673,9 +495,6 @@
 </script>
 
 <style lang="scss">
-	/* icon 也可以使用组件*/
-	// @import "../../../static/style/icon.css";
-	
 	page {
 		background: #f7f7f7;
 	}

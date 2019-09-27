@@ -227,6 +227,11 @@
 										title: '取消订单成功'
 									})
 									this.loadData(orderId);
+									setTimeout(function(){
+										uni.redirectTo({
+										    url: '/pages/order/order?state=4'
+										});
+									}, 2000);
 								}else{
 									uni.showToast({
 										icon: 'none',

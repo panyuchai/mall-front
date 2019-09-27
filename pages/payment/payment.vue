@@ -229,30 +229,6 @@
 	export default {
 		data() {
 			return {
-				// maskState: 0, //优惠券面板显示状态
-				// desc: '', //备注
-				// payType: 1, //1微信 2支付宝
-				// couponList: [
-				// 	{
-				// 		title: '新用户专享优惠券',
-				// 		price: 5,
-				// 	},
-				// 	{
-				// 		title: '庆五一发一波优惠券',
-				// 		price: 10,
-				// 	},
-				// 	{
-				// 		title: '优惠券优惠券优惠券优惠券',
-				// 		price: 15,
-				// 	}
-				// ],
-				// addressData: {
-				// 	name: '许小星',
-				// 	mobile: '13853988752',
-				// 	address: '湖北省武汉市江汉区淮海路泛海国际soho',
-				// 	area: '123',
-				// 	default: false,
-				// },
 				hasAddress: true,
 				isWx: false,
 				isWebWx: false,
@@ -263,7 +239,6 @@
 				goodsList: [],
 				balanceType: 0,
 				fee: 0,
-				// payInfo: {}
 			}
 		},
 		methods: {
@@ -341,52 +316,6 @@
 					console.log(err);
 				})
 			},
-			
-			// getPayInfo(params){                                              //调用统一下单接口获取js支付参数  参数：金额、商品名称等 具体可以看统一接口的接收参数类WxPayUnifiedOrderRequest
-			// 	this.$api.gotoPay(params).then(res=>{  
-			// 	  if(res!=null){
-			// 		this.payInfo.appId = res.data.appId;
-			// 		this.payInfo.timeStamp = res.data.timeStamp;
-			// 		this.payInfo.nonceStr = res.data.nonceStr;
-			// 		this.payInfo.packages = res.data.packages;
-			// 		this.payInfo.sign = res.data.sign;
-			// 	  }
-			// 	})
-		 //    },
-		 
-			// onBridgeReady(){　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　//使用微信浏览器内置的对象调起微信支付插件，并传入统一接口返回的参数
-			// 	WeixinJSBridge.invoke(
-			// 	  'getBrandWCPayRequest', {
-			// 		"appId":this.payInfo.appId,                 //公众号名称，由商户传入
-			// 		"timeStamp":this.payInfo.timeStamp,         //时间戳，自1970年以来的秒数
-			// 		"nonceStr":this.payInfo.nonceStr,           //随机字符串
-			// 		"package":this.payInfo.package,            //支付验证pay_id
-			// 		"signType":this.payInfo.signType,                           //微信签名方式
-			// 		"paySign":this.payInfo.paySign                 //微信签名
-			// 	  },
-			// 	  function(res){
-			// 		alert(res)
-			// 		if(res.err_msg == "get_brand_wcpay_request:ok" ){
-			// 		  // 使用以上方式判断前端返回,微信团队郑重提示：
-			// 		  //res.err_msg将在用户支付成功后返回ok，但并不保证它绝对可靠。
-			// 		  console.log('res.err_msg == "get_brand_wcpay_request:ok"')
-			// 		}
-			// 	  }
-			// 	)
-			// },
-			// Gopay(){　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　//点击付款按钮开始支付
-			// 	console.log("开始支付")
-			// 	if (typeof WeixinJSBridge == "undefined"){
-			// 	  if( document.addEventListener ){
-			// 		document.addEventListener('WeixinJSBridgeReady', this.onBridgeReady(), false);
-			// 	  }else if (document.attachEvent){
-			// 		document.attachEvent('WeixinJSBridgeReady', this.onBridgeReady());
-			// 		document.attachEvent('onWeixinJSBridgeReady', this.onBridgeReady());
-			// 	  }
-			// 	}else{
-			// 	  this.onBridgeReady();
-			// 	}
-			// },
 			handleWxWebPay(data){
 				this.$http.post('/mall/app/order/submit', {
 					...data,
@@ -407,8 +336,6 @@
 						}, 1000)
 					}else{
 						if(res.code == 0){
-							// uni.setStorageSync('PAYMENT_ORDER_INFO', JSON.stringify(data));
-							// window.location.href=`http://${this.paymentUrl}.yujianli.cn/#/pages/payment/cashRegister?orderNo=`+res.result.orderNo+"&mallDomain="+this.baseInfo.mallDomain+'&paymentOrderInfo'+JSON.stringify(data);
 							window.location.href=`http://${this.paymentUrl}.yujianli.cn/#/pages/payment/cashRegister?orderNo=`+res.result.orderNo+"&mallDomain="+this.baseInfo.mallDomain+'&orderPayPrice='+data.payPrice+'&baseUrl='+this.baseUrl+'&token='+encodeURIComponent(this.token);
 						}else{
 							uni.showToast({
@@ -416,28 +343,6 @@
 								title: res.message
 							})
 						}
-						
-						
-						// this.$http.post('/mall/app/order/submit', {
-						// 	...data,
-						// 	payChannels: '6',
-						// 	callBackNo: res.result.orderNo
-						// })
-						// .then( res => {
-						// 	console.log('WxWebPay  接口调用成功')
-						// 	if(res.code == 0){
-						// 		this.payInfo.appId = res.result.payResponse.wxPayResponse.appId;
-						// 		this.payInfo.timeStamp = res.result.payResponse.wxPayResponse.timeStamp;
-						// 		this.payInfo.nonceStr = res.result.payResponse.wxPayResponse.nonceStr;
-						// 		this.payInfo.package = res.result.payResponse.wxPayResponse.packageStr;
-						// 		this.payInfo.signType = res.result.payResponse.wxPayResponse.signType;
-						// 		this.payInfo.paySign = res.result.payResponse.wxPayResponse.paySign;
-						// 		this.onBridgeReady();
-						// 	}
-						// })
-						// .catch( err => {
-						// 	console.log(err);
-						// })
 					}
 					
 				})
@@ -511,41 +416,6 @@
 				}else if(this.isWeb){
 					this.handleWebPay(data);
 				}
-				
-				// let payChannels = '',
-				// 	arrStr = [];
-				// 	// this.balancePay, this.payPrice
-				// if(this.balanceType){
-				// 	if(this.balancePay>0){
-				// 		arrStr.push(0)
-				// 	}
-				// 	if(this.payPrice>0){
-				// 		arrStr.push(0)
-				// 	}
-				// }else{
-				// 	
-				// }
-				// console.log(arrStr)
-				
-				// this.$http.post('/mall/app/order/submit', {
-				// 	...this.baseInfo,
-				// 	accountId: this.userInfo.accountId,
-				// 	// balance: this.balancePay,
-				// 	isBalance: this.balanceType,
-				// 	credits: 0,
-				// 	expressFee: this.payData.express.fee,
-				// 	goodsList: this.payData.goodsListDetailList,
-				// 	payChannels: '',
-				// 	payPrice: this.payPrice,
-				// 	remark: this.remark,
-				// 	totalPrice: this.payData.totalPrice,
-				// })
-				// .then( res => {
-				// 	cnsole.log(res);
-				// })
-				// .catch( err => {
-				// 	console.log(err);
-				// })
 			},
 			checkEnvironment(){
 				if(navigator && navigator.userAgent){
@@ -558,15 +428,7 @@
 			},
 			browserRedirect() {
 				var sUserAgent = navigator.userAgent.toLowerCase();
-				// var bIsIpad = sUserAgent.match(/ipad/i) == "ipad";
-				// var bIsIphoneOs = sUserAgent.match(/iphone os/i) == "iphone os";
-				// var bIsMidp = sUserAgent.match(/midp/i) == "midp";
-				// var bIsUc7 = sUserAgent.match(/rv:1.2.3.4/i) == "rv:1.2.3.4";
-				// var bIsUc = sUserAgent.match(/ucweb/i) == "ucweb";
-				// var bIsAndroid = sUserAgent.match(/android/i) == "android";
-				// var bIsCE = sUserAgent.match(/windows ce/i) == "windows ce";
-				// var bIsWM = sUserAgent.match(/windows mobile/i) == "windows mobile";
-				var bIsWeChat = sUserAgent.match(/MicroMessenger/i) == "micromessenger";//微信端
+				var bIsWeChat = sUserAgent.match(/MicroMessenger/i) == "micromessenger";
 				if(bIsWeChat) {
 					this.isWebWx=true;
 				}else {
@@ -578,7 +440,6 @@
 					...this.baseInfo,
 					accountId: this.userInfo.accountId,
 					goodsList: uni.getStorageSync('buyList')
-					// goodsList: this.order_goodsList
 				})
 				.then( res => {
 					console.log(res)
@@ -633,13 +494,9 @@
 		},
 		onBackPress(){
 			uni.removeStorageSync('chooseAddress');
-			// 支付结束后重删一次
 		},
 		onLoad(option){
 			this.checkEnvironment();
-			//商品数据
-			//let data = JSON.parse(option.data);
-			//console.log(data);
 		},
 	}
 </script>

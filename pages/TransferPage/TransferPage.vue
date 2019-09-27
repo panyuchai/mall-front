@@ -26,7 +26,6 @@
 					this.SET_HASLOGIN(true);
 					this.SET_TOKEN(options.token);
 					this.$http.setConfig((config) => {
-						// config.header['Authorization'] = 'Bearer ' + getStore({ name: 'token' });
 						config.header['Authorization'] = 'Bearer ' + uni.getStorageSync('token');
 						return config;
 					});
@@ -50,7 +49,6 @@
 									window.location.href=uni.getStorageSync('referUrl');
 									uni.removeStorageSync('referUrl');
 								}else{
-									// window.location.href=this.baseUrl + '?mallDomain='+options.mallDomain;
 									// window.location.href='?mallDomain='+options.mallDomain;
 									uni.switchTab({
 										url: '/pages/index/index'
@@ -64,24 +62,8 @@
 					.catch( err => {
 						console.log('TransferPage.vue-- info接口调用错误');
 					})
-					// if(uni.getStorageSync('referUrl')){
-					// 	window.location.href=uni.getStorageSync('referUrl');
-					// 	uni.removeStorageSync('referUrl');
-					// }else{
-					// 	window.location.href=this.transferUrl + '?mallDomain='+options.mallDomain;
-					// }
 				}else{
 					uni.setStorageSync('openid',options.openid);
-					
-					// uni.navigateTo({
-					// 	url: '/pages/login/login?mallDomain=yyy'
-					// })
-					// uni.reLaunch({
-					// 	url: '/pages/index/index?mallDomain='+this.mallDomain
-					// });
-					// uni.switchTab({
-					// 	url: '/pages/index/index'
-					// });
 					uni.setStorageSync('isTransferPage', false);
 					// window.location.href='?mallDomain='+options.mallDomain;
 					uni.switchTab({
