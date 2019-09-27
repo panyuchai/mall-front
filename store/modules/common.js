@@ -5,7 +5,7 @@ const state = {
    */
   baseUrl: '',
   transferUrl: '',
-  paymentUrl: 'testpay',
+  paymentUrl: 'pay',
   mallDomain: '',
   mallType: '',
   mallId: null,

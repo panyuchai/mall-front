@@ -409,7 +409,7 @@
 						if(res.code == 0){
 							// uni.setStorageSync('PAYMENT_ORDER_INFO', JSON.stringify(data));
 							// window.location.href=`http://${this.paymentUrl}.yujianli.cn/#/pages/payment/cashRegister?orderNo=`+res.result.orderNo+"&mallDomain="+this.baseInfo.mallDomain+'&paymentOrderInfo'+JSON.stringify(data);
-							window.location.href=`http://${this.paymentUrl}.yujianli.cn/#/pages/payment/cashRegister?orderNo=`+res.result.orderNo+"&mallDomain="+this.baseInfo.mallDomain+'&orderPayPrice='+data.payPrice+'&token='+encodeURIComponent(this.token);
+							window.location.href=`http://${this.paymentUrl}.yujianli.cn/#/pages/payment/cashRegister?orderNo=`+res.result.orderNo+"&mallDomain="+this.baseInfo.mallDomain+'&orderPayPrice='+data.payPrice+'&baseUrl='+this.baseUrl+'&token='+encodeURIComponent(this.token);
 						}else{
 							uni.showToast({
 								icon: 'none',
@@ -609,7 +609,7 @@
 			}
 		},
 		computed: {
-			...mapState('common', ['baseInfo', 'userInfo', 'paymentUrl', 'token']),
+			...mapState('common', ['baseInfo', 'userInfo', 'paymentUrl', 'baseUrl', 'token']),
 			// ...mapState('order', ['order_goodsList'])
 			
 			// balancePay(){

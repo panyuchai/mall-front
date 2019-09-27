@@ -170,6 +170,7 @@
 	export default {
 		data() {
 			return {
+				baseUrl: '',
 				orderNo: '',
 				mallDomain: '',
 				payInfo: {},
@@ -288,6 +289,7 @@
 				this.token=uni.getStorageSync('token');
 				this.payPrice=Number(uni.getStorageSync('payPrice'));
 				// this.initData=JSON.parse(uni.getStorageSync('PAYMENT_ORDER_INFO'));
+				this.baseUrl=uni.getStorageSync('baseUrl');
 			},
 			checkMallType(){
 				this.$http.post('/mall/app/login/mall/shopmall/type', {
@@ -343,6 +345,7 @@
 			uni.setStorageSync('mallDomain', options.mallDomain);
 			uni.setStorageSync('token', decodeURIComponent(options.token));
 			uni.setStorageSync('payPrice', options.orderPayPrice);
+			uni.setStorageSync('baseUrl', options.baseUrl);
 			// uni.setStorageSync('PAYMENT_ORDER_INFO', options.paymentOrderInfo);
 			this.getInitInfo();
 			this.checkMallType();

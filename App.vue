@@ -50,7 +50,6 @@
 				this.SET_MALLDOMAIN(mallDomain);
 			},
 			getMallDomain(){
-				 // ncs.yujianli.cn
 				let mallDomain = this.GetQueryString('mallDomain'),
 					storageMallDomain = this.mallDomain,
 					host = window.location.host;
@@ -65,44 +64,38 @@
 					default:
 						this.SET_TRANSFERURL('//mall-api.yujianli.cn');
 				}
+				
 				if(!mallDomain){
 					mallDomain = window.location.hostname.split('.')[0];
 					this.getStorageInfo(storageMallDomain, mallDomain);
 				}else{
 					this.getStorageInfo(storageMallDomain, mallDomain);
 				}
-				
 				// if(!mallDomain){
-				// 	let hostName = window.location.hostname,
-				// 		hostMallDomain = window.location.hostname.split('.')[0];
-				// 	this.SET_TRANSFERURL(hostName);
-				// 	this.SET_MALLDOMAIN(hostMallDomain);
+				// 	mallDomain = window.location.hostname.split('.')[0];
 				// }
-				// if(mallDomain){
-				// 	let storageMallDomain = this.mallDomain;
-				// 	if(storageMallDomain && storageMallDomain!==mallDomain){
-				// 		this.clearUserInfo();
-				// 	}else{
-				// 		if(uni.getStorageSync('hasLogin')){
-				// 			this.SET_HASLOGIN(uni.getStorageSync('hasLogin'));
-				// 		}
-				// 		if(uni.getStorageSync('token')){
-				// 			this.SET_TOKEN(uni.getStorageSync('token'));
-				// 		}
-				// 		if(uni.getStorageSync('uniCode')){
-				// 			this.SET_UNICODE(uni.getStorageSync('uniCode'));
-				// 		}
-				// 		let storageUserInfo = getStore({ name: 'userInfo' }),
-				// 			storageBaseInfo = getStore({ name: 'baseInfo' });
-				// 		if(storageUserInfo){
-				// 			this.SET_USERIFNO(storageUserInfo);
-				// 		}
-				// 		if(storageBaseInfo){
-				// 			this.SET_BASEINFO(storageBaseInfo);
-				// 		}
+				// if(storageMallDomain && storageMallDomain!==mallDomain){
+				// 	this.clearUserInfo();
+				// }else{
+				// 	if(uni.getStorageSync('hasLogin')){
+				// 		this.SET_HASLOGIN(uni.getStorageSync('hasLogin'));
 				// 	}
-				// 	this.SET_MALLDOMAIN(mallDomain);
+				// 	if(uni.getStorageSync('token')){
+				// 		this.SET_TOKEN(uni.getStorageSync('token'));
+				// 	}
+				// 	if(uni.getStorageSync('uniCode')){
+				// 		this.SET_UNICODE(uni.getStorageSync('uniCode'));
+				// 	}
+				// 	let storageUserInfo = getStore({ name: 'userInfo' }),
+				// 		storageBaseInfo = getStore({ name: 'baseInfo' });
+				// 	if(storageUserInfo){
+				// 		this.SET_USERIFNO(storageUserInfo);
+				// 	}
+				// 	if(storageBaseInfo){
+				// 		this.SET_BASEINFO(storageBaseInfo);
+				// 	}
 				// }
+				// this.SET_MALLDOMAIN(mallDomain);
 			},
 			checkMallType(){
 				this.$http.post('/mall/app/login/mall/shopmall/type', {
