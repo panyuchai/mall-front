@@ -5,7 +5,7 @@ const state = {
    */
   baseUrl: '',
   transferUrl: '',
-  paymentUrl: 'pay',
+  paymentUrl: '',
   mallDomain: '',
   mallType: '',
   mallId: null,
@@ -41,6 +41,9 @@ const mutations = {
 	},
 	SET_TRANSFERURL: (state, transferUrl) => {
 		state.transferUrl = transferUrl;
+	},
+	SET_PAYMENTURL: (state, paymentUrl) => {
+		state.paymentUrl = paymentUrl;
 	},
 	SET_ISTRANSFERPAGE: (state, isTransferPage) => {
 		state.isTransferPage = isTransferPage;

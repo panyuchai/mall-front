@@ -169,7 +169,6 @@
 			}
 		},
 		onBackPress(eve) {
-			debugger;
 			alert('11111111111111')
 			alert(eve);
 			return true;
@@ -191,11 +190,9 @@
 					  // 使用以上方式判断前端返回,微信团队郑重提示：
 					  //res.err_msg将在用户支付成功后返回ok，但并不保证它绝对可靠。
 					  // uni.removeStorageSync('chooseAddress');
-					    window.location.href=that.baseUrl + '?mallDomain='+that.mallDomain + '#/pages/orderDetail/orderDetail?orderId='+that.initData.orderId;
+					    window.location.href='//'+that.baseUrl + '#/pages/orderDetail/orderDetail?orderId='+that.initData.orderId;
 					}else{
-						debugger;
 						// uni.removeStorageSync('chooseAddress');
-						alert(that.baseUrl + '#/pages/order/order?state=0')
 						window.location.href='//'+that.baseUrl + '#/pages/order/order?state=0';
 					}
 				  }

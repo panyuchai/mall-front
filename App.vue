@@ -7,7 +7,7 @@
 			...mapState("common", ['transferUrl', 'baseUrl', 'uniCode', 'mallDomain', 'baseInfo', 'hasLogin', 'isTransferPage'])
 		},
 		methods: {
-			...mapMutations("common", ['SET_TRANSFERURL', 'SET_BASEURL', 'SET_USERIFNO', 'SET_BASEINFO', 'SET_HASLOGIN', 'SET_UNICODE', 'SET_TOKEN', 'SET_MALLTYPE', 'SET_MALLID', 'SET_MALLNAME', 'SET_MALLLOGO', 'SET_MALLDOMAIN', 'SET_ISTRANSFERPAGE']),
+			...mapMutations("common", ['SET_TRANSFERURL', 'SET_BASEURL', 'SET_PAYMENTURL', 'SET_USERIFNO', 'SET_BASEINFO', 'SET_HASLOGIN', 'SET_UNICODE', 'SET_TOKEN', 'SET_MALLTYPE', 'SET_MALLID', 'SET_MALLNAME', 'SET_MALLLOGO', 'SET_MALLDOMAIN', 'SET_ISTRANSFERPAGE']),
 			GetQueryString(name) {
 				var reg = new RegExp('(^|&)' + name + '=([^&]*)(&|$)', 'i');
 				var r = window.location.search.substr(1).match(reg);
@@ -24,7 +24,6 @@
 				uni.removeStorageSync('baseInfo');
 			},
 			getMallDomain(){
-				debugger;
 				let mallDomain = this.GetQueryString('mallDomain'),
 					storageMallDomain = this.mallDomain,
 					host = window.location.host;
@@ -32,12 +31,15 @@
 				switch(host){
 					case 'localhost:8080':
 						this.SET_TRANSFERURL('//192.168.1.104:8087');
+						this.SET_PAYMENTURL('testpay');
 						break;
 					case '192.168.1.10:8888':
 						this.SET_TRANSFERURL('//192.168.1.104:8087');
+						this.SET_PAYMENTURL('testpay');
 						break;
 					default:
 						this.SET_TRANSFERURL('//mall-api.yujianli.cn');
+						this.SET_PAYMENTURL('pay');
 				}
 				if(!mallDomain){
 					mallDomain = window.location.hostname.split('.')[0];
@@ -211,7 +213,6 @@
 			}
 		},
 		onLaunch: function(options) {
-			debugger;
 			this.initData();
 			this.getMallDomain();
 			this.checkMallType();
