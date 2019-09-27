@@ -24,6 +24,7 @@
 				uni.removeStorageSync('baseInfo');
 			},
 			getMallDomain(){
+				debugger;
 				let mallDomain = this.GetQueryString('mallDomain'),
 					storageMallDomain = this.mallDomain,
 					host = window.location.host;
@@ -40,6 +41,9 @@
 				}
 				if(!mallDomain){
 					mallDomain = window.location.hostname.split('.')[0];
+					// if(mallDomain.indexOf('pay') !== -1){
+					// 	mallDomain = ''
+					// }
 				}
 				if(storageMallDomain && storageMallDomain!==mallDomain){
 					this.clearUserInfo();
@@ -207,6 +211,7 @@
 			}
 		},
 		onLaunch: function(options) {
+			debugger;
 			this.initData();
 			this.getMallDomain();
 			this.checkMallType();
