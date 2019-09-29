@@ -12,15 +12,15 @@
 				<view class="item" @tap="doQuery(2)">
 					价格
 					<text class="item-icon">
-						<text class="iconfont icon-icon_sanjiaoxing icon-top" v-bind:class='[searchData.orderType==2 && searchData.isDesc ? "red" : ""]'></text>
-						<text class="iconfont icon-icon_sanjiaoxing icon-bottom" v-bind:class='[searchData.orderType==2 && !searchData.isDesc ? "red" : ""]'></text>
+						<text class="iconfont icon-icon_sanjiaoxing icon-top" v-bind:class='[searchData.orderType==2 && searchData.desc ? "red" : ""]'></text>
+						<text class="iconfont icon-icon_sanjiaoxing icon-bottom" v-bind:class='[searchData.orderType==2 && !searchData.desc ? "red" : ""]'></text>
 					</text>
 				</view>
 				<view class="item" @tap="doQuery(3)">
 					销量
 					<text class="item-icon">
-						<text class="iconfont icon-icon_sanjiaoxing icon-top" v-bind:class='[searchData.orderType==3 && searchData.isDesc ? "red" : ""]'></text>
-						<text class="iconfont icon-icon_sanjiaoxing icon-bottom" v-bind:class='[searchData.orderType==3 && !searchData.isDesc ? "red" : ""]'></text>
+						<text class="iconfont icon-icon_sanjiaoxing icon-top" v-bind:class='[searchData.orderType==3 && searchData.desc ? "red" : ""]'></text>
+						<text class="iconfont icon-icon_sanjiaoxing icon-bottom" v-bind:class='[searchData.orderType==3 && !searchData.desc ? "red" : ""]'></text>
 					</text>
 				</view>
 			</view>
@@ -90,7 +90,7 @@
 					totalPage: null,
 					keyword: uni.getStorageSync('searchKeyword') || '',
 					orderType: null,
-					isDesc: false
+					desc: false
 				},
 				scrollTop: 0,
 				old: {
@@ -118,13 +118,13 @@
 				this.searchData.pageNum=1;
 				switch (orderType){
 					case 2:
-						this.searchData.isDesc=!this.searchData.isDesc;
+						this.searchData.desc=!this.searchData.desc;
 						break;
 					case 3:
-						this.searchData.isDesc=!this.searchData.isDesc;
+						this.searchData.desc=!this.searchData.desc;
 						break;
 					default:
-						this.searchData.isDesc=false;
+						this.searchData.desc=false;
 				}
 				this.doSearch(orderType);
 				uni.setStorageSync('product_searchType_storage', orderType);
