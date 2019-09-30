@@ -90,11 +90,11 @@
 .goods-list .goods .info .sale .sale-points .saleMoney .money {
             font-size: 40rpx;
 }
-.goods-list .goods .info .sale .sale-points .salePoints {
+.goods-list .goods .info .sale .sale-points .and {
             padding-left: 10rpx;
 }
 .goods-list .goods .info .sale .sale-points .salePoints .points {
-              font-size: 35rpx;
+            font-size: 35rpx;
 }
 .goods-list .goods .info .sale .sale-action .sale-btn {
           width: 176rpx;

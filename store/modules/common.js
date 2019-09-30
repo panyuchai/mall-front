@@ -1,12 +1,12 @@
 import { setStore, getStore, removeStore } from '../../utils/store.js'
 const state = {
-  /**
-   * 是否需要强制登录
-   */
   baseUrl: '',
   transferUrl: '',
   paymentUrl: '',
   mallDomain: '',
+  // #ifdef MP
+  mallDomain: 'ytt',
+  // #endif
   mallType: '',
   mallId: null,
   mallName: '',

@@ -1,32 +1,16 @@
 {
     "pages": [ //pages数组中第一项表示应用启动页,
-		
         {
             "path": "pages/index/index",
             "style": {
                 "navigationBarTitleText": ""
             }
         }, {
-            "path": "pages/main/main",
-            "style": {
-                "navigationBarTitleText": "登录模板"
-            }
-        }, {
 			"path": "pages/login/login",
 			"style": {
 				"navigationBarTitleText": "登录"
 			}
-		}, {
-            "path": "pages/reg/reg",
-            "style": {
-                "navigationBarTitleText": "注册"
-            }
-        }, {
-            "path": "pages/pwd/pwd",
-            "style": {
-                "navigationBarTitleText": "找回密码"
-            }
-        }
+		}
         ,{
             "path" : "pages/product/product",
             "style" : {
@@ -110,8 +94,8 @@
             "style" : {
 				"navigationBarTitleText": "物流详情"
 			}
-        }
-        ,{
+        },
+		{
             "path" : "pages/TransferPage/TransferPage",
             "style" : {}
         }

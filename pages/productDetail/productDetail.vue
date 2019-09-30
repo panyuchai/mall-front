@@ -436,6 +436,7 @@
 						console.log(res.result);
 						this.goodsInfo=res.result;
 						this.banner=res.result.pics;
+						this.goodsInfo.details.replace(/<img /g, '<img class="rich_img" ');
 					}else{
 						console.log('productDetail.vue-- detail接口获取数据失败');
 					};

@@ -98,7 +98,9 @@
 			},
 		},
 		onLoad(options){
+			// #ifdef H5
 			this.handleTransfer(options);
+			// #endif
 		}
 	}
 </script>

@@ -1,5 +1,4 @@
 @charset "UTF-8";
-/* icon 也可以使用组件*/
 page {
   background: #f7f7f7;
 }
@@ -242,11 +241,36 @@ page {
 .pro-pricebox .pro-price .sale-price {
       font-size: 32rpx;
       color: #E11F17;
-      font-weight: 600;
       padding-right: 10px;
+      display: -webkit-box;
+      display: -webkit-flex;
+      display: -ms-flexbox;
+      display: flex;
+      -webkit-box-orient: horizontal;
+      -webkit-box-direction: normal;
+      -webkit-flex-direction: row;
+          -ms-flex-direction: row;
+              flex-direction: row;
+      -webkit-box-pack: start;
+      -webkit-justify-content: flex-start;
+          -ms-flex-pack: start;
+              justify-content: flex-start;
+      -webkit-box-align: end;
+      -webkit-align-items: flex-end;
+          -ms-flex-align: end;
+              align-items: flex-end;
 }
-.pro-pricebox .pro-price .sale-price .num {
-        font-size: 48rpx;
+.pro-pricebox .pro-price .sale-price .saleMoney {
+        font-weight: 600;
+}
+.pro-pricebox .pro-price .sale-price .saleMoney .money {
+          font-size: 48rpx;
+}
+.pro-pricebox .pro-price .sale-price .and {
+        padding-left: 10rpx;
+}
+.pro-pricebox .pro-price .sale-price .salePoints .points {
+        font-size: 35rpx;
 }
 .pro-pricebox .pro-price .original-price {
       font-size: 24rpx;
@@ -355,38 +379,25 @@ page {
     vertical-align: top !important;
     width: 100% !important;
 }
-.info-detail .content-info .content-item .product-specs .specs-info {
-    padding: 30rpx 20rpx;
+.info-detail .content-info .content-item .table-list {
+    margin: 0 20rpx 20rpx 20rpx;
+    width: calc(100% - 40rpx);
 }
-.info-detail .content-info .content-item .product-specs .specs-info .table-list {
-      border-top: 1px solid #ccc;
-      border-left: 1px solid #ccc;
+.info-detail .content-info .content-item .table-list .list-cell /deep/ .t-td {
+      -webkit-box-flex: 1 !important;
+      -webkit-flex: auto !important;
+          -ms-flex: auto !important;
+              flex: auto !important;
+      text-align: left !important;
 }
-.info-detail .content-info .content-item .product-specs .specs-info .table-list .list-cell {
-        display: -webkit-box;
-        display: -webkit-flex;
-        display: -ms-flexbox;
-        display: flex;
-        -webkit-box-align: center;
-        -webkit-align-items: center;
-            -ms-flex-align: center;
-                align-items: center;
+.info-detail .content-info .content-item .table-list .list-cell /deep/ .cell-name {
+      width: 200rpx !important;
 }
-.info-detail .content-info .content-item .product-specs .specs-info .table-list .list-cell .cell {
-          border-bottom: 1px solid #ccc;
-          border-right: 1px solid #ccc;
-          padding: 10rpx 20rpx;
-          font-size: 24rpx;
-          color: #747474;
-}
-.info-detail .content-info .content-item .product-specs .specs-info .table-list .list-cell .cell.skey {
-            min-width: 80rpx;
-}
-.info-detail .content-info .content-item .product-specs .specs-info .table-list .list-cell .cell.svalue {
-            -webkit-box-flex: 1;
-            -webkit-flex: 1;
-                -ms-flex: 1;
-                    flex: 1;
+.info-detail .content-info .content-item .table-list .list-cell /deep/ .cell-value {
+      -webkit-box-flex: 1;
+      -webkit-flex: 1;
+          -ms-flex: 1;
+              flex: 1;
 }
 .base-info .list-cell {
   background-color: #fff;
@@ -829,11 +840,35 @@ page {
   padding-bottom: 8rpx;
 }
 .tui-amount {
-  color: #ff201f;
-  font-size: 24rpx;
+  font-size: 32rpx;
+  color: #E11F17;
+  padding-right: 10px;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+  -webkit-flex-direction: row;
+      -ms-flex-direction: row;
+          flex-direction: row;
+  -webkit-box-pack: start;
+  -webkit-justify-content: flex-start;
+      -ms-flex-pack: start;
+          justify-content: flex-start;
+  -webkit-box-align: end;
+  -webkit-align-items: flex-end;
+      -ms-flex-align: end;
+          align-items: flex-end;
 }
-.tui-amount .num {
+.tui-amount .saleMoney .money {
     font-size: 32rpx;
+}
+.tui-amount .and {
+    padding-left: 10rpx;
+}
+.tui-amount .salePoints .points {
+    font-size: 28rpx;
 }
 .tui-number {
   font-size: 24rpx;

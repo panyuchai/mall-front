@@ -70,6 +70,25 @@
 				}
 				this.SET_MALLDOMAIN(mallDomain);
 			},
+			getStorageInfo(){
+				if(uni.getStorageSync('hasLogin')){
+					this.SET_HASLOGIN(uni.getStorageSync('hasLogin'));
+				}
+				if(uni.getStorageSync('token')){
+					this.SET_TOKEN(uni.getStorageSync('token'));
+				}
+				if(uni.getStorageSync('uniCode')){
+					this.SET_UNICODE(uni.getStorageSync('uniCode'));
+				}
+				let storageUserInfo = getStore({ name: 'userInfo' }),
+					storageBaseInfo = getStore({ name: 'baseInfo' });
+				if(storageUserInfo){
+					this.SET_USERIFNO(storageUserInfo);
+				}
+				if(storageBaseInfo){
+					this.SET_BASEINFO(storageBaseInfo);
+				}
+			},
 			checkMallType(){
 				this.$http.post('/mall/app/login/mall/shopmall/type', {
 					mallDomain: this.mallDomain
@@ -181,6 +200,13 @@
 						});
 						if(res.data.code == 0){
 							if(res.data.result.isSuccess){
+								this.SET_HASLOGIN(true);
+								this.SET_TOKEN(res.data.result.token);
+								test.setConfig((config) => {
+									config.header['Authorization'] = 'Bearer ' + uni.getStorageSync('token');
+									return config;
+								});
+								this.setUserInfo();
 								console.log('App.vue--wxapp 登陆成功');
 							}else{
 								console.log("App.vue--wxapp 登陆失败");
@@ -210,11 +236,41 @@
 						this.defaultWxLogin();
 					}
 				};
+			},
+			setUserInfo(){
+				this.$http.post('/mall/app/account/info')
+				.then( res => {
+					if(res.code == 0){
+						if(res.result){
+							let mobilephone = res.result.mobilephone;
+							let loginname = res.result.loginname;
+							let accountId = res.result.id;
+							let {customerName, wechatName, customerSex, customerBirthday, customerImage, customerId} = res.result.customer;
+							this.SET_USERIFNO({customerName, wechatName, customerSex, customerBirthday,  customerImage, customerId});
+							this.SET_USERIFNO({
+								...this.userInfo,
+								mobilephone: mobilephone,
+								loginname: loginname,
+								accountId: accountId
+							});
+						}
+					}else{
+						console.log('App.vue-- info接口调用失败');
+					}
+				})
+				.catch( err => {
+					console.log('App.vue-- info接口调用错误');
+				})
 			}
 		},
 		onLaunch: function(options) {
+			// #ifdef  H5
 			this.initData();
 			this.getMallDomain();
+			// #endif
+			// #ifdef MP
+			this.getStorageInfo();
+			// #endif
 			this.checkMallType();
 			this.checkEnvironment(options);
 		},
@@ -223,7 +279,6 @@
 		},
 		onHide: function() {
 			console.log('App Hide');
-			
 		}
 	}
 </script>
@@ -256,94 +311,11 @@
 		min-height: 100%;
 		display: flex;
 	}
-
 	/* #endif */
 
 	/* #ifdef MP-ALIPAY */
 	page {
 		min-height: 100vh;
 	}
-
 	/* #endif */
-
-	/* 原生组件模式下需要注意组件外部样式 */
-	/* m-input {
-		width: 100%;
-		min-height: 100%;
-		display: flex;
-	}
-
-	.content {
-		display: flex;
-		flex: 1;
-		flex-direction: column;
-		background-color: #efeff4;
-		padding: 20upx;
-	}
-
-	.input-group {
-		background-color: #ffffff;
-		margin-top: 40upx;
-		position: relative;
-	}
-
-	.input-group::before {
-		position: absolute;
-		right: 0;
-		top: 0;
-		left: 0;
-		height: 1upx;
-		content: '';
-		-webkit-transform: scaleY(.5);
-		transform: scaleY(.5);
-		background-color: #c8c7cc;
-	}
-
-	.input-group::after {
-		position: absolute;
-		right: 0;
-		bottom: 0;
-		left: 0;
-		height: 1upx;
-		content: '';
-		-webkit-transform: scaleY(.5);
-		transform: scaleY(.5);
-		background-color: #c8c7cc;
-	}
-
-	.input-row {
-		display: flex;
-		flex-direction: row;
-		position: relative;
-	}
-
-	.input-row .title {
-		width: 20%;
-		height: 50upx;
-		min-height: 50upx;
-		padding: 15upx 0;
-		padding-left: 30upx;
-		line-height: 50upx;
-	}
-
-	.input-row.border::after {
-		position: absolute;
-		right: 0;
-		bottom: 0;
-		left: 15upx;
-		height: 1upx;
-		content: '';
-		-webkit-transform: scaleY(.5);
-		transform: scaleY(.5);
-		background-color: #c8c7cc;
-	}
-
-	.btn-row {
-		margin-top: 50upx;
-		padding: 20upx;
-	}
-
-	button.primary {
-		background-color: #0faeff;
-	} */
 </style>

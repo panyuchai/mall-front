@@ -1,0 +1,1 @@
+<view class="pointsBar"><view class="name">{{'尊敬的'+(customerName||'游客')+', 您当前积分:'}}</view><view class="points"><text class="iconfont icon-jinbi icon"></text><text class="num">{{options.points+"分"}}</text></view></view>

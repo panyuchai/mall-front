@@ -19,6 +19,8 @@ page {
     -webkit-align-items: center;
         -ms-flex-align: center;
             align-items: center;
+    min-height: 60rpx;
+    padding-bottom: 5rpx;
 }
 .address-section .cen {
     font-size: 28rpx;
@@ -156,11 +158,28 @@ page {
       right: 0;
       font-size: 24rpx;
 }
-.goods-section .g-item .price-box .price {
+.goods-section .g-item .price-box .priceInfo {
         color: #E93548;
+        display: -webkit-box;
+        display: -webkit-flex;
+        display: -ms-flexbox;
+        display: flex;
+        -webkit-box-orient: horizontal;
+        -webkit-box-direction: normal;
+        -webkit-flex-direction: row;
+            -ms-flex-direction: row;
+                flex-direction: row;
+        -webkit-box-pack: start;
+        -webkit-justify-content: flex-start;
+            -ms-flex-pack: start;
+                justify-content: flex-start;
+        -webkit-box-align: end;
+        -webkit-align-items: flex-end;
+            -ms-flex-align: end;
+                align-items: flex-end;
 }
-.goods-section .g-item .price-box .price .num {
-          font-size: 32rpx;
+.goods-section .g-item .price-box .priceInfo .and {
+          padding-left: 10rpx;
 }
 .goods-section .g-item .price-box .number {
         color: #B3B3B3;

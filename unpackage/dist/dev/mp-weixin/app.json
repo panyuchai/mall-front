@@ -1,10 +1,7 @@
 {
   "pages": [
     "pages/index/index",
-    "pages/main/main",
     "pages/login/login",
-    "pages/reg/reg",
-    "pages/pwd/pwd",
     "pages/product/product",
     "pages/car/car",
     "pages/user/user",
@@ -24,7 +21,7 @@
   "subPackages": [],
   "window": {
     "navigationBarTextStyle": "black",
-    "navigationBarTitleText": "专属商城",
+    "navigationBarTitleText": "",
     "navigationBarBackgroundColor": "#ffffff",
     "backgroundColor": "#F8F8F8"
   },
@@ -60,5 +57,5 @@
     ]
   },
   "usingComponents": {},
-  "sitemapLocation": "sitemap37.json"
+  "sitemapLocation": "sitemap12.json"
 }

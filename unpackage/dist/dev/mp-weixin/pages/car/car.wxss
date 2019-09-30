@@ -333,25 +333,38 @@
             font-size: 28rpx;
             height: 60rpx;
 }
-.goods-list .row .carrier .goods-info .info .price-number .price {
+.goods-list .row .carrier .goods-info .info .price-number .sale-info {
+              line-height: 40rpx;
+              color: #E93548;
               display: -webkit-box;
               display: -webkit-flex;
               display: -ms-flexbox;
               display: flex;
-              line-height: 40rpx;
+              -webkit-box-orient: horizontal;
+              -webkit-box-direction: normal;
+              -webkit-flex-direction: row;
+                  -ms-flex-direction: row;
+                      flex-direction: row;
+              -webkit-box-pack: start;
+              -webkit-justify-content: flex-start;
+                  -ms-flex-pack: start;
+                      justify-content: flex-start;
+              -webkit-box-align: end;
+              -webkit-align-items: flex-end;
+                  -ms-flex-align: end;
+                      align-items: flex-end;
 }
-.goods-list .row .carrier .goods-info .info .price-number .price .sale-price {
+.goods-list .row .carrier .goods-info .info .price-number .sale-info .sale-price {
                 font-size: 24rpx;
-                color: #E93548;
 }
-.goods-list .row .carrier .goods-info .info .price-number .price .sale-price .num {
+.goods-list .row .carrier .goods-info .info .price-number .sale-info .sale-price .price {
                   font-size: 32rpx;
 }
-.goods-list .row .carrier .goods-info .info .price-number .price .factory-price {
-                padding-left: 15rpx;
-                font-size: 24rpx;
-                color: #B3B3B3;
-                text-decoration: line-through;
+.goods-list .row .carrier .goods-info .info .price-number .sale-info .and {
+                padding-left: 10rpx;
+}
+.goods-list .row .carrier .goods-info .info .price-number .sale-info .sale-points .points {
+                font-size: 28rpx;
 }
 .goods-list .row .carrier .goods-info .info .price-number .number {
               display: -webkit-box;
@@ -480,15 +493,36 @@
       display: -webkit-flex;
       display: -ms-flexbox;
       display: flex;
-      -webkit-box-pack: end;
-      -webkit-justify-content: flex-end;
-          -ms-flex-pack: end;
-              justify-content: flex-end;
-      color: #2F2F2F;
+      -webkit-box-pack: justify;
+      -webkit-justify-content: space-between;
+          -ms-flex-pack: justify;
+              justify-content: space-between;
+      -webkit-box-orient: horizontal;
+      -webkit-box-direction: normal;
+      -webkit-flex-direction: row;
+          -ms-flex-direction: row;
+              flex-direction: row;
+      -webkit-box-align: center;
+      -webkit-align-items: center;
+          -ms-flex-align: center;
+              align-items: center;
+      padding: 0 5rpx 0 10rpx;
 }
-.footer .settlement .sum .money {
+.footer .settlement .sum ._left {
+        display: -webkit-box;
+        display: -webkit-flex;
+        display: -ms-flexbox;
+        display: flex;
+        text-align: right;
+        -webkit-box-orient: vertical;
+        -webkit-box-direction: normal;
+        -webkit-flex-direction: column;
+            -ms-flex-direction: column;
+                flex-direction: column;
+}
+.footer .settlement .sum ._right {
         color: #E51700;
-        padding: 0 5rpx 0 10rpx;
+        text-align: right;
 }
 .footer .settlement .btn {
       background: -o-linear-gradient(196deg, #f23a0c 0%, #ea210b 100%);

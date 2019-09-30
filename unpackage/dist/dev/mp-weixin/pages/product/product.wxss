@@ -103,7 +103,7 @@
       color: #E93548;
 }
 .product-list {
-  margin-top: 94px;
+  margin-top: 80px;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -130,7 +130,7 @@
           box-sizing: border-box;
   width: 48.8%;
   position: relative;
-  margin-bottom: 2.5%;
+  margin-bottom: 2.8%;
 }
 .pro-item::after {
   content: '';
@@ -193,13 +193,37 @@
 }
 .pro-price {
   padding-top: 14rpx;
-}
-.sale-price {
   font-size: 32rpx;
   color: #ea1500;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+  -webkit-flex-direction: row;
+      -ms-flex-direction: row;
+          flex-direction: row;
+  -webkit-box-pack: start;
+  -webkit-justify-content: flex-start;
+      -ms-flex-pack: start;
+          justify-content: flex-start;
+  -webkit-box-align: end;
+  -webkit-align-items: flex-end;
+      -ms-flex-align: end;
+          align-items: flex-end;
 }
-.sale-price .unit {
+.pro-price .saleprice .unit {
     font-size: 24rpx;
+}
+.pro-price .saleMoney .money {
+    font-size: 32rpx;
+}
+.pro-price .and {
+    padding-left: 10rpx;
+}
+.pro-price .salePoints .points {
+    font-size: 28rpx;
 }
 .tag {
   position: absolute;

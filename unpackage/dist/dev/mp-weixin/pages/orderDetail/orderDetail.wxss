@@ -5,6 +5,28 @@ page {
 .mt-20 {
   margin-top: 20rpx;
 }
+.mode_price {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+  -webkit-flex-direction: row;
+      -ms-flex-direction: row;
+          flex-direction: row;
+  -webkit-box-pack: start;
+  -webkit-justify-content: flex-start;
+      -ms-flex-pack: start;
+          justify-content: flex-start;
+  -webkit-box-align: end;
+  -webkit-align-items: flex-end;
+      -ms-flex-align: end;
+          align-items: flex-end;
+}
+.mode_price .and {
+    padding-left: 10rpx;
+}
 .info-mode {
   background: #ffffff;
   display: -webkit-box;
@@ -129,6 +151,7 @@ page {
       -webkit-flex: 1;
           -ms-flex: 1;
               flex: 1;
+      position: relative;
 }
 .order-detail .bd .info .tit {
         font-size: 28rpx;
@@ -164,8 +187,11 @@ page {
           font-size: 24rpx;
           color: #E93548;
 }
-.order-detail .bd .info .con ._left .price {
+.order-detail .bd .info .con ._left .salePrice .price {
             font-size: 32rpx;
+}
+.order-detail .bd .info .con ._left .salePoints .points {
+            font-size: 28rpx;
 }
 .order-detail .bd .info .con ._right {
           font-size: 24rpx;
@@ -229,38 +255,6 @@ page {
 .list-box .hd .text ._right {
         font-size: 24rpx;
         color: #333333;
-}
-.list-box .bd {
-    position: relative;
-    padding: 20rpx 0;
-    display: -webkit-box;
-    display: -webkit-flex;
-    display: -ms-flexbox;
-    display: flex;
-    -webkit-box-pack: end;
-    -webkit-justify-content: flex-end;
-        -ms-flex-pack: end;
-            justify-content: flex-end;
-    -webkit-box-align: center;
-    -webkit-align-items: center;
-        -ms-flex-align: center;
-            align-items: center;
-    font-size: 28rpx;
-    color: #333333;
-}
-.list-box .bd:before {
-      content: '';
-      position: absolute;
-      left: 0;
-      right: 0;
-      top: 0;
-      height: 1px;
-      background: #E8E8E8;
-}
-.list-box .bd .num {
-      font-size: 32rpx;
-      color: #E93548;
-      padding-left: 20rpx;
 }
 .action-box {
   position: fixed;

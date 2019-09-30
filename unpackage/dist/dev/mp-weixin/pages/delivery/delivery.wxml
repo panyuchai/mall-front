@@ -1,1 +1,1 @@
-<view class="content"><step vue-id="1" state="{{expressData.status}}" datas="{{expressData.data}}" deleveryNum="{{expressData.mailNo}}" bind:__l="__l"></step></view>
+<view class="content"><step vue-id="1" state="{{expressData.status}}" datas="{{expressData.data}}" deleveryNum="{{deleveryNum}}" bind:__l="__l"></step></view>

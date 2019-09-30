@@ -8,6 +8,9 @@
     "tui-button": "/components/button/button",
     "tui-top-dropdown": "/components/top-dropdown/top-dropdown",
     "tui-bottom-popup": "/components/bottom-popup/bottom-popup",
-    "tui-numberbox": "/components/numberbox/numberbox"
+    "tui-numberbox": "/components/numberbox/numberbox",
+    "t-table": "/components/t-table/t-table",
+    "t-tr": "/components/t-table/t-tr",
+    "t-td": "/components/t-table/t-td"
   }
 }
