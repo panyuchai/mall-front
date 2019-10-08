@@ -72,8 +72,11 @@
 				this.$http.post('/mall/app/backsite/decoration/homepage/'+this.baseInfo.mallId)
 				.then(res => {
 					this.templateData=res.content;
+					// uni.setNavigationBarTitle({
+					//     title: this.mallName
+					// });
 					uni.setNavigationBarTitle({
-					    title: this.mallName
+					    title: res.title
 					});
 				})
 				.catch(err => {

@@ -399,6 +399,9 @@ page {
           -ms-flex: 1;
               flex: 1;
 }
+.rich_img {
+  width: 100% !important;
+}
 .base-info .list-cell {
   background-color: #fff;
   position: relative;
@@ -613,10 +616,6 @@ page {
 .tui-product-img {
   -webkit-transform: translateZ(0);
           transform: translateZ(0);
-}
-.tui-product-img image {
-  width: 100%;
-  display: block;
 }
 /*底部操作栏*/
 .tui-col-10 {

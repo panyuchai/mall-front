@@ -180,7 +180,7 @@
 				</view>
 				<scroll-view scroll-y class="tui-popup-scroll">
 					<view class="tui-scrollview-box">
-						<view v-for="(attrs,j) in goodsInfo.attrs">
+						<view v-for="(attrs,j) in goodsInfo.attrs" :key='attrs.id'>
 							<view class="tui-bold tui-attr-title">{{attrs.attributeName}}</view>
 							<view class="tui-attr-box">
 								<view class="tui-attr-item" v-for="item in attrs.attributeValue.split(',')" @tap="handleChooseAttrs(item,j)" :class='item==attrs.selectAttributeValue ? "tui-attr-active" : ""'>
@@ -433,10 +433,9 @@
 				})
 				.then( res => {
 					if(res.code == 0){
-						console.log(res.result);
 						this.goodsInfo=res.result;
 						this.banner=res.result.pics;
-						this.goodsInfo.details.replace(/<img /g, '<img class="rich_img" ');
+						this.goodsInfo.details=this.goodsInfo.details.replace(/<img /g, '<img class="rich_img" ');
 					}else{
 						console.log('productDetail.vue-- detail接口获取数据失败');
 					};
@@ -697,65 +696,6 @@
 		padding: 20upx 0 30upx 0;
 	}
 
-// 	.tui-pro-pricebox {
-// 		display: flex;
-// 		align-items: center;
-// 		justify-content: space-between;
-// 		color: #ff201f;
-// 		font-size: 36upx;
-// 		font-weight: bold;
-// 		line-height: 44upx;
-// 	}
-// 
-// 	.tui-pro-price {
-// 		display: flex;
-// 		align-items: center;
-// 	}
-// 
-// 	.tui-pro-price .tui-tag-class {
-// 		transform: scale(0.7);
-// 		transform-origin: center center;
-// 		line-height: 24upx;
-// 		font-weight: normal;
-// 	}
-// 
-// 	.tui-price {
-// 		font-size: 58upx;
-// 	}
-// 
-// 	.tui-original-price {
-// 		font-size: 26upx;
-// 		line-height: 26upx;
-// 		padding: 10upx 30upx;
-// 		box-sizing: border-box;
-// 	}
-// 
-// 	.tui-line-through {
-// 		text-decoration: line-through;
-// 	}
-// 
-// 	.tui-collection {
-// 		color: #333;
-// 		display: flex;
-// 		align-items: center;
-// 		flex-direction: column;
-// 		justify-content: center;
-// 		height: 44upx;
-// 	}
-// 
-// 	.tui-scale {
-// 		transform: scale(0.7);
-// 		transform-origin: center center;
-// 		line-height: 24upx;
-// 		font-weight: normal;
-// 	}
-// 
-// 	.tui-icon-collection {
-// 		line-height: 20px !important;
-// 		margin-bottom: 0 !important;
-// 
-// 	}
-	
 	.pro-pricebox{
 		display: flex;
 		align-items: center;
@@ -975,6 +915,9 @@
 			}
 		}
 		
+	}
+	.rich_img{
+		width: 100%!important;
 	}
 	
 	.base-info{
@@ -1212,10 +1155,10 @@
 		transform: translateZ(0);
 	}
 
-	.tui-product-img image {
-		width: 100%;
-		display: block;
-	}
+	// .tui-product-img image {
+	// 	width: 100%;
+	// 	display: block;
+	// }
 
 	/*底部操作栏*/
 

@@ -194,8 +194,11 @@ var _vuex = __webpack_require__(/*! vuex */ 14);function _objectSpread(target) {
       this.$http.post('/mall/app/backsite/decoration/homepage/' + this.baseInfo.mallId).
       then(function (res) {
         _this2.templateData = res.content;
+        // uni.setNavigationBarTitle({
+        //     title: this.mallName
+        // });
         uni.setNavigationBarTitle({
-          title: _this2.mallName });
+          title: res.title });
 
       }).
       catch(function (err) {

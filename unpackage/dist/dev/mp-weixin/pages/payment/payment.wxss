@@ -216,7 +216,7 @@ page {
       padding-right: 35rpx;
 }
 .yt-list-cell .cell-tit.ticket-tit .ticket {
-      background: url(/static/img/ticket.png) no-repeat;
+      background: url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADgAAAAUCAYAAADY6P5TAAAAAXNSR0IArs4c6QAABSdJREFUWAltmE2OXEUQhN9700L+QYOE2GD1xvIKseAK3nIFH8BHmENwBG7CzlfwghPQKyyNhBeALWaa+CIys18Lqj2vqjIjIiOrXo9GXu9f3f74uD78/Pi4HNd1WRZ+GJpXfc76ED8Tco6HduQT8Pp8Dm545NExtjkoEgE7gADFd4EOAwy4hJK3F9cK0HuX2WkmddrW7e364dXz34Sv5loRhgZbBgQ3Q5vZZ0F817wxZIL7b67jOTiQoytw0zmAzvVhtBbac7AGGVoea60JhW1dTtuZmyOgCLfA3IPzdlFiTqTj3EPWhKcgmx2OquQcsm446EdDcKxUkdRXA/UxbnJwwvSkRx9EJVwHDaME1uq4dRIdBKxnSATAE4PW5My7V8KasDXKUDbhzC1V861D3I0OHxO53TYfbLRZs6oeBK2alK2CE7OmbpF4zAfxf2QyNmOVkhJpCqJQ5rs6+DZpZcyMIW5V2Sp2hSudNto3bWrxmcypJqjJEmclOR1vZFoMI17jl0TlINmMZgcLR3FyaaZy00Sg0ZZaRABp5PbDqzehnDXeKIubsKsfL268ztoce8NLO3QZfQ+fPH0h9pttW07xj+MkmTEGiVBGVhwAn4jXDMBGc0NuoPZzE6USqHguop0PJgexP7jogb44mHU15XNQmi1rvZb65bK9uTk8eTGsP76//frz3w/vhTmOVmVt1M1EwA3rQYMewgFld5Xb8Z0laTfgkswhFbGcGuZ6LUAVqQ9fR1CpiXt/1o2tpy9vtx/WXz7ew/J3kMVXv368v9mWO9bUYfSp+xZpoWqQmVjjVHFMWwB2uah9mgvOr6zSQRSuXO+15xBB1gm6zxhM0/YQv+uy3XVzQKZBNg+Hp++Yx6gVo0Gh9I0ZOuWZiFdqIqa70Us2x91YoWm4XE7Uh1BfB+V2bCxpgOSVDp85oShAZ7UevninacZVg88mHBKMCCaRxpOb23EqO18AjerjiNY9B2ZbxcBQDJe6prwZNloHcKmjlQuAjk4O4aIZnevnVYN/fvrrNWkf5uAi4Cfmu/daUNSFmJ0TUnOKRyQU4iTYhWPzw+/CwfUrjILXlWZtL9qHD0Jrgsqd//n8mn2Pxi7+JfOJXzLrUcjkJ1sCqGCw4j7R9dKKi6TSFO9ssJI1HwEZBWutrsctpbrDXldDSuxzPqar65Gk8Px5tv8ls3747ptvF25uXX4S5FilciIKQJpbYuvKvQjaRjkUJ0uhcA5VnExjrzUbLMAcLrH9IVSutKIDojBKk3KN5aw/tG/u+D6uv798fu4EEuZ7wYZFRmPa4HWuXzlhLZBmW+tiInHbUDItxKAxlIKUf1f1ux7pHFR8+YkQ0dJsLLMveffWCYjZGizgMc1MsKqw1Ii5Ha+jInVz/T1CyK2R67VQadceXQxp8nzGgGOXrXOuxaM8MbUvzQeTIQKhE4p57kChSWn41cKYML7NwlKs+bXwZBMjASnGSRpvfr0BCmCuX78AVHT45Nj2gUTPxgANPxGwhyFXIasJi2bfyRkd0Ir61I1NoeY7PacVR3kKp19EzY9waVFD4jmcEqVKXQG3OrkUqPrtDL4IDOVbwXRtyOkvm+XUGb8SRbAej2JRiE22PPUz2BQMX8Hi0dTcBib2bDCCTgPeEGi+8vwD14X2Gg7HVcmaGr1UElV/k643b1mAZ1iPheoUI3zXJlhxAS7m88qgET+Aiy7DvgnNtiOAV8qHP5VhR8BX0BqaiTPx2C+l1Wyy2UjfWDWn/7L4F+XIsyurjR++AAAAAElFTkSuQmCC") no-repeat;
       background-size: 100% 100%;
       padding: 8rpx 20rpx;
       color: #fff;
@@ -268,10 +268,10 @@ page {
         display: -webkit-flex;
         display: -ms-flexbox;
         display: flex;
-        -webkit-box-pack: center;
-        -webkit-justify-content: center;
-            -ms-flex-pack: center;
-                justify-content: center;
+        -webkit-box-pack: end;
+        -webkit-justify-content: flex-end;
+            -ms-flex-pack: end;
+                justify-content: flex-end;
         -webkit-box-align: center;
         -webkit-align-items: center;
             -ms-flex-align: center;
@@ -279,6 +279,7 @@ page {
 }
 .yt-list-cell .cell-tip.cell-account-tip .action-right .switchBtn {
           margin-top: -10rpx;
+          margin-right: -20rpx;
 }
 .yt-list-cell .cell-tip.cell-coupon-tip {
       display: -webkit-box;

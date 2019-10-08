@@ -395,25 +395,32 @@ var _vuex = __webpack_require__(/*! vuex */ 14);function _objectSpread(target) {
             callBackNo: res.result.orderNo })).
 
           then(function (res) {
-            wx.requestPayment({
-              'timeStamp': res.result.payResponse.wxPayResponse.timeStamp,
-              'nonceStr': res.result.payResponse.wxPayResponse.nonceStr,
-              'package': res.result.payResponse.wxPayResponse.packageStr,
-              'signType': res.result.payResponse.wxPayResponse.signType,
-              'paySign': res.result.payResponse.wxPayResponse.paySign,
-              'success': function success(sc) {
-                console.log(sc);
-                // wx.redirectTo({
-                // 	url: '/pages/translateOrder/translateOrder'
-                // })
-              },
-              'fail': function fail(er) {
-                console.log(er);
-              },
-              'complete': function complete(msg) {
-                console.log(msg);
-              } });
+            if (res.code == 0) {
+              wx.requestPayment({
+                'timeStamp': res.result.payResponse.wxPayResponse.timeStamp,
+                'nonceStr': res.result.payResponse.wxPayResponse.nonceStr,
+                'package': res.result.payResponse.wxPayResponse.packageStr,
+                'signType': res.result.payResponse.wxPayResponse.signType,
+                'paySign': res.result.payResponse.wxPayResponse.paySign,
+                'success': function success(sc) {
+                  console.log(sc);
+                  // wx.redirectTo({
+                  // 	url: '/pages/translateOrder/translateOrder'
+                  // })
+                },
+                'fail': function fail(er) {
+                  console.log(er);
+                },
+                'complete': function complete(msg) {
+                  console.log(msg);
+                } });
 
+            } else {
+              uni.showToast({
+                icon: 'none',
+                title: res.message });
+
+            }
           }).
           catch(function (err) {
             console.log(err);
@@ -551,7 +558,6 @@ var _vuex = __webpack_require__(/*! vuex */ 14);function _objectSpread(target) {
         goodsList: uni.getStorageSync('buyList') })).
 
       then(function (res) {
-        console.log(res);
         if (res.code == 0) {
           if (!res.result.address) {
             _this4.hasAddress = false;

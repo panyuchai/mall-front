@@ -557,10 +557,9 @@ var _vuex = __webpack_require__(/*! vuex */ 14);function _objectSpread(target) {
 
       then(function (res) {
         if (res.code == 0) {
-          console.log(res.result);
           _this3.goodsInfo = res.result;
           _this3.banner = res.result.pics;
-          _this3.goodsInfo.details.replace(/<img /g, '<img class="rich_img" ');
+          _this3.goodsInfo.details = _this3.goodsInfo.details.replace(/<img /g, '<img class="rich_img" ');
         } else {
           console.log('productDetail.vue-- detail接口获取数据失败');
         };

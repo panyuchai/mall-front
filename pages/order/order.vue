@@ -386,6 +386,11 @@
 		margin-top: 100px;
 	}
 	/*  #endif  */
+	/*  #ifdef  MP-WEIXIN  */
+	.list-scroll-content{
+		margin-top: 90px;
+	}
+	/*  #endif  */
 	.fixedTop{
 		position: fixed;
 		top: 44px;
@@ -393,6 +398,11 @@
 		right: 0;
 		z-index: 9;
 	}
+	/*  #ifdef  MP-WEIXIN  */
+	.fixedTop{
+		top: 0px;
+	}
+	/*  #endif  */
 	.search-box{
 		background: #fff;
 		padding: 20upx;
