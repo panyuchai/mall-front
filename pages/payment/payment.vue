@@ -328,6 +328,7 @@
 						}, 1000)
 					}else{
 						if(res.code == 0){
+							alert(this.paymentUrl);
 							window.location.href=`http://${this.paymentUrl}.yujianli.cn/#/pages/payment/cashRegister?orderNo=`+res.result.orderNo+"&mallDomain="+this.baseInfo.mallDomain+'&orderPayPrice='+data.payPrice+'&baseUrl='+this.baseUrl+'&token='+encodeURIComponent(this.token);
 						}else{
 							uni.showToast({
