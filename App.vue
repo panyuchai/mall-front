@@ -123,6 +123,8 @@
 			// 	}
 			// },
 			checkMallType(){
+				alert(this.mallDomain);
+				debugger;
 				this.$http.post('/mall/app/login/mall/shopmall/type', {
 					mallDomain: this.mallDomain
 				})
@@ -139,11 +141,11 @@
 						this.SET_MALLNAME(res.result.mallName);
 						this.SET_MALLLOGO(res.result.mallLogo);
 					}else{
-						console.log('login--mallTaye 接口调用失败');
+						console.log('App--mallTaye 接口调用失败');
 					}
 				})
 				.catch( err => {
-					console.log('login--mallTaye 接口调用出错');
+					console.log('App--mallTaye 接口调用出错');
 				})
 			},
 			initData(){
