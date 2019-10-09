@@ -76,7 +76,7 @@
 					//     title: this.mallName
 					// });
 					uni.setNavigationBarTitle({
-					    title: res.title
+					    title: res.title || '首页'
 					});
 				})
 				.catch(err => {
