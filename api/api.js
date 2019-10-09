@@ -15,6 +15,9 @@ test.setConfig((config) => { /* 设置全局配置 */
 		case '192.168.1.130:8080':
 			config.baseUrl = '//192.168.1.104:8087';
 			break;
+		case 'testpay.yujianli.cn':
+			config.baseUrl = '//192.168.1.104:8087';
+			break;
 		default:
 			config.baseUrl = '//mall-api.yujianli.cn';
 	}
@@ -62,6 +65,9 @@ http.setConfig((config) => { /* 设置全局配置 */
 			config.baseUrl = '//192.168.1.104:8087';
 			break;
 		case '192.168.1.10:8888':
+			config.baseUrl = '//192.168.1.104:8087';
+			break;
+		case 'testpay.yujianli.cn':
 			config.baseUrl = '//192.168.1.104:8087';
 			break;
 		default:

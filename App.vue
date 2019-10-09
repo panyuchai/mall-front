@@ -66,6 +66,10 @@
 						this.SET_TRANSFERURL('//192.168.1.104:8087');
 						this.SET_PAYMENTURL('testpay');
 						break;
+					case 'testpay.yujianli.cn':
+						this.SET_TRANSFERURL('//192.168.1.104:8087');
+						this.SET_PAYMENTURL('testpay');
+						break;
 					default:
 						this.SET_TRANSFERURL('//mall-api.yujianli.cn');
 						this.SET_PAYMENTURL('pay');
