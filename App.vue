@@ -69,6 +69,7 @@
 					}
 				}
 				this.SET_MALLDOMAIN(mallDomain);
+				alert('--------------'+this.mallDomain);
 			},
 			getStorageInfo(){
 				if(uni.getStorageSync('hasLogin')){
