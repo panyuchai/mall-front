@@ -271,8 +271,7 @@ var _store = __webpack_require__(/*! ../../utils/store.js */ 12);function _objec
               'user': 'test' },
 
             success: function success(uploadFileRes) {
-              // if(uploadFileRes.data && uploadFileRes.data.code == 0){
-
+              // if(uploadFileRes.data && uploadFileRes.data.code == 0){							
               _this.formData = _objectSpread({},
               _this.formData, {
                 customerImage: JSON.parse(uploadFileRes.data).result.url

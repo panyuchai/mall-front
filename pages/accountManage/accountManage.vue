@@ -147,8 +147,7 @@
 				                'user': 'test'
 				            },
 				            success: (uploadFileRes) => {
-				                // if(uploadFileRes.data && uploadFileRes.data.code == 0){
-									
+				                // if(uploadFileRes.data && uploadFileRes.data.code == 0){							
 									this.formData={
 										...this.formData,
 										customerImage: JSON.parse(uploadFileRes.data).result.url

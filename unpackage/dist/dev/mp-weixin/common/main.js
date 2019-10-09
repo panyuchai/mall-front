@@ -173,7 +173,7 @@ var _vuex = __webpack_require__(/*! vuex */ 14);
 var _api = __webpack_require__(/*! ./api/api.js */ 15);function _objectSpread(target) {for (var i = 1; i < arguments.length; i++) {var source = arguments[i] != null ? arguments[i] : {};var ownKeys = Object.keys(source);if (typeof Object.getOwnPropertySymbols === 'function') {ownKeys = ownKeys.concat(Object.getOwnPropertySymbols(source).filter(function (sym) {return Object.getOwnPropertyDescriptor(source, sym).enumerable;}));}ownKeys.forEach(function (key) {_defineProperty(target, key, source[key]);});}return target;}function _defineProperty(obj, key, value) {if (key in obj) {Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true });} else {obj[key] = value;}return obj;}var _default =
 {
   computed: _objectSpread({},
-  (0, _vuex.mapState)("common", ['transferUrl', 'baseUrl', 'uniCode', 'mallDomain', 'baseInfo', 'hasLogin', 'isTransferPage'])),
+  (0, _vuex.mapState)("common", ['transferUrl', 'baseUrl', 'uniCode', 'mallDomain', 'baseInfo', 'hasLogin', 'isTransferPage', 'userInfo'])),
 
   methods: _objectSpread({},
   (0, _vuex.mapMutations)("common", ['SET_TRANSFERURL', 'SET_BASEURL', 'SET_PAYMENTURL', 'SET_USERIFNO', 'SET_BASEINFO', 'SET_HASLOGIN', 'SET_UNICODE', 'SET_TOKEN', 'SET_MALLTYPE', 'SET_MALLID', 'SET_MALLNAME', 'SET_MALLLOGO', 'SET_MALLDOMAIN', 'SET_ISTRANSFERPAGE']), {

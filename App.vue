@@ -4,7 +4,7 @@
 	import { test } from './api/api.js'
 	export default {
 		computed: {
-			...mapState("common", ['transferUrl', 'baseUrl', 'uniCode', 'mallDomain', 'baseInfo', 'hasLogin', 'isTransferPage'])
+			...mapState("common", ['transferUrl', 'baseUrl', 'uniCode', 'mallDomain', 'baseInfo', 'hasLogin', 'isTransferPage', 'userInfo'])
 		},
 		methods: {
 			...mapMutations("common", ['SET_TRANSFERURL', 'SET_BASEURL', 'SET_PAYMENTURL', 'SET_USERIFNO', 'SET_BASEINFO', 'SET_HASLOGIN', 'SET_UNICODE', 'SET_TOKEN', 'SET_MALLTYPE', 'SET_MALLID', 'SET_MALLNAME', 'SET_MALLLOGO', 'SET_MALLDOMAIN', 'SET_ISTRANSFERPAGE']),

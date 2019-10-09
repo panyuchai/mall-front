@@ -49,10 +49,10 @@
 									window.location.href=uni.getStorageSync('referUrl');
 									uni.removeStorageSync('referUrl');
 								}else{
-									// window.location.href='?mallDomain='+options.mallDomain;
-									uni.switchTab({
-										url: '/pages/index/index'
-									})
+									window.location.href='?mallDomain='+options.mallDomain;
+									// uni.switchTab({
+									// 	url: '/pages/index/index'
+									// })
 								}
 							}
 						}else{
@@ -65,10 +65,10 @@
 				}else{
 					uni.setStorageSync('openid',options.openid);
 					uni.setStorageSync('isTransferPage', false);
-					// window.location.href='?mallDomain='+options.mallDomain;
-					uni.switchTab({
-						url: '/pages/index/index'
-					})
+					window.location.href='?mallDomain='+options.mallDomain;
+					// uni.switchTab({
+					// 	url: '/pages/index/index'
+					// })
 				}
 			},
 			setUserInfo(){
