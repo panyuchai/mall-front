@@ -8,7 +8,7 @@
 				<!-- #ifdef H5 -->
 				<view><tui-icon name="search" :size='16' color='#333' @tap="handleSearch"></tui-icon></view>
 				<!-- #endif -->
-				<input @keypress='handleSearch' confirm-type="search" placeholder="大家都在搜：2019退役球星" type="search" :focus="true" auto-focus placeholder-class="tui-input-plholder"
+				<input @keypress.13='handleSearch' confirm-type="search" placeholder="大家都在搜：新款上衣" type="search" :focus="true" auto-focus placeholder-class="tui-input-plholder"
 				 class="tui-input" v-model.trim="keyword" />
 				<!-- #ifdef APP-PLUS || MP -->
 				<icon type="clear" :size='13' color='#bcbcbc' @tap="cleanKey" v-show="keyword"></icon>
@@ -76,7 +76,7 @@
 			chooseKeywords: function(e){
 				this.keyword = e;
 			},
-			handleSearch(){
+			handleSearch(e){
 				if(this.keyword.trim() == ''){
 					uni.showToast({
 						icon: 'none',

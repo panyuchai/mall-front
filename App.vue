@@ -24,6 +24,7 @@
 				uni.removeStorageSync('baseInfo');
 			},
 			getStorageInfo(storageMallDomain, mallDomain){
+				alert(storageMallDomain, mallDomain+'------------------');
 				if(storageMallDomain && storageMallDomain!==mallDomain){
 					this.clearUserInfo();
 				}else{
@@ -46,6 +47,7 @@
 					}
 				}
 				this.SET_MALLDOMAIN(mallDomain);
+				alert(storageMallDomain, mallDomain+'22222222222');
 			},
 			getMallDomain(){
 				let mallDomain = this.GetQueryString('mallDomain'),
