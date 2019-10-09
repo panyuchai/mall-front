@@ -23,30 +23,7 @@
 				uni.removeStorageSync('userInfo');
 				uni.removeStorageSync('baseInfo');
 			},
-			getMallDomain(){
-				let mallDomain = this.GetQueryString('mallDomain'),
-					storageMallDomain = this.mallDomain,
-					host = window.location.host;
-				this.SET_BASEURL(host);
-				switch(host){
-					case 'localhost:8080':
-						this.SET_TRANSFERURL('//192.168.1.104:8087');
-						this.SET_PAYMENTURL('testpay');
-						break;
-					case '192.168.1.10:8888':
-						this.SET_TRANSFERURL('//192.168.1.104:8087');
-						this.SET_PAYMENTURL('testpay');
-						break;
-					default:
-						this.SET_TRANSFERURL('//mall-api.yujianli.cn');
-						this.SET_PAYMENTURL('pay');
-				}
-				if(!mallDomain){
-					mallDomain = window.location.hostname.split('.')[0];
-					// if(mallDomain.indexOf('pay') !== -1){
-					// 	mallDomain = ''
-					// }
-				}
+			getStorageInfo(storageMallDomain, mallDomain){
 				if(storageMallDomain && storageMallDomain!==mallDomain){
 					this.clearUserInfo();
 				}else{
@@ -69,7 +46,58 @@
 					}
 				}
 				this.SET_MALLDOMAIN(mallDomain);
-				alert('--------------'+this.mallDomain);
+			},
+			getMallDomain(){
+				let mallDomain = this.GetQueryString('mallDomain'),
+					storageMallDomain = this.mallDomain,
+					host = window.location.host;
+				this.SET_BASEURL(host);
+				switch(host){
+					case 'localhost:8080':
+						this.SET_TRANSFERURL('//192.168.1.104:8087');
+						this.SET_PAYMENTURL('testpay');
+						break;
+					case '192.168.1.10:8888':
+						this.SET_TRANSFERURL('//192.168.1.104:8087');
+						this.SET_PAYMENTURL('testpay');
+						break;
+					default:
+						this.SET_TRANSFERURL('//mall-api.yujianli.cn');
+						this.SET_PAYMENTURL('pay');
+				}
+				if(!mallDomain){
+					mallDomain = window.location.hostname.split('.')[0];
+					this.getStorageInfo(storageMallDomain, mallDomain);
+				}else{
+					this.getStorageInfo(storageMallDomain, mallDomain);
+				}
+			// 	if(!mallDomain){
+			// 		mallDomain = window.location.hostname.split('.')[0];
+			// 		// if(mallDomain.indexOf('pay') !== -1){
+			// 		// 	mallDomain = ''
+			// 		// }
+			// 	}
+			// 	if(storageMallDomain && storageMallDomain!==mallDomain){
+			// 		this.clearUserInfo();
+			// 	}else{
+			// 		if(uni.getStorageSync('hasLogin')){
+			// 			this.SET_HASLOGIN(uni.getStorageSync('hasLogin'));
+			// 		}
+			// 		if(uni.getStorageSync('token')){
+			// 			this.SET_TOKEN(uni.getStorageSync('token'));
+			// 		}
+			// 		if(uni.getStorageSync('uniCode')){
+			// 			this.SET_UNICODE(uni.getStorageSync('uniCode'));
+			// 		}
+			// 		let storageUserInfo = getStore({ name: 'userInfo' }),
+			// 			storageBaseInfo = getStore({ name: 'baseInfo' });
+			// 		if(storageUserInfo){
+			// 			this.SET_USERIFNO(storageUserInfo);
+			// 		}
+			// 		if(storageBaseInfo){
+			// 			this.SET_BASEINFO(storageBaseInfo);
+			// 		}
+			// 	}
 			},
 			getStorageInfo(){
 				if(uni.getStorageSync('hasLogin')){
