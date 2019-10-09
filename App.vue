@@ -9,10 +9,10 @@
 		methods: {
 			...mapMutations("common", ['SET_TRANSFERURL', 'SET_BASEURL', 'SET_PAYMENTURL', 'SET_USERIFNO', 'SET_BASEINFO', 'SET_HASLOGIN', 'SET_UNICODE', 'SET_TOKEN', 'SET_MALLTYPE', 'SET_MALLID', 'SET_MALLNAME', 'SET_MALLLOGO', 'SET_MALLDOMAIN', 'SET_ISTRANSFERPAGE']),
 			GetQueryString(name) {
-				var reg = new RegExp('(^|&)' + name + '=([^&]*)(&|$)', 'i');
-				var r = window.location.search.substr(1).match(reg);
+				var reg = new RegExp(name +"=\\w*");
+				var r = window.location.href.substr(1).match(reg);
 				if (r != null) {
-					return unescape(r[2]);
+					return unescape(r[0]).split('=')[1];
 				}
 				return null;
 			},
@@ -24,8 +24,6 @@
 				uni.removeStorageSync('baseInfo');
 			},
 			getStorageInfo(storageMallDomain, mallDomain){
-				debugger;
-				console.log(storageMallDomain, mallDomain);
 				if(storageMallDomain && storageMallDomain!==mallDomain){
 					this.clearUserInfo();
 				}else{
@@ -51,13 +49,16 @@
 				console.log(this.mallDomain);
 			},
 			getMallDomain(){
-				debugger;
 				let mallDomain = this.GetQueryString('mallDomain'),
 					storageMallDomain = this.mallDomain,
 					host = window.location.host;
 				this.SET_BASEURL(host);
 				switch(host){
 					case 'localhost:8080':
+						this.SET_TRANSFERURL('//192.168.1.104:8087');
+						this.SET_PAYMENTURL('testpay');
+						break;
+					case '192.168.1.130:8080':
 						this.SET_TRANSFERURL('//192.168.1.104:8087');
 						this.SET_PAYMENTURL('testpay');
 						break;
@@ -123,8 +124,6 @@
 			// 	}
 			// },
 			checkMallType(){
-				alert(this.mallDomain);
-				debugger;
 				this.$http.post('/mall/app/login/mall/shopmall/type', {
 					mallDomain: this.mallDomain
 				})
@@ -149,7 +148,6 @@
 				})
 			},
 			initData(){
-				debugger;
 				if(uni.getStorageSync('mallDomain')){
 					this.SET_MALLDOMAIN(uni.getStorageSync('mallDomain'));
 				}
@@ -190,7 +188,7 @@
 					isTransferPage = true;
 				}
 				if(urlPath && isTransferPage){
-					window.location.href=this.transferUrl + '/mall/app/login/mall/wxweb?mallDomain='+this.mallDomain+'&redirectUrl=192.168.1.130'; // +'&redirectUrl='+this.transferUrl
+					window.location.href=this.transferUrl + '/mall/app/login/mall/wxweb?mallDomain='+this.mallDomain; // +'&redirectUrl='+this.transferUrl
 				}
 				if(isTransferPage === false){
 					uni.removeStorageSync('isTransferPage');
@@ -305,7 +303,7 @@
 			this.getMallDomain();
 			// #endif
 			// #ifdef MP
-			this.getStorageInfo();
+			// this.getStorageInfo();
 			// #endif
 			this.checkMallType();
 			this.checkEnvironment(options);
