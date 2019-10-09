@@ -24,7 +24,8 @@
 				uni.removeStorageSync('baseInfo');
 			},
 			getStorageInfo(storageMallDomain, mallDomain){
-				alert(storageMallDomain, mallDomain+'------------------');
+				debugger;
+				console.log(storageMallDomain, mallDomain);
 				if(storageMallDomain && storageMallDomain!==mallDomain){
 					this.clearUserInfo();
 				}else{
@@ -47,9 +48,10 @@
 					}
 				}
 				this.SET_MALLDOMAIN(mallDomain);
-				alert(storageMallDomain, mallDomain+'22222222222');
+				console.log(this.mallDomain);
 			},
 			getMallDomain(){
+				debugger;
 				let mallDomain = this.GetQueryString('mallDomain'),
 					storageMallDomain = this.mallDomain,
 					host = window.location.host;
@@ -145,6 +147,7 @@
 				})
 			},
 			initData(){
+				debugger;
 				if(uni.getStorageSync('mallDomain')){
 					this.SET_MALLDOMAIN(uni.getStorageSync('mallDomain'));
 				}
