@@ -290,7 +290,7 @@
 										icon: 'none',
 										title: '取消订单成功'
 									})
-									alert(this);
+									alert(JSON.stringify(this));
 									this.loadData(uni.getStorageSync('order_searchType_storage'));
 								}else{
 									uni.showToast({

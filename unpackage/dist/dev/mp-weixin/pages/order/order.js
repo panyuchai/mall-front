@@ -414,7 +414,7 @@ var _vuex = __webpack_require__(/*! vuex */ 14);function _objectSpread(target) {
                   icon: 'none',
                   title: '取消订单成功' });
 
-                alert(_this3);
+                alert(JSON.stringify(_this3));
                 _this3.loadData(uni.getStorageSync('order_searchType_storage'));
               } else {
                 uni.showToast({
