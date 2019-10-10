@@ -361,6 +361,7 @@ var _api = __webpack_require__(/*! ./api/api.js */ 15);function _objectSpread(ta
         isTransferPage = true;
       }
       if (urlPath && isTransferPage) {
+        alert(this.mallDomain);
         window.location.href = this.transferUrl + '/mall/app/login/mall/wxweb?mallDomain=' + this.mallDomain + '&redirectUrl=http://192.168.1.130:8080'; // +'&redirectUrl='+this.transferUrl
       }
       if (isTransferPage === false) {
