@@ -22,7 +22,7 @@
 				uni.removeStorageSync('uniCode');
 				uni.removeStorageSync('userInfo');
 				uni.removeStorageSync('baseInfo');
-				uni.removeStorageSync('isTransferPage');
+				// uni.removeStorageSync('isTransferPage');
 			},
 			getStorageInfo(storageMallDomain, mallDomain){
 				alert(storageMallDomain);
