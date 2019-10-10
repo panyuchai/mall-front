@@ -190,7 +190,7 @@
 				let urlPath = !(reg.test(options.path));				
 				let isTransferPage = uni.getStorageSync('isTransferPage');
 				alert(JSON.stringify(isTransferPage)+'-----------------');
-				if(isTransferPage === ''){
+				if(isTransferPage == ''){
 					isTransferPage = true;
 				}
 				if(urlPath && isTransferPage){
