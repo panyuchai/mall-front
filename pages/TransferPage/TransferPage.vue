@@ -45,16 +45,16 @@
 									loginname: loginname,
 									accountId: accountId
 								});
-								if(uni.getStorageSync('referUrl')){
-									window.location.href=uni.getStorageSync('referUrl');
-									uni.removeStorageSync('referUrl');
-								}else{
+								// if(uni.getStorageSync('referUrl')){
+								// 	window.location.href=uni.getStorageSync('referUrl');
+								// 	uni.removeStorageSync('referUrl');
+								// }else{
 									alert("success transferPage ---" + options.mallDomain)
 									window.location.href='?mallDomain='+options.mallDomain;
 									// uni.switchTab({
 									// 	url: '/pages/index/index'
 									// })
-								}
+								// }
 							}
 						}else{
 							console.log('TransferPage.vue-- info接口调用失败');
