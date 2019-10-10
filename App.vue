@@ -22,11 +22,11 @@
 				uni.removeStorageSync('uniCode');
 				uni.removeStorageSync('userInfo');
 				uni.removeStorageSync('baseInfo');
-				// uni.removeStorageSync('isTransferPage');
+				uni.removeStorageSync('isTransferPage');
 			},
 			getStorageInfo(storageMallDomain, mallDomain){
 				alert(storageMallDomain);
-				alert(mallDomain)
+				alert(mallDomain);
 				if(storageMallDomain && storageMallDomain!==mallDomain){
 					this.clearUserInfo();
 				}else{
@@ -196,7 +196,6 @@
 					isTransferPage = true;
 				}
 				if(urlPath && isTransferPage){
-					alert(this.mallDomain);
 					window.location.href=this.transferUrl + '/mall/app/login/mall/wxweb?mallDomain='+this.mallDomain; // +'&redirectUrl='+this.transferUrl
 				}
 				if(isTransferPage === false){

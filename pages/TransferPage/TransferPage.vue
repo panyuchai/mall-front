@@ -22,7 +22,6 @@
 		methods: {
 			...mapMutations('common', ['SET_HASLOGIN', 'SET_TOKEN', 'SET_USERIFNO', 'SET_ISTRANSFERPAGE']),
 			handleTransfer(options){
-				debugger;
 				if(options.success == 'true'){
 					this.SET_HASLOGIN(true);
 					this.SET_TOKEN(options.token);
@@ -50,7 +49,6 @@
 									window.location.href=uni.getStorageSync('referUrl');
 									uni.removeStorageSync('referUrl');
 								}else{
-									alert(JSON.stringify(options));
 									window.location.href='?mallDomain='+options.mallDomain;
 									// uni.switchTab({
 									// 	url: '/pages/index/index'
@@ -67,7 +65,6 @@
 				}else{
 					uni.setStorageSync('openid',options.openid);
 					uni.setStorageSync('isTransferPage', false);
-					alert(JSON.stringify(options));
 					window.location.href='?mallDomain='+options.mallDomain;
 					// uni.switchTab({
 					// 	url: '/pages/index/index'

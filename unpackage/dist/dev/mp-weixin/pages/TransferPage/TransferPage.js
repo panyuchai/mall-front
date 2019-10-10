@@ -144,7 +144,6 @@ var _store = __webpack_require__(/*! ../../utils/store.js */ 12);function _objec
   methods: _objectSpread({},
   (0, _vuex.mapMutations)('common', ['SET_HASLOGIN', 'SET_TOKEN', 'SET_USERIFNO', 'SET_ISTRANSFERPAGE']), {
     handleTransfer: function handleTransfer(options) {var _this = this;
-      debugger;
       if (options.success == 'true') {
         this.SET_HASLOGIN(true);
         this.SET_TOKEN(options.token);
@@ -172,7 +171,6 @@ var _store = __webpack_require__(/*! ../../utils/store.js */ 12);function _objec
                 window.location.href = uni.getStorageSync('referUrl');
                 uni.removeStorageSync('referUrl');
               } else {
-                alert(JSON.stringify(options));
                 window.location.href = '?mallDomain=' + options.mallDomain;
                 // uni.switchTab({
                 // 	url: '/pages/index/index'
@@ -189,7 +187,6 @@ var _store = __webpack_require__(/*! ../../utils/store.js */ 12);function _objec
       } else {
         uni.setStorageSync('openid', options.openid);
         uni.setStorageSync('isTransferPage', false);
-        alert(JSON.stringify(options));
         window.location.href = '?mallDomain=' + options.mallDomain;
         // uni.switchTab({
         // 	url: '/pages/index/index'
