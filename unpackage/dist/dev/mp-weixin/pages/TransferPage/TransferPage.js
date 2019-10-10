@@ -152,7 +152,7 @@ var _store = __webpack_require__(/*! ../../utils/store.js */ 12);function _objec
           return config;
         });
         // this.setUserInfo();
-        this.$http.post('/mall/app/account/info?mallDomain=' + this.mallDomain).
+        this.$http.post('/mall/app/account/info').
         then(function (res) {
           if (res.code == 0) {
             if (res.result) {
@@ -171,6 +171,7 @@ var _store = __webpack_require__(/*! ../../utils/store.js */ 12);function _objec
                 window.location.href = uni.getStorageSync('referUrl');
                 uni.removeStorageSync('referUrl');
               } else {
+                alert(options.mallDomain);
                 window.location.href = '?mallDomain=' + options.mallDomain;
                 // uni.switchTab({
                 // 	url: '/pages/index/index'
@@ -187,6 +188,7 @@ var _store = __webpack_require__(/*! ../../utils/store.js */ 12);function _objec
       } else {
         uni.setStorageSync('openid', options.openid);
         uni.setStorageSync('isTransferPage', false);
+        alert(options.mallDomain);
         window.location.href = '?mallDomain=' + options.mallDomain;
         // uni.switchTab({
         // 	url: '/pages/index/index'

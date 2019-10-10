@@ -445,7 +445,7 @@ var _api = __webpack_require__(/*! ./api/api.js */ 15);function _objectSpread(ta
       };
     },
     setUserInfo: function setUserInfo() {var _this4 = this;
-      this.$http.post('/mall/app/account/info?mallDomain=' + this.mallDomain).
+      this.$http.post('/mall/app/account/info').
       then(function (res) {
         if (res.code == 0) {
           if (res.result) {

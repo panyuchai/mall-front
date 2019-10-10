@@ -30,7 +30,7 @@
 						return config;
 					});
 					// this.setUserInfo();
-					this.$http.post('/mall/app/account/info?mallDomain='+this.mallDomain)
+					this.$http.post('/mall/app/account/info')
 					.then( res => {
 						if(res.code == 0){
 							if(res.result){
@@ -49,6 +49,7 @@
 									window.location.href=uni.getStorageSync('referUrl');
 									uni.removeStorageSync('referUrl');
 								}else{
+									alert(options.mallDomain);
 									window.location.href='?mallDomain='+options.mallDomain;
 									// uni.switchTab({
 									// 	url: '/pages/index/index'
@@ -65,6 +66,7 @@
 				}else{
 					uni.setStorageSync('openid',options.openid);
 					uni.setStorageSync('isTransferPage', false);
+					alert(options.mallDomain);
 					window.location.href='?mallDomain='+options.mallDomain;
 					// uni.switchTab({
 					// 	url: '/pages/index/index'

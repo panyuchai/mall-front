@@ -276,7 +276,7 @@
 				};
 			},
 			setUserInfo(){
-				this.$http.post('/mall/app/account/info?mallDomain='+this.mallDomain)
+				this.$http.post('/mall/app/account/info')
 				.then( res => {
 					if(res.code == 0){
 						if(res.result){
