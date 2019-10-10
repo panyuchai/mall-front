@@ -172,7 +172,6 @@ var _vuex = __webpack_require__(/*! vuex */ 14);function _objectSpread(target) {
       uni.removeStorageSync('userInfo');
       uni.removeStorageSync('baseInfo');
       uni.removeStorageSync('mallDomain');
-      uni.removeStorageSync('isTransferPage');
     },
     checkMallType: function checkMallType() {var _this = this;
       this.$http.post('/mall/app/login/mall/shopmall/type', {

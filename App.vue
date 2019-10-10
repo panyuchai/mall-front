@@ -22,7 +22,7 @@
 				uni.removeStorageSync('uniCode');
 				uni.removeStorageSync('userInfo');
 				uni.removeStorageSync('baseInfo');
-				
+				uni.removeStorageSync('isTransferPage');
 			},
 			getStorageInfo(storageMallDomain, mallDomain){
 				if(storageMallDomain && storageMallDomain!==mallDomain){
@@ -189,6 +189,7 @@
 				let reg = /\/TransferPage\/TransferPage/ig;
 				let urlPath = !(reg.test(options.path));				
 				let isTransferPage = uni.getStorageSync('isTransferPage');
+				alert(JSON.stringify(isTransferPage)+'-----------------');
 				if(isTransferPage === ''){
 					isTransferPage = true;
 				}
