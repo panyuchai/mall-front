@@ -194,6 +194,7 @@
 				if(isTransferPage === ''){
 					isTransferPage = true;
 				}
+				alet('isTransferPage-----'+isTransferPage);
 				if(urlPath && isTransferPage){
 					alert('this.mallDomain--------'+this.mallDomain);
 					window.location.href=this.transferUrl + '/mall/app/login/mall/wxweb?mallDomain='+this.mallDomain; // +'&redirectUrl='+this.transferUrl
