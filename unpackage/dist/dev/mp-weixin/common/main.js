@@ -194,8 +194,7 @@ var _api = __webpack_require__(/*! ./api/api.js */ 15);function _objectSpread(ta
       // uni.removeStorageSync('isTransferPage');
     },
     getStorageInfo: function getStorageInfo(storageMallDomain, mallDomain) {
-      alert(storageMallDomain);
-      alert(mallDomain);
+      alert(storageMallDomain, '------------' + mallDomain);
       if (storageMallDomain && storageMallDomain !== mallDomain) {
         this.clearUserInfo();
       } else {
@@ -360,11 +359,11 @@ var _api = __webpack_require__(/*! ./api/api.js */ 15);function _objectSpread(ta
       var reg = /\/TransferPage\/TransferPage/ig;
       var urlPath = !reg.test(options.path);
       var isTransferPage = uni.getStorageSync('isTransferPage');
-      alert(JSON.stringify(isTransferPage) + '-----------------');
       if (isTransferPage === '') {
         isTransferPage = true;
       }
       if (urlPath && isTransferPage) {
+        alert(this.mallDomain);
         window.location.href = this.transferUrl + '/mall/app/login/mall/wxweb?mallDomain=' + this.mallDomain; // +'&redirectUrl='+this.transferUrl
       }
       if (isTransferPage === false) {

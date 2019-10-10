@@ -25,8 +25,7 @@
 				// uni.removeStorageSync('isTransferPage');
 			},
 			getStorageInfo(storageMallDomain, mallDomain){
-				alert(storageMallDomain);
-				alert(mallDomain);
+				alert(storageMallDomain, '------------'+mallDomain);
 				if(storageMallDomain && storageMallDomain!==mallDomain){
 					this.clearUserInfo();
 				}else{
@@ -191,11 +190,11 @@
 				let reg = /\/TransferPage\/TransferPage/ig;
 				let urlPath = !(reg.test(options.path));				
 				let isTransferPage = uni.getStorageSync('isTransferPage');
-				alert(JSON.stringify(isTransferPage)+'-----------------');
 				if(isTransferPage === ''){
 					isTransferPage = true;
 				}
 				if(urlPath && isTransferPage){
+					alert(this.mallDomain);
 					window.location.href=this.transferUrl + '/mall/app/login/mall/wxweb?mallDomain='+this.mallDomain; // +'&redirectUrl='+this.transferUrl
 				}
 				if(isTransferPage === false){
