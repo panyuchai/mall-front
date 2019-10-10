@@ -49,6 +49,7 @@
 									window.location.href=uni.getStorageSync('referUrl');
 									uni.removeStorageSync('referUrl');
 								}else{
+									alert("transferPage ---" + options.mallDomain)
 									window.location.href='?mallDomain='+options.mallDomain;
 									// uni.switchTab({
 									// 	url: '/pages/index/index'

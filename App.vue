@@ -25,8 +25,6 @@
 				// uni.removeStorageSync('isTransferPage');
 			},
 			getStorageInfo(storageMallDomain, mallDomain){
-				alert(storageMallDomain);
-				alert('------------'+mallDomain)
 				if(storageMallDomain && storageMallDomain!==mallDomain){
 					this.clearUserInfo();
 				}else{
@@ -194,9 +192,8 @@
 				if(isTransferPage === ''){
 					isTransferPage = true;
 				}
-				alert('isTransferPage-----'+isTransferPage);
 				if(urlPath && isTransferPage){
-					alert('this.mallDomain--------'+this.mallDomain);
+					alert("app.vue --- " + urlPath + "--" + isTransferPage)
 					window.location.href=this.transferUrl + '/mall/app/login/mall/wxweb?mallDomain='+this.mallDomain; // +'&redirectUrl='+this.transferUrl
 				}
 				if(isTransferPage === false){
