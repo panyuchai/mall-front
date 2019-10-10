@@ -359,7 +359,7 @@ var _api = __webpack_require__(/*! ./api/api.js */ 15);function _objectSpread(ta
       var urlPath = !reg.test(options.path);
       var isTransferPage = uni.getStorageSync('isTransferPage');
       alert(JSON.stringify(isTransferPage) + '-----------------');
-      if (isTransferPage == '') {
+      if (isTransferPage === "") {
         isTransferPage = true;
       }
       if (urlPath && isTransferPage) {
