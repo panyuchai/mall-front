@@ -410,17 +410,19 @@ var _vuex = __webpack_require__(/*! vuex */ 14);function _objectSpread(target) {
 
             then(function (res) {
               if (res.code == 0) {
+                _this3.loadData(uni.getStorageSync('order_searchType_storage'));
+                alert('取消成功');
                 uni.showToast({
                   icon: 'none',
                   title: '取消订单成功' });
 
-                _this3.loadData(uni.getStorageSync('order_searchType_storage'));
+
               } else {
                 uni.showToast({
                   icon: 'none',
                   title: '取消订单失败' });
 
-                _this3.loadData(uni.getStorageSync('order_searchType_storage'));
+                // this.loadData(uni.getStorageSync('order_searchType_storage'));
               }
             }).
             catch(function (err) {
