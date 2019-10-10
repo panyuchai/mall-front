@@ -363,7 +363,7 @@ var _api = __webpack_require__(/*! ./api/api.js */ 15);function _objectSpread(ta
       if (isTransferPage === '') {
         isTransferPage = true;
       }
-      alet('isTransferPage-----' + isTransferPage);
+      alert('isTransferPage-----' + isTransferPage);
       if (urlPath && isTransferPage) {
         alert('this.mallDomain--------' + this.mallDomain);
         window.location.href = this.transferUrl + '/mall/app/login/mall/wxweb?mallDomain=' + this.mallDomain; // +'&redirectUrl='+this.transferUrl
