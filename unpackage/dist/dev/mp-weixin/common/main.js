@@ -191,9 +191,11 @@ var _api = __webpack_require__(/*! ./api/api.js */ 15);function _objectSpread(ta
       uni.removeStorageSync('uniCode');
       uni.removeStorageSync('userInfo');
       uni.removeStorageSync('baseInfo');
-      uni.removeStorageSync('isTransferPage');
+      // uni.removeStorageSync('isTransferPage');
     },
     getStorageInfo: function getStorageInfo(storageMallDomain, mallDomain) {
+      alert(storageMallDomain);
+      alert(mallDomain);
       if (storageMallDomain && storageMallDomain !== mallDomain) {
         this.clearUserInfo();
       } else {
@@ -359,7 +361,7 @@ var _api = __webpack_require__(/*! ./api/api.js */ 15);function _objectSpread(ta
       var urlPath = !reg.test(options.path);
       var isTransferPage = uni.getStorageSync('isTransferPage');
       alert(JSON.stringify(isTransferPage) + '-----------------');
-      if (isTransferPage === "") {
+      if (isTransferPage === '') {
         isTransferPage = true;
       }
       if (urlPath && isTransferPage) {

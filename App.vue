@@ -22,9 +22,11 @@
 				uni.removeStorageSync('uniCode');
 				uni.removeStorageSync('userInfo');
 				uni.removeStorageSync('baseInfo');
-				uni.removeStorageSync('isTransferPage');
+				// uni.removeStorageSync('isTransferPage');
 			},
 			getStorageInfo(storageMallDomain, mallDomain){
+				alert(storageMallDomain);
+				alert(mallDomain)
 				if(storageMallDomain && storageMallDomain!==mallDomain){
 					this.clearUserInfo();
 				}else{
@@ -190,7 +192,7 @@
 				let urlPath = !(reg.test(options.path));				
 				let isTransferPage = uni.getStorageSync('isTransferPage');
 				alert(JSON.stringify(isTransferPage)+'-----------------');
-				if(isTransferPage === ""){
+				if(isTransferPage === ''){
 					isTransferPage = true;
 				}
 				if(urlPath && isTransferPage){
