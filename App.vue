@@ -22,6 +22,7 @@
 				uni.removeStorageSync('uniCode');
 				uni.removeStorageSync('userInfo');
 				uni.removeStorageSync('baseInfo');
+				
 			},
 			getStorageInfo(storageMallDomain, mallDomain){
 				if(storageMallDomain && storageMallDomain!==mallDomain){

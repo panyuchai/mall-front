@@ -191,6 +191,7 @@ var _api = __webpack_require__(/*! ./api/api.js */ 15);function _objectSpread(ta
       uni.removeStorageSync('uniCode');
       uni.removeStorageSync('userInfo');
       uni.removeStorageSync('baseInfo');
+
     },
     getStorageInfo: function getStorageInfo(storageMallDomain, mallDomain) {
       if (storageMallDomain && storageMallDomain !== mallDomain) {
