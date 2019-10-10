@@ -286,12 +286,12 @@
 							})
 							.then( res => {
 								if(res.code == 0){
+									// alert(JSON.stringify(this));
+									this.loadData(uni.getStorageSync('order_searchType_storage'));
 									uni.showToast({
 										icon: 'none',
 										title: '取消订单成功'
 									})
-									alert(JSON.stringify(this));
-									this.loadData(uni.getStorageSync('order_searchType_storage'));
 								}else{
 									uni.showToast({
 										icon: 'none',

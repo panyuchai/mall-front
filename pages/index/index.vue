@@ -8,7 +8,7 @@
 			<recommend v-if="item.type === '203'" :options="item.data"></recommend>
 			<points v-if="item.type === '007'" :options="item.renderData" :customerName='userInfo.customerName'></points>
 		</block>
-		<button type="primary" @tap="clearUserInfo">清除登陆</button>
+		<!-- <button type="primary" @tap="clearUserInfo">清除登陆</button> -->
 	</view>
 </template>
 
