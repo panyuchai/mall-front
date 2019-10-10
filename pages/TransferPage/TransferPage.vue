@@ -49,7 +49,6 @@
 								// 	window.location.href=uni.getStorageSync('referUrl');
 								// 	uni.removeStorageSync('referUrl');
 								// }else{
-									alert("success transferPage ---" + options.mallDomain)
 									window.location.href='?mallDomain='+options.mallDomain;
 									// uni.switchTab({
 									// 	url: '/pages/index/index'
@@ -66,7 +65,6 @@
 				}else{
 					uni.setStorageSync('openid',options.openid);
 					uni.setStorageSync('isTransferPage', false);
-					alert("fail transferPage ---" + options.mallDomain)
 					window.location.href='?mallDomain='+options.mallDomain;
 					// uni.switchTab({
 					// 	url: '/pages/index/index'
@@ -101,7 +99,6 @@
 		},
 		onLoad(options){
 			// #ifdef H5
-			alert("transferPage start --- " + JSON.stringify(options))
 			this.handleTransfer(options);
 			// #endif
 		}

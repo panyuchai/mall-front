@@ -17,12 +17,13 @@
 				return null;
 			},
 			clearUserInfo(){
-				uni.removeStorageSync('hasLogin');
-				uni.removeStorageSync('token');
-				uni.removeStorageSync('uniCode');
-				uni.removeStorageSync('userInfo');
-				uni.removeStorageSync('baseInfo');
-				// uni.removeStorageSync('isTransferPage');
+				// uni.removeStorageSync('hasLogin');
+				// uni.removeStorageSync('token');
+				// uni.removeStorageSync('uniCode');
+				// uni.removeStorageSync('userInfo');
+				// uni.removeStorageSync('baseInfo');
+				// // uni.removeStorageSync('isTransferPage');
+				uni.clearStorageSync();
 			},
 			getStorageInfo(storageMallDomain, mallDomain){
 				if(storageMallDomain && storageMallDomain!==mallDomain){
@@ -184,9 +185,9 @@
 			},
 			defaultwxWebLogin(options){
 				alert("186 app.vue --- " + JSON.stringify(options));
-				if (document.referrer) {
-				    uni.setStorageSync('referUrl', document.referrer);
-				}
+				// if (document.referrer) {
+				//     uni.setStorageSync('referUrl', document.referrer);
+				// }
 				let reg = /\/TransferPage\/TransferPage/ig;
 				let urlPath = !(reg.test(options.path));				
 				let isTransferPage = uni.getStorageSync('isTransferPage');
@@ -194,7 +195,6 @@
 					isTransferPage = true;
 				}
 				if(urlPath && isTransferPage){
-					alert("app.vue --- " + urlPath + "--" + isTransferPage);
 					window.location.href=this.transferUrl + '/mall/app/login/mall/wxweb?mallDomain='+this.mallDomain; // +'&redirectUrl='+this.transferUrl
 				}
 				if(isTransferPage === false){
@@ -314,7 +314,6 @@
 			// #endif
 			this.checkMallType();
 			this.checkEnvironment(options);
-			alert("app.vue --- onLaunch end")
 		},
 		onShow: function(){
 			console.log('App Show')

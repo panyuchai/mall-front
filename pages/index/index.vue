@@ -44,13 +44,14 @@
 		methods: {
 			...mapMutations("common", ['SET_BASEINFO', 'SET_MALLTYPE', 'SET_MALLID', 'SET_MALLNAME', 'SET_MALLLOGO', 'SET_MALLDOMAIN']),
 			clearUserInfo(){
-				uni.removeStorageSync('hasLogin');
-				uni.removeStorageSync('token');
-				uni.removeStorageSync('uniCode');
-				uni.removeStorageSync('userInfo');
-				uni.removeStorageSync('baseInfo');
-				uni.removeStorageSync('mallDomain');
-				uni.removeStorageSync('isTransferPage');
+				// uni.removeStorageSync('hasLogin');
+				// uni.removeStorageSync('token');
+				// uni.removeStorageSync('uniCode');
+				// uni.removeStorageSync('userInfo');
+				// uni.removeStorageSync('baseInfo');
+				// uni.removeStorageSync('mallDomain');
+				// uni.removeStorageSync('isTransferPage');
+				uni.clearStorageSync();
 			},
 			checkMallType(){
 				this.$http.post('/mall/app/login/mall/shopmall/type', {

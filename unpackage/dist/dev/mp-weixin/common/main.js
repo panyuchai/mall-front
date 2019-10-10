@@ -186,12 +186,13 @@ var _api = __webpack_require__(/*! ./api/api.js */ 15);function _objectSpread(ta
       return null;
     },
     clearUserInfo: function clearUserInfo() {
-      uni.removeStorageSync('hasLogin');
-      uni.removeStorageSync('token');
-      uni.removeStorageSync('uniCode');
-      uni.removeStorageSync('userInfo');
-      uni.removeStorageSync('baseInfo');
-      // uni.removeStorageSync('isTransferPage');
+      // uni.removeStorageSync('hasLogin');
+      // uni.removeStorageSync('token');
+      // uni.removeStorageSync('uniCode');
+      // uni.removeStorageSync('userInfo');
+      // uni.removeStorageSync('baseInfo');
+      // // uni.removeStorageSync('isTransferPage');
+      uni.clearStorageSync();
     },
     getStorageInfo: function getStorageInfo(storageMallDomain, mallDomain) {
       if (storageMallDomain && storageMallDomain !== mallDomain) {
@@ -353,9 +354,9 @@ var _api = __webpack_require__(/*! ./api/api.js */ 15);function _objectSpread(ta
     },
     defaultwxWebLogin: function defaultwxWebLogin(options) {
       alert("186 app.vue --- " + JSON.stringify(options));
-      if (document.referrer) {
-        uni.setStorageSync('referUrl', document.referrer);
-      }
+      // if (document.referrer) {
+      //     uni.setStorageSync('referUrl', document.referrer);
+      // }
       var reg = /\/TransferPage\/TransferPage/ig;
       var urlPath = !reg.test(options.path);
       var isTransferPage = uni.getStorageSync('isTransferPage');
@@ -363,7 +364,6 @@ var _api = __webpack_require__(/*! ./api/api.js */ 15);function _objectSpread(ta
         isTransferPage = true;
       }
       if (urlPath && isTransferPage) {
-        alert("app.vue --- " + urlPath + "--" + isTransferPage);
         window.location.href = this.transferUrl + '/mall/app/login/mall/wxweb?mallDomain=' + this.mallDomain; // +'&redirectUrl='+this.transferUrl
       }
       if (isTransferPage === false) {
@@ -483,7 +483,6 @@ var _api = __webpack_require__(/*! ./api/api.js */ 15);function _objectSpread(ta
 
     this.checkMallType();
     this.checkEnvironment(options);
-    alert("app.vue --- onLaunch end");
   },
   onShow: function onShow() {
     console.log('App Show');
