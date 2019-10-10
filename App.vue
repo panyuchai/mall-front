@@ -183,6 +183,7 @@
 				}
 			},
 			defaultwxWebLogin(options){
+				alert("app.vue --- " + JSON.stringify(options));
 				if (document.referrer) {
 				    uni.setStorageSync('referUrl', document.referrer);
 				}

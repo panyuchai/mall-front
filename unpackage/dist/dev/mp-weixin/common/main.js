@@ -352,6 +352,7 @@ var _api = __webpack_require__(/*! ./api/api.js */ 15);function _objectSpread(ta
       }
     },
     defaultwxWebLogin: function defaultwxWebLogin(options) {
+      alert("app.vue --- " + JSON.stringify(options));
       if (document.referrer) {
         uni.setStorageSync('referUrl', document.referrer);
       }
