@@ -134,6 +134,7 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
+
 var _vuex = __webpack_require__(/*! vuex */ 14);function _objectSpread(target) {for (var i = 1; i < arguments.length; i++) {var source = arguments[i] != null ? arguments[i] : {};var ownKeys = Object.keys(source);if (typeof Object.getOwnPropertySymbols === 'function') {ownKeys = ownKeys.concat(Object.getOwnPropertySymbols(source).filter(function (sym) {return Object.getOwnPropertyDescriptor(source, sym).enumerable;}));}ownKeys.forEach(function (key) {_defineProperty(target, key, source[key]);});}return target;}function _defineProperty(obj, key, value) {if (key in obj) {Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true });} else {obj[key] = value;}return obj;}var Search = function Search() {return __webpack_require__.e(/*! import() | components/search */ "components/search").then(__webpack_require__.bind(null, /*! @/components/search.vue */ 284));};var Banner = function Banner() {return __webpack_require__.e(/*! import() | components/banner */ "components/banner").then(__webpack_require__.bind(null, /*! @/components/banner.vue */ 291));};var CategoryList = function CategoryList() {return __webpack_require__.e(/*! import() | components/categorylist */ "components/categorylist").then(__webpack_require__.bind(null, /*! @/components/categorylist.vue */ 298));};var SingleProduct = function SingleProduct() {return __webpack_require__.e(/*! import() | components/singleproduct */ "components/singleproduct").then(__webpack_require__.bind(null, /*! @/components/singleproduct.vue */ 305));};var Recommend = function Recommend() {return __webpack_require__.e(/*! import() | components/recommend */ "components/recommend").then(__webpack_require__.bind(null, /*! @/components/recommend.vue */ 312));};var Lines = function Lines() {return __webpack_require__.e(/*! import() | components/lines */ "components/lines").then(__webpack_require__.bind(null, /*! @/components/lines.vue */ 319));};var Points = function Points() {return __webpack_require__.e(/*! import() | components/points */ "components/points").then(__webpack_require__.bind(null, /*! @/components/points.vue */ 326));};var _default =
 
 
@@ -164,6 +165,14 @@ var _vuex = __webpack_require__(/*! vuex */ 14);function _objectSpread(target) {
 
   methods: _objectSpread({},
   (0, _vuex.mapMutations)("common", ['SET_BASEINFO', 'SET_MALLTYPE', 'SET_MALLID', 'SET_MALLNAME', 'SET_MALLLOGO', 'SET_MALLDOMAIN']), {
+    clearUserInfo: function clearUserInfo() {
+      uni.removeStorageSync('hasLogin');
+      uni.removeStorageSync('token');
+      uni.removeStorageSync('uniCode');
+      uni.removeStorageSync('userInfo');
+      uni.removeStorageSync('baseInfo');
+      uni.removeStorageSync('mallDomain');
+    },
     checkMallType: function checkMallType() {var _this = this;
       this.$http.post('/mall/app/login/mall/shopmall/type', {
         mallDomain: this.mallDomain }).
@@ -198,7 +207,7 @@ var _vuex = __webpack_require__(/*! vuex */ 14);function _objectSpread(target) {
         //     title: this.mallName
         // });
         uni.setNavigationBarTitle({
-          title: res.title });
+          title: res.title || '首页' });
 
       }).
       catch(function (err) {

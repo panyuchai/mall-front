@@ -162,6 +162,11 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
+
+
+
+
+
 var _vuex = __webpack_require__(/*! vuex */ 14);function _toConsumableArray(arr) {return _arrayWithoutHoles(arr) || _iterableToArray(arr) || _nonIterableSpread();}function _nonIterableSpread() {throw new TypeError("Invalid attempt to spread non-iterable instance");}function _iterableToArray(iter) {if (Symbol.iterator in Object(iter) || Object.prototype.toString.call(iter) === "[object Arguments]") return Array.from(iter);}function _arrayWithoutHoles(arr) {if (Array.isArray(arr)) {for (var i = 0, arr2 = new Array(arr.length); i < arr.length; i++) {arr2[i] = arr[i];}return arr2;}}function _objectSpread(target) {for (var i = 1; i < arguments.length; i++) {var source = arguments[i] != null ? arguments[i] : {};var ownKeys = Object.keys(source);if (typeof Object.getOwnPropertySymbols === 'function') {ownKeys = ownKeys.concat(Object.getOwnPropertySymbols(source).filter(function (sym) {return Object.getOwnPropertyDescriptor(source, sym).enumerable;}));}ownKeys.forEach(function (key) {_defineProperty(target, key, source[key]);});}return target;}function _defineProperty(obj, key, value) {if (key in obj) {Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true });} else {obj[key] = value;}return obj;}var tuiIcon = function tuiIcon() {return __webpack_require__.e(/*! import() | components/icon/icon */ "components/icon/icon").then(__webpack_require__.bind(null, /*! @/components/icon/icon */ 361));};var tuiTag = function tuiTag() {return __webpack_require__.e(/*! import() | components/tag/tag */ "components/tag/tag").then(__webpack_require__.bind(null, /*! @/components/tag/tag */ 368));};var tuiActionsheet = function tuiActionsheet() {return __webpack_require__.e(/*! import() | components/actionsheet/actionsheet */ "components/actionsheet/actionsheet").then(__webpack_require__.bind(null, /*! @/components/actionsheet/actionsheet */ 375));};var _default =
 
 
@@ -200,7 +205,7 @@ var _vuex = __webpack_require__(/*! vuex */ 14);function _toConsumableArray(arr)
     chooseKeywords: function chooseKeywords(e) {
       this.keyword = e;
     },
-    handleSearch: function handleSearch() {
+    handleSearch: function handleSearch(e) {
       if (this.keyword.trim() == '') {
         uni.showToast({
           icon: 'none',
@@ -249,7 +254,6 @@ var _vuex = __webpack_require__(/*! vuex */ 14);function _toConsumableArray(arr)
         if (res.code == 0) {
           if (res.result.list) {
             _this2.historyData = _this2.unique(res.result.list);
-            console.log(_this2.historyData);
           } else {
             _this2.historyShow = false;
           }

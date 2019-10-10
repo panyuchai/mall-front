@@ -108,25 +108,25 @@
 			// 		}
 			// 	}
 			},
-			// getStorageInfo(){
-			// 	if(uni.getStorageSync('hasLogin')){
-			// 		this.SET_HASLOGIN(uni.getStorageSync('hasLogin'));
-			// 	}
-			// 	if(uni.getStorageSync('token')){
-			// 		this.SET_TOKEN(uni.getStorageSync('token'));
-			// 	}
-			// 	if(uni.getStorageSync('uniCode')){
-			// 		this.SET_UNICODE(uni.getStorageSync('uniCode'));
-			// 	}
-			// 	let storageUserInfo = getStore({ name: 'userInfo' }),
-			// 		storageBaseInfo = getStore({ name: 'baseInfo' });
-			// 	if(storageUserInfo){
-			// 		this.SET_USERIFNO(storageUserInfo);
-			// 	}
-			// 	if(storageBaseInfo){
-			// 		this.SET_BASEINFO(storageBaseInfo);
-			// 	}
-			// },
+			wxGetStorageInfo(){
+				if(uni.getStorageSync('hasLogin')){
+					this.SET_HASLOGIN(uni.getStorageSync('hasLogin'));
+				}
+				if(uni.getStorageSync('token')){
+					this.SET_TOKEN(uni.getStorageSync('token'));
+				}
+				if(uni.getStorageSync('uniCode')){
+					this.SET_UNICODE(uni.getStorageSync('uniCode'));
+				}
+				let storageUserInfo = getStore({ name: 'userInfo' }),
+					storageBaseInfo = getStore({ name: 'baseInfo' });
+				if(storageUserInfo){
+					this.SET_USERIFNO(storageUserInfo);
+				}
+				if(storageBaseInfo){
+					this.SET_BASEINFO(storageBaseInfo);
+				}
+			},
 			checkMallType(){
 				this.$http.post('/mall/app/login/mall/shopmall/type', {
 					mallDomain: this.mallDomain
@@ -307,7 +307,7 @@
 			this.getMallDomain();
 			// #endif
 			// #ifdef MP
-			// this.getStorageInfo();
+			this.wxGetStorageInfo();
 			// #endif
 			this.checkMallType();
 			this.checkEnvironment(options);

@@ -8,6 +8,7 @@
 			<recommend v-if="item.type === '203'" :options="item.data"></recommend>
 			<points v-if="item.type === '007'" :options="item.renderData" :customerName='userInfo.customerName'></points>
 		</block>
+		<button type="primary" @tap="clearUserInfo">清除登陆</button>
 	</view>
 </template>
 
@@ -42,6 +43,14 @@
 		},
 		methods: {
 			...mapMutations("common", ['SET_BASEINFO', 'SET_MALLTYPE', 'SET_MALLID', 'SET_MALLNAME', 'SET_MALLLOGO', 'SET_MALLDOMAIN']),
+			clearUserInfo(){
+				uni.removeStorageSync('hasLogin');
+				uni.removeStorageSync('token');
+				uni.removeStorageSync('uniCode');
+				uni.removeStorageSync('userInfo');
+				uni.removeStorageSync('baseInfo');
+				uni.removeStorageSync('mallDomain');
+			},
 			checkMallType(){
 				this.$http.post('/mall/app/login/mall/shopmall/type', {
 					mallDomain: this.mallDomain

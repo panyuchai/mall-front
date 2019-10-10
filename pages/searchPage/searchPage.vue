@@ -17,7 +17,12 @@
 				<view @tap="cleanKey" v-show="keyword"><tui-icon name="close-fill" :size='16' color='#bcbcbc'></tui-icon></view>
 				<!-- #endif -->
 			</view>
+			<!-- #ifdef H5 -->
 			<view class="tui-cancle" @tap="back">取消</view>
+			<!-- #endif -->
+			<!-- #ifdef MP -->
+			<view class="tui-cancle" @tap="handleSearch">搜索</view>
+			<!-- #endif -->
 		</view>
 
 		<view class="tui-search-history" v-if="historyShow">
@@ -125,7 +130,6 @@
 					if(res.code == 0){
 						if(res.result.list){
 							this.historyData=this.unique(res.result.list);
-							console.log(this.historyData)
 						}else{
 							this.historyShow=false;
 						}

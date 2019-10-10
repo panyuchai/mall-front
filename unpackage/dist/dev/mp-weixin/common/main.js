@@ -178,10 +178,10 @@ var _api = __webpack_require__(/*! ./api/api.js */ 15);function _objectSpread(ta
   methods: _objectSpread({},
   (0, _vuex.mapMutations)("common", ['SET_TRANSFERURL', 'SET_BASEURL', 'SET_PAYMENTURL', 'SET_USERIFNO', 'SET_BASEINFO', 'SET_HASLOGIN', 'SET_UNICODE', 'SET_TOKEN', 'SET_MALLTYPE', 'SET_MALLID', 'SET_MALLNAME', 'SET_MALLLOGO', 'SET_MALLDOMAIN', 'SET_ISTRANSFERPAGE']), {
     GetQueryString: function GetQueryString(name) {
-      var reg = new RegExp('(^|&)' + name + '=([^&]*)(&|$)', 'i');
-      var r = window.location.search.substr(1).match(reg);
+      var reg = new RegExp(name + "=\\w*");
+      var r = window.location.href.substr(1).match(reg);
       if (r != null) {
-        return unescape(r[2]);
+        return unescape(r[0]).split('=')[1];
       }
       return null;
     },
@@ -192,30 +192,7 @@ var _api = __webpack_require__(/*! ./api/api.js */ 15);function _objectSpread(ta
       uni.removeStorageSync('userInfo');
       uni.removeStorageSync('baseInfo');
     },
-    getMallDomain: function getMallDomain() {
-      var mallDomain = this.GetQueryString('mallDomain'),
-      storageMallDomain = this.mallDomain,
-      host = window.location.host;
-      this.SET_BASEURL(host);
-      switch (host) {
-        case 'localhost:8080':
-          this.SET_TRANSFERURL('//192.168.1.104:8087');
-          this.SET_PAYMENTURL('testpay');
-          break;
-        case '192.168.1.10:8888':
-          this.SET_TRANSFERURL('//192.168.1.104:8087');
-          this.SET_PAYMENTURL('testpay');
-          break;
-        default:
-          this.SET_TRANSFERURL('//mall-api.yujianli.cn');
-          this.SET_PAYMENTURL('pay');}
-
-      if (!mallDomain) {
-        mallDomain = window.location.hostname.split('.')[0];
-        // if(mallDomain.indexOf('pay') !== -1){
-        // 	mallDomain = ''
-        // }
-      }
+    getStorageInfo: function getStorageInfo(storageMallDomain, mallDomain) {
       if (storageMallDomain && storageMallDomain !== mallDomain) {
         this.clearUserInfo();
       } else {
@@ -238,8 +215,69 @@ var _api = __webpack_require__(/*! ./api/api.js */ 15);function _objectSpread(ta
         }
       }
       this.SET_MALLDOMAIN(mallDomain);
+      console.log(this.mallDomain);
     },
-    getStorageInfo: function getStorageInfo() {
+    getMallDomain: function getMallDomain() {
+      var mallDomain = this.GetQueryString('mallDomain'),
+      storageMallDomain = this.mallDomain,
+      host = window.location.host;
+      this.SET_BASEURL(host);
+      switch (host) {
+        case 'localhost:8080':
+          this.SET_TRANSFERURL('//192.168.1.104:8087');
+          this.SET_PAYMENTURL('testpay');
+          break;
+        case '192.168.1.130:8080':
+          this.SET_TRANSFERURL('//192.168.1.104:8087');
+          this.SET_PAYMENTURL('testpay');
+          break;
+        case '192.168.1.10:8888':
+          this.SET_TRANSFERURL('//192.168.1.104:8087');
+          this.SET_PAYMENTURL('testpay');
+          break;
+        case 'testpay.yujianli.cn':
+          this.SET_TRANSFERURL('//192.168.1.104:8087');
+          this.SET_PAYMENTURL('testpay');
+          break;
+        default:
+          this.SET_TRANSFERURL('//mall-api.yujianli.cn');
+          this.SET_PAYMENTURL('pay');}
+
+      if (!mallDomain) {
+        mallDomain = window.location.hostname.split('.')[0];
+        this.getStorageInfo(storageMallDomain, mallDomain);
+      } else {
+        this.getStorageInfo(storageMallDomain, mallDomain);
+      }
+      // 	if(!mallDomain){
+      // 		mallDomain = window.location.hostname.split('.')[0];
+      // 		// if(mallDomain.indexOf('pay') !== -1){
+      // 		// 	mallDomain = ''
+      // 		// }
+      // 	}
+      // 	if(storageMallDomain && storageMallDomain!==mallDomain){
+      // 		this.clearUserInfo();
+      // 	}else{
+      // 		if(uni.getStorageSync('hasLogin')){
+      // 			this.SET_HASLOGIN(uni.getStorageSync('hasLogin'));
+      // 		}
+      // 		if(uni.getStorageSync('token')){
+      // 			this.SET_TOKEN(uni.getStorageSync('token'));
+      // 		}
+      // 		if(uni.getStorageSync('uniCode')){
+      // 			this.SET_UNICODE(uni.getStorageSync('uniCode'));
+      // 		}
+      // 		let storageUserInfo = getStore({ name: 'userInfo' }),
+      // 			storageBaseInfo = getStore({ name: 'baseInfo' });
+      // 		if(storageUserInfo){
+      // 			this.SET_USERIFNO(storageUserInfo);
+      // 		}
+      // 		if(storageBaseInfo){
+      // 			this.SET_BASEINFO(storageBaseInfo);
+      // 		}
+      // 	}
+    },
+    wxGetStorageInfo: function wxGetStorageInfo() {
       if (uni.getStorageSync('hasLogin')) {
         this.SET_HASLOGIN(uni.getStorageSync('hasLogin'));
       }
@@ -275,11 +313,11 @@ var _api = __webpack_require__(/*! ./api/api.js */ 15);function _objectSpread(ta
           _this.SET_MALLNAME(res.result.mallName);
           _this.SET_MALLLOGO(res.result.mallLogo);
         } else {
-          console.log('login--mallTaye 接口调用失败');
+          console.log('App--mallTaye 接口调用失败');
         }
       }).
       catch(function (err) {
-        console.log('login--mallTaye 接口调用出错');
+        console.log('App--mallTaye 接口调用出错');
       });
     },
     initData: function initData() {
@@ -438,7 +476,7 @@ var _api = __webpack_require__(/*! ./api/api.js */ 15);function _objectSpread(ta
 
 
 
-    this.getStorageInfo();
+    this.wxGetStorageInfo();
 
     this.checkMallType();
     this.checkEnvironment(options);
