@@ -152,7 +152,7 @@ var _store = __webpack_require__(/*! ../../utils/store.js */ 12);function _objec
           return config;
         });
         // this.setUserInfo();
-        this.$http.post('/mall/app/account/info').
+        this.$http.post('/mall/app/account/info?mallDomain=' + this.mallDomain).
         then(function (res) {
           if (res.code == 0) {
             if (res.result) {

@@ -30,7 +30,7 @@
 						return config;
 					});
 					// this.setUserInfo();
-					this.$http.post('/mall/app/account/info')
+					this.$http.post('/mall/app/account/info?mallDomain='+this.mallDomain)
 					.then( res => {
 						if(res.code == 0){
 							if(res.result){
