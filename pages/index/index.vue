@@ -50,6 +50,7 @@
 				uni.removeStorageSync('userInfo');
 				uni.removeStorageSync('baseInfo');
 				uni.removeStorageSync('mallDomain');
+				uni.removeStorageSync('isTransferPage');
 			},
 			checkMallType(){
 				this.$http.post('/mall/app/login/mall/shopmall/type', {
