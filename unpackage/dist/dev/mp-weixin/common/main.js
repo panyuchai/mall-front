@@ -352,7 +352,7 @@ var _api = __webpack_require__(/*! ./api/api.js */ 15);function _objectSpread(ta
       }
     },
     defaultwxWebLogin: function defaultwxWebLogin(options) {
-      alert("app.vue --- " + JSON.stringify(options));
+      alert("186 app.vue --- " + JSON.stringify(options));
       if (document.referrer) {
         uni.setStorageSync('referUrl', document.referrer);
       }
@@ -483,6 +483,7 @@ var _api = __webpack_require__(/*! ./api/api.js */ 15);function _objectSpread(ta
 
     this.checkMallType();
     this.checkEnvironment(options);
+    alert("app.vue --- onLaunch end");
   },
   onShow: function onShow() {
     console.log('App Show');

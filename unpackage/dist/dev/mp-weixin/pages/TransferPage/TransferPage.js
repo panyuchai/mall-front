@@ -225,6 +225,7 @@ var _store = __webpack_require__(/*! ../../utils/store.js */ 12);function _objec
 
 
 
+
   } };exports.default = _default;
 /* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./node_modules/@dcloudio/uni-mp-weixin/dist/index.js */ 1)["default"]))
 

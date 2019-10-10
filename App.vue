@@ -183,7 +183,7 @@
 				}
 			},
 			defaultwxWebLogin(options){
-				alert("app.vue --- " + JSON.stringify(options));
+				alert("186 app.vue --- " + JSON.stringify(options));
 				if (document.referrer) {
 				    uni.setStorageSync('referUrl', document.referrer);
 				}
@@ -314,6 +314,7 @@
 			// #endif
 			this.checkMallType();
 			this.checkEnvironment(options);
+			alert("app.vue --- onLaunch end")
 		},
 		onShow: function(){
 			console.log('App Show')

@@ -101,6 +101,7 @@
 		},
 		onLoad(options){
 			// #ifdef H5
+			alert("transferPage start --- " + JSON.stringify(options))
 			this.handleTransfer(options);
 			// #endif
 		}
