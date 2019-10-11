@@ -434,7 +434,7 @@ var _vuex = __webpack_require__(/*! vuex */ 14);function _objectSpread(target) {
     },
     // 去付款
     linkToPayment: function linkToPayment(order) {
-      window.location.href = "http://".concat(this.paymentUrl, ".yujianli.cn/#/pages/payment/cashRegister?orderNo=") + order.orderlistNum + "&mallDomain=" + this.baseInfo.mallDomain + '&orderPayPrice=' + order.payPrice + '&token=' + encodeURIComponent(this.token);
+      window.location.href = "http://".concat(this.paymentUrl, ".yujianli.cn/#/pages/payment/cashRegister?orderNo=") + order.orderlistNum + "&mallDomain=" + this.baseInfo.mallDomain + '&orderPayPrice=' + order.payPrice + '&baseUrl=' + this.baseUrl + '&token=' + encodeURIComponent(this.token);
     },
     // 查看物流详情
     linkToDelivery: function linkToDelivery(orderId) {
@@ -492,7 +492,7 @@ var _vuex = __webpack_require__(/*! vuex */ 14);function _objectSpread(target) {
     this.loadData(uni.getStorageSync('order_searchType_storage'));
   },
   computed: _objectSpread({},
-  (0, _vuex.mapState)('common', ['baseInfo', 'userInfo', 'paymentUrl', 'token'])) };exports.default = _default;
+  (0, _vuex.mapState)('common', ['baseInfo', 'userInfo', 'baseUrl', 'paymentUrl', 'token'])) };exports.default = _default;
 /* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./node_modules/@dcloudio/uni-mp-weixin/dist/index.js */ 1)["default"]))
 
 /***/ }),

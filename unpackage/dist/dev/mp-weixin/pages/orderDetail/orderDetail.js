@@ -311,7 +311,7 @@ var _vuex = __webpack_require__(/*! vuex */ 14);function _objectSpread(target) {
 
     },
     linkToPayment: function linkToPayment(order) {
-      window.location.href = "http://".concat(this.paymentUrl, ".yujianli.cn/#/pages/payment/cashRegister?orderNo=") + order.orderlistNum + "&mallDomain=" + this.baseInfo.mallDomain + '&orderPayPrice=' + order.payPrice + '&token=' + encodeURIComponent(this.token);
+      window.location.href = "http://".concat(this.paymentUrl, ".yujianli.cn/#/pages/payment/cashRegister?orderNo=") + order.orderlistNum + "&mallDomain=" + this.baseInfo.mallDomain + '&orderPayPrice=' + order.payPrice + '&baseUrl=' + this.baseUrl + '&token=' + encodeURIComponent(this.token);
     },
     confirmOrder: function confirmOrder(orderId) {var _this = this;
       this.$http.post('/mall/app/order/receive', _objectSpread({},
@@ -452,7 +452,7 @@ var _vuex = __webpack_require__(/*! vuex */ 14);function _objectSpread(target) {
     } },
 
   computed: _objectSpread({},
-  (0, _vuex.mapState)('common', ['baseInfo', 'userInfo', 'paymentUrl', 'token'])),
+  (0, _vuex.mapState)('common', ['baseInfo', 'userInfo', 'baseUrl', 'paymentUrl', 'token'])),
 
   onLoad: function onLoad(options) {
     this.loadData(options.orderId);
