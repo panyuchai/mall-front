@@ -5,7 +5,7 @@ const state = {
   paymentUrl: '',
   mallDomain: '',
   // #ifdef MP
-  mallDomain: 'ytt',
+  mallDomain: 'yyy',
   // #endif
   mallType: '',
   mallId: null,

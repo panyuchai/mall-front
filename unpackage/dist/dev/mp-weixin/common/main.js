@@ -217,7 +217,6 @@ var _api = __webpack_require__(/*! ./api/api.js */ 15);function _objectSpread(ta
         }
       }
       this.SET_MALLDOMAIN(mallDomain);
-      console.log(this.mallDomain);
     },
     getMallDomain: function getMallDomain() {
       var mallDomain = this.GetQueryString('mallDomain'),
@@ -280,23 +279,30 @@ var _api = __webpack_require__(/*! ./api/api.js */ 15);function _objectSpread(ta
       // 	}
     },
     wxGetStorageInfo: function wxGetStorageInfo() {
-      if (uni.getStorageSync('hasLogin')) {
-        this.SET_HASLOGIN(uni.getStorageSync('hasLogin'));
+      var mallDomain = this.mallDomain,
+      storageMallDomain = uni.getStorageSync('mallDomain');
+      if (storageMallDomain != mallDomain) {
+        this.clearUserInfo();
+      } else {
+        if (uni.getStorageSync('hasLogin')) {
+          this.SET_HASLOGIN(uni.getStorageSync('hasLogin'));
+        }
+        if (uni.getStorageSync('token')) {
+          this.SET_TOKEN(uni.getStorageSync('token'));
+        }
+        if (uni.getStorageSync('uniCode')) {
+          this.SET_UNICODE(uni.getStorageSync('uniCode'));
+        }
+        var storageUserInfo = (0, _store.getStore)({ name: 'userInfo' }),
+        storageBaseInfo = (0, _store.getStore)({ name: 'baseInfo' });
+        if (storageUserInfo) {
+          this.SET_USERIFNO(storageUserInfo);
+        }
+        if (storageBaseInfo) {
+          this.SET_BASEINFO(storageBaseInfo);
+        }
       }
-      if (uni.getStorageSync('token')) {
-        this.SET_TOKEN(uni.getStorageSync('token'));
-      }
-      if (uni.getStorageSync('uniCode')) {
-        this.SET_UNICODE(uni.getStorageSync('uniCode'));
-      }
-      var storageUserInfo = (0, _store.getStore)({ name: 'userInfo' }),
-      storageBaseInfo = (0, _store.getStore)({ name: 'baseInfo' });
-      if (storageUserInfo) {
-        this.SET_USERIFNO(storageUserInfo);
-      }
-      if (storageBaseInfo) {
-        this.SET_BASEINFO(storageBaseInfo);
-      }
+      this.SET_MALLDOMAIN(mallDomain);
     },
     checkMallType: function checkMallType() {var _this = this;
       this.$http.post('/mall/app/login/mall/shopmall/type', {
@@ -370,27 +376,38 @@ var _api = __webpack_require__(/*! ./api/api.js */ 15);function _objectSpread(ta
       }
     },
     defaultWxLogin: function defaultWxLogin() {var _this2 = this;
-      uni.checkSession({
+      // uni.checkSession({
+      // 	success: (res) => {
+      // 	  console.log('App.vue--uni.login登陆状态');
+      // 	  this.wxLogin(this.uniCode);
+      // 	},
+      // 	fail: (err) => {
+      // 		console.log('App.vue--uni.login登陆已失效');
+      // 		uni.login({
+      // 		  provider: 'weixin',
+      // 		  success: (res) => {
+      // 			  // console.log(res);
+      // 			  this.SET_UNICODE(res.code);
+      // 		    if(res.code){
+      // 				this.wxLogin(res.code);
+      // 			}else{
+      // 				console.log("App.vue--获取code失败")
+      // 			}
+      // 		  }
+      // 		});
+      // 	}
+      // });
+      uni.login({
+        provider: 'weixin',
         success: function success(res) {
-          console.log('App.vue--uni.login登陆状态');
-          _this2.wxLogin(_this2.uniCode);
-        },
-        fail: function fail(err) {
-          console.log('App.vue--uni.login登陆已失效');
-          uni.login({
-            provider: 'weixin',
-            success: function success(res) {
-              // console.log(res);
-              _this2.SET_UNICODE(res.code);
-              if (res.code) {
-                _this2.wxLogin(res.code);
-              } else {
-                console.log("App.vue--获取code失败");
-              }
-            } });
-
+          // console.log(res);
+          _this2.SET_UNICODE(res.code);
+          if (res.code) {
+            _this2.wxLogin(res.code);
+          } else {
+            console.log("App.vue--获取code失败");
+          }
         } });
-
 
 
     },
@@ -409,6 +426,7 @@ var _api = __webpack_require__(/*! ./api/api.js */ 15);function _objectSpread(ta
           });
           if (res.data.code == 0) {
             if (res.data.result.isSuccess) {
+              _this3.set;
               _this3.SET_HASLOGIN(true);
               _this3.SET_TOKEN(res.data.result.token);
               _api.test.setConfig(function (config) {

@@ -60,10 +60,10 @@
 	.swiper-box{
 		position: relative;
 		.swiper{
-			height: 260upx;
+			// height: 260upx;
 			.swiper-item{
 				width: 100%;
-				height: 100%;
+				// height: 100%;
 				.img{
 					width: 100%;
 				}

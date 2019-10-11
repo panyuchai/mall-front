@@ -125,6 +125,7 @@
 					label:"女",
 					value:1
 				}],
+				uploadUrl: ''
 			};
 		},
 		computed: {
@@ -134,11 +135,13 @@
 			...mapMutations('common', ['SET_USERIFNO']),
 			uploadAvatar(){
 				uni.chooseImage({
+					count: 1,
 				    success: (chooseImageRes) => {
 				        const tempFilePaths = chooseImageRes.tempFilePaths;
 				        uni.uploadFile({
-				            url: '/saas/app/backsite/sysFile/upload',
+				            url: this.uploadUrl+'/saas/app/backsite/sysFile/upload',
 							header:{
+								"Content-Type": "multipart/form-data",
 								Authorization: 'Bearer ' + uni.getStorageSync('token')
 							},
 				            filePath: tempFilePaths[0],
@@ -147,6 +150,10 @@
 				                'user': 'test'
 				            },
 				            success: (uploadFileRes) => {
+								uni.showToast({
+									icon: 'none',
+									title: '上传成功'
+								})
 				                // if(uploadFileRes.data && uploadFileRes.data.code == 0){							
 									this.formData={
 										...this.formData,
@@ -156,6 +163,10 @@
 								// }
 				            },
 							fail: (err) => {
+								uni.showToast({
+									icon: 'none',
+									title: '上传失败'+err
+								})
 								console.log(err);
 							}
 				        });
@@ -230,6 +241,28 @@
 			// 	this.formData.transCustomerBirthday=this.userInfo.customerBirthday.split('T')[0];
 			// 	this.formData.transCustomerSex=this.transformSex(this.userInfo.customerSex);
 			// },
+			getUploadUrl(){
+				// #ifdef H5
+				let host = window.location.host;
+				switch(host){
+					case 'localhost:8080':
+						this.uploadUrl = '//192.168.1.104';
+						break;
+					case '192.168.1.10:8888':
+						this.uploadUrl = '//192.168.1.104';
+						break;
+					case '192.168.1.130:8080':
+						this.uploadUrl = '//192.168.1.104';
+						break;
+					default:
+						this.uploadUrl = '//tbs-api.yujianli.cn';
+				}
+				// #endif
+				// #ifdef MP
+				this.uploadUrl = 'http://192.168.1.104';
+				// this.uploadUrl = 'http://tbs-api.yujianli.cn';
+				// #endif
+			},
 			setUserInfo(){
 				this.$http.post('/mall/app/account/info')
 				.then( res => {
@@ -275,7 +308,7 @@
 		},
 		onLoad(){
 			this.setUserInfo();
-			
+			this.getUploadUrl();
 		}
 	}
 </script>

@@ -48,7 +48,6 @@
 					}
 				}
 				this.SET_MALLDOMAIN(mallDomain);
-				console.log(this.mallDomain);
 			},
 			getMallDomain(){
 				let mallDomain = this.GetQueryString('mallDomain'),
@@ -111,23 +110,30 @@
 			// 	}
 			},
 			wxGetStorageInfo(){
-				if(uni.getStorageSync('hasLogin')){
-					this.SET_HASLOGIN(uni.getStorageSync('hasLogin'));
+				let mallDomain = this.mallDomain,
+					storageMallDomain = uni.getStorageSync('mallDomain');
+				if(storageMallDomain != mallDomain){
+					this.clearUserInfo();
+				}else{
+					if(uni.getStorageSync('hasLogin')){
+						this.SET_HASLOGIN(uni.getStorageSync('hasLogin'));
+					}
+					if(uni.getStorageSync('token')){
+						this.SET_TOKEN(uni.getStorageSync('token'));
+					}
+					if(uni.getStorageSync('uniCode')){
+						this.SET_UNICODE(uni.getStorageSync('uniCode'));
+					}
+					let storageUserInfo = getStore({ name: 'userInfo' }),
+						storageBaseInfo = getStore({ name: 'baseInfo' });
+					if(storageUserInfo){
+						this.SET_USERIFNO(storageUserInfo);
+					}
+					if(storageBaseInfo){
+						this.SET_BASEINFO(storageBaseInfo);
+					}
 				}
-				if(uni.getStorageSync('token')){
-					this.SET_TOKEN(uni.getStorageSync('token'));
-				}
-				if(uni.getStorageSync('uniCode')){
-					this.SET_UNICODE(uni.getStorageSync('uniCode'));
-				}
-				let storageUserInfo = getStore({ name: 'userInfo' }),
-					storageBaseInfo = getStore({ name: 'baseInfo' });
-				if(storageUserInfo){
-					this.SET_USERIFNO(storageUserInfo);
-				}
-				if(storageBaseInfo){
-					this.SET_BASEINFO(storageBaseInfo);
-				}
+				this.SET_MALLDOMAIN(mallDomain);
 			},
 			checkMallType(){
 				this.$http.post('/mall/app/login/mall/shopmall/type', {
@@ -201,28 +207,39 @@
 				}
 			},
 			defaultWxLogin(){
-				uni.checkSession({
-					success: (res) => {
-					  console.log('App.vue--uni.login登陆状态');
-					  this.wxLogin(this.uniCode);
-					},
-					fail: (err) => {
-						console.log('App.vue--uni.login登陆已失效');
-						uni.login({
-						  provider: 'weixin',
-						  success: (res) => {
-							  // console.log(res);
-							  this.SET_UNICODE(res.code);
-						    if(res.code){
-								this.wxLogin(res.code);
-							}else{
-								console.log("App.vue--获取code失败")
-							}
-						  }
-						});
+				// uni.checkSession({
+				// 	success: (res) => {
+				// 	  console.log('App.vue--uni.login登陆状态');
+				// 	  this.wxLogin(this.uniCode);
+				// 	},
+				// 	fail: (err) => {
+				// 		console.log('App.vue--uni.login登陆已失效');
+				// 		uni.login({
+				// 		  provider: 'weixin',
+				// 		  success: (res) => {
+				// 			  // console.log(res);
+				// 			  this.SET_UNICODE(res.code);
+				// 		    if(res.code){
+				// 				this.wxLogin(res.code);
+				// 			}else{
+				// 				console.log("App.vue--获取code失败")
+				// 			}
+				// 		  }
+				// 		});
+				// 	}
+				// });
+				uni.login({
+				  provider: 'weixin',
+				  success: (res) => {
+					  // console.log(res);
+					  this.SET_UNICODE(res.code);
+				    if(res.code){
+						this.wxLogin(res.code);
+					}else{
+						console.log("App.vue--获取code失败")
 					}
+				  }
 				});
-				
 				
 			},
 			wxLogin(code){
@@ -240,6 +257,7 @@
 						});
 						if(res.data.code == 0){
 							if(res.data.result.isSuccess){
+								this.set
 								this.SET_HASLOGIN(true);
 								this.SET_TOKEN(res.data.result.token);
 								test.setConfig((config) => {

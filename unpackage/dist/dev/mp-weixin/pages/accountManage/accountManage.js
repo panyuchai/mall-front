@@ -247,8 +247,9 @@ var _store = __webpack_require__(/*! ../../utils/store.js */ 12);function _objec
         value: 0 },
       {
         label: "女",
-        value: 1 }] };
+        value: 1 }],
 
+      uploadUrl: '' };
 
   },
   computed: _objectSpread({},
@@ -258,11 +259,13 @@ var _store = __webpack_require__(/*! ../../utils/store.js */ 12);function _objec
   (0, _vuex.mapMutations)('common', ['SET_USERIFNO']), {
     uploadAvatar: function uploadAvatar() {var _this = this;
       uni.chooseImage({
+        count: 1,
         success: function success(chooseImageRes) {
           var tempFilePaths = chooseImageRes.tempFilePaths;
           uni.uploadFile({
-            url: '/saas/app/backsite/sysFile/upload',
+            url: _this.uploadUrl + '/saas/app/backsite/sysFile/upload',
             header: {
+              "Content-Type": "multipart/form-data",
               Authorization: 'Bearer ' + uni.getStorageSync('token') },
 
             filePath: tempFilePaths[0],
@@ -271,6 +274,10 @@ var _store = __webpack_require__(/*! ../../utils/store.js */ 12);function _objec
               'user': 'test' },
 
             success: function success(uploadFileRes) {
+              uni.showToast({
+                icon: 'none',
+                title: '上传成功' });
+
               // if(uploadFileRes.data && uploadFileRes.data.code == 0){							
               _this.formData = _objectSpread({},
               _this.formData, {
@@ -280,6 +287,10 @@ var _store = __webpack_require__(/*! ../../utils/store.js */ 12);function _objec
                 // }
               });},
             fail: function fail(err) {
+              uni.showToast({
+                icon: 'none',
+                title: '上传失败' + err });
+
               console.log(err);
             } });
 
@@ -354,6 +365,28 @@ var _store = __webpack_require__(/*! ../../utils/store.js */ 12);function _objec
     // 	this.formData.transCustomerBirthday=this.userInfo.customerBirthday.split('T')[0];
     // 	this.formData.transCustomerSex=this.transformSex(this.userInfo.customerSex);
     // },
+    getUploadUrl: function getUploadUrl() {
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+      this.uploadUrl = 'http://192.168.1.104';
+      // this.uploadUrl = 'http://tbs-api.yujianli.cn';
+
+    },
     setUserInfo: function setUserInfo() {var _this3 = this;
       this.$http.post('/mall/app/account/info').
       then(function (res) {
@@ -399,7 +432,7 @@ var _store = __webpack_require__(/*! ../../utils/store.js */ 12);function _objec
 
   onLoad: function onLoad() {
     this.setUserInfo();
-
+    this.getUploadUrl();
   } };exports.default = _default;
 /* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./node_modules/@dcloudio/uni-mp-weixin/dist/index.js */ 1)["default"]))
 
