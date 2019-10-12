@@ -23,8 +23,8 @@ test.setConfig((config) => { /* 设置全局配置 */
 	}
 	// #endif
 	// #ifdef MP
-	config.baseUrl = 'http://192.168.1.104:8087';
-	// config.baseUrl = 'http://mall-api.yujianli.cn';
+	// config.baseUrl = 'http://192.168.1.104:8087';
+	config.baseUrl = 'http://mall-api.yujianli.cn';
 	// #endif
 	config.header = {
 		a: 4,
@@ -75,8 +75,8 @@ http.setConfig((config) => { /* 设置全局配置 */
 	}
 	// #endif
 	// #ifdef MP
-	config.baseUrl = 'http://192.168.1.104:8087';
-	// config.baseUrl = 'http://mall-api.yujianli.cn';
+	// config.baseUrl = 'http://192.168.1.104:8087';
+	config.baseUrl = 'http://mall-api.yujianli.cn';
 	// #endif
 	config.header = {
 		// 'cookie': uni.getStorageSync('sessionid') || '123',

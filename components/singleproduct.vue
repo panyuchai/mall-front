@@ -1,6 +1,6 @@
 <template>
 	<view class="goods-list">
-		<view class="goods" v-for="(good, index) in options.list" v-if="good.shelf" :key="index">
+		<view class="goods" v-for="(good, index) in options.list" v-if="good.shelf" :key="index" @tap="linkToDetail(good.goodsId)">
 			<view class="img">
 				<image :src="good.goodsImg" mode="aspectFit"></image>
 			</view>
@@ -27,8 +27,8 @@
 						</view>
 					</view>
 					<view class="sale-action">
-						<view class="sale-btn" @tap="linkToDetail(good.goodsId)">
-							马上抢
+						<view class="sale-btn">
+							立即订购
 						</view>
 					</view>
 				</view>

@@ -9746,8 +9746,8 @@ test.setConfig(function (config) {/* 设置全局配置 */
 
 
 
-  config.baseUrl = 'http://192.168.1.104:8087';
-  // config.baseUrl = 'http://mall-api.yujianli.cn';
+  // config.baseUrl = 'http://192.168.1.104:8087';
+  config.baseUrl = 'http://mall-api.yujianli.cn';
 
   config.header = {
     a: 4
@@ -9798,8 +9798,8 @@ http.setConfig(function (config) {/* 设置全局配置 */
 
 
 
-  config.baseUrl = 'http://192.168.1.104:8087';
-  // config.baseUrl = 'http://mall-api.yujianli.cn';
+  // config.baseUrl = 'http://192.168.1.104:8087';
+  config.baseUrl = 'http://mall-api.yujianli.cn';
 
   config.header = {
     // 'cookie': uni.getStorageSync('sessionid') || '123',
