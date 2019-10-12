@@ -222,6 +222,13 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
+
+
+
+
+
+
+
 var _vuex = __webpack_require__(/*! vuex */ 14);
 
 
@@ -383,7 +390,7 @@ var _store = __webpack_require__(/*! ../../utils/store.js */ 12);function _objec
 
 
 
-      this.uploadUrl = 'http://192.168.1.104';
+      // this.uploadUrl = 'http://192.168.1.104';
       // this.uploadUrl = 'http://tbs-api.yujianli.cn';
 
     },

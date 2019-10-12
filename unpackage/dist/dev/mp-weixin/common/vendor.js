@@ -9746,8 +9746,8 @@ test.setConfig(function (config) {/* 设置全局配置 */
 
 
 
-  // config.baseUrl = 'http://192.168.1.104:8087';
-  config.baseUrl = 'http://mall-api.yujianli.cn';
+  // config.baseUrl = 'https://test.yujianliwu.com';
+  config.baseUrl = 'https://mall-api.yujianli.cn';
 
   config.header = {
     a: 4
@@ -9798,8 +9798,8 @@ http.setConfig(function (config) {/* 设置全局配置 */
 
 
 
-  // config.baseUrl = 'http://192.168.1.104:8087';
-  config.baseUrl = 'http://mall-api.yujianli.cn';
+  // config.baseUrl = 'https://test.yujianliwu.com';
+  config.baseUrl = 'https://mall-api.yujianli.cn';
 
   config.header = {
     // 'cookie': uni.getStorageSync('sessionid') || '123',
@@ -9987,7 +9987,7 @@ var state = (_state = {
   paymentUrl: '',
   mallDomain: '' }, _defineProperty(_state, "mallDomain",
 
-'yyy'), _defineProperty(_state, "mallType",
+'liangpinpuzi'), _defineProperty(_state, "mallType",
 
 ''), _defineProperty(_state, "mallId",
 null), _defineProperty(_state, "mallName",

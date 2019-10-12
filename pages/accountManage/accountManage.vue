@@ -5,9 +5,16 @@
 				<view class="cell-tit">
 					头像
 				</view>
+				<!--  #ifdef  MP-WEIXIN -->
+				<view class="cell-info cell-info-avatar">
+					<image class="portrait" :src="formData.customerImage || '/static/img/missing-face.png'"></image>
+				</view>
+				<!--  #endif -->
+				<!--  #ifdef  H5 -->
 				<view class="cell-info cell-info-avatar" @tap="uploadAvatar">
 					<image class="portrait" :src="formData.customerImage || '/static/img/missing-face.png'"></image>
 				</view>
+				<!--  #endif -->
 			</view>
 			<view class="list-cell">
 				<view class="cell-tit">
@@ -259,7 +266,7 @@
 				}
 				// #endif
 				// #ifdef MP
-				this.uploadUrl = 'http://192.168.1.104';
+				// this.uploadUrl = 'http://192.168.1.104';
 				// this.uploadUrl = 'http://tbs-api.yujianli.cn';
 				// #endif
 			},

@@ -40,13 +40,13 @@
 			<view class="order-section">
 				<view class="order-item" @tap="navTo('/pages/order/order?state=0')" hover-class="common-hover"  :hover-stay-time="50">
 					<view class="icon">
-						<text class="iconfont icon-icon iconfont-all"></text>
+						<view class="iconfont icon-icon iconfont-all"></view>
 					</view>
 					<view class="name">全部订单</view>
 				</view>
 				<view class="order-item" @tap="navTo('/pages/order/order?state=1')"  hover-class="common-hover" :hover-stay-time="50">
 					<view class="icon">
-						<text class="iconfont icon-tianchongxing-"><tui-badge v-if="toPayNum" class="badge" type="danger" size="small">{{toPayNum}}</tui-badge></text>
+						<view class="iconfont icon-tianchongxing-"><tui-badge v-if="toPayNum" class="badge" type="danger" size="small">{{toPayNum}}</tui-badge></view>
 					</view>
 					<view class="name">待付款</view>
 				</view>
@@ -58,13 +58,13 @@
 				</view>
 				<view class="order-item" @tap="navTo('/pages/order/order?state=3')" hover-class="common-hover"  :hover-stay-time="50">
 					<view class="icon">
-						<text class="iconfont icon-dingdanwancheng iconfont-finished"></text>
+						<view class="iconfont icon-dingdanwancheng iconfont-finished"></view>
 					</view>
 					<view class="name">已完成</view>
 				</view>
 				<view class="order-item" @tap="navTo('/pages/order/order?state=4')" hover-class="common-hover"  :hover-stay-time="50">
 					<view class="icon">
-						<text class="iconfont icon-shouhou iconfont-service"></text>
+						<view class="iconfont icon-shouhou iconfont-service"></view>
 					</view>
 					<view class="name">售后</view>
 				</view>
@@ -278,15 +278,13 @@
 					.badge{
 						position: absolute;
 						top: 0;
-						left: 8upx;
+						left: 4upx;
 					}
 					&.iconfont-all{
 						font-size: 42upx;
 					}
 					&.iconfont-transport{
 						font-size: 50upx;
-						
-						
 					}
 					&.iconfont-finished{
 						font-size: 54upx;

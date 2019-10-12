@@ -187,7 +187,58 @@
 				})
 			},
 			linkToPayment(order){
+				// #ifdef  H5
 				window.location.href=`http://${this.paymentUrl}.yujianli.cn/#/pages/payment/cashRegister?orderNo=`+order.orderlistNum+"&mallDomain="+this.baseInfo.mallDomain+'&orderPayPrice='+order.payPrice+'&baseUrl='+this.baseUrl+'&token='+encodeURIComponent(this.token);
+				// #endif
+				// #ifdef  MP-WEIXIN
+				this.$http.post('/mall/app/order/submit', {
+					...this.baseInfo,
+					accountId: order.accountId,
+					addressId: order.addressId,
+					credits: order.credits,
+					expressFee: order.expressPay,
+					goodsList: order.details,
+					payPrice: order.payPrice,
+					remark: order.orderlistMessage,
+					// totalPrice: this.payData.totalPrice,
+					// goodsPrice: this.totalPriceDecrease,
+					// address: this.address,
+					payChannels: '8',
+					callBackNo: order.orderlistNum
+				})
+				.then( res => {
+					if(res.code == 0){
+						wx.requestPayment({
+							'timeStamp': res.result.payResponse.wxPayResponse.timeStamp,
+							'nonceStr': res.result.payResponse.wxPayResponse.nonceStr,
+							'package': res.result.payResponse.wxPayResponse.packageStr,
+							'signType': res.result.payResponse.wxPayResponse.signType,
+							'paySign': res.result.payResponse.wxPayResponse.paySign,
+							'success': function (sc) {
+								uni.redirectTo({
+									url: '/pages/orderDetail/orderDetail?orderId='+resultOrderId
+								});
+							},
+							'fail': function (er) {
+								uni.redirectTo({
+									url: '/pages/order/order?state=0'
+								})
+							},
+							'complete': function(msg){
+								console.log(msg);
+							}
+						})
+					}else{
+						uni.showToast({
+							icon: 'none',
+							title: res.message
+						})
+					}
+				})
+				.catch( err => {
+					console.log(err);
+				})
+				// #endif
 			},
 			confirmOrder(orderId){
 				this.$http.post('/mall/app/order/receive', {

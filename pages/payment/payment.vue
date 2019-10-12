@@ -252,7 +252,9 @@
 					payChannels: '8',
 				})
 				.then( res => {
-					// if(res.result){
+					let resultOrderId = res.result && res.result.orderId;
+					console.log(res)
+					if(res.result){
 						if(res.result.orderState == 1){
 							uni.showToast({
 								icon: 'none',
@@ -261,7 +263,7 @@
 							uni.removeStorageSync('chooseAddress');
 							setTimeout(function(){
 								uni.redirectTo({
-									url: '/pages/orderDetail/orderDetail?orderId='+res.result.orderId
+									url: '/pages/orderDetail/orderDetail?orderId='+resultOrderId
 								})
 							}, 1000)
 						}else{
@@ -279,16 +281,17 @@
 										'signType': res.result.payResponse.wxPayResponse.signType,
 										'paySign': res.result.payResponse.wxPayResponse.paySign,
 										'success': function (sc) {
-											console.log(sc);
-											// wx.redirectTo({
-											// 	url: '/pages/translateOrder/translateOrder'
-											// })
+											uni.redirectTo({
+												url: '/pages/orderDetail/orderDetail?orderId='+resultOrderId
+											});
 										},
 										'fail': function (er) {
-											console.log(er);
+											uni.redirectTo({
+												url: '/pages/order/order?state=0'
+											})
 										},
 										'complete': function(msg){
-											console.log(msg)
+											console.log(msg);
 										}
 									})
 								}else{
@@ -302,7 +305,12 @@
 								console.log(err);
 							})
 						}
-					// }
+					}else{
+						uni.showToast({
+							icon: 'none',
+							title: res.message
+						})
+					}
 				})
 				.catch( err => {
 					console.log(err);
