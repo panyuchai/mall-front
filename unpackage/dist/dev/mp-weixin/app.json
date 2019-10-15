@@ -56,6 +56,6 @@
       }
     ]
   },
-  "usingComponents": {},
-  "sitemapLocation": "sitemap53.json"
+  "permission": {},
+  "usingComponents": {}
 }

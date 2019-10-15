@@ -15,15 +15,20 @@
 					<!-- 已售:{{good.saleNum}} -->
 				</view>
 				<view class="sale">
-					<view class="sale-points">
-						<view class="saleMoney" v-if="good.goodsPrice">
-							<text class="money">{{good.goodsPrice}}</text>元
+					<view class="salePrice">
+						<view class="rulingPrice">
+							<view class="price" v-if="good.goodsPoint">
+								<text class="text">{{good.goodsPoint}}</text>积分
+							</view>
+							<view v-if="good.goodsPrice && good.goodsPoint">
+								+
+							</view>
+							<view class="price" v-if="good.goodsPrice">
+								<text class="text">{{good.goodsPrice}}</text>元
+							</view>
 						</view>
-						<view class="and" v-if="good.goodsPrice && good.goodsPoint">
-							+
-						</view>
-						<view class="salePoints" v-if="good.goodsPoint">
-							<text class="points">{{good.goodsPoint}}</text>分
+						<view class="markedPrice">
+							{{good.goodsVirtualprice}}元
 						</view>
 					</view>
 					<view class="sale-action">
@@ -106,29 +111,39 @@
 					padding: 0 5upx;
 				}
 				.sale{
-					margin-top: 18upx;
+					margin-top: 6upx;
 					display: flex;
 					justify-content: space-between;
 					align-items: flex-end;
-					.sale-points{
-						color: #E51700;
-						font-size: 24upx;
-						display: flex;
-						flex-direction:row;
-						justify-content : flex-start;
-						align-items : flex-end;
-						.saleMoney{
-							.money{
-								font-size: 40upx;
+					.salePrice{
+						.rulingPrice{
+							color: #E51700;
+							font-size: 24upx;
+							display: flex;
+							flex-direction:row;
+							justify-content : flex-start;
+							align-items : flex-end;
+							line-height: 40upx;
+							.price{
+								.text{
+									padding-right: 8upx;
+								}
+								&:nth-of-type(1){
+									.text{
+										font-size: 40upx;
+									}
+								}
+								&:nth-of-type(2){
+									.text{
+										font-size: 30upx;
+									}
+								}
 							}
 						}
-						.and{
-							padding-left: 10upx;
-						}
-						.salePoints{
-							.points{
-								font-size: 35upx;
-							}
+						.markedPrice{
+							color: #B3B3B3;
+							font-size: 24upx;
+							text-decoration: line-through;
 						}
 					}
 					.sale-action{

@@ -52,7 +52,7 @@
         padding: 0 5rpx;
 }
 .goods-list .goods .info .sale {
-        margin-top: 18rpx;
+        margin-top: 6rpx;
         display: -webkit-box;
         display: -webkit-flex;
         display: -ms-flexbox;
@@ -66,7 +66,7 @@
             -ms-flex-align: end;
                 align-items: flex-end;
 }
-.goods-list .goods .info .sale .sale-points {
+.goods-list .goods .info .sale .salePrice .rulingPrice {
           color: #E51700;
           font-size: 24rpx;
           display: -webkit-box;
@@ -86,15 +86,21 @@
           -webkit-align-items: flex-end;
               -ms-flex-align: end;
                   align-items: flex-end;
+          line-height: 40rpx;
 }
-.goods-list .goods .info .sale .sale-points .saleMoney .money {
+.goods-list .goods .info .sale .salePrice .rulingPrice .price .text {
+            padding-right: 8rpx;
+}
+.goods-list .goods .info .sale .salePrice .rulingPrice .price:nth-of-type(1) .text {
             font-size: 40rpx;
 }
-.goods-list .goods .info .sale .sale-points .and {
-            padding-left: 10rpx;
+.goods-list .goods .info .sale .salePrice .rulingPrice .price:nth-of-type(2) .text {
+            font-size: 30rpx;
 }
-.goods-list .goods .info .sale .sale-points .salePoints .points {
-            font-size: 35rpx;
+.goods-list .goods .info .sale .salePrice .markedPrice {
+          color: #B3B3B3;
+          font-size: 24rpx;
+          text-decoration: line-through;
 }
 .goods-list .goods .info .sale .sale-action .sale-btn {
           width: 176rpx;

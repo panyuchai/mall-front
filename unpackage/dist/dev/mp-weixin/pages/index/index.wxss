@@ -1,0 +1,37 @@
+.poster {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 99;
+}
+.poster .mask {
+    position: absolute;
+    left: 0;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.4);
+}
+.poster .image {
+    position: relative;
+    z-index: 100;
+    width: 75%;
+    margin: 50% auto;
+    -webkit-transform: translateY(-30%);
+        -ms-transform: translateY(-30%);
+            transform: translateY(-30%);
+    overflow: hidden;
+}
+.poster .image image {
+      width: 100%;
+      vertical-align: top;
+}
+.poster .closeBtn {
+    color: #fff;
+    position: absolute;
+    top: 50rpx;
+    right: 50rpx;
+}
+

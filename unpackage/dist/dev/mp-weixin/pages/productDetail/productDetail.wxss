@@ -228,20 +228,29 @@ page {
           justify-content: space-between;
   line-height: 44rpx;
 }
-.pro-pricebox .pro-price {
+.pro-pricebox .salePrice {
     display: -webkit-box;
     display: -webkit-flex;
     display: -ms-flexbox;
     display: flex;
+    -webkit-box-orient: horizontal;
+    -webkit-box-direction: normal;
+    -webkit-flex-direction: row;
+        -ms-flex-direction: row;
+            flex-direction: row;
+    -webkit-box-pack: start;
+    -webkit-justify-content: flex-start;
+        -ms-flex-pack: start;
+            justify-content: flex-start;
     -webkit-box-align: end;
     -webkit-align-items: flex-end;
         -ms-flex-align: end;
             align-items: flex-end;
+    line-height: 40rpx;
 }
-.pro-pricebox .pro-price .sale-price {
-      font-size: 32rpx;
-      color: #E11F17;
-      padding-right: 10px;
+.pro-pricebox .salePrice .rulingPrice {
+      color: #E51700;
+      font-size: 24rpx;
       display: -webkit-box;
       display: -webkit-flex;
       display: -ms-flexbox;
@@ -259,23 +268,22 @@ page {
       -webkit-align-items: flex-end;
           -ms-flex-align: end;
               align-items: flex-end;
+      line-height: 40rpx;
 }
-.pro-pricebox .pro-price .sale-price .saleMoney {
-        font-weight: 600;
+.pro-pricebox .salePrice .rulingPrice .price .text {
+        padding-right: 8rpx;
 }
-.pro-pricebox .pro-price .sale-price .saleMoney .money {
-          font-size: 48rpx;
+.pro-pricebox .salePrice .rulingPrice .price:nth-of-type(1) .text {
+        font-size: 48rpx;
 }
-.pro-pricebox .pro-price .sale-price .and {
-        padding-left: 10rpx;
-}
-.pro-pricebox .pro-price .sale-price .salePoints .points {
+.pro-pricebox .salePrice .rulingPrice .price:nth-of-type(2) .text {
         font-size: 35rpx;
 }
-.pro-pricebox .pro-price .original-price {
-      font-size: 24rpx;
+.pro-pricebox .salePrice .markedPrice {
+      padding-left: 18rpx;
       color: #B3B3B3;
-      vertical-align: bottom;
+      font-size: 24rpx;
+      text-decoration: line-through;
 }
 .pro-pricebox .pro-action .we-share {
     display: block;

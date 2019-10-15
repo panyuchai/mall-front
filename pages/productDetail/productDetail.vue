@@ -32,7 +32,23 @@
 		<view class="tui-pro-detail">
 			<view class="tui-product-title">
 				<view class="pro-pricebox tui-padding">
-					<view class="pro-price">
+					<view class="salePrice">
+						<view class="rulingPrice">
+							<view class="price" v-if="goodsInfo.credits">
+								<text class="text">{{goodsInfo.credits}}</text>积分
+							</view>
+							<view v-if="goodsInfo.salePrice && goodsInfo.credits">
+								+
+							</view>
+							<view class="price" v-if="goodsInfo.salePrice">
+								<text class="text">{{goodsInfo.salePrice}}</text>元
+							</view>
+						</view>
+						<view class="markedPrice">
+							{{goodsInfo.goodsVirtualprice}}元
+						</view>
+					</view>
+					<!-- <view class="pro-price">
 						<view class="sale-price">
 							<view class="saleMoney" v-if="goodsInfo.salePrice">
 								<text class="money">{{goodsInfo.salePrice}}</text>元
@@ -44,7 +60,10 @@
 								<text class="points">{{goodsInfo.credits}}</text>分
 							</view>
 						</view>
-					</view>
+						<view class="original-price">
+							<text class="line-through">￥199.00</text>
+						</view>
+					</view> -->
 					<!-- <view class="pro-action">
 						<button  open-type="share" class="we-share">
 							<view class="icon-share iconfont icon-fenxiang"></view>
@@ -701,38 +720,75 @@
 		align-items: center;
 		justify-content: space-between;
 		line-height: 44upx;
-		.pro-price{
+		.salePrice{
 			display: flex;
+			flex-direction:row;
+			justify-content : flex-start;
 			align-items : flex-end;
-			.sale-price{
-				font-size: 32rpx;
-				color: #E11F17;
-				padding-right: 10px;
+			line-height: 40upx;
+			.rulingPrice{
+				color: #E51700;
+				font-size: 24upx;
 				display: flex;
 				flex-direction:row;
 				justify-content : flex-start;
 				align-items : flex-end;
-				.saleMoney{
-					font-weight: 600;
-					.money{
-						font-size: 48upx;
+				line-height: 40upx;
+				.price{
+					.text{
+						padding-right: 8upx;
 					}
-				}
-				.and{
-					padding-left: 10upx;
-				}
-				.salePoints{
-					.points{
-						font-size: 35upx;
+					&:nth-of-type(1){
+						.text{
+							font-size: 48upx;
+						}
+					}
+					&:nth-of-type(2){
+						.text{
+							font-size: 35upx;
+						}
 					}
 				}
 			}
-			.original-price{
-				font-size: 24rpx;
+			.markedPrice{
+				padding-left: 18upx;
 				color: #B3B3B3;
-				vertical-align: bottom;
+				font-size: 24upx;
+				text-decoration: line-through;
 			}
 		}
+		// .pro-price{
+		// 	display: flex;
+		// 	align-items : flex-end;
+		// 	.sale-price{
+		// 		font-size: 32rpx;
+		// 		color: #E11F17;
+		// 		padding-right: 10px;
+		// 		display: flex;
+		// 		flex-direction:row;
+		// 		justify-content : flex-start;
+		// 		align-items : flex-end;
+		// 		.saleMoney{
+		// 			font-weight: 600;
+		// 			.money{
+		// 				font-size: 48upx;
+		// 			}
+		// 		}
+		// 		.and{
+		// 			padding-left: 10upx;
+		// 		}
+		// 		.salePoints{
+		// 			.points{
+		// 				font-size: 35upx;
+		// 			}
+		// 		}
+		// 	}
+		// 	.original-price{
+		// 		font-size: 24rpx;
+		// 		color: #B3B3B3;
+		// 		vertical-align: bottom;
+		// 	}
+		// }
 		.pro-action{
 			.we-share{
 				display: block;

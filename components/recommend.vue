@@ -18,16 +18,20 @@
 						<view class="pro-subtit">
 							{{item.goodsSubTitle}}
 						</view>
-						<view class="pro-price">
-							<!-- <text class="sale-price"><text class="unit">￥</text>{{item.goodsPrice}}</text> -->
-							<view class="sale-price" v-if="item.goodsPrice">
-								<text class="money">{{item.goodsPrice}}</text>元
+						<view class="salePrice">
+							<view class="rulingPrice">
+								<view class="price" v-if="item.goodsPoint">
+									<text class="text">{{item.goodsPoint}}</text>积分
+								</view>
+								<view v-if="item.goodsPrice && item.goodsPoint">
+									+
+								</view>
+								<view class="price" v-if="item.goodsPrice">
+									<text class="text">{{item.goodsPrice}}</text>元
+								</view>
 							</view>
-							<view class="and" v-if="item.goodsPrice && item.goodsPoint">
-								+
-							</view>
-							<view class="sale-points" v-if="item.goodsPoint">
-								<text class="points">{{item.goodsPoint}}</text>分
+							<view class="markedPrice">
+								{{item.goodsVirtualprice}}元
 							</view>
 						</view>
 					</view>
@@ -132,7 +136,7 @@
 		justify-content: space-between;
 		box-sizing: border-box;
 		padding: 20upx;
-		height: 215upx;
+		height: 245upx;
 	}
 	
 	.pro-tit {
@@ -153,31 +157,42 @@
 		overflow: hidden;
 		white-space: nowrap;
 		text-overflow: ellipsis;
+		
 	}
 	
-	.pro-price {
-		padding-top: 14upx;
-		color: #ea1500;
-		display: flex;
-		flex-direction:row;
-		justify-content : flex-start;
-		align-items : flex-end;
-		font-size: 32upx;
+	.salePrice{
+		margin-top: 10upx;
+		.rulingPrice{
+			color: #E51700;
+			font-size: 24upx;
+			display: flex;
+			flex-direction:row;
+			justify-content : flex-start;
+			align-items : flex-end;
+			line-height: 40upx;
+			.price{
+				.text{
+					padding-right: 8upx;
+				}
+				&:nth-of-type(1){
+					.text{
+						font-size: 40upx;
+					}
+				}
+				&:nth-of-type(2){
+					.text{
+						font-size: 30upx;
+					}
+				}
+			}
+		}
+		.markedPrice{
+			color: #B3B3B3;
+			font-size: 24upx;
+			text-decoration: line-through;
+		}
 	}
 	
-	.sale-price {
-		.money{
-			font-size: 32upx;
-		}
-	}
-	.and{
-		padding-left: 10upx;
-	}
-	.sale-points{
-		.points{
-			font-size: 28upx;
-		}
-	}
 	.tag{
 		position: absolute;
 		top: -10rpx;

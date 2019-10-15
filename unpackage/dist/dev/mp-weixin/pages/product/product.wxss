@@ -123,9 +123,10 @@
   -webkit-box-sizing: border-box;
           box-sizing: border-box;
   padding: 30rpx 30rpx 0 30rpx;
+  background: #F8F8F8;
 }
 .pro-item {
-  background: #fff;
+  background: #ffffff;
   -webkit-box-sizing: border-box;
           box-sizing: border-box;
   width: 48.8%;
@@ -137,7 +138,6 @@
   position: absolute;
   height: 200%;
   width: 200%;
-  border: 1rpx solid #e1e1e1;
   -ms-transform-origin: 0 0;
       transform-origin: 0 0;
   -webkit-transform-origin: 0 0;
@@ -168,7 +168,7 @@
   -webkit-box-sizing: border-box;
           box-sizing: border-box;
   padding: 20rpx;
-  height: 215rpx;
+  height: 245rpx;
 }
 .pro-tit {
   /* font-size:  */
@@ -191,39 +191,44 @@
   -o-text-overflow: ellipsis;
      text-overflow: ellipsis;
 }
-.pro-price {
-  padding-top: 14rpx;
-  font-size: 32rpx;
-  color: #ea1500;
-  display: -webkit-box;
-  display: -webkit-flex;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-box-orient: horizontal;
-  -webkit-box-direction: normal;
-  -webkit-flex-direction: row;
-      -ms-flex-direction: row;
-          flex-direction: row;
-  -webkit-box-pack: start;
-  -webkit-justify-content: flex-start;
-      -ms-flex-pack: start;
-          justify-content: flex-start;
-  -webkit-box-align: end;
-  -webkit-align-items: flex-end;
-      -ms-flex-align: end;
-          align-items: flex-end;
+.salePrice {
+  margin-top: 10rpx;
 }
-.pro-price .saleprice .unit {
+.salePrice .rulingPrice {
+    color: #E51700;
     font-size: 24rpx;
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-orient: horizontal;
+    -webkit-box-direction: normal;
+    -webkit-flex-direction: row;
+        -ms-flex-direction: row;
+            flex-direction: row;
+    -webkit-box-pack: start;
+    -webkit-justify-content: flex-start;
+        -ms-flex-pack: start;
+            justify-content: flex-start;
+    -webkit-box-align: end;
+    -webkit-align-items: flex-end;
+        -ms-flex-align: end;
+            align-items: flex-end;
+    line-height: 40rpx;
 }
-.pro-price .saleMoney .money {
-    font-size: 32rpx;
+.salePrice .rulingPrice .price .text {
+      padding-right: 8rpx;
 }
-.pro-price .and {
-    padding-left: 10rpx;
+.salePrice .rulingPrice .price:nth-of-type(1) .text {
+      font-size: 40rpx;
 }
-.pro-price .salePoints .points {
-    font-size: 28rpx;
+.salePrice .rulingPrice .price:nth-of-type(2) .text {
+      font-size: 30rpx;
+}
+.salePrice .markedPrice {
+    color: #B3B3B3;
+    font-size: 24rpx;
+    text-decoration: line-through;
 }
 .tag {
   position: absolute;

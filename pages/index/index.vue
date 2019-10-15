@@ -9,6 +9,15 @@
 			<points v-if="item.type === '007'" :options="item.renderData" :customerName='userInfo.customerName'></points>
 		</block>
 		<!-- <button type="primary" @tap="clearUserInfo">清除登陆</button> -->
+		<view class="poster" v-if="showPoser" @tap="handleClickPoster">
+			<view class="mask"></view>
+			<view class="image">
+				<image src="/static/img/missing-face.png" mode="aspectFit"></image>
+			</view>
+			<view class="closeBtn" @tap.stop="closePoster">
+				关闭
+			</view>
+		</view>
 	</view>
 </template>
 
@@ -28,6 +37,7 @@
 	export default {
 		data() {
 			return {
+				showPoser: false,
 				templateData: [],
 				canIUse: false
 			}
@@ -43,6 +53,15 @@
 		},
 		methods: {
 			...mapMutations("common", ['SET_BASEINFO', 'SET_MALLTYPE', 'SET_MALLID', 'SET_MALLNAME', 'SET_MALLLOGO', 'SET_MALLDOMAIN']),
+			getPoster(){
+				console.log('getPoster')
+			},
+			closePoster(){
+				this.showPoser=false;
+			},
+			handleClickPoster(){
+				
+			},
 			clearUserInfo(){
 				// uni.removeStorageSync('hasLogin');
 				// uni.removeStorageSync('token');
@@ -120,12 +139,55 @@
 			this.getMallType();
 		},
 		onLoad(options) {
-			
-		},
+			// this.getPoster();
+		}
 		
 	}
 </script>
 
-<style>
-
+<style lang="scss">
+	.poster{
+		position: fixed;
+		top: 0;
+		left: 0;
+		right: 0;
+		bottom: 0;
+		z-index: 99;
+		.mask{
+			position: absolute;
+			left: 0;
+			top: 0;
+			right: 0;
+			bottom: 0;
+			background: rgba(0, 0, 0, 0.4);
+		}
+		.image{
+			position: relative;
+			z-index: 100;
+			width: 75%;
+			margin: 50% auto;
+			transform:translateY(-30%);
+			overflow: hidden;
+			image{
+				width: 100%;
+				vertical-align: top;
+			}
+		}
+		/* #ifdef H5 */
+		.image{
+			transform:translateY(-5%);
+		}
+		/* #endif */
+		.closeBtn{
+			color: #fff;
+			position: absolute;
+			top: 50upx;
+			right: 50upx;
+		}
+		/* #ifdef H5 */
+		.closeBtn{
+			top: 140upx;
+		}
+		/* #endif */
+	}
 </style>

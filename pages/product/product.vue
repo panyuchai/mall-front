@@ -40,16 +40,20 @@
 						<view class="pro-subtit">
 							{{item.goodsTitle}}
 						</view>
-						<view class="pro-price">
-							<text class="salePrice" v-if="item.salePrice"><text class="unit">￥</text></text>
-							<view class="saleMoney" v-if="item.salePrice">
-								<text class="money">{{item.salePrice}}</text>元
+						<view class="salePrice">
+							<view class="rulingPrice">
+								<view class="price" v-if="item.credits">
+									<text class="text">{{item.credits}}</text>积分
+								</view>
+								<view v-if="item.salePrice && item.credits">
+									+
+								</view>
+								<view class="price" v-if="item.salePrice">
+									<text class="text">{{item.salePrice}}</text>元
+								</view>
 							</view>
-							<view class="and" v-if="item.salePrice && item.credits">
-								+
-							</view>
-							<view class="salePoints" v-if="item.credits">
-								<text class="points">{{item.credits}}</text>分
+							<view class="markedPrice">
+								{{item.goodsVirtualprice}}元
 							</view>
 						</view>
 					</view>
@@ -337,11 +341,11 @@
 		flex-wrap: wrap;
 		box-sizing: border-box;
 		padding: 30upx 30upx 0 30upx;
-		// background: #fff;
+		background: #F8F8F8;
 	}
 	
 	.pro-item {
-		background: #fff;
+		background: #ffffff;
 		box-sizing: border-box;
 		width: 48.8%;
 		position: relative;
@@ -353,7 +357,7 @@
 		position: absolute;
 		height: 200%;
 		width: 200%;
-		border: 1upx solid #e1e1e1;
+		// border: 1upx solid #e1e1e1;
 		transform-origin: 0 0;
 		-webkit-transform-origin: 0 0;
 		-webkit-transform: scale(0.5);
@@ -373,7 +377,7 @@
 		justify-content: space-between;
 		box-sizing: border-box;
 		padding: 20upx;
-		height: 215upx;
+		height: 245upx;
 	}
 	
 	.pro-tit {
@@ -397,33 +401,39 @@
 		text-overflow: ellipsis;
 	}
 	
-	.pro-price {
-		padding-top: 14upx;
-		font-size: 32upx;
-		color: #ea1500;
-		display: flex;
-		flex-direction:row;
-		justify-content : flex-start;
-		align-items : flex-end;
-		.saleprice {
-			.unit{
-				font-size: 24upx;
+	.salePrice{
+		margin-top: 10upx;
+		.rulingPrice{
+			color: #E51700;
+			font-size: 24upx;
+			display: flex;
+			flex-direction:row;
+			justify-content : flex-start;
+			align-items : flex-end;
+			line-height: 40upx;
+			.price{
+				.text{
+					padding-right: 8upx;
+				}
+				&:nth-of-type(1){
+					.text{
+						font-size: 40upx;
+					}
+				}
+				&:nth-of-type(2){
+					.text{
+						font-size: 30upx;
+					}
+				}
 			}
 		}
-		.saleMoney{
-			.money{
-				font-size: 32upx;
-			}
-		}
-		.and{
-			padding-left: 10upx;
-		}
-		.salePoints{
-			.points{
-				font-size: 28upx;
-			}
+		.markedPrice{
+			color: #B3B3B3;
+			font-size: 24upx;
+			text-decoration: line-through;
 		}
 	}
+	
 	.tag{
 		position: absolute;
 		top: -10rpx;
