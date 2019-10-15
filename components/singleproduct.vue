@@ -27,7 +27,7 @@
 								<text class="text">{{good.goodsPrice}}</text>元
 							</view>
 						</view>
-						<view class="markedPrice">
+						<view class="markedPrice" v-if="good.goodsVirtualprice">
 							{{good.goodsVirtualprice}}元
 						</view>
 					</view>
