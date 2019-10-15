@@ -5,7 +5,6 @@
 			<banner v-if="item.type === '003'" :options="item.data" @reLoadIndex='getDecoration'></banner>
 			<lines v-if="item.type === '004'" :options="item.data"></lines>
 			<single-product v-if="item.type === '205'" :options="item.data"></single-product>
-			<lines></lines>
 			<recommend v-if="item.type === '203'" :options="item.data"></recommend>
 			<points v-if="item.type === '007'" :options="item.renderData" :customerName='userInfo.customerName'></points>
 		</block>

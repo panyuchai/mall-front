@@ -11,6 +11,9 @@
 		</view>
 		<view class="bd">
 			<view class="pro-item" @tap="linkToDetail(item.goodsId)" v-for="(item,index) in options.list" v-if="item.shelf" :key="index">
+				<view v-if="item.label" class="tag">
+					{{item.label}}
+				</view>
 				<image :src="item.goodsImg" class="pro-img" mode="widthFix" />
 				<view class="pro-content">
 					<view class="pro-tit">{{item.goodsTitle}}</view>
@@ -99,7 +102,7 @@
 			flex-direction: row;
 			flex-wrap: wrap;
 			box-sizing: border-box;
-			padding: 10upx 20upx 0 20upx;
+			padding: 20upx 20upx 0 20upx;
 		}
 	}
 	
@@ -109,6 +112,7 @@
 		width: 48.8%;
 		position: relative;
 		margin-bottom: 2.5%;
+		position: relative;
 	}
 	
 	.pro-item::after {
@@ -137,6 +141,21 @@
 		box-sizing: border-box;
 		padding: 20upx;
 		height: 245upx;
+	}
+	
+	.tag{
+		position: absolute;
+		top: -10rpx;
+		left: 10rpx;
+		z-index: 8;
+		height: 40rpx;
+		line-height: 40rpx;
+		background:linear-gradient(220deg,rgba(255,77,69,1) 0%,rgba(226,32,24,1) 100%);
+		box-shadow:0px 2px 3px 0px rgba(226,32,24,0.54);
+		border-radius:4px;
+		color: #fff;
+		font-size: 26upx;
+		padding: 0 10px;
 	}
 	
 	.pro-tit {

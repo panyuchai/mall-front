@@ -32,6 +32,15 @@
 							<view class="salePoints" v-if="row.credits">
 								<text class="points">{{row.credits}}</text>分
 							</view>
+							<!-- <view class="price" v-if="row.credits">
+								<text class="text">{{row.credits}}</text>积分
+							</view>
+							<view class="and" v-if="row.salePrice && row.credits">
+								+
+							</view>
+							<view class="price" v-if="row.salePrice">
+								<text class="text">{{row.salePrice}}</text>元
+							</view> -->
 						</view>
 						<view class="number">x {{row.goodsCount}}</view>
 					</view>
@@ -642,6 +651,7 @@
 					.and{
 						padding-left: 10upx;
 					}
+					
 				}
 				.number{
 					color: #B3B3B3;

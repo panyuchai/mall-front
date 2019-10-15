@@ -847,9 +847,6 @@ page {
   padding-bottom: 8rpx;
 }
 .tui-amount {
-  font-size: 32rpx;
-  color: #E11F17;
-  padding-right: 10px;
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -867,15 +864,44 @@ page {
   -webkit-align-items: flex-end;
       -ms-flex-align: end;
           align-items: flex-end;
+  line-height: 40rpx;
 }
-.tui-amount .saleMoney .money {
-    font-size: 32rpx;
+.tui-amount .rulingPrice {
+    color: #E51700;
+    font-size: 24rpx;
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-orient: horizontal;
+    -webkit-box-direction: normal;
+    -webkit-flex-direction: row;
+        -ms-flex-direction: row;
+            flex-direction: row;
+    -webkit-box-pack: start;
+    -webkit-justify-content: flex-start;
+        -ms-flex-pack: start;
+            justify-content: flex-start;
+    -webkit-box-align: end;
+    -webkit-align-items: flex-end;
+        -ms-flex-align: end;
+            align-items: flex-end;
+    line-height: 40rpx;
 }
-.tui-amount .and {
-    padding-left: 10rpx;
+.tui-amount .rulingPrice .price .text {
+      padding-right: 8rpx;
 }
-.tui-amount .salePoints .points {
-    font-size: 28rpx;
+.tui-amount .rulingPrice .price:nth-of-type(1) .text {
+      font-size: 40rpx;
+}
+.tui-amount .rulingPrice .price:nth-of-type(2) .text {
+      font-size: 30rpx;
+}
+.tui-amount .markedPrice {
+    padding-left: 18rpx;
+    color: #B3B3B3;
+    font-size: 24rpx;
+    text-decoration: line-through;
 }
 .tui-number {
   font-size: 24rpx;

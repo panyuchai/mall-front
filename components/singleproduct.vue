@@ -1,6 +1,9 @@
 <template>
 	<view class="goods-list">
 		<view class="goods" v-for="(good, index) in options.list" v-if="good.shelf" :key="index" @tap="linkToDetail(good.goodsId)">
+			<view v-if="good.label" class="tag">
+				{{good.label}}
+			</view>
 			<view class="img">
 				<image :src="good.goodsImg" mode="aspectFit"></image>
 			</view>
@@ -72,7 +75,21 @@
 			margin: 20upx 0;
 			display: flex;
 			justify-content: space-between;
-			overflow: hidden;
+			position: relative;
+			.tag{
+				position: absolute;
+				top: -10rpx;
+				left: 10rpx;
+				z-index: 8;
+				height: 40rpx;
+				line-height: 40rpx;
+				background:linear-gradient(220deg,rgba(255,77,69,1) 0%,rgba(226,32,24,1) 100%);
+				box-shadow:0px 2px 3px 0px rgba(226,32,24,0.54);
+				border-radius:4px;
+				color: #fff;
+				font-size: 26upx;
+				padding: 0 10px;
+			}
 			.img{
 				image{
 					width: 236upx;
@@ -163,4 +180,5 @@
 			}
 		}
 	}
+	
 </style>

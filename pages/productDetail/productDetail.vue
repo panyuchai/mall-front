@@ -48,22 +48,6 @@
 							{{goodsInfo.goodsVirtualprice}}元
 						</view>
 					</view>
-					<!-- <view class="pro-price">
-						<view class="sale-price">
-							<view class="saleMoney" v-if="goodsInfo.salePrice">
-								<text class="money">{{goodsInfo.salePrice}}</text>元
-							</view>
-							<view class="and" v-if="goodsInfo.salePrice && goodsInfo.credits">
-								+
-							</view>
-							<view class="salePoints" v-if="goodsInfo.credits">
-								<text class="points">{{goodsInfo.credits}}</text>分
-							</view>
-						</view>
-						<view class="original-price">
-							<text class="line-through">￥199.00</text>
-						</view>
-					</view> -->
 					<!-- <view class="pro-action">
 						<button  open-type="share" class="we-share">
 							<view class="icon-share iconfont icon-fenxiang"></view>
@@ -184,7 +168,22 @@
 					<image :src="goodsInfo.goodsMainimagepath" class="tui-popup-img"></image>
 					<view class="tui-popup-price">
 						<view class="tui-amount">
-							<view class="saleMoney" v-if="goodsInfo.salePrice">
+							<view class="rulingPrice">
+								<view class="price" v-if="goodsInfo.credits">
+									<text class="text">{{goodsInfo.credits}}</text>积分
+								</view>
+								<view v-if="goodsInfo.salePrice && goodsInfo.credits">
+									+
+								</view>
+								<view class="price" v-if="goodsInfo.salePrice">
+									<text class="text">{{goodsInfo.salePrice}}</text>元
+								</view>
+							</view>
+							<view class="markedPrice" v-if="goodsInfo.goodsVirtualprice">
+								{{goodsInfo.goodsVirtualprice}}元
+							</view>
+							
+							<!-- <view class="saleMoney" v-if="goodsInfo.salePrice">
 								<text class="money">{{goodsInfo.salePrice}}</text>元
 							</view>
 							<view class="and" v-if="goodsInfo.salePrice && goodsInfo.credits">
@@ -192,7 +191,7 @@
 							</view>
 							<view class="salePoints" v-if="goodsInfo.credits">
 								<text class="points">{{goodsInfo.credits}}</text>分
-							</view>
+							</view> -->
 						</view>
 						<view class="tui-number">货号：{{goodsInfo.goodsGoodsnum}}</view>
 					</view>
@@ -1404,25 +1403,40 @@
 	}
 
 	.tui-amount {
-		font-size: 32rpx;
-		color: #E11F17;
-		padding-right: 10px;
 		display: flex;
 		flex-direction:row;
 		justify-content : flex-start;
 		align-items : flex-end;
-		.saleMoney{
-			.money{
-				font-size: 32upx;
+		line-height: 40upx;
+		.rulingPrice{
+			color: #E51700;
+			font-size: 24upx;
+			display: flex;
+			flex-direction:row;
+			justify-content : flex-start;
+			align-items : flex-end;
+			line-height: 40upx;
+			.price{
+				.text{
+					padding-right: 8upx;
+				}
+				&:nth-of-type(1){
+					.text{
+						font-size: 40upx;
+					}
+				}
+				&:nth-of-type(2){
+					.text{
+						font-size: 30upx;
+					}
+				}
 			}
 		}
-		.and{
-			padding-left: 10upx;
-		}
-		.salePoints{
-			.points{
-				font-size: 28upx;
-			}
+		.markedPrice{
+			padding-left: 18upx;
+			color: #B3B3B3;
+			font-size: 24upx;
+			text-decoration: line-through;
 		}
 	}
 
